@@ -16,7 +16,7 @@ unless num == 5
   puts "Your number is NOT 5."
 end
 
-# num == (5 || 6) ? "Your number is either 5 or 6." : "Your number is neither 5 nor 6."
+num == 5 || num == 6 ? puts("Your number is absolutely either 5 or 6.") : puts("Your number is in no way either 5 or 6.")
 
 case num
 when 5
