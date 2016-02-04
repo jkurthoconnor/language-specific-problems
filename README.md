@@ -1,0 +1,1 @@
+Exercises and notes/paradigms corresponding to Launch School prep work
