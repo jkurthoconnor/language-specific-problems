@@ -7,20 +7,17 @@ puts "The factorial of 6 is: #{f6}"
 puts "The factorial of 7 is: #{f7}"
 puts "The factorial of 8 is: #{f8}"
 
-
-
-
-
-
-=begin
-factorial num = factorial (num - 1)
-def factorial n
-  while n >= 3
-    a = n ** (n - 1)
-    b = a ** (n - 2)
-    n = n - 1
+puts "Now let's try the same sequence using a recursive method!"
+def factorial(number)
+  if number <= 1
+    1
+  elsif number < 0
+    "How do you expect me to provide the factorial for a number less than 0?"
+  else
+    number * factorial(number - 1)
   end
-  puts b
 end
-
-=end
+puts factorial(5)
+puts factorial(6)
+puts factorial(7)
+puts factorial(8)

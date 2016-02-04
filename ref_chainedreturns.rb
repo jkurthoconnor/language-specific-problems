@@ -5,7 +5,7 @@ end
 
 add_three(5).times {puts "This will print 8 times"} #add_three(5) returns value 8; .times is called on the returned value 8, which executes the code block in its argument 8 times
 
-#but NB: methods must be able to work with the value passed along; without ending the method with 'number + 3' the code below won't work because puts returns nil and .times can't operate on nil
+#but NB: methods must be able to work with the value passed along; without ending the method with 'number + 3' the code below won't work ***because puts returns nil*** and .times can't operate on nil
 
 def add_three_puts(number)
   puts number + 3
