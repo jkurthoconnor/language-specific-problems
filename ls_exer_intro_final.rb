@@ -75,7 +75,7 @@ hash_o_arrays = {a: [8, 6, 7], b: [5, 3, 0]}
 #Let's see if 'hash_o_arrays' is really a hash with arrays as values.
 puts "#{hash_o_arrays[:b]} is the value (an array) stored with key ':b' in hash_o_arrays."
 hash_o_arrays[:b].push 9
-puts "#{hash_o_arrays[:b]} and that is the value of :b after pushing 9 to it.  Value of :b certainly functions like an array."
+puts "#{hash_o_arrays[:b]} <<-- and that is the value of :b after pushing 9 to it.  Value of :b certainly functions like an array."
 arr_o_hashes = [{c: 'carrot', d: 'stick'}, {e: 'donkey', f: 'motivation'}]
 puts "This is the item stored in slot 0 of arr_o_hashes: #{arr_o_hashes[0]}. Looks like a hash."
 h = arr_o_hashes[0]
