@@ -123,6 +123,14 @@ puts "Exercise 14"
 contact_data2 = [["joe@email.com", "123 Main st.", "555-123-4567"],
             ["sally@email.com", "404 Not Found Dr.", "123-234-3454"]]
 contacts2 = {"Joe Smith" => {}, "Sally Johnson" => {}}
+keys = [:email, :addr, :tel]
+n = 0
+keys.each do |k|
+  contacts2["Joe Smith"][k] = contact_data2[0][n]
+  contacts2["Sally Johnson"][k] = contact_data2[1][n]
+  n += 1
+end
+puts contacts2
 spacer(3)
 
 

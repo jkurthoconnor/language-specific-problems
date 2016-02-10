@@ -76,11 +76,25 @@ spacer(3)
 puts "Exercise 6"
 spacer(1)
 #6 "Write a program that calculates the squares of 3 float numbers of your choosing and outputs the result to the screen."
-ruby ls_exer_basics.rb
 
+arr = ["first", "second", "third"]
+sl = 0
+3.times do
+  puts "What's the #{arr[sl]} float you want squared?"
+  n = gets.chomp.to_f
+  spacer(1)
+  puts "#{n} squared is #{n * n}"
+  sl = sl + 1
+  spacer(1)
+end
+puts "Three squares and you're out.  Good bye!"
 spacer(3)
 
 puts "Exercise 7"
 spacer(1)
+#7 "What does the following error message tell you?
 
+  #SyntaxError: (irb):2: syntax error, unexpected ')', expecting '}'
+  #  from /usr/local/rvm/rubies/ruby-2.0.0-rc2/bin/irb:16:in `<main>'"
+puts "The error message indicates that the expected syntax would require '}', but instead a ')' was used."
 spacer(3)
