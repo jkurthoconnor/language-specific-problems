@@ -17,6 +17,7 @@ def countdown(number)
     number -=1
   end
 end
+
 puts "From what number would you like to countdown?"
 number = gets.chomp.to_i
 puts "Here you go:"

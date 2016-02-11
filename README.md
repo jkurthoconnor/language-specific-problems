@@ -1,1 +1,1 @@
-Exercises and notes/paradigms corresponding to Launch School prep work
+Exercises from Launch School work.  Directories represent individual courses.
