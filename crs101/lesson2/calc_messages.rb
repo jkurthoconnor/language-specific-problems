@@ -1,4 +1,4 @@
-# used this file to create yaml version of messages used in calc.rb  Messages hash here was made by hand.  NB: attempts at interpolation threw undefined variable errors (even whenthiscode was run within the loop in calc.rb.) I commented them out as a workaround
+# used this file to create yaml version of messages used in calc.rb  Messages hash here was made by hand.  NB: attempts at interpolation threw undefined variable errors (even whenthiscode was run within the loop in calc.rb.) I commented them out as a workaround.
 
 require 'yaml'
 messages = { welcome: "Welcome to the calculator. Please enter your name.",
