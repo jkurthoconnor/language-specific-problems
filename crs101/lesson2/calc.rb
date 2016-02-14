@@ -2,7 +2,7 @@
 require 'yaml'
 MESSAGES = YAML.load_file('calc_messages.yml')
 
-def prompt(message) # changes prompt
+def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
@@ -25,40 +25,40 @@ def operation_to_message(op)
   end
 end
 
-prompt(MESSAGES[:welcome]) # argument prior to yaml config: ("Welcome to the calculator. Please enter your name.")
+prompt(MESSAGES[:welcome])
 
 name = ''
 loop do
   name = Kernel.gets().chomp()
 
   if name.empty?()
-    prompt(MESSAGES[:name]) # argument prior to yaml config: ("Please enter your name.")
+    prompt(MESSAGES[:name])
   else
     break
   end
 end
 prompt("Hi #{name}.  Let's get started!")
 loop do # main loop
-  num_1 = '' # initializes variable outside of loop block to make it available   outside of loop
+  num_1 = ''
   loop do
-    prompt(MESSAGES[:number_1]) # argument prior to yaml config: ("What's the first number you wish to use?")
-    num_1 = Kernel.gets().chomp()# could delete commas at this point
+    prompt(MESSAGES[:number_1])
+    num_1 = Kernel.gets().chomp()
 
     if valid_number?(num_1)
       break
     else
-      prompt(MESSAGES[:invalid]) # argument prior to yaml config: ("That isn't a valid number. Try again.")
+      prompt(MESSAGES[:invalid])
     end
   end
   num_2 = ''
   loop do
-    prompt(MESSAGES[:number_2]) # argument prior to yaml config: ("What is the second number?")
+    prompt(MESSAGES[:number_2])
     num_2 = Kernel.gets().chomp()
 
     if valid_number?(num_2)
       break
     else
-      prompt(MESSAGES[:invalid]) # argument prior to yaml config: ("That isn't a valid number. Try again.")
+      prompt(MESSAGES[:invalid])
     end
   end
 
@@ -72,7 +72,7 @@ loop do # main loop
   #   4) divide
   # MSG
 
-  prompt(MESSAGES[:operator_prompt]) #  argument prior to yaml config: (operator_prompt)
+  prompt(MESSAGES[:operator_prompt])
 
   operator = ''
   loop do
@@ -81,7 +81,7 @@ loop do # main loop
     if %w(1 2 3 4).include?(operator) # checks if operator is included in an array of given strings
       break
     else
-      prompt(MESSAGES[:operator_followup]) # # argument prior to yaml config: ("Choose 1, 2, 3 or 4")
+      prompt(MESSAGES[:operator_followup])
     end
   end
 
@@ -89,19 +89,19 @@ loop do # main loop
 
   result = case operator # refactored from conditional statements
            when '1'
-             num_1.to_f() + num_2.to_f() # in 1, 2, 3 changed `.to_i` to `.to_f` to allow for adding float inputs
+             num_1.to_f() + num_2.to_f()
            when '2'
              num_1.to_f() - num_2.to_f()
            when '3'
              num_1.to_f() * num_2.to_f()
            when '4'
-             num_1.to_f() / num_2.to_f() # already was `.to_f` to prevent integer division
+             num_1.to_f() / num_2.to_f() #
            end
 
   prompt("The result is #{result}")
-  prompt(MESSAGES[:more?])  # argument prior to yaml config:  ("Would you like to perform additional calculations? (Y)")
+  prompt(MESSAGES[:more?])
   answer = Kernel.gets().chomp().downcase()
   break unless answer.start_with?('y')
 
-end # end main loop
+end
 prompt("Thanks for calculating today.  Good bye, #{name}!")

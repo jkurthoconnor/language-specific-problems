@@ -1,4 +1,5 @@
 # to do: revise clean input method and its implementation 1) fix function: it allows mistyped '12,0 to be saved as 120.00'; 2) use hash to store loan_data
+
 def prompt(message)
   print("=> #{message}")
 end
