@@ -1,61 +1,68 @@
-
-def prompt(message) # changes prompt
+# to do: revise clean input method and its implementation 1) fix function: it allows mistyped '12,0 to be saved as 120.00'; 2) use hash to store loan_data
+def prompt(message)
   print("=> #{message}")
 end
 
 def valid_number?(num)
-  num_stripped = num.delete(',.')
-  /^\d+$/.match(num_stripped) && num.to_i >= 0
+  clean_number = num.delete(',.')
+  /^\d+$/.match(clean_number) && num.to_i >= 0
 end
 
-prompt("Welcome to the loan payment calculator.\n")
+def save_clean_input(destination, source)
+  destination.push source.delete(',').to_f
+end
 
-loop do #  main loop
-  inputs = { loan: ['loan amount'], apr: ['Annual Percentage Rate (APR)'], length: ['the length of the loan in months'] } # initialize within main loop to prevent data retention from previous iteration
+def say_invalid
+  prompt("That's not a valid entry.  Please try again. Include only digits and a decimal point if necessary.\n")
+end
 
-  temp = ''
-  loop do # loan entry and validation loop
-    prompt("Please enter #{inputs[:loan][0]}: $")
-    temp = gets.chomp
-    if valid_number?(temp)
-      inputs[:loan][1] = temp.delete(',').to_f # removes possible formatting commas to prevent mis-reading by `.to_f` or `.to_i`
+messages = { welcome: "Welcome to the loan payment calculator.\n", loan: 'Please enter loan amount: $', apr: 'Please enter the Annual Percentage Rate (APR): ', length: 'Please enter the length of the loan in months: ', continue?: 'If you would like to enter additional loans, type \'y\'.  Any other input will exit. ' }
+
+prompt(messages[:welcome])
+
+loop do
+  loan_data = []
+  user_input = ''
+  loop do
+    prompt(messages[:loan])
+    user_input = gets.chomp
+    if valid_number?(user_input)
+      save_clean_input(loan_data, user_input)
       break
     else
-      prompt("That's not a valid entry.  Please try again. Include only digits and a decimal point if necessary.\n")
+      say_invalid
     end
   end
 
-  temp = ''
-  loop do # apr entry and validation loop
-    prompt("Please enter #{inputs[:apr][0]}: ")
-    temp = gets.chomp
-    if valid_number?(temp)
-      inputs[:apr][1] = temp.delete(',').to_f
+  loop do
+    prompt(messages[:apr])
+    user_input = gets.chomp
+    if valid_number?(user_input)
+      save_clean_input(loan_data, user_input)
       break
     else
-      prompt("That's not a valid entry.  Please try again. Include only digits and a decimal point if necessary.\n")
+      say_invalid
     end
   end
 
-  temp = ''
-  loop do # months entry and validation loop
-    prompt("Please enter #{inputs[:length][0]}: ")
-    temp = gets.chomp
-    if valid_number?(temp)
-      inputs[:length][1] = temp.delete(',').to_f
+  loop do
+    prompt(messages[:length])
+    user_input = gets.chomp
+    if valid_number?(user_input)
+      save_clean_input(loan_data, user_input)
       break
     else
-      prompt("That's not a valid entry.  Please try again. Include only digits and a decimal point if necessary.\n")
+      say_invalid
     end
   end
 
-  apr_dec = inputs[:apr][1] / 100
-  m_rate = apr_dec / 12
-  l = inputs[:loan][1] # assigns variable `l` and `m` to facilitate reading formula
-  m = inputs[:length][1]
-  payment = l * (m_rate * (1 + m_rate)**m) / ((1 + m_rate)**m - 1)
-  prompt("A #{m} month loan of $#{format('%.2f', l)} at #{inputs[:apr][1]}% interest would require monthly payments of $#{format('%.2f', payment.round(2))}\n") #  force loan and payment output to include both cents places even if .00
-  prompt("If you would like to enter additional loans, type 'y'.  Any other input will exit. ")
+  apr_decimal = loan_data[1] / 100
+  monthly_rate = apr_decimal / 12
+  l = loan_data[0] # assign variable `l` and `m` to facilitate reading formula
+  m = loan_data[2]
+  payment = l * (monthly_rate * (1 + monthly_rate)**m) / ((1 + monthly_rate)**m - 1)
+  prompt("A #{m} month loan of $#{format('%.2f', l)} at #{loan_data[1]}% interest would require monthly payments of $#{format('%.2f', payment.round(2))}\n") #  force loan and payment output to include both cents places even if .00
+  prompt(messages[:continue?])
   response = gets.chomp
   break unless response.casecmp('y') == 0
 end
