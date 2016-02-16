@@ -38,7 +38,7 @@ def determine_result(player, computer)
 end
 
 def increment_score(result, score_hash)
-  if result ==  "You won this round!"
+  if result == "You won this round!"
     score_hash[:player] = score_hash[:player] + 1
   elsif result == "Computer won this round!"
     score_hash[:computer] = score_hash[:computer] + 1
@@ -57,7 +57,7 @@ end
 loop do
   prompt("Welcome to ROCK PAPER SCISSORS LIZARD VULCAN.\n=> The first player to win five (5) rounds wins the game.\n=> You may select by typing the full word (e.g.: 'rock')\n=> or you may enter the first letter of your choice.\n=> (Remember to capitalize for the Vulcan!)")
 
-  score = {player: 0, computer: 0}
+  score = { player: 0, computer: 0 }
   while score[:player] < 5 && score[:computer] < 5
 
     choice = ''
@@ -76,7 +76,7 @@ loop do
 
     computer_choice = VALID_CHOICES.sample
 
-    prompt("You chose #{choice}; the computer chose #{computer_choice}")
+    prompt("You chose #{choice}; the computer chose #{computer_choice}.")
     outcome = determine_result(choice, computer_choice)
     prompt("#{outcome}")
     increment_score(outcome, score)
