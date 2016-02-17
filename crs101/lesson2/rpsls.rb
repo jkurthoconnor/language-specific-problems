@@ -6,16 +6,12 @@ def prompt(message)
 end
 
 def convert_initial(entry)
-  if entry == 'r'
-    'rock'
-  elsif entry == 'p'
-    'paper'
-  elsif entry == 's'
-    'scissors'
-  elsif entry == 'l'
-    'lizard'
-  else
-    'Spock'
+  case entry
+  when 'r' then 'rock'
+  when 'p' then 'paper'
+  when 's' then 'scissors'
+  when 'l' then 'lizard'
+  when 'S' then 'Spock'
   end
 end
 
@@ -37,29 +33,28 @@ def determine_result(player, computer)
   end
 end
 
-def increment_score(result, score_hash)
+def increment_score(result, scores)
   if result == "You won this round!"
-    score_hash[:player] = score_hash[:player] + 1
+    scores[:player] += 1
   elsif result == "Computer won this round!"
-    score_hash[:computer] = score_hash[:computer] + 1
+    scores[:computer] += 1
   end
 end
 
-def say_score(score_hash)
-  prompt("Here's the current score: #{score_hash}")
-  if score_hash[:player] == 5
+def say_score(scores)
+  prompt("Here's the current score: #{scores}")
+  if scores[:player] == 5
     prompt("\n=> Congratulations!  You beat the computer!!")
-  elsif score_hash[:computer] == 5
+  elsif scores[:computer] == 5
     prompt("\n=> Sorry. You've lost this game.")
   end
 end
 
 loop do
-  prompt("Welcome to ROCK PAPER SCISSORS LIZARD VULCAN.\n=> The first player to win five (5) rounds wins the game.\n=> You may select by typing the full word (e.g.: 'rock')\n=> or you may enter the first letter of your choice.\n=> (Remember to capitalize for the Vulcan!)")
+  prompt("Welcome to ROCK PAPER SCISSORS LIZARD SPOCK.\n=> The first player to win five (5) rounds wins the game.\n=> You may select by typing the full word (e.g.: 'rock')\n=> or you may enter the first letter of your choice.\n=> (Remember to capitalize for Spock!)")
 
   score = { player: 0, computer: 0 }
-  while score[:player] < 5 && score[:computer] < 5
-
+  until score.value?(5)
     choice = ''
     loop do
       prompt("\n=> Choose one: #{VALID_CHOICES.join(', ')}.")
@@ -76,7 +71,7 @@ loop do
 
     computer_choice = VALID_CHOICES.sample
 
-    prompt("You chose #{choice}; the computer chose #{computer_choice}.")
+    prompt("You chose #{choice}. The computer chose #{computer_choice}.")
     outcome = determine_result(choice, computer_choice)
     prompt("#{outcome}")
     increment_score(outcome, score)
