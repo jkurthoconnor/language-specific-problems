@@ -57,10 +57,10 @@ loop do
   end
 
   monthly_rate = (loan_data[:apr] / 100) / 12
-  l = loan_data[:amount] # assign variable `l` and `m` to facilitate reading formula
-  m = loan_data[:length]
-  payment = l * (monthly_rate * (1 + monthly_rate)**m) / ((1 + monthly_rate)**m - 1)
-  prompt("A #{m} month loan of $#{format('%.2f', l)} at #{loan_data[:apr]}% interest would require monthly payments of $#{format('%.2f', payment.round(2))}\n") #  force loan and payment output to include both cents places even if .00
+  loan = loan_data[:amount] # assign variables to facilitate reading formula
+  months = loan_data[:length]
+  payment = loan * (monthly_rate * (1 + monthly_rate)**months) / ((1 + monthly_rate)**months - 1)
+  prompt("A #{months} month loan of $#{format('%.2f', loan)} at #{loan_data[:apr]}% interest would require monthly payments of $#{format('%.2f', payment.round(2))}\n") #  force loan and payment output to include both cents places even if .00
   prompt(messages[:continue?])
   response = gets.chomp
   break unless response.casecmp('y') == 0
