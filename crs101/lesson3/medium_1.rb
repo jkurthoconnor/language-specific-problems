@@ -148,11 +148,24 @@ puts "Exercise 7"
 #   end
 #   sum
 # end
-puts "`limit` is assigned prior to/outside the method definition and it is not passed into the method as an argument.  As a result, `fib` has no idea what `limit` is supposed to refer to and the interpreter returns an undefined local variable error."
 # result = fib(0, 1)
 # puts "result is #{result}"
 # How would you fix this so that it works?
 
+puts "`limit` is assigned prior to/outside the method definition and it is not passed into the method as an argument.  As a result, `fib` has no idea what `limit` is supposed to refer to and the interpreter returns an undefined local variable error. Adding `limit` as one of the arguments passed into `fib` fixes this error, but unless the goal is to simply print the last digit in defined sequence we'll need to capture each sum in an array. My changes do this."
+
+
+def fib(first_num, second_num, limit, destination)
+  while second_num < limit
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+    destination.push sum
+  end
+  destination
+end
+sequence = []
+puts fib(0, 1, 15, sequence)
 spacer
 
 
@@ -160,6 +173,24 @@ puts "Exercise 8"
 # In another example we used some built-in string methods to change the case of a string. A notably missing method is something provided in Rails, but not in Ruby itself...titleize! This method in Ruby on Rails creates a string that has each word capitalized as it would be in a title.
 
 # Write your own version of the rails titleize implementation.
+# iterate oneach word (split...each do)
+# capitalize 1st word in split array
+# unless word is a preposition, capitalize it
+
+title = "this is the title of a famous book or film"
+exceptions = ['a', 'an', 'the', 'then', 'but','for', 'or', 'of', 'in', 'if', 'is']
+def titleize!(string, exceptions)
+  capitalized = string.split.each { |wrd| wrd.capitalize! }
+  capitalized.each do |wrd|
+    if exceptions.include?(wrd)
+      wrd.downcase!
+    end
+  end
+  capitalized.join(' ')
+end
+p titleize!(title, exceptions) # why aren't the exceptions downcased in the output?
+
+
 
 
 
@@ -187,6 +218,7 @@ puts "Exercise 9"
 
 # hint: try using a case statement along with Ruby Range objects in your solution
 
-
+## pseudocode: .each_pair do |k, v|
+# if v at k  == range, then add hash[k] = new v}
 
 spacer
