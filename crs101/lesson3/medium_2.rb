@@ -4,13 +4,20 @@ end
 
 puts "Exercise 1"
 # Figure out the total age of just the male members of the family.
- # try `inject`??
 munsters = {
   "Herman" => { "age" => 32, "gender" => "male" },
   "Lily" => { "age" => 30, "gender" => "female" },
   "Grandpa" => { "age" => 402, "gender" => "male" },
   "Eddie" => { "age" => 10, "gender" => "male" }
 }
+total_male_age = 0
+munsters.each_key do |name|
+  if munsters[name].has_value?("male")
+    total_male_age = total_male_age + munsters[name]["age"]
+  end
+end
+
+puts total_male_age
 spacer
 
 puts "Exercise 2"
@@ -27,10 +34,9 @@ munsters = {
   "Marilyn" => { "age" => 23, "gender" => "female"}
 }
 
-munsters.each_pair do |name, value|
-  puts "#{name} is a #{value["age"]} year old #{value["gender"]}"
+munsters.each do |name, value|
+  puts "#{name} is a #{value["age"]} year old #{value["gender"]}."
 end
-
 
 spacer
 
@@ -53,19 +59,30 @@ puts "Exercise 3"
 
 # How can we refactor this exercise to make the result easier to predict and easier for the next programmer to maintain?
 
+def tricky_arr_method(an_array_param)
+  an_array_param << "rutabaga"
+end
+
+def tricky_str_method(a_string_param)
+  a_string_param << " rutabaga"
+end
+
+my_string = "pumpkins"
+my_array = ["pumpkins"]
+tricky_arr_method(my_array)
+tricky_str_method(my_string)
+puts "The make the method work, we need to use a mutating method on the string.  This would then allow the mutated string to be accessed outside of the method, and the logic would parallel that of the push called on the array.  I would also break this into two methods, one for the array and one for the string UNLESS I knew that future use would always require both the string and the array to receive the same mutation at the same time."
+puts "My string looks like this now: #{my_string}"
+puts "My array looks like this now: #{my_array}"
 
 spacer
 
 puts "Exercise 4"
-# A quick glance at the docs for the Ruby String class will have you scratching your head over the absence of any "word iterator" methods.
-
-# Our natural inclination is to think of the words in a sentence as a collection. We would like to be able to operate on those words the same way we operate on the elements of an array. Where are the String#each_word and the String#map_words methods?
-
-# A common idiom used to solve this conundrum is to use the String#split in conjunction with Array#join methods to break our string up and then put it back together again.
-
-# Use this technique to break up the following string and put it back together with the words in reverse order:
+# Use [String#split  Array#join] technique to break up the following string and put it back together with the words in reverse order:
 
 sentence = "Humpty Dumpty sat on a wall."
+reversed = sentence.delete('.').split.reverse.join(' ')
+p reversed
 spacer
 
 puts "Exercise 5"
@@ -104,6 +121,7 @@ puts "Exercise 6"
 
 # mess_with_demographics(munsters)
 # Did the family's data get ransacked, or did the mischief only mangle a local copy of the original hash? (why?)
+puts "The `munsters` hash was changed, but it was not saved to a file and the original hash will load a the next execution.  Modifying the hash the program executes won't affect the hash permanently since `munsters` is assigned to the same hash at the start of each execution.  IF the hash had been loaded from, say a YAML file and then saved, Spot would have done permanent damage."
 
 spacer
 
@@ -129,7 +147,7 @@ puts "Exercise 8"
 # Consider these two simple methods:
 
 # def foo(param = "no")
-#   "yes"
+#  "yes"
 # end
 
 # def bar(param = "no")
@@ -138,5 +156,6 @@ puts "Exercise 8"
 # What would be the output of this code:
 
 # bar(foo)
+puts "`bar(foo)` should return 'no'"
 
 spacer
