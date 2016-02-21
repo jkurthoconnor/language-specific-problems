@@ -3,7 +3,7 @@ def spacer
 end
 
 puts "Exercise 1"
-# For this exercise, write a one-line program that creates the following output 10 times, with # the subsequent line indented 1 space to the right:
+# write a one-line program that creates the following output 10 times, with the subsequent line indented 1 space to the right:
 
 # The Flintstones Rock!
 #  The Flintstones Rock!
@@ -18,6 +18,7 @@ n = 0
 end
 # one line? OK
 30.times { |n| puts (' ' * n) + "The Flintstones Rock!" }
+
 spacer
 
 puts "Exercise 2"
@@ -28,6 +29,8 @@ puts "Exercise 2"
 statement = "The Flintstones Rock"
 frequency = {}
 letters = statement.split('').sort
+frequency.delete_if { |k| k == ' ' }
+
 letters.each do |ltr|
   if frequency.key?(ltr)
     frequency[ltr].push ltr
@@ -35,20 +38,16 @@ letters.each do |ltr|
     frequency[ltr] = [ltr]
   end
 end
-frequency.delete_if { |k| k == ' ' }
+
 frequency.each { |k, v| frequency[k] = v.length }
 p frequency
-
 
 spacer
 
 puts "Exercise 3"
-# The result of the following statement will be an error:
+# The result of the following statement will be an error: puts "the value of 40 + 2 is " + (40 + 2) . Why is this and what are two possible ways to fix this?
 
-# puts "the value of 40 + 2 is " + (40 + 2)
-# Why is this and what are two possible ways to fix this?
 puts "The problem is that the original code tried to append the result of a mathematical operation to the end of a string using '+'.  '+' can be used as either a numerical operator OR a string operator.  The interpreter can't make sense of the line of code; which way is '+' supposed to be used?  The fix is to add '.to_s' to the end of the equation.  Here are results of the corrected code: '#{"the value of 40 + 2 is " + (40 + 2).to_s}'"
-
 
 spacer
 
@@ -67,7 +66,7 @@ numbers.each_with_index do |number, index|
   numbers.shift(1)
 end
 
-puts "\nBefore checking in irb I thought this would print each number and then remove it from the numbers array, so at the end of each iteration it would return the most recently 'shifted' number. Now that I've run it and read the solution I understand what is happening.  The array size changes immediately with the .shift call, but when the 3rd iteration begins, the interpreter find noting in the 2 index.  Basically, with the immediate shift, numbers 2 and 4 are skipped because they slide into the index that had just had its element removed with the .shift call."
+puts "\nBefore checking in irb I thought this would print each number and then remove it from the numbers array, so at the end of each iteration it would return the most recently 'shifted' number. Now that I've run it and read the solution I understand what is happening.  The array size changes immediately with the .shift call, but when the 3rd iteration begins, the interpreter finds noting in the 2 index.  Basically, with the immediate shift, numbers 2 and 4 are skipped because they slide into the index that had just had its element removed with the .shift call."
 
 # What would be output by this code?
 
@@ -87,10 +86,8 @@ puts "\nHaving understood the previous explanation, I was able to predict correc
 
 spacer
 
-
 puts "Exercise 5"
 # Alan wrote the following method, which was intended to show all of the factors of the input number:
-
 # def factors(number)
 #   dividend = number
 #   divisors = []
@@ -110,6 +107,19 @@ puts "Exercise 5"
 
 # What is the purpose of the second-to-last line in the method (the divisors before the method's end)?
 
+def factors(number)
+  dividend = number
+  divisors = []
+  while dividend > 0 do
+    divisors << number / dividend if number % dividend == 0
+    dividend -= 1
+  end
+  divisors
+end
+
+p factors(50)
+p "Bonus 1: `number % dividend == 0` is used to identify the factors of the number."
+p "Bonus 2: the `divisors` just before `end` is required for the method to return the array of divisors created by the while loop.  Without that line, the method would return the value of `dividend -= 1` as it stood on the last iteration."
 
 spacer
 
@@ -154,7 +164,6 @@ puts "Exercise 7"
 
 puts "`limit` is assigned prior to/outside the method definition and it is not passed into the method as an argument.  As a result, `fib` has no idea what `limit` is supposed to refer to and the interpreter returns an undefined local variable error. Adding `limit` as one of the arguments passed into `fib` fixes this error, but unless the goal is to simply print the last digit in defined sequence we'll need to capture each sum in an array. My changes do this."
 
-
 def fib(first_num, second_num, limit, destination)
   while second_num < limit
     sum = first_num + second_num
@@ -164,61 +173,52 @@ def fib(first_num, second_num, limit, destination)
   end
   destination
 end
+
 sequence = []
 puts fib(0, 1, 15, sequence)
-spacer
 
+spacer
 
 puts "Exercise 8"
-# In another example we used some built-in string methods to change the case of a string. A notably missing method is something provided in Rails, but not in Ruby itself...titleize! This method in Ruby on Rails creates a string that has each word capitalized as it would be in a title.
-
 # Write your own version of the rails titleize implementation.
-# iterate oneach word (split...each do)
-# capitalize 1st word in split array
-# unless word is a preposition, capitalize it
 
-title = "this is the title of a famous book or film"
-exceptions = ['a', 'an', 'the', 'then', 'but','for', 'or', 'of', 'in', 'if', 'is']
 def titleize!(string, exceptions)
-  capitalized = string.split.each { |wrd| wrd.capitalize! }
-  capitalized.each do |wrd|
-    if exceptions.include?(wrd)
-      wrd.downcase!
-    end
-  end
+  capitalized = string.split.map { |wrd| wrd.capitalize! }
+  capitalized.map { |wrd| wrd.downcase! if exceptions.include?(wrd) }
+  capitalized[0].capitalize!
   capitalized.join(' ')
 end
-p titleize!(title, exceptions) # why aren't the exceptions downcased in the output?
 
+title = "this is the title of a famous book or film"
+exceptions = ["A", "An", "At", "But", "For", "If", "In", "Is", "Of", "On", "Or", "The", "Then", "This"]
 
-
-
+p titleize!(title, exceptions)
 
 spacer
 
-
 puts "Exercise 9"
-# Given the munsters hash below
-
-# munsters = {
-#   "Herman" => { "age" => 32, "gender" => "male" },
-#   "Lily" => { "age" => 30, "gender" => "female" },
-#   "Grandpa" => { "age" => 402, "gender" => "male" },
-#   "Eddie" => { "age" => 10, "gender" => "male" },
-#   "Marilyn" => { "age" => 23, "gender" => "female"}
-# }
-# Modify the hash such that each member of the Munster family has an additional "age_group" key that has one of three values describing the age group the family member is in (kid, adult, or senior). Your solution should produce the hash below
-
-# { "Herman" => { "age" => 32, "gender" => "male", "age_group" => "adult" },
-#   "Lily" => {"age" => 30, "gender" => "female", "age_group" => "adult" },
-#   "Grandpa" => { "age" => 402, "gender" => "male", "age_group" => "senior" },
-#   "Eddie" => { "age" => 10, "gender" => "male", "age_group" => "kid" },
-#   "Marilyn" => { "age" => 23, "gender" => "female", "age_group" => "adult" } }
+# Given the munsters hash below ...
+# Modify the hash such that each member of the Munster family has an additional "age_group" key that has one of three values describing the age group the family member is in (kid, adult, or senior).
 # Note: a kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is aged 65+.
 
-# hint: try using a case statement along with Ruby Range objects in your solution
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+ }
 
-## pseudocode: .each_pair do |k, v|
-# if v at k  == range, then add hash[k] = new v}
+def categorize_age(age)
+  case age
+  when (0..17) then "kid"
+  when (18..64) then "adult"
+  when (65..9999999999) then "senior"
+  end
+end
+
+age = munsters["Herman"]["age"]
+munsters.each_key { |key| munsters[key]["age_group"] = categorize_age(munsters[key]["age"]) }
+p munsters
 
 spacer
