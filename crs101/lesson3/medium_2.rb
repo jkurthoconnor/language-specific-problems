@@ -13,7 +13,7 @@ munsters = {
 total_male_age = 0
 munsters.each_key do |name|
   if munsters[name].has_value?("male")
-    total_male_age = total_male_age + munsters[name]["age"]
+    total_male_age += munsters[name]["age"]
   end
 end
 
@@ -22,9 +22,7 @@ spacer
 
 puts "Exercise 2"
 #Given this previously seen family hash, print out the name, age and gender of each family member:
-
 # (Name) is a (age) year old (male or female).
-
 
 munsters = {
   "Herman" => { "age" => 32, "gender" => "male" },
@@ -55,8 +53,6 @@ puts "Exercise 3"
 # puts "My string looks like this now: #{my_string}"
 # puts "My array looks like this now: #{my_array}"
 
-# We learned that whether the above "coincidentally" does what we think we wanted "depends" upon what is going on inside the method.
-
 # How can we refactor this exercise to make the result easier to predict and easier for the next programmer to maintain?
 
 def tricky_arr_method(an_array_param)
@@ -71,9 +67,12 @@ my_string = "pumpkins"
 my_array = ["pumpkins"]
 tricky_arr_method(my_array)
 tricky_str_method(my_string)
-puts "The make the method work, we need to use a mutating method on the string.  This would then allow the mutated string to be accessed outside of the method, and the logic would parallel that of the push called on the array.  I would also break this into two methods, one for the array and one for the string UNLESS I knew that future use would always require both the string and the array to receive the same mutation at the same time."
+puts "To make the method work, we need to use a mutating method on the string.  This would then allow the mutated string to be accessed outside of the method, and the logic would parallel that of the push called on the array.  I might also break this into two methods, one for the array and one for the string UNLESS I knew that future use would always require both the string and the array to receive the same mutation at the same time."
 puts "My string looks like this now: #{my_string}"
 puts "My array looks like this now: #{my_array}"
+
+puts "Having read the solution online I see that my solution above exploits a more idiosyncratic aspect of Ruby's use of methods.
+As such it would not be as easy for others to read/maintain.  The preferred solution calls for reassigning the values of `my_string` and `my_array` outside of the method."
 
 spacer
 
@@ -98,6 +97,8 @@ puts "Exercise 5"
 
 # p answer - 8
 
+puts "The code will output '34'.  While the method will output '50' from the line `new_answer = ...` the final line asks for `answer - 8`, but `answer` remains unchanged outside the method.  The method operates on the  value of `answer` and reassigns it for use in the method.  Since this isn't a mutating method, `answer` still points to 42 for all purposes outside of the method."
+
 spacer
 
 puts "Exercise 6"
@@ -121,7 +122,7 @@ puts "Exercise 6"
 
 # mess_with_demographics(munsters)
 # Did the family's data get ransacked, or did the mischief only mangle a local copy of the original hash? (why?)
-puts "The `munsters` hash was changed, but it was not saved to a file and the original hash will load a the next execution.  Modifying the hash the program executes won't affect the hash permanently since `munsters` is assigned to the same hash at the start of each execution.  IF the hash had been loaded from, say a YAML file and then saved, Spot would have done permanent damage."
+puts "The `munsters` hash was changed, but it was not saved to a file and the original hash will load at the next execution.  Modifying the hash the program executes won't affect the hash permanently since `munsters` is assigned to the same hash at the start of each execution and the `*.rb` file remains the same.  IF the hash had been loaded from, say a YAML file and then saved, Spot would have done permanent damage. As it is, he's only caused problems for the current running of the program."
 
 spacer
 
@@ -140,22 +141,43 @@ puts "Exercise 7"
 # What is the result of the following call?
 
 # puts rps(rps(rps("rock", "paper"), rps("rock", "scissors")), "rock")
+# rps(rps("rock", "paper"), rps("rock", "scissors")
+#                 paper                    rock
+#                          paper                                rock
+#                                           paper
+
+def rps(fist1, fist2)
+  if fist1 == "rock"
+    (fist2 == "paper") ? "paper" : "rock"
+  elsif fist1 == "paper"
+    (fist2 == "scissors") ? "scissors" : "paper"
+  else
+    (fist2 == "rock") ? "rock" : "scissors"
+  end
+end
+
+puts "The code below should return 'paper'."
+
+puts rps(rps(rps("rock", "paper"), rps("rock", "scissors")), "rock")
+
 
 spacer
 
 puts "Exercise 8"
 # Consider these two simple methods:
 
-# def foo(param = "no")
-#  "yes"
-# end
-
-# def bar(param = "no")
-#   param == "no" ? "yes" : "no"
-# end
 # What would be the output of this code:
-
 # bar(foo)
+
+def foo(param = "no")
+  "yes"
+end
+
+def bar(param = "no")
+  param == "no" ? "yes" : "no"
+end
+
 puts "`bar(foo)` should return 'no'"
+p bar(foo)
 
 spacer
