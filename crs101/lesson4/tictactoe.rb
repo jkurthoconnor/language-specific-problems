@@ -9,10 +9,11 @@ def prompt(msg)
 end
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 
-def display_board(brd)
+def display_board(brd, score)
   system 'clear'
-  puts "Player marks #{PLAYER_MARKER}"
-  puts "Computer marks #{COMPUTER_MARKER}"
+  puts "Welcome to Tic Tac Toe. The first player to win 5 rounds wins the game.\n(Player marks `#{PLAYER_MARKER}`. Computer marks `#{COMPUTER_MARKER}`)"
+  puts ''
+  puts "Player Score: #{score[:player]}   //   Computer Score: #{score[:computer]}"
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -35,7 +36,7 @@ def initialize_board
   new_board
 end
 
-def empty_squares(brd) # returns array with integer keys meeting seletion criteria
+def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
@@ -59,9 +60,9 @@ def board_full?(brd)
   empty_squares(brd) == []
 end
 
-def detect_winner(brd)
+def detect_round_winner(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(*line).count(PLAYER_MARKER) == 3 # `*line` refers to each index in `line`
+    if brd.values_at(*line).count(PLAYER_MARKER) == 3
       return 'Player'
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
       return 'Computer'
@@ -71,33 +72,59 @@ def detect_winner(brd)
 end
 
 def someone_won?(brd)
-  !!detect_winner(brd) # `!!`turns into Boolean value; any string is truthy; only nil returns false
+  !!detect_round_winner(brd) # `!!`turns into Boolean value; any string is truthy; only nil returns false
+end
+
+def keep_score(result, score)
+  if result == 'Player'
+    score[:player] += 1
+  elsif result == 'Computer'
+    score[:computer] += 1
+  end
+end
+
+def detect_game_winner(score)
+  if score[:player] == 5
+    return 'Player'
+  elsif score[:computer] == 5
+    return 'Computer'
+  end
+  nil
 end
 
 loop do
-  board = initialize_board
-  display_board(board)
-  loop do
-    player_places_piece!(board)
-    display_board(board)
-    break if someone_won?(board) || board_full?(board)
+  scores = { player: 0, computer: 0 }
+  loop do # game to 5
+    board = initialize_board
+    display_board(board, scores)
 
-    sleep 0.25
+    loop do # single round
+      player_places_piece!(board)
+      display_board(board, scores)
+      break if someone_won?(board) || board_full?(board)
 
-    computer_places_piece!(board)
-    display_board(board)
-    break if someone_won?(board) || board_full?(board)
+      computer_places_piece!(board)
+      display_board(board, scores)
+      break if someone_won?(board) || board_full?(board)
+    end
+
+    if someone_won?(board)
+      prompt "#{detect_round_winner(board)} won the round"
+    else
+      prompt "This round's a tie."
+    end
+
+    sleep 1.0
+
+    winner = detect_round_winner(board)
+    keep_score(winner, scores)
+    break if detect_game_winner(scores)
   end
-
-  if someone_won?(board)
-    prompt "#{detect_winner(board)} won!!"
-  else
-    prompt "It's a tie."
-  end
-
+  system 'clear'
+  prompt "Player Score: #{scores[:player]}   //   Computer Score: #{scores[:computer]}"
+  prompt "#{detect_game_winner(scores)} won the game!!"
   prompt "Would you like to play again? (Y or N)"
   answer = gets.chomp.downcase
   break unless answer.start_with? 'y'
 end
-
 prompt "That was fun. Good bye!"
