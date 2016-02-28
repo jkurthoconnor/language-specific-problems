@@ -40,10 +40,18 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
+def joiner(brd, separator, conjunction)
+  if empty_squares(brd).length > 1
+    empty_squares(brd).join("#{separator} ").insert(-2, "#{conjunction} ")
+  else
+    empty_squares(brd).join
+  end
+end
+
 def player_places_piece!(brd)
   square = ''
   loop do
-    prompt "Choose a square (#{empty_squares(brd).join(', ')}):"
+    prompt "Choose a square (#{joiner(brd, ',', 'or')}):"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice."
@@ -121,7 +129,7 @@ loop do
     break if detect_game_winner(scores)
   end
   system 'clear'
-  prompt "Player Score: #{scores[:player]}   //   Computer Score: #{scores[:computer]}"
+  prompt "Final Score: Player #{scores[:player]}   //   Computer: #{scores[:computer]}"
   prompt "#{detect_game_winner(scores)} won the game!!"
   prompt "Would you like to play again? (Y or N)"
   answer = gets.chomp.downcase
