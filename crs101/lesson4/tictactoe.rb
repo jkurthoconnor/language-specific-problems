@@ -1,4 +1,3 @@
-require 'pry'
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -59,9 +58,28 @@ def player_places_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
+def id_decisive_line(brd)
+  block = []
+  WINNING_LINES.each do |line|
+    if (brd.values_at(*line).count(COMPUTER_MARKER) == 2) && brd.values_at(*line).count(INITIAL_MARKER) == 1
+      return line
+    elsif (brd.values_at(*line).count(PLAYER_MARKER) == 2) && brd.values_at(*line).count(INITIAL_MARKER) == 1
+      block.push line
+    end
+  end
+  block[0]
+end
+
 def computer_places_piece!(brd)
-  square = empty_squares(brd).sample
-  brd[square] = COMPUTER_MARKER
+  if !id_decisive_line(brd) && brd[5] == INITIAL_MARKER
+    brd[5] = COMPUTER_MARKER
+  elsif !id_decisive_line(brd)
+    square = empty_squares(brd).sample
+    brd[square] = COMPUTER_MARKER
+  elsif id_decisive_line(brd)
+    square = id_decisive_line(brd).select { |num| brd[num] == INITIAL_MARKER }[0]
+    brd[square] = COMPUTER_MARKER
+  end
 end
 
 def board_full?(brd)
@@ -80,7 +98,7 @@ def detect_round_winner(brd)
 end
 
 def someone_won?(brd)
-  !!detect_round_winner(brd) # `!!`turns into Boolean value; any string is truthy; only nil returns false
+  !!detect_round_winner(brd)
 end
 
 def keep_score(result, score)
@@ -102,11 +120,12 @@ end
 
 loop do
   scores = { player: 0, computer: 0 }
-  loop do # game to 5
+
+  loop do
     board = initialize_board
     display_board(board, scores)
 
-    loop do # single round
+    loop do
       player_places_piece!(board)
       display_board(board, scores)
       break if someone_won?(board) || board_full?(board)
