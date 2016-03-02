@@ -8,9 +8,24 @@ def prompt(msg)
 end
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 
+def choose_play_sequence
+  prompt "\n=> Who gets the first turn, you or the computer?\n=> (Type `1` for you, `2` for computer)"
+  turn_choice = ''
+  loop do
+    turn_choice = gets.chomp.to_i
+    break if [1, 2].include?(turn_choice)
+    prompt "That's not a valid choice.\n=> Please select `1` for you, `2` for computer."
+  end
+
+  case turn_choice
+  when 1 then 'Player'
+  when 2 then 'Computer'
+  end
+end
+
 def display_board(brd, score)
   system 'clear'
-  puts "Welcome to Tic Tac Toe. The first player to win 5 rounds wins the game.\n(Player marks `#{PLAYER_MARKER}`. Computer marks `#{COMPUTER_MARKER}`)"
+  puts "(Player marks `#{PLAYER_MARKER}`. Computer marks `#{COMPUTER_MARKER}`)"
   puts ''
   puts "Player Score: #{score[:player]}   //   Computer Score: #{score[:computer]}"
   puts ""
@@ -118,20 +133,36 @@ def detect_game_winner(score)
   nil
 end
 
+def switch_player(turn)
+  case turn
+  when 'Player' then 'Computer'
+  when 'Computer' then 'Player'
+  end
+end
+
+def place_piece!(brd, turn)
+  case turn
+  when 'Player'
+    player_places_piece!(brd)
+  when 'Computer'
+    computer_places_piece!(brd)
+  end
+end
+
 loop do
   scores = { player: 0, computer: 0 }
+  prompt "Welcome to Tic Tac Toe. The first player to win 5 rounds wins the game."
+  moves_first = choose_play_sequence
 
   loop do
     board = initialize_board
     display_board(board, scores)
+    current_turn = moves_first
 
     loop do
-      player_places_piece!(board)
+      place_piece!(board, current_turn)
       display_board(board, scores)
-      break if someone_won?(board) || board_full?(board)
-
-      computer_places_piece!(board)
-      display_board(board, scores)
+      current_turn = switch_player(current_turn)
       break if someone_won?(board) || board_full?(board)
     end
 
