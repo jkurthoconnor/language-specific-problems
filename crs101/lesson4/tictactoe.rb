@@ -24,7 +24,7 @@ def choose_play_sequence
 end
 
 def display_board(brd, score)
-  system 'clear'
+  system 'clear' or system 'cls'
   puts "(Player marks `#{PLAYER_MARKER}`. Computer marks `#{COMPUTER_MARKER}`)"
   puts ''
   puts "Player Score: #{score[:player]}   //   Computer Score: #{score[:computer]}"
@@ -73,12 +73,14 @@ def player_places_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def id_decisive_line(brd)
+def identify_decisive_line(brd)
   block = []
   WINNING_LINES.each do |line|
-    if (brd.values_at(*line).count(COMPUTER_MARKER) == 2) && brd.values_at(*line).count(INITIAL_MARKER) == 1
+    if (brd.values_at(*line).count(COMPUTER_MARKER) == 2) &&
+      brd.values_at(*line).count(INITIAL_MARKER) == 1
       return line
-    elsif (brd.values_at(*line).count(PLAYER_MARKER) == 2) && brd.values_at(*line).count(INITIAL_MARKER) == 1
+    elsif (brd.values_at(*line).count(PLAYER_MARKER) == 2) &&
+      brd.values_at(*line).count(INITIAL_MARKER) == 1
       block.push line
     end
   end
@@ -86,15 +88,14 @@ def id_decisive_line(brd)
 end
 
 def computer_places_piece!(brd)
-  if !id_decisive_line(brd) && brd[5] == INITIAL_MARKER
-    brd[5] = COMPUTER_MARKER
-  elsif !id_decisive_line(brd)
+  if identify_decisive_line(brd)
+    square = identify_decisive_line(brd).select { |num| brd[num] == INITIAL_MARKER }[0]
+  elsif brd[5] == INITIAL_MARKER
+    square = 5
+  else
     square = empty_squares(brd).sample
-    brd[square] = COMPUTER_MARKER
-  elsif id_decisive_line(brd)
-    square = id_decisive_line(brd).select { |num| brd[num] == INITIAL_MARKER }[0]
-    brd[square] = COMPUTER_MARKER
   end
+  brd[square] = COMPUTER_MARKER
 end
 
 def board_full?(brd)
