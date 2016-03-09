@@ -11,8 +11,7 @@
 
 # ## tips
 
-#
-# ***** Calculating Aces. Remember that aces can be worth either 1 or 11, depending on the context. You should not ask the user what the value of the ace is; your program should be able to figure this out automatically.
+
 
 require 'pry'
 
@@ -23,7 +22,7 @@ def shuffle_new_deck(source)
   deck.shuffle
 end
 
-def deal_hand(deck, hand)
+def deal_hands(deck, hand)
   n = 0
   2.times do |n|
     hand[:player][n] = deck.shift
@@ -32,27 +31,24 @@ def deal_hand(deck, hand)
   end
 end
 
-def calculate_hand_value(hand, totals)
-  totals[:player] = hand[:player][0][1].to_i + hand[:player][1][1].to_i
-  totals[:dealer] = hand[:dealer][0][1].to_i + hand[:dealer][1][1].to_i
-  # pseudo code for aces
-  # totals.each do |competitor|
-  # if totals[:competitor] > 21
-  #   if [:competitor].values.include?(11)
-  #      subtract 10 from totals[:competitor] for each occurance of 11
-  #   end
-  # end
+def calculate_hands_values(hands, totals)
+  totals.each_key do |k|
+    totals[k] = hands[k].flatten.select { |n| n == n.to_i }
+                .inject { |sum, n| sum + n }
+    if totals[k] > 21 && hands[k].flatten.include?(11)
+      totals[k] = (totals[k] - 10 * hands[k].flatten.count(11)) + 10
+    end
+  end
 end
 
 
-current_hand = { dealer: [], player: [] }
-current_hand_totals = { dealer: 0,  player: 0 }
-binding.pry
+current_hands = { dealer: [], player: [] }
+current_hands_totals = { dealer: 0,  player: 0 }
 deck_in_play = shuffle_new_deck(DECK)
 
-deal_hand(deck_in_play, current_hand)
-binding.pry
-puts "Dealer's Hand: showing #{current_hand[:dealer][0][0].to_s}\nYour Hand: #{current_hand[:player][0][0].to_s} & #{current_hand[:player][1][0].to_s}"
+deal_hands(deck_in_play, current_hands)
+puts "Dealer's Hand: showing #{current_hands[:dealer][0][0] }\nYour Hand: #{current_hands[:player].flatten.select { |c| c != c.to_i }.join(', ' ) }" # hide/show additional cards
 
-calculate_hand_value(current_hand, current_hand_totals)
-p current_hand_totals
+calculate_hands_values(current_hands, current_hands_totals)
+p current_hands_totals
+p current_hands
