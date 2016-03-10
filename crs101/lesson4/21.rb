@@ -41,14 +41,44 @@ def calculate_hands_values(hands, totals)
   end
 end
 
+def hit_me(hands, turn, deck)
+  hands[turn].push deck.shift
+end
 
+def busted?(totals, turn)
+  if totals[turn] > 21
+    true
+  end
+end
+
+def display_current_hands(hands)
+  puts "Dealer's Hand: showing #{hands[:dealer][0][0] }\nYour Hand: #{hands[:player].flatten.select { |c| c != c.to_i }.join(', ' ) }" # hide/show additional dealer cards
+end
+
+deck_in_play = shuffle_new_deck(DECK)
 current_hands = { dealer: [], player: [] }
 current_hands_totals = { dealer: 0,  player: 0 }
-deck_in_play = shuffle_new_deck(DECK)
 
 deal_hands(deck_in_play, current_hands)
-puts "Dealer's Hand: showing #{current_hands[:dealer][0][0] }\nYour Hand: #{current_hands[:player].flatten.select { |c| c != c.to_i }.join(', ' ) }" # hide/show additional cards
+display_current_hands(current_hands)
 
-calculate_hands_values(current_hands, current_hands_totals)
+response = nil
+loop do
+  puts "Would you like to hit or stay?"
+  response = gets.chomp
+  break if response.downcase == 'stay'
+  hit_me(current_hands, :player, deck_in_play)
+  calculate_hands_values(current_hands, current_hands_totals)
+  puts "Your new card is: #{current_hands[:player][-1][0]}"
+  display_current_hands(current_hands)
+  break if busted?(current_hands_totals, :player)
+end
+
+if busted?(current_hands_totals, :player)
+  puts "You've gone over 21."
+else
+  puts "OK. You chose to stay. Now it is the dealer's turn."
+end
+
 p current_hands_totals
 p current_hands
