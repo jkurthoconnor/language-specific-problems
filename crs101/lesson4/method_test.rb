@@ -1,26 +1,19 @@
 require 'pry'
 
-def determine_winner(totals)
-  comparison = 21 - totals[:player] <=> 21 - totals[:dealer]
-  case comparison
-  when -1 then 'player'
-  when 0 then 'tie'
-  when 1 then 'dealer'
-  end
+DECK = { '2 of S' => 2, '3 of S' => 3, '4 of S' => 4, '5 of S' => 5, '6 of S' => 6, '7 of S' => 7, '8 of S' => 8, '9 of S' => 9, '10 of S' => 10, 'Jack of S' => 10, 'Queen of S' => 10, 'King of S' => 10, 'Ace of S' => 11, '2 of Diamonds' => 2, '3 of Diamonds' => 3, '4 of Diamonds' => 4, '5 of Diamonds' => 5, '6 of Diamonds' => 6, '7 of Diamonds' => 7, '8 of Diamonds' => 8, '9 of Diamonds' => 9, '10 of Diamonds' => 10, 'Jack of Diamonds' => 10, 'Queen of Diamonds' => 10, 'King of Diamonds' => 10, 'Ace of Diamonds' => 11, '2 of Spades' => 2, '3 of Spades' => 3, '4 of Spades' => 4, '5 of Spades' => 5, '6 of Spades' => 6, '7 of Spades' => 7, '8 of Spades' => 8, '9 of Spades' => 9, '10 of Spades' => 10, 'Jack of Spades' => 10, 'Queen of Spades' => 10, 'King of Spades' => 10, 'Ace of Spades' => 11, '2 of Clubs' => 2, '3 of Clubs' => 3, '4 of Clubs' => 4, '5 of Clubs' => 5, '6 of Clubs' => 6, '7 of Clubs' => 7, '8 of Clubs' => 8, '9 of Clubs' => 9, '10 of Clubs' => 10, 'Jack of Clubs' => 10, 'Queen of Clubs' => 10, 'King of Clubs' => 10, 'Ace of Clubs' => 11 }
+#
+def shuffle_new_deck(source)
+  deck = source.to_a
+  deck.shuffle
 end
 
-def display_results(outcome)
-  case outcome
-  when 'player' then p "Congratulations, you won!!"
-  when 'tie' then p 'Wow!  That hand was a tie.'
-  when 'dealer' then p "I'm sorry.  The computer won that hand. Better luck next time."
-  end
+# current_hands = { dealer: [], player: [] }
+# deck_in_play = shuffle_new_deck(DECK)
+# deal_hands(deck_in_play, current_hands)
+# p current_hands
+
+loop do
+  puts "Would you like to hit or stay?"
+  response = gets.chomp
+  break if response.casecmp('stay') == 0
 end
-
-deck = [ ["Ace of Examples", 11], ["Ace of Experiments", 11], ["Ace of Samples", 11], ["Ace of Tests", 11], ["Ace of Something", 11], ["7 of Hearts", 7], ["8 of Hearts", 8], ["Ace of That", 11], ["10 of Hearts", 10], ["Ace of Another", 11], ["Queen of Hearts", 10], ["King of Hearts", 10], ["Ace of Hearts", 11] ]
-
-deck_in_play = deck.shuffle
-current_hands = { dealer: [], player: [] }
-current_hands_totals = { dealer: 20,  player: 20 }
-
-display_results(determine_winner(current_hands_totals))
