@@ -1,26 +1,7 @@
 
-# refactor ideas
-# - rubocop clean up
-# - too much repetition of 'n wins' text; find way to consolidate
-# - hide/show additional dealer cards?
-# - large conditional chains smell; fix if not remedied by adding the play again loop and breaks
-# - *** create deck without relying on hash of complete options
+CARDS = [['2 of s', '2'], ['3 of s', '3'], ['4 of s', '4'], ['5 of s', '5'], ['6 of s', '6'], ['7 of s', '7'], ['8 of s', '8'], ['9 of s', '9'], ['10 of s', '10'], ['Jack of s', '10'], ['Queen of s', '10'], ['King of s', '10'], ['Ace of s', '11']]
 
-# functional additions
-# - XX play again loop
-# - xx entry validation
-# - xx display current hands at top of screen (use 'clear'?)
-# - xx add prompt
-# -  xx add play to five loop
-#   - xx add display results after final hand
-# - xx add constants for goal (now GOAL) and dealer hold threshold (now 17)
-#   - xx refactor formulae to accomodate outcomes with new goal
-
-
-require 'pry'
-
-DECK = { '2 of Hearts' => 2, '3 of Hearts' => 3, '4 of Hearts' => 4, '5 of Hearts' => 5, '6 of Hearts' => 6, '7 of Hearts' => 7, '8 of Hearts' => 8, '9 of Hearts' => 9, '10 of Hearts' => 10, 'Jack of Hearts' => 10, 'Queen of Hearts' => 10, 'King of Hearts' => 10, 'Ace of Hearts' => 11, '2 of Diamonds' => 2, '3 of Diamonds' => 3, '4 of Diamonds' => 4, '5 of Diamonds' => 5, '6 of Diamonds' => 6, '7 of Diamonds' => 7, '8 of Diamonds' => 8, '9 of Diamonds' => 9, '10 of Diamonds' => 10, 'Jack of Diamonds' => 10, 'Queen of Diamonds' => 10, 'King of Diamonds' => 10, 'Ace of Diamonds' => 11, '2 of Spades' => 2, '3 of Spades' => 3, '4 of Spades' => 4, '5 of Spades' => 5, '6 of Spades' => 6, '7 of Spades' => 7, '8 of Spades' => 8, '9 of Spades' => 9, '10 of Spades' => 10, 'Jack of Spades' => 10, 'Queen of Spades' => 10, 'King of Spades' => 10, 'Ace of Spades' => 11, '2 of Clubs' => 2, '3 of Clubs' => 3, '4 of Clubs' => 4, '5 of Clubs' => 5, '6 of Clubs' => 6, '7 of Clubs' => 7, '8 of Clubs' => 8, '9 of Clubs' => 9, '10 of Clubs' => 10, 'Jack of Clubs' => 10, 'Queen of Clubs' => 10, 'King of Clubs' => 10, 'Ace of Clubs' => 11 }
-
+SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 GOAL = 21
 DEALER_HOLD_POINT = 17
 
@@ -34,9 +15,17 @@ def introduce_game
   sleep 1.5
 end
 
-def shuffle_new_deck(source)
-  deck = source.to_a
-  deck.shuffle
+def make_new_deck(deck)
+  SUITS.each do |name|
+    CARDS.each do |arr|
+      deck.push arr.map { |str| str.sub('s', name) }
+    end
+  end
+  deck.each { |arr| arr[1] = arr[1].to_i }
+end
+
+def shuffle_new_deck(new_deck)
+  new_deck.shuffle
 end
 
 def deal_hands(deck, hand)
@@ -66,7 +55,7 @@ def busted?(totals, turn)
   end
 end
 
-def display_current_status(hands, score)
+def display_status(hands, score)
   system 'clear' or system 'cls'
   prompt "Game Score: Dealer: #{score[:dealer]} // Player: #{score[:player]}"
   puts
@@ -136,13 +125,14 @@ loop do
 
   loop do
     scores = { dealer: 0, player: 0 }
-    loop do
-      deck_in_play = shuffle_new_deck(DECK)
-      current_hands = { dealer: [], player: [] }
-      current_hands_totals = { dealer: 0, player: 0 }
 
-      deal_hands(deck_in_play, current_hands)
-      display_current_status(current_hands, scores)
+    loop do
+      deck = []
+      deck_in_play = shuffle_new_deck(make_new_deck(deck))
+      hands = { dealer: [], player: [] }
+      hands_totals = { dealer: 0, player: 0 }
+      deal_hands(deck_in_play, hands)
+      display_status(hands, scores)
 
       loop do
         prompt "Would you like to hit or stay?"
@@ -154,12 +144,12 @@ loop do
         end
 
         break if response.casecmp('stay') == 0
-        hit_me(current_hands, :player, deck_in_play)
-        update_hands_values(current_hands, current_hands_totals)
-        prompt "Your new card is: #{current_hands[:player][-1][0]}"
+        hit_me(hands, :player, deck_in_play)
+        update_hands_values(hands, hands_totals)
+        prompt "Your new card is: #{hands[:player][-1][0]}"
         sleep 1.0
-        display_current_status(current_hands, scores)
-        break if busted?(current_hands_totals, :player) || current_hands_totals[:player] == GOAL
+        display_status(hands, scores)
+        break if busted?(hands_totals, :player) || hands_totals[:player] == GOAL
       end
 
       if response == 'stay'
@@ -168,33 +158,38 @@ loop do
       end
 
       loop do
-        break if busted?(current_hands_totals, :player) || (current_hands_totals[:player] == GOAL)
-        break if busted?(current_hands_totals, :dealer) || (current_hands_totals[:dealer] >= DEALER_HOLD_POINT)
+        break if busted?(hands_totals, :player) || (hands_totals[:player] == GOAL)
+        break if busted?(hands_totals, :dealer) || (hands_totals[:dealer] >= DEALER_HOLD_POINT)
         prompt "Dealer hits."
         sleep 1.0
-        hit_me(current_hands, :dealer, deck_in_play)
-        display_current_status(current_hands, scores)
-        update_hands_values(current_hands, current_hands_totals)
+        hit_me(hands, :dealer, deck_in_play)
+        display_status(hands, scores)
+        update_hands_values(hands, hands_totals)
       end
 
-      if !busted?(current_hands_totals, :dealer) && !busted?(current_hands_totals, :player) && !(current_hands_totals[:player] == GOAL)
+      if !busted?(hands_totals, :dealer) && !busted?(hands_totals, :player) && !(hands_totals[:player] == GOAL)
         prompt "Dealer stays."
         sleep 1.0
       end
-      current_hand_outcome = determine_hand_outcome(current_hands_totals)
-      display_hand_outcome(current_hands, current_hand_outcome, current_hands_totals)
+
+      current_hand_outcome = determine_hand_outcome(hands_totals)
+      display_hand_outcome(hands, current_hand_outcome, hands_totals)
       increment_scores(current_hand_outcome, scores)
       break if scores[:dealer] == 5 || scores[:player] == 5
     end
+
     display_game_outcome(scores)
     prompt "Would you like a rematch?"
+
     loop do
       response = gets.chomp
       break if response.casecmp('yes') == 0 || response.casecmp('no') == 0
       prompt "That's not an option.  Please enter 'yes' or 'no'."
     end
+
     break if response.casecmp('no') == 0
   end
+
   break if response.casecmp('no') == 0
 end
 
