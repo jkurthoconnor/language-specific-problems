@@ -17,8 +17,8 @@ end
 
 def make_new_deck(deck)
   SUITS.each do |name|
-    CARDS.each do |arr|
-      deck.push arr.map { |str| str.sub('s', name) }
+    CARDS.each do |card|
+      deck.push card.map { |template| template.sub('s', name) }
     end
   end
   deck.each { |arr| arr[1] = arr[1].to_i }
@@ -36,11 +36,10 @@ def deal_hands(deck, hand)
 end
 
 def update_hands_values(hands, totals)
-  totals.each_key do |k|
-    totals[k] = hands[k].flatten.select { |n| n == n.to_i }
-                        .inject { |sum, n| sum + n }
-    hands[k].flatten.count(11).times do
-      totals[k] -= 10 if totals[k] > GOAL
+  totals.each_key do |current_player|
+    totals[current_player] = hands[current_player].flatten.select { |card_datum| card_datum == card_datum.to_i }.inject { |sum, card_datum| sum + card_datum }
+    hands[current_player].flatten.count(11).times do
+      totals[current_player] -= 10 if totals[current_player] > GOAL
     end
   end
 end
@@ -50,9 +49,7 @@ def hit_me(hands, turn, deck)
 end
 
 def busted?(totals, turn)
-  if totals[turn] > GOAL
-    true
-  end
+  totals[turn] > GOAL
 end
 
 def display_status(hands, score)
@@ -135,15 +132,15 @@ loop do
       display_status(hands, scores)
 
       loop do
-        prompt "Would you like to hit or stay?"
+        prompt "Would you like to hit [H] or stay [S]?"
 
         loop do
           response = gets.chomp
-          break if response.casecmp('stay') == 0 || response.casecmp('hit') == 0
-          prompt "That's not a valid game option.  Enter 'hit' or 'stay'."
+          break if response.downcase == 's' || response.downcase == 'h'
+          prompt "That's not a valid game option.  Enter 'H' to hit or 'S' to stay."
         end
 
-        break if response.casecmp('stay') == 0
+        break if response.downcase.start_with?('s')
         hit_me(hands, :player, deck_in_play)
         update_hands_values(hands, hands_totals)
         prompt "Your new card is: #{hands[:player][-1][0]}"
@@ -152,7 +149,7 @@ loop do
         break if busted?(hands_totals, :player) || hands_totals[:player] == GOAL
       end
 
-      if response == 'stay'
+      if response.downcase.start_with?('s')
         prompt "OK. You chose to stay. Now it is the dealer's turn."
         sleep 1.0
       end
@@ -175,22 +172,22 @@ loop do
       current_hand_outcome = determine_hand_outcome(hands_totals)
       display_hand_outcome(hands, current_hand_outcome, hands_totals)
       increment_scores(current_hand_outcome, scores)
-      break if scores[:dealer] == 5 || scores[:player] == 5
+      break if scores.value?(5)
     end
 
     display_game_outcome(scores)
-    prompt "Would you like a rematch?"
+    prompt "Would you like a rematch? (Y or N)"
 
     loop do
       response = gets.chomp
-      break if response.casecmp('yes') == 0 || response.casecmp('no') == 0
-      prompt "That's not an option.  Please enter 'yes' or 'no'."
+      break if response.downcase == 'y' || response.downcase == 'n'
+      prompt "That's not an option.  Please enter 'Y' or 'N'."
     end
 
-    break if response.casecmp('no') == 0
+    break if response.downcase == 'n'
   end
 
-  break if response.casecmp('no') == 0
+  break if response.downcase == 'n'
 end
 
 prompt "Thanks for playing.  Good bye!"
