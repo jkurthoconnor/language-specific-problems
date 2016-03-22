@@ -1,6 +1,6 @@
-Exercises: Medium 1
+## Exercises: Medium 1
 
-#### Q Med. 1
+#### Q  1
 Let's do some "ASCII Art" (a stone-age form of nerd artwork from back in the days before computers had video screens).
 
 For this exercise, write a one-line program that creates the following output 10 times, with the subsequent line indented 1 space to the right:
@@ -17,7 +17,7 @@ The Flintstones Rock!
 30.times { |num| puts ' '  * num + 'The Flintstones Rock!'}
 ```
 
-#### Q Med 2
+#### Q  2
 
 Create a hash that expresses the frequency with which each letter occurs in this string:
 
@@ -42,7 +42,7 @@ statement.split('').uniq.sort.each do |letter|
 end
 ```
 
-#### Q Med 3
+#### Q  3
 
 The result of the following statement will be an error:
 ```ruby
@@ -64,7 +64,7 @@ This could be resolved by converting the sum `40 + 2` to a string.  Then `+` cou
 puts "the value of 40 + 2 is " + (40 + 2).to_s
 ```
 
-#### Q Med 4
+#### Q 4
 What happens when we modify an array while we are iterating over it? What would be output by this code?
 
 ```ruby
@@ -126,7 +126,7 @@ and will return
 
 The different output and return is because `pop` doesn't interfere with the iterator's count.  `pop` removes elements off of the end, so although the original `numbers`  array isn't output as a whole because at each iteration its last element is being deleted, the iterator counting isn't interfered with.
 
-#### Q Med 5
+#### Q Medium 5
 Alan wrote the following method, which was intended to show all of the factors of the input number:
 
 ```ruby
@@ -155,5 +155,158 @@ What is the purpose of the second-to-last line in the method (the divisors befor
 #### Answer
 
 ```ruby
+def factors(number)
+  dividend = number
+  divisors = []
+  
+  if number <= 0
+    puts "Sorry.  We only provide factors for positive numbers."
+  end
+  
+  while dividend > 0
+    divisors << number / dividend if number % dividend == 0
+    dividend -= 1
+  end
+  divisors
+end
+```
+Answer Bonus 1: 
+`number % dividend == 0` is the test for a number to be evenly divided by a (potential) integer dividend.  This Boolean expression returns true only when the (potential) integer dividend is a factor of the number.
 
+Answer Bonus 2:
+`divisors` appears just before the method end so that when called the method will return the array of divisors (i.e. the integers that have been identified as factors of the number entered as the method argument.)  Without this, the method will return `nil` and after the method has been run there will be no way to access the factors stored under `divisors` because that array was initialized within the method.  
+
+
+#### Q 6
+
+Alyssa was asked to write an implementation of a rolling buffer. Elements are added to the rolling buffer and if the buffer becomes full, then new elements that are added will displace the oldest elements in the buffer.
+
+She wrote two implementations saying, "Take your pick. Do you like << or + for modifying the buffer?". Is there a difference between the two, other than what operator she chose to use to add an element to the buffer?
+
+```ruby
+def rolling_buffer1(buffer, max_buffer_size, new_element)
+  buffer << new_element
+  buffer.shift if buffer.size >= max_buffer_size
+  buffer
+end
+
+def rolling_buffer2(input_array, max_buffer_size, new_element)
+  buffer = input_array + [new_element]
+  buffer.shift if buffer.size >= max_buffer_size
+  buffer
+end
+```
+
+#### Answer
+
+Both `rolling_buffer1` (#1) and `rolling_buffer2`(#2)  will return the same array, (assuming `buffer` in #1 and `input_array` in #2 have the same values, and the values for the other parameters are the same). 
+
+#1 passes `buffer` in as an argument, so because it uses a mutating method `<<` `buffer` will be modified and  its new content will be available outside of the method. But #2 does not pass in `buffer` as an argument.  Rather it simply assigns a value to `buffer` within the method.  This [re]assignment is local to the method, and so won't affect the value of `buffer` outside.  So, while both return the same array, only #1 actually modifies the buffer as it appears outside of the method.
+
+#### Q 7
+
+Alyssa asked Ben to write up a basic implementation of a Fibonacci calculator, A user passes in two numbers, and the calculator will keep computing the sequence until some limit is reached.
+
+Ben coded up this implementation but complained that as soon as he ran it, he got an error. Something about the limit variable. What's wrong with the code?
+
+```ruby
+limit = 15
+
+def fib(first_num, second_num)
+  while second_num < limit
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+  end
+  sum
+end
+
+result = fib(0, 1)
+puts "result is #{result}"
+```
+
+How would you fix this so that it works?
+
+
+#### Answer
+
+This original code doesn't allow the local variable `limit` to be accessed within the method.  `limit` is defined outside of the method, and it is not being passed in as an argument.  The error reports that `limit` is an `undefined local variable or method`. The `fib` method simply doesn't 'know' what `limit` is. `limit` is outside of `fib` method's scope.
+
+To fix this, just add `limit` in as an argument when defining the method.
+
+```ruby
+limit = 15
+
+def fib(first_num, second_num, limit)
+  while second_num < limit
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+  end
+  sum
+end
+
+result = fib(0, 1, limit)
+puts "result is #{result}"
+```
+
+#### Q 8
+
+In another example we used some built-in string methods to change the case of a string. A notably missing method is something provided in Rails, but not in Ruby itself...`titleize`! This method in Ruby on Rails creates a string that has each word capitalized as it would be in a title.
+
+Write your own version of the rails `titleize` implementation.
+
+
+#### Answer
+
+```ruby
+title = 'tHis is THe tItle oF ThE bOOk'
+
+title.split.each { |word| word.capitalize! }.join(' ')
+
+```
+
+#### Q 9
+
+Given the munsters hash below
+
+```ruby
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
+```
+
+Modify the hash such that each member of the Munster family has an additional "age_group" key that has one of three values describing the age group the family member is in (kid, adult, or senior). Your solution should produce the hash below
+
+```ruby
+{ "Herman" => { "age" => 32, "gender" => "male", "age_group" => "adult" },
+  "Lily" => {"age" => 30, "gender" => "female", "age_group" => "adult" },
+  "Grandpa" => { "age" => 402, "gender" => "male", "age_group" => "senior" },
+  "Eddie" => { "age" => 10, "gender" => "male", "age_group" => "kid" },
+  "Marilyn" => { "age" => 23, "gender" => "female", "age_group" => "adult" } }
+```
+
+Note: a kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is aged 65+.
+
+hint: try using a `case` statement along with Ruby `Range` objects in your solution
+
+
+#### Answer
+
+```ruby
+munsters.each_key do |name|
+  
+  age = munsters[name]["age"]
+  case age
+  when (0..17) then munsters[name]["age_group"] = "kid"
+  when (18..64) then munsters[name]["age_group"] = "adult"
+  when (65..1000) then munsters[name]["age_group"] = "senior"
+  end
+end
+
+p munsters
 ```
