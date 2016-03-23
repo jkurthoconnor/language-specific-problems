@@ -1,5 +1,5 @@
-## Exercises: Easy 2
-
+## Exercises: Course 101, Lesson 3, Easy 2
+(Re-working exercises as review for assessment 109)
 #### Q 1
 In this hash of people and their age,
 

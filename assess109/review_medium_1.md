@@ -1,5 +1,5 @@
-## Exercises: Medium 1
-
+## Exercises: Course 101, Lesson 3, Medium 1
+(Re-working exercises as review for assessment 109)
 #### Q  1
 Let's do some "ASCII Art" (a stone-age form of nerd artwork from back in the days before computers had video screens).
 

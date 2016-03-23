@@ -1,4 +1,5 @@
-## Exercises Medium 2
+## Exercises: Course 101, Lesson 3, Medium 2
+(Re-working exercises as review for assessment 109)
 
 #### Q 1
 
@@ -137,3 +138,23 @@ reverse_sent = sentence.split.reverse.join(' ')
 reverse_sent = reverse_sent.delete('.')
 p reverse_sent
 ```
+
+#### Q 5
+
+What is the output of the following code?
+
+```ruby
+answer = 42
+
+def mess_with_it(some_number)
+  some_number += 8
+end
+
+new_answer = mess_with_it(answer)
+
+p answer - 8
+```
+
+#### Answer
+
+`p answer - 8` will print out `34`.  This is because `some_number += 8` is a variable reassignment, and reassignments within methods do not persist outside the method.  Thus the value for `answer` remains 42, and `answer - 8` equals 34.

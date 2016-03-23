@@ -1,5 +1,5 @@
-## Exercises: Easy 3
-
+## Exercises: Course 101, Lesson 3, Easy 3
+(Re-working exercises as review for assessment 109)
 #### Q 1
 
 Show an easier way to write this array:

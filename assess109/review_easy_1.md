@@ -1,4 +1,5 @@
-## Exercises: Easy 1
+## Exercises: Course 101, Lesson 3, Easy 1
+(Re-working exercises as review for assessment 109)
 
 #### Q 1.
 What would you expect the code below to print out?
