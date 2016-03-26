@@ -97,6 +97,10 @@ arr.each do |number|
     new_arr.push number
   end
 end
+
+# or
+
+new_arr = arr.select { |number| number.even? }
 ```
 
 
@@ -109,6 +113,13 @@ arr = [1, 2, 3, 4, 5, 5, 2, 1]
 arr.map { |number| number + 1 }
 # or
 arr.map { |number| number.next }
+# or
+incremented_arr = []
+
+arr.each do |number|
+  incremented_arr.push number + 1
+end
+
 ```
 
 
@@ -128,45 +139,53 @@ arr.inject { |sum, number| sum += number }
 ```
 
 
-- [] (hash) get value of specified key
-
-
+- [x] (hash) get value of specified key
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
-
+hsh[:pear]
+# or
+hsh.values_at(:pear)
+# or
+hsh.fetch(:pear)
 ```
-- [] (hash) add key/value pair 
 
-
+- [x] (hash) add key/value pair 
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
+hsh[:berry] = 'blue'
+# or
+hsh.store(:potato, 'white')
 
 ```
-- [] (hash) print out all keys
-
-
+- [x] (hash) print out all keys
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
+p hsh.keys
 
 ```
-- [] (hash) print out all values
-
-
+- [x] (hash) print out all values
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
+p hsh.values
 
 ```
+
 - [] (hash) print out all key/value pairs
 
-
-
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
-
+hsh.each { |food, color| p food.to_s + ' ' + color }
+# or 
+hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 ```
 - [] (hash) print out all key/value pairs where value meets certain conditions
 
