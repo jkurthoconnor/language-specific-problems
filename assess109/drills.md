@@ -1,7 +1,7 @@
 ## Ruby fluency drills
 Practice until these patterns and their explanations are second nature
 
-- [x] (array) iterate over array of numbers and print out each value (iterators v. loops)
+### (array) iterate over array of numbers and print out each value (iterators v. loops)
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -14,7 +14,7 @@ end
 ```
 
 
-- [x] (array) iterate over array of numbers and print out only those matching certain conditions
+### (array) iterate over array of numbers and print out only those matching certain conditions
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -28,7 +28,7 @@ arr2.each { |droid| p droid if droid.include?('O') }
 ```
 
 
-- [x] (array) append n to end of array
+### (array) append n to end of array
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -45,7 +45,7 @@ p arr3 + arr
 ```
 
 
-- [x] (array) prepend n to beginning of array
+### (array) prepend n to beginning of array
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -56,7 +56,7 @@ arr.insert(0, -1)
 ```
 
 
-- [x] (array) remove specified objects
+### (array) remove specified objects
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -68,7 +68,7 @@ arr.delete_at(-1)
 ```
 
 
-- [x] (array) remove objects at specified indices
+### (array) remove objects at specified indices
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -77,7 +77,7 @@ arr.delete_at(-1)
 ```
 
 
-- [x] (array) remove duplicates using one method
+### (array) remove duplicates using one method
 
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
@@ -86,7 +86,7 @@ arr.uniq!
 ```
 
 
-- [x] (array) extract all odds (or evens, or other criteria) into new array
+### (array) extract all odds (or evens, or other criteria) into new array
 
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
@@ -104,7 +104,7 @@ new_arr = arr.select { |number| number.even? }
 ```
 
 
-- [x] (array) increment all numbers by 1
+### (array) increment all numbers by 1
 
 ```ruby
 
@@ -123,7 +123,7 @@ end
 ```
 
 
-- [x] (array) find sum of all numbers
+### (array) find sum of all numbers
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -139,7 +139,7 @@ arr.inject { |sum, number| sum += number }
 ```
 
 
-- [x] (hash) get value of specified key
+### (hash) get value of specified key
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -151,7 +151,7 @@ hsh.values_at(:pear)
 hsh.fetch(:pear)
 ```
 
-- [x] (hash) add key/value pair 
+### (hash) add key/value pair 
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -161,7 +161,7 @@ hsh[:berry] = 'blue'
 hsh.store(:potato, 'white')
 
 ```
-- [x] (hash) print out all keys
+### (hash) print out all keys
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -169,7 +169,7 @@ hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 p hsh.keys
 
 ```
-- [x] (hash) print out all values
+### (hash) print out all values
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -178,7 +178,7 @@ p hsh.values
 
 ```
 
-- [x] (hash) print out all key/value pairs
+### (hash) print out all key/value pairs
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -189,10 +189,10 @@ hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 ```
 
 
-- [x] (hash) print out all key/value pairs where value meets certain conditions
+### (hash) print out all key/value pairs where value meets certain conditions
 
 ```ruby
-hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'white' }
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan' }
 
 hsh.each { |food, color| puts "#{fruit} is #{color}" if color.length > 3 }
  # or
@@ -204,42 +204,75 @@ hsh.each do |food, color|
 end
 ```
 
-- [x] (hash) return new hash of pairs meeting certain criteria
+### (hash) return new hash of pairs meeting certain criteria
 
 ```ruby
-hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'white' }
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
 
 hsh.select { |food, color| food.to_s.include?('r') }
 
 ```
-- [] (hash) delete all key/value pairs where value meets certain conditions
+### (hash) delete all key/value pairs where value meets certain conditions
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
 
-
+hsh.delete_if { |food, color| color.length > 3 }
+# or
+hsh.keep_if { |food, color| food.to_s.include?('r') }
 ```
 
-- [] "reverse an array without using the built-in reverse method"
+### "reverse an array without using the built-in reverse method"
+```ruby
+arr = [1, 2, 3, 4, 5]
+arr_reversed = []
 
+while arr.length > 0
+  arr_reversed.push arr.pop
+end
+# or
+while arr.length > 0
+  arr_reversed.unshift arr.shift
+end
 
+# NONE OF THESE WORK, appear to have incomplete iteration through array
 
+# arr.each do |number|
+#   arr_reversed.push arr.pop
+# end
+
+# arr.each do |number|
+#   arr_reversed.unshift arr.shift
+# end
+
+# arr.map do |number|
+#   arr_reversed.push arr.pop
+# end
+
+```  
+### "select the element out of the array if its index is a fibonacci number"
 ```ruby
 
 
 ```  
-- [] "select the element out of the array if its index is a fibonacci number"
-
-
-
+### "write a method to determine if a word is a palindrome, without using the reverse method"
 ```ruby
+puts "Enter test word."
+word = gets.chomp.downcase
 
+reversed_ltrs = []
+ltrs = word.split('')
 
-```  
-- [] "write a method to determine if a word is a palindrome, without using the reverse method"
+while ltrs.length > 0
+  reversed_ltrs.push ltrs.pop
+end
 
+reversed_word = reversed_ltrs.join
 
-
-```ruby
-
+if word == reversed_word
+  puts "Palindrome!"
+else
+  puts "Not!"
+end
 
 ```
