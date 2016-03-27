@@ -178,7 +178,7 @@ p hsh.values
 
 ```
 
-- [] (hash) print out all key/value pairs
+- [x] (hash) print out all key/value pairs
 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
@@ -187,25 +187,32 @@ hsh.each { |food, color| p food.to_s + ' ' + color }
 # or 
 hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 ```
-- [] (hash) print out all key/value pairs where value meets certain conditions
 
 
+- [x] (hash) print out all key/value pairs where value meets certain conditions
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'white' }
 
-
+hsh.each { |food, color| puts "#{fruit} is #{color}" if color.length > 3 }
+ # or
+ 
+hsh.each do |food, color|
+  if color.length > 3
+    p food.to_s + ' ' + color
+  end
+end
 ```
-- [] (hash) return new hash of pairs meeting certain criteria
 
-
+- [x] (hash) return new hash of pairs meeting certain criteria
 
 ```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'white' }
 
+hsh.select { |food, color| food.to_s.include?('r') }
 
 ```
 - [] (hash) delete all key/value pairs where value meets certain conditions
-
-
 
 ```ruby
 
