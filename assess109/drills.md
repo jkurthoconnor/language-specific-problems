@@ -1,8 +1,9 @@
-## Ruby fluency drills
+# Ruby fluency drills
 Practice until these patterns and their explanations are second nature
 
-### (array) iterate over array of numbers and print out each value (iterators v. loops)
+## Basic Data Manipulation
 
+### (array) iterate over array of numbers and print out each value (iterators v. loops)
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -13,9 +14,7 @@ arr.each do |number|
 end
 ```
 
-
 ### (array) iterate over array of numbers and print out only those matching certain conditions
-
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -87,7 +86,6 @@ arr.uniq!
 
 
 ### (array) extract all odds (or evens, or other criteria) into new array
-
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
 new_arr = []
@@ -105,9 +103,7 @@ new_arr = arr.select { |number| number.even? }
 
 
 ### (array) increment all numbers by 1
-
 ```ruby
-
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
 
 arr.map { |number| number + 1 }
@@ -124,7 +120,6 @@ end
 
 
 ### (array) find sum of all numbers
-
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -138,9 +133,7 @@ p total
 arr.inject { |sum, number| sum += number }
 ```
 
-
 ### (hash) get value of specified key
-
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
@@ -152,7 +145,6 @@ hsh.fetch(:pear)
 ```
 
 ### (hash) add key/value pair 
-
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
@@ -162,7 +154,6 @@ hsh.store(:potato, 'white')
 
 ```
 ### (hash) print out all keys
-
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
@@ -205,7 +196,6 @@ end
 ```
 
 ### (hash) return new hash of pairs meeting certain criteria
-
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
 
@@ -222,6 +212,8 @@ hsh.delete_if { |food, color| color.length > 3 }
 hsh.keep_if { |food, color| food.to_s.include?('r') }
 ```
 
+## Larger Data Manipulation
+
 ### "reverse an array without using the built-in reverse method"
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -236,7 +228,6 @@ while arr.length > 0
 end
 
 # NONE OF THESE WORK, appear to have incomplete iteration through array
-
 # arr.each do |number|
 #   arr_reversed.push arr.pop
 # end
@@ -248,8 +239,27 @@ end
 # arr.map do |number|
 #   arr_reversed.push arr.pop
 # end
+``` 
 
-```  
+- [] FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
+```ruby
+def fizzbuzz(start, stop)
+  n = start
+  while n < stop + 1
+    if n % 3 == 0 && n % 5 == 0
+      p FizzBuzz!!
+    elsif n % 3 == 0
+      p Fizz!
+    elsif n % 5 == 0
+      p Buzz!
+    else
+      p n
+    end
+    n += 1
+  end
+end
+
+- [] write a method that takes an array and returns an array of the same string values except with the vowels removed 
 ### "select the element out of the array if its index is a fibonacci number"
 ```ruby
 
@@ -257,22 +267,19 @@ end
 ```  
 ### "write a method to determine if a word is a palindrome, without using the reverse method"
 ```ruby
-puts "Enter test word."
-word = gets.chomp.downcase
 
-reversed_ltrs = []
-ltrs = word.split('')
 
-while ltrs.length > 0
-  reversed_ltrs.push ltrs.pop
+def palindrome?(word)
+  reversed_ltrs = []
+  ltrs = word.split('')
+
+  while ltrs.length > 0
+    reversed_ltrs.push ltrs.pop
+  end
+  reversed_word = reversed_ltrs.join
+  word == reversed_word
 end
 
-reversed_word = reversed_ltrs.join
 
-if word == reversed_word
-  puts "Palindrome!"
-else
-  puts "Not!"
-end
 
 ```
