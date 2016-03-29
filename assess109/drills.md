@@ -241,34 +241,51 @@ end
 # end
 ``` 
 
-- [] FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
+### FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
 ```ruby
 def fizzbuzz(start, stop)
   n = start
-  while n < stop + 1
+  while n <= stop
     if n % 3 == 0 && n % 5 == 0
-      p FizzBuzz!!
+      puts 'FizzBuzz'
     elsif n % 3 == 0
-      p Fizz!
-    elsif n % 5 == 0
-      p Buzz!
+      puts 'Fizz'
+    elsif n % 5 == 0 
+      puts 'Buzz'
     else
-      p n
+      puts n
     end
     n += 1
   end
 end
 
-- [] write a method that takes an array and returns an array of the same string values except with the vowels removed 
+fizzbuzz(1, 50)
+```
+
+### write a method that takes an array and returns an array of the same string values except with the vowels removed
+```ruby
+def remove_vowels(arr)
+  arr.map { |element| element.delete('aeiou') }
+end
+
+array = ["red", "green", "orange", "tan"]
+p remove_vowels(array)
+
+```
+
+
 ### "select the element out of the array if its index is a fibonacci number"
 ```ruby
+array = ["red", "green", "orange", "tan", "purple", "magenta", "yellow"] 
+fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-
+array.select do |color|
+  fib.include?(array.index(color))
+end
 ```  
+
 ### "write a method to determine if a word is a palindrome, without using the reverse method"
 ```ruby
-
-
 def palindrome?(word)
   reversed_ltrs = []
   ltrs = word.split('')
@@ -279,7 +296,7 @@ def palindrome?(word)
   reversed_word = reversed_ltrs.join
   word == reversed_word
 end
-
-
-
 ```
+
+### write method that determines if there is a balanced number of parentheses
+  - bonus: add check to ensure parentheses are in correct order
