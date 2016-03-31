@@ -101,3 +101,20 @@ end
 
 ### write method that determines if there is a balanced number of parentheses
   - bonus: add check to ensure parentheses are in correct order
+  
+```ruby
+def balanced_paren?(string)
+  string.count('(') == string.count(')')
+end
+
+str = 'This (is) my (st)rin)g'
+balanced_paren?(str)
+
+def balanced_and_ordered_paren?(string)
+  if str.count('(') != str.count(')')
+    puts "unbalanced number of parentheses"
+  else
+      
+  end
+  
+```

@@ -3,6 +3,88 @@ Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
 
+### (string) return length/ number of characters in string
+```ruby
+str = 'This is my string.'
+
+str.length
+```
+
+### (string) return number of specified characters in string
+```ruby
+str = 'This is my string.'
+
+str.count('i')
+```
+
+### (string) delete specified characters in string
+```ruby
+str = 'This is my string.'
+
+str.delete('is')
+# or 
+str.delete!('is')
+```
+
+### (string) delete characters at specified indices in string
+```ruby
+str = 'This is my string.'
+
+str.slice(1)
+# or 
+str.slice!(1)
+# or
+str.slice(1, 4) 
+```
+
+### (string) return index of specified characters
+```ruby
+str = 'This is my string.'
+
+str.index('m')
+```
+
+### (string) add specified characters to start of string
+```ruby
+
+```
+
+### (string) add specified characters to end of string
+```ruby
+
+```
+
+### (string) add / insert specified characters at specified indices in string
+```ruby
+
+```
+
+### (string) substitute given character for another
+```ruby
+
+```
+
+### (string) reverse character order in string
+```ruby
+
+```
+
+   - bonus: reverse without using .reverse on array
+   ```ruby
+   
+   ```
+   
+### (string) determine if given characters are present in string
+```ruby
+
+```
+
+### (string) return array of characters matching a pattern
+```ruby
+
+```
+
+
 ### (array) iterate over array of numbers and print out each value (iterators v. loops)
 ```ruby
 arr = [1, 2, 3, 4, 5]
