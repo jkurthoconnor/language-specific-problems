@@ -24,6 +24,8 @@ str = 'This is my string.'
 str.delete('is')
 # or 
 str.delete!('is')
+# or 
+str.delete('a-z', '^i-s')
 ```
 
 ### (string) delete characters at specified indices in string
@@ -35,6 +37,8 @@ str.slice(1)
 str.slice!(1)
 # or
 str.slice(1, 4) 
+# or 
+str.slice(1..4)
 ```
 
 ### (string) return index of specified characters
@@ -46,12 +50,18 @@ str.index('m')
 
 ### (string) add specified characters to start of string
 ```ruby
+str = 'Hey, it is Friday!'
 
+str.prepend('!!')
 ```
 
 ### (string) add specified characters to end of string
 ```ruby
+str = 'Hey, it is Friday!'
 
+str.concat(' Yes')
+# or
+str << ' yes'
 ```
 
 ### (string) add / insert specified characters at specified indices in string
