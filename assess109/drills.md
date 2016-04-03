@@ -66,21 +66,38 @@ str << ' yes'
 
 ### (string) add / insert specified characters at specified indices in string
 ```ruby
+str = 'Hey, it is Friday!'
 
+str.insert(3, 'eee')
+# or 
+str.insert(-2, 'aaa')
 ```
 
 ### (string) substitute given character for another
 ```ruby
+str = 'Hey, now it is not Friday.'
 
+str.gsub('i', '!!!')
+# or 
+str.gsub!('i', '!!!')
 ```
 
 ### (string) reverse character order in string
 ```ruby
-
+str = 'Hey, now it is not Friday.'
+str.reverse
 ```
 
    - bonus: reverse without using .reverse on array
    ```ruby
+   str = 'Hey, now it is not Friday.'
+   
+   reversed = []
+   split = str.split('')
+   while split.length > 0
+     reversed.push split.pop
+   end
+   reversed.join
    
    ```
    
