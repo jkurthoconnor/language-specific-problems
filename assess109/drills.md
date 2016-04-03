@@ -103,12 +103,16 @@ str.reverse
    
 ### (string) determine if given characters are present in string
 ```ruby
+str = 'Oh, what beautiful weather today!'
 
+str.include?('O')
 ```
 
 ### (string) return array of characters matching a pattern
 ```ruby
+str = 'Oh, what beautiful weather today!'
 
+str.scan('t')
 ```
 
 
@@ -127,7 +131,7 @@ end
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
-arr.each { |number| p number if number >   2.3 }
+arr.each { |number| p number if number > 2.3 }
 
 
 arr2 = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']

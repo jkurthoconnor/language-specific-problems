@@ -34,6 +34,18 @@ munsters = {
 }
 
 male_age = 0
+
+munsters.each do |name, info|
+  if info["gender"] == "male"
+    male_age += info["age"]
+  end
+end
+
+p male_age
+
+# or
+
+male_age = 0
 munsters.each_key do |name|
   if munsters[name]["gender"].start_with?("m") # why must name of hsh be included? it isn't in sample answer for what looks like a similar situation?
     male_age = male_age + munsters[name]["age"]
@@ -134,9 +146,8 @@ sentence = "Humpty Dumpty sat on a wall."
 
 ```ruby
 sentence = "Humpty Dumpty sat on a wall."
-reverse_sent = sentence.split.reverse.join(' ')
-reverse_sent = reverse_sent.delete('.')
-p reverse_sent
+
+reversed = sentence.split.reverse.join(' ').delete('.').insert(-1, '.')
 ```
 
 #### Q 5
