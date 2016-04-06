@@ -118,3 +118,21 @@ def balanced_and_ordered_paren?(string)
   end
   
 ```
+
+### write a search method that returns all elements in a hash matching a set of conditions
+
+```ruby
+food = {
+  grape: {color: 'red', cost: 75}, 
+  pear: {color: 'green', cost: 50},
+  carrot: {color: 'orange', cost: 100},
+  potato: {color: 'tan', cost: 150}
+ }
+ 
+ def search_or(hash, color, cost)
+   hash.select do |item_name, data|
+     data[:color] == color || data[:cost] == cost
+   end
+ end
+ 
+ search_or(food, 'red', 100)
