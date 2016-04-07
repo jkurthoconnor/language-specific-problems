@@ -110,12 +110,19 @@ end
 str = 'This (is) my (st)rin)g'
 balanced_paren?(str)
 
-def balanced_and_ordered_paren?(string)
-  if str.count('(') != str.count(')')
-    puts "unbalanced number of parentheses"
+def check_parens(string)
+  split = string.split('')
+  parens = split.select { |char| char == '(' || char == ')' }
+  if parens.count('(') != parens.count(')')
+    puts "unequal numbers of opening and closing parentheses"
+  elsif parens.first != '('
+    puts "lacks proper opening to parenthesis series"
+  elsif parens.last != ')'
+    puts "lacks proper closing to parenthesis series" 
   else
-      
+    puts "looks good" 
   end
+end
   
 ```
 
