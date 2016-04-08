@@ -103,27 +103,45 @@ end
   - bonus: add check to ensure parentheses are in correct order
   
 ```ruby
-def balanced_paren?(string)
-  string.count('(') == string.count(')')
+def balanced_paren?(str)
+  str.count('(') == str.count(')')
 end
 
-str = 'This (is) my (st)rin)g'
+string = 'This (is) my (st)rin)g'
 balanced_paren?(str)
 
-def check_parens(string)
-  split = string.split('')
-  parens = split.select { |char| char == '(' || char == ')' }
-  if parens.count('(') != parens.count(')')
-    puts "unequal numbers of opening and closing parentheses"
-  elsif parens.first != '('
-    puts "lacks proper opening to parenthesis series"
-  elsif parens.last != ')'
-    puts "lacks proper closing to parenthesis series" 
-  else
-    puts "looks good" 
+def paren_check (str)
+  if str.count('(') != str.count(')')
+    puts "unequal numbers of opening and closing parentheses."
+    return
+  end
+  n = 1
+  while n <= str.length
+    if str[0, n].count('(') < str[0, n].count(')')
+      puts "closing parentheses exceed opening parentheses at index #{n - 1}"
+      break
+    end
+    n += 1
   end
 end
-  
+
+# this won't catch every problem with parentheses.   it would be better to employ a principle that governs the ordering of parens, like above
+# def check_parens(string)
+#   split = string.split('')
+#   parens = split.select { |char| char == '(' || char == ')' }
+#   if parens.count('(') != parens.count(')')
+#     puts "unequal numbers of opening and closing parentheses"
+#   elsif parens.first != '('
+#     puts "lacks proper opening to parenthesis series"
+#   elsif parens.last != ')'
+#     puts "lacks proper closing to parenthesis series" 
+#   else
+#     puts "looks good" 
+#   end
+# end
+
+# this won't catch every problem with parentheses.   it would be better to employ a principle that governs the ordering of parens
+#   - at any point, the number of '(' >= number of ')'
 ```
 
 ### write a search method that returns all elements in a hash matching a set of conditions
