@@ -50,12 +50,40 @@ fizzbuzz(1, 50)
 
 ### write a method that takes an array and returns an array of the same string values except with the vowels removed
 ```ruby
-def remove_vowels(arr)
+def delete_vowels(arr)
   arr.map { |element| element.delete('aeiou') }
 end
 
-array = ["red", "green", "orange", "tan"]
-p remove_vowels(array)
+pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
+
+delete_vowels(pets)
+
+# or without `map`
+
+# non-destructive:
+def vowel_deleter(arr)
+  removed = []
+  n = 0
+  while n + 1 <= arr.length
+    removed.push arr[n].delete('aeiou')
+    n += 1
+  end  
+  p removed
+end
+
+pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
+
+# destructive:
+
+def vowel_deleter(arr)
+  removed = []
+  while arr.length > 0
+    removed.push arr.pop.delete('aeiou')
+  end  
+  p removed
+end
+
+pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
 
 ```
 
