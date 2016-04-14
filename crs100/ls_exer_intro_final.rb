@@ -142,12 +142,18 @@ arr_copy = ['snow', 'winter', 'ice', 'slippery', 'salted roads', 'white trees']
 arr.delete_if { |word| word.start_with?('s')}
 p arr
 
-#arr.each do |word|  #why won't this block work?  it leaves 'salted roads'
+#why won't this block work?  it leaves 'salted roads'
+# calling `delete` mutates the array instantly, but `each` iteration counter simply progresses from index n, to index n + 1, to index n + 2, etc.   thus elements will be skipped when the element at index immedetialy preceding is removed in previous iteration, because they will take the spot of the just deleted element, and the iterator will jump to the next one.
+# try with a differently ordered array; it works: arr = [ 'slippery', 'winter', 'snow', 'ice', 'white trees', 'salted roads' ]
+
+
+# arr.each do |word| 
 #  if word.start_with?('s')
 #    arr.delete(word)
 #  end
-#end
-#p arr
+# end
+# p arr
+
 arr_copy.delete_if { |word| word.start_with?('s', 'w') }
 #this also works:  arr_copy.delete_if { |word| word.start_with?('s') || word.start_with?('w')}
 p arr_copy
