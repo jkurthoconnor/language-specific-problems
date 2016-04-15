@@ -99,6 +99,20 @@ str.reverse
    end
    reversed.join
    
+   # non-destrctive
+   
+   string = 'This is my string!'
+
+   reversed_chars = []
+   string_chars = string.split('')
+   
+   n = 0
+   while n + 1 <= string_chars.length
+     reversed_chars.unshift string_chars[n]
+     n += 1
+   end
+   reversed_string = reversed_chars.join
+   
    ```
    
 ### (string) determine if given characters are present in string
