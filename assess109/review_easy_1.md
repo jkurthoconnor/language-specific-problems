@@ -156,6 +156,9 @@ OR
 ```ruby
 flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
 
+flintstones.select { |name, number| number == 2 }.to_a.flatten
+
+```
 
 #### Q 10.
 Given the array below
@@ -187,3 +190,17 @@ flintstones.each_with_index { |name, index| characters[name] = index }
 
 p characters
 ````
+
+or
+
+```ruby
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "Pebbles", "BamBam"]
+
+names = {}
+
+flintstones.each do |name|
+  names[name] = flintstones.index(name)
+end
+
+p names
+```
