@@ -64,6 +64,13 @@ Programmatically determine if 42 lies between 10 and 100.
 (10..100).include?(42)
 ````
 
+OR
+
+```ruby
+range = 10..100
+range.include?(42)
+```
+
 #### Q 6.
 Starting with the string:
 ````ruby
@@ -77,10 +84,12 @@ show two different ways to put the expected "Four score and " in front of it.
 famous_words = "seven years ago..."
 addition = 'Four score and '
 
-famous_words.insert(0, addition)
 addition + famous_words
+complete = addition + famous_words
+famous_words.insert(0, addition)
+
 ````
-There's an important difference between the two approaches.  While both return 'Four score and seven years ago...', calling `insert` actually modifies the string, so it is returning the modified string; Using `+` to concatenate two strings leaves each string as it was.
+There's an important difference between the three approaches.  While all return 'Four score and seven years ago...', calling `insert` actually modifies the string, so it is returning the modified string; Using `+` to concatenate two strings leaves each string as it was, and assigning `complete` to the concatenation of `addition` and `famous_words` creates a new string, but leaves the original strings as they were.
 
 #### Q 7.
 Fun with gsub:
@@ -137,11 +146,15 @@ flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam"
 Turn this into an array containing only two elements: Barney's name and Barney's number
 
 #### Answer
-````ruby
+```ruby
 flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
 
 barney = flintstones.assoc("Barney")
-````
+```
+
+OR
+```ruby
+flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
 
 
 #### Q 10.
