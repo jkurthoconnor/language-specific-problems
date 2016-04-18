@@ -174,7 +174,7 @@ flintstones = ["Fred", "Barney", "Wilma", "Betty", "Pebbles", "BamBam"]
 
 characters = {}
 
-flintstones.map { |name| characters[name] = flintstones.index(name) }
+flintstones.each { |name| characters[name] = flintstones.index(name) }
 
 p characters
 ````
@@ -203,4 +203,17 @@ flintstones.each do |name|
 end
 
 p names
+```
+
+or 
+
+```ruby
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "Pebbles", "BamBam"]
+names_index = []
+flintstones.each do |name|
+  pair = [name, flintstones.index(name)]
+  names_index.push pair
+end
+names_index.to_h
+
 ```

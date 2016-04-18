@@ -17,6 +17,7 @@ Bonus: What are two other hash methods that would work just as well for this sol
 ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
 
 ages.include?("Spot")
+ages.keys.include?("Spot")
 ages["Spot"]
 ages.values_at("Spot")
 
@@ -37,6 +38,20 @@ ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marily
 p ages.values.inject { |sum, age| sum + age }
 
 ````
+or without `inject`
+
+```ruby
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
+
+ages_only = ages.values
+total_age = 0
+
+ages_only.each do |age|
+  total_age += age
+end
+
+total_age
+```
 ---
 #### Q 3
 In the age hash:
@@ -53,6 +68,22 @@ ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
 
 ages.select { |name, age| age < 100 }
 ````
+
+if one wants to mutate the hash itself
+
+```ruby 
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
+
+ages.keep_if { |name, age| age < 100 }
+```
+or (also mutates)
+
+```ruby 
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
+
+ages.delete_if { |name, age| age > 99 }
+```
+
 ---
 
 #### Q 4
@@ -106,6 +137,14 @@ ages["Marilyn"] = 22
 ages["Spot"] = 237
 
 ````
+or
+
+```ruby
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10 }
+additional_ages = { "Marilyn" => 22, "Spot" => 237 }
+
+ages.merge!(additional_ages)
+```
 ---
 
 #### Q 6
