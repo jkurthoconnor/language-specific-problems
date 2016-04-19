@@ -120,6 +120,9 @@ str.reverse
 str = 'Oh, what beautiful weather today!'
 
 str.include?('O')
+# also effective, depending on the return one is seeking
+str.scan('O') # returns array of matched patterns
+str.match('O') # returns match object or nil
 ```
 
 ### (string) return array of characters matching a pattern
@@ -270,6 +273,16 @@ arr = [1, 2, 67, 19]
 
 arr.inject { |sum, number| sum += number }
 ```
+### (array) find max / min value in array
+```ruby
+arr = [1, 3, 67, 34, 1001, 3, 2]
+
+arr.max
+arr.min
+arr.sort[-1]
+arr.sort[0]
+
+```
 
 ### (hash) get value of specified key
 ```ruby
@@ -331,6 +344,17 @@ hsh.each do |food, color|
     p food.to_s + ' ' + color
   end
 end
+```
+
+### (hash) find max / min key/value 
+
+```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan', :spinach => 'green' }
+
+hsh.max # returns arr of key and value associated with max key
+hsh.min
+hsh.values.max # returns max value
+hsh.values.min
 ```
 
 ### (hash) return new hash of pairs meeting certain criteria
