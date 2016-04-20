@@ -283,6 +283,14 @@ arr.sort[-1]
 arr.sort[0]
 
 ```
+### (array) find the index of the first element that matches a given block
+```ruby
+droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
+
+droids.index { |droid| droid.include?('C') }
+
+```
+
 
 ### (hash) get value of specified key
 ```ruby
