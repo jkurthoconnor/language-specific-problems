@@ -213,6 +213,12 @@ flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 
 flintstones.map! { |name| name.slice(0, 3)}
+
+# or
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+
+flintstones.map! { |name| name[0..2] }
 ```
 #### Q 10
 

@@ -317,6 +317,12 @@ hsh.store(:potato, 'white')
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
 p hsh.keys
+# or
+hsh.each_key { |food| p food }
+# or
+hsh.each do |food, color|
+  p food
+end
 
 ```
 ### (hash) print out all values
@@ -325,7 +331,12 @@ p hsh.keys
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
 p hsh.values
-
+# or 
+hsh.each_value { |color| p color }
+# or
+hsh.each do |food, color|
+  p color
+end
 ```
 
 ### (hash) print out all key/value pairs
@@ -336,6 +347,8 @@ hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 hsh.each { |food, color| p food.to_s + ' ' + color }
 # or 
 hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
+# or
+hsh.each { |pair| p pair }
 ```
 
 
@@ -360,9 +373,11 @@ end
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan', :spinach => 'green' }
 
 hsh.max # returns arr of key and value associated with max key
-hsh.min
+hsh.min # returns arr of key and values associated with min key
 hsh.values.max # returns max value
 hsh.values.min
+hsh.keys.max
+hsh.keys.min
 ```
 
 ### (hash) return new hash of pairs meeting certain criteria
