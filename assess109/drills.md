@@ -17,6 +17,19 @@ str = 'This is my string.'
 str.count('i')
 ```
 
+### (string) return number of specified sub-strings (words) in string
+```ruby 
+str = 'So this is my string, is it?'
+
+str.split.count('is')
+# or
+str.scan(' is ').length # not reliable; USE REGEX as argument for `scan` instead.  as it is, this would miss 'is' at start and stop of string
+# or
+total = 0
+str.split.each { |word| total += 1 if word == 'is' }
+total
+```
+
 ### (string) delete specified characters in string
 ```ruby
 str = 'This is my string.'
@@ -288,6 +301,21 @@ arr.sort[0]
 droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 
 droids.index { |droid| droid.include?('C') }
+
+```
+
+###  (array) return number of times an element occurs within the array
+```ruby
+arr = [1, 3, 67, 34, 1001, 3, 2]
+
+arr.count(3)
+
+# or 
+
+total = 0
+arr.each { |number| total += 1 if number == 3 }
+total
+
 
 ```
 

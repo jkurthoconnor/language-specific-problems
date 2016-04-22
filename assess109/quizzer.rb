@@ -3,6 +3,7 @@
 string_fluency = [
   'return length / number of characters in string',
   'return number of specified characters in string',
+  'return number of specified sub-strings (words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
   'return index of specified characters in a string',
@@ -28,8 +29,8 @@ array_fluency = [
   'find sum of all numbers in an array',
   'find max / min value in an array',
   'return the index of specified element',
-  'return the index of the first object that matches a given block'
-
+  'return the index of the first object that matches a given block',
+  'return number of times an element occurs within the array'
 ]
 
 hash_fluency = [
@@ -73,15 +74,15 @@ end
 puts 'Welcome to the Basic Ruby Fluency Quizzer.'
 
 loop do
-  puts "Select an area to practice:\n(1) string fluency\n(2) array fluency\n(3) hash fluency\n(4) mini-challenges\n(5) basic concepts"
+  puts "Select one:\n(1) string fluency\n(2) array fluency\n(3) hash fluency\n(4) mini-challenges\n(5) basic concepts\n(6) exit program"
   choice = ''
   loop do
     choice = gets.chomp.to_i
-    break if (1..5).cover?(choice)
+    break if (1..6).cover?(choice)
     puts 'That is not an option.  Please make a selection by entering 1 - 5.'
   end
-
-  data_set = case choice
+  break if choice == 6
+  question_set = case choice
               when 1 then string_fluency
               when 2 then array_fluency
               when 3 then hash_fluency
@@ -90,7 +91,7 @@ loop do
               end
 
   loop do
-    puts random_question(data_set)
+    puts random_question(question_set)
     puts "Hit `enter` to continue, or type 'menu' to return to menu."
     break if gets.chomp == 'menu'
   end
