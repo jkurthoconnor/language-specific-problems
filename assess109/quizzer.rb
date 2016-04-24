@@ -71,15 +71,22 @@ def random_question(type)
   type[rand(type.length)]
 end
 
-puts 'Welcome to the Basic Ruby Fluency Quizzer.'
+def prompt(text)
+  puts ">> #{text}"
+end
+
+MENU = "Select one:\n(1) string fluency\n(2) array fluency\n(3) hash fluency\n(4) mini-challenges\n(5) basic concepts\n(6) exit program"
+
+
+prompt('Welcome to the Basic Ruby Fluency Quizzer.')
 
 loop do
-  puts "Select one:\n(1) string fluency\n(2) array fluency\n(3) hash fluency\n(4) mini-challenges\n(5) basic concepts\n(6) exit program"
+  prompt(MENU)
   choice = ''
   loop do
     choice = gets.chomp.to_i
     break if (1..6).cover?(choice)
-    puts 'That is not an option.  Please make a selection by entering 1 - 5.'
+    prompt('That is not an option.  Please make a selection by entering 1 - 5.')
   end
   break if choice == 6
   question_set = case choice
@@ -91,8 +98,8 @@ loop do
               end
 
   loop do
-    puts random_question(question_set)
-    puts "Hit `enter` to continue, or type 'menu' to return to menu."
+    prompt(random_question(question_set))
+    prompt("[ENTER to continue, or type 'menu' to return to menu.]")
     break if gets.chomp == 'menu'
   end
 end
