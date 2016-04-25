@@ -67,6 +67,8 @@ basic_concepts = [
   'implicit return value of methods and blocks'
 ]
 
+menu_options = {1=>"string fluency", 2=>"array fluency", 3=>"hash fluency", 4=>"mini-challenges", 5=>"basic concepts", 6=>"exit program"}
+
 def random_question(type)
   type[rand(type.length)]
 end
@@ -75,13 +77,22 @@ def prompt(text)
   puts ">> #{text}"
 end
 
-MENU = "Select one:\n(1) string fluency\n(2) array fluency\n(3) hash fluency\n(4) mini-challenges\n(5) basic concepts\n(6) exit program"
-
-
-prompt('Welcome to the Basic Ruby Fluency Quizzer.')
+def display_menu(options)
+  system 'clear' or system 'cls'
+  prompt('Welcome to the Basic Ruby Fluency Quizzer.')
+  puts ''
+  prompt("Select one")
+  puts '>>'
+  options.each do |number, option|
+    puts ">> >> (#{number}) #{option}"
+  end
+  puts '>>'
+  print '>> '
+end
+  
 
 loop do
-  prompt(MENU)
+  display_menu(menu_options)
   choice = ''
   loop do
     choice = gets.chomp.to_i
