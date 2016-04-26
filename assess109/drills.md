@@ -324,9 +324,9 @@ total
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
-hsh[:pear]
+hsh[:pear] # returns the value(s)
 # or
-hsh.values_at(:pear)
+hsh.values_at(:pear) # returns array containing the values
 # or
 hsh.fetch(:pear)
 ```

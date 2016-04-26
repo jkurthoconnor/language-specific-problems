@@ -89,6 +89,11 @@ def display_menu(options)
   puts '>>'
   print '>> '
 end
+
+def display_please_reenter
+  prompt('That is not an option.  Please enter 1 - 6.')
+  print '>> '
+end
   
 
 loop do
@@ -97,7 +102,7 @@ loop do
   loop do
     choice = gets.chomp.to_i
     break if (1..6).cover?(choice)
-    prompt('That is not an option.  Please make a selection by entering 1 - 5.')
+    display_please_reenter
   end
   break if choice == 6
   question_set = case choice
