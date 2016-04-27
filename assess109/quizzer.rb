@@ -1,4 +1,9 @@
-
+## changes
+# - move questions to separate file (yaml?)
+# - revise questioning prompt display;
+#    - [x] clear after each question
+#    - [] re-position text
+#    - [x] prompt on curser line
 
 string_fluency = [
   'return length / number of characters in string',
@@ -54,7 +59,6 @@ mini_programs = [
   'write a method to determine if a word is a palindrome, without using the reverse method',
   'write method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',
-  'delete all key/value pairs where value meets certain conditions'
 ]
 
 basic_concepts = [
@@ -114,8 +118,16 @@ loop do
               end
 
   loop do
+    system 'clear' or system 'cls'
+    5.times do 
+      puts ''
+    end
     prompt(random_question(question_set))
+    5.times do 
+      puts ''
+    end
     prompt("[ENTER to continue, or type 'menu' to return to menu.]")
+    print '>> '
     break if gets.chomp == 'menu'
   end
 end

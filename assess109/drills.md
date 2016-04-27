@@ -167,6 +167,15 @@ arr.each { |number| p number if number > 2.3 }
 arr2 = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 
 arr2.each { |droid| p droid if droid.include?('O') }
+
+
+arr2 = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
+
+arr2.each do |droid|
+  if droid.include?('O')
+    p droid
+  end
+end
 ```
 
 
