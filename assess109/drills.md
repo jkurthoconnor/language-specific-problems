@@ -8,6 +8,10 @@ Practice until these patterns and their explanations are second nature
 str = 'This is my string.'
 
 str.length
+
+# to count only letter/number characters
+
+str.length - str.count(' .')
 ```
 
 ### (string) return number of specified characters in string
@@ -326,6 +330,13 @@ arr.each { |number| total += 1 if number == 3 }
 total
 
 
+```
+
+### (array) move element in array to new index using one line
+```ruby
+arr = [1, 3, 67, 34, 1001, 3, 2]
+
+arr.push arr.delete_at(4)
 ```
 
 

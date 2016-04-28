@@ -1,4 +1,5 @@
 ## changes
+# - [] add case modification questions to string_fluency
 # - move questions to separate file (yaml?)
 # - revise questioning prompt display;
 #    - [x] clear after each question
@@ -35,7 +36,8 @@ array_fluency = [
   'find max / min value in an array',
   'return the index of specified element',
   'return the index of the first object that matches a given block',
-  'return number of times an element occurs within the array'
+  'return number of times an element occurs within the array',
+  'move element in array to new index using one line'
 ]
 
 hash_fluency = [
