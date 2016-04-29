@@ -149,6 +149,37 @@ str = 'Oh, what beautiful weather today!'
 str.scan('t')
 ```
 
+### (string) return new string (or modify existing string) to have all characters lowercased
+```ruby
+string = 'This IS tHe tEST string'
+string.downcase
+
+string.downcase!
+```
+
+### (string) return new string (or modify existing string) to have all characters uppercased
+```ruby
+string = 'This IS tHe tEST string'
+string.upcase
+
+string.upcase!
+```
+
+### (string) return new string (or modify existing string) to have sentence case
+```ruby
+string = 'This IS tHe tEST string'
+string.capitalize
+
+string.capitalize!
+```
+
+### (string) return new string (or modify existing string) to have all cases switch
+```ruby
+string = 'This IS tHe tEST string'
+string.swapcase
+
+string.swapcase!
+```
 
 ### (array) iterate over array of numbers and print out each value (iterators v. loops)
 ```ruby

@@ -19,7 +19,11 @@ string_fluency = [
   'substitute given character(s) for other(s) in a string',
   'reverse character order in string (bonus: reverse without using .reverse on array)',
   'determine if given characters are present in string',
-  'return array of characters matching a pattern'
+  'return array of characters matching a pattern',
+  'return new string (or modify existing string) to have all characters lowercased',
+  'return new string (or modify existing string) to have all characters uppercased',
+  'return new string (or modify existing string) to have sentence case',
+  'return new string (or modify existing string) to have all cases switched'
 ]
 
 array_fluency = [
