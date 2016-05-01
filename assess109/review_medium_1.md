@@ -38,8 +38,9 @@ frequencies = {}
 
 statement.split('').uniq.sort.each do |letter|
   frequencies[letter] = statement.count(letter)
-  frequencies.delete(' ')
 end
+frequencies.delete(' ')
+
 ```
 
 #### Q  3
