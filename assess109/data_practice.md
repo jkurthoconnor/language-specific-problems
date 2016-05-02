@@ -224,6 +224,18 @@ def search(query)
   # implementation
 end
 
+```
 
+### write a title case method
+```ruby
+title = 'tHis is MY sample TItlE'
 
+def title_case(string)
+  title_words = string.split
+  title_words.each do |word|
+    word.capitalize!
+  end
+  title_words.join(' ')
+end
+  
 ```
