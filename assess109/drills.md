@@ -340,6 +340,14 @@ arr.sort[-1]
 arr.sort[0]
 
 ```
+
+### (array) find index of a specified element
+```ruby
+droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
+
+droids.index('C3PO')
+```
+
 ### (array) find the index of the first element that matches a given block
 ```ruby
 droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']

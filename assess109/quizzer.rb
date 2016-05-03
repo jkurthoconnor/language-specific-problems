@@ -62,7 +62,7 @@ mini_programs = [
   'write a solution to FizzBuzz',
   'write a method that takes an array and returns an array of the same string values except with the vowels removed',
   'select elements out of the array if its index is a fibonacci number',
-  'write a method to generate fibonacci numbers between start and stop points',
+  'write a method to generate fibonacci numbers between 0 and a stop point',
   'write a method to determine if a word is a palindrome, without using the reverse method',
   'write method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',

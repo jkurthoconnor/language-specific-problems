@@ -12,19 +12,10 @@ end
 while arr.length > 0
   arr_reversed.unshift arr.shift
 end
-
-# NONE OF THESE WORK, appear to have incomplete iteration through array
-# arr.each do |number|
-#   arr_reversed.push arr.pop
-# end
-
-# arr.each do |number|
-#   arr_reversed.unshift arr.shift
-# end
-
-# arr.map do |number|
-#   arr_reversed.push arr.pop
-# end
+# or
+arr.each do |n|
+  arr_reversed.unshift n
+end
 ``` 
 
 ### FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
@@ -84,6 +75,23 @@ def vowel_deleter(arr)
 end
 
 pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
+
+```
+### "write a method to generate fibonacci numbers between 0 and a stop point"
+```ruby
+def fibonacci(stop)
+  a = 0
+  b = 1
+  puts a
+  puts b
+  loop do
+    c = a + b
+    break if c >= stop
+    puts c
+    a = b
+    b = c
+  end
+end
 
 ```
 
