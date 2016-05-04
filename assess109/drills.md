@@ -436,6 +436,8 @@ hsh.each { |food, color| p food.to_s + ' ' + color }
 hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 # or
 hsh.each { |pair| p pair }
+# or
+hsh.each_pair { |pair| p pair }
 ```
 
 
@@ -446,12 +448,13 @@ hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan' 
 
 hsh.each { |food, color| puts "#{fruit} is #{color}" if color.length > 3 }
  # or
- 
 hsh.each do |food, color|
   if color.length > 3
     p food.to_s + ' ' + color
   end
 end
+# or
+p hsh.select { |food, color| color.include?('n') }
 ```
 
 ### (hash) find max / min key/value 
