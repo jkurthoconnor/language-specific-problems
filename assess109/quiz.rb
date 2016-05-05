@@ -66,7 +66,8 @@ mini_programs = [
   'write a method to determine if a word is a palindrome, without using the reverse method',
   'write method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',
-  'write a title case method that returns a string with title-appropriate capitalization'
+  'write a title case method that returns a string with title-appropriate capitalization',
+  'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings'
 ]
 
 basic_concepts = [

@@ -247,3 +247,20 @@ def title_case(string)
 end
   
 ```
+
+### write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matched of multi-char strings
+```ruby
+str = "ThiS is the String to uSe for single ChAr paTTernS matches"
+
+def indexer(str, match)
+  match_indexes = []
+  n = 0
+  str.split('').each do |char|
+    if char == match
+      match_indexes.push n
+    end
+    n += 1
+  end
+  match_indexes
+end
+```
