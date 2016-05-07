@@ -39,7 +39,7 @@ array_fluency = [
   'increment all numbers in an array by 1',
   'find sum of all numbers in an array',
   'find max / min value in an array',
-  'return the index of specified element',
+  'return the index of specified element (first occurance)',
   'return the index of the first object that matches a given block',
   'return number of times an element occurs within the array',
   'move element in array to new index using one line'
