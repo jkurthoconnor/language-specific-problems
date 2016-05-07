@@ -58,7 +58,7 @@ str.slice(1, 4)
 str.slice(1..4)
 ```
 
-### (string) return index of specified characters
+### (string) return index of specified characters (first occurrance)
 ```ruby
 str = 'This is my string.'
 

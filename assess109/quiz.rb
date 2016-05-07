@@ -13,7 +13,7 @@ string_fluency = [
   'return number of specified sub-strings (words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  'return index of specified characters in a string',
+  'return index of specified characters in a string (first occurrance)',
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',
@@ -67,7 +67,8 @@ mini_programs = [
   'write method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',
   'write a title case method that returns a string with title-appropriate capitalization',
-  'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings'
+  'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings',
+  'write a method that takes an array and returns the indices of all elements matching a pattern'
 ]
 
 basic_concepts = [

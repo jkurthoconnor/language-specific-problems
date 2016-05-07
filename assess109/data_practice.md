@@ -264,3 +264,21 @@ def indexer(str, match)
   match_indexes
 end
 ```
+
+### write a method that takes an array and returns the indices of all elements matching a pattern
+
+```ruby
+arr = [1, 2, 6, 4, 1, 55, 4, 1, 5 ]
+
+def return_indexes(arr, match)
+  indexes = []
+  ind = 0
+  arr.each do |n| 
+    if n == match 
+      indexes.push ind
+    end
+    ind += 1
+  end
+  indexes
+end
+```
