@@ -198,7 +198,7 @@ food = {
  
  search_or(food, 'red', 100)
 ```
-### challenge from video 5
+### challenge from video 4: implement this search method
 ```ruby
 PRODUCTS = [
   { name: "Thinkpad x210", price: 220 },
@@ -208,14 +208,16 @@ PRODUCTS = [
   { name: "Thinkpad x230", price: 330 },
   { name: "Thinkpad x230", price: 350 },
   { name: "Thinkpad x240", price: 700 },
-  { name: "Macbook Leopard", price: 300 },{ name: "Macbook Air", price: 700 },
+  { name: "Macbook Leopard", price: 300 },
+  { name: "Macbook Air", price: 700 },
   { name: "Macbook Pro", price: 600 },
   { name: "Macbook", price: 1449 },
   { name: "Dell Latitude", price: 200 },
   { name: "Dell Latitude", price: 650 },
-  { name: "Dell Inspiron", price: 300 },{ name: "Dell Inspiron", price: 450 }
+  { name: "Dell Inspiron", price: 300 },
+  { name: "Dell Inspiron", price: 450 }
 ]
-
+# filtering criteria
 query = {
   price_min: 240, 
   price_max: 280,
@@ -223,15 +225,20 @@ query = {
 }
 
 query2 = {
-  price_min: 300, 
+  price_min: 300,
   price_max: 450,
-  q: "dell"
+  q: 'dell'
 }
 
 def search(query)
   # implementation
 end
 
+search(query)
+# => [ { name: 'Thinkpad x220', price: 250 } ]
+
+search(query2)
+# => [{name: 'Dell Inspiron", price: 300}, {name: 'Dell Inspiron', price: 450}]
 ```
 
 ### write a title case method

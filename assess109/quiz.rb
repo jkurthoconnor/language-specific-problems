@@ -13,7 +13,7 @@ string_fluency = [
   'return number of specified sub-strings (words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  'return index of specified characters in a string (first occurrance)',
+  'return index of specified characters in a string (first occurrance); bonus: return index of specified characters (first occurrence) starting at given index',
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',

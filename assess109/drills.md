@@ -3,11 +3,15 @@ Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
 
-### (string) return length/ number of characters in string
+### (string) return length/ number of characters in string.  Bonus: return length without spaces
 ```ruby
 str = 'This is my string.'
 
 str.length
+
+# to count without including spaces
+
+str.gsub(' ', '').length
 
 # to count only letter/number characters
 
@@ -27,7 +31,7 @@ str = 'So this is my string, is it?'
 
 str.split.count('is')
 # or
-str.scan(' is ').length # not reliable; USE REGEX as argument for `scan` instead.  as it is, this would miss 'is' at start and stop of string
+str.scan('is').length
 # or
 total = 0
 str.split.each { |word| total += 1 if word == 'is' }
@@ -58,11 +62,15 @@ str.slice(1, 4)
 str.slice(1..4)
 ```
 
-### (string) return index of specified characters (first occurrance)
+### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index
 ```ruby
 str = 'This is my string.'
 
 str.index('m')
+
+# bonus
+
+str.index('i', 3)
 ```
 
 ### (string) add specified characters to start of string
