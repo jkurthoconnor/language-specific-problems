@@ -30,12 +30,14 @@ str.count('i')
 str = 'So this is my string, is it?'
 
 str.split.count('is')
-# or
-str.scan('is').length
+
 # or
 total = 0
 str.split.each { |word| total += 1 if word == 'is' }
 total
+
+# or
+str.scan('is').length # NB: this will return a count of an instance of 'is', even within other words
 ```
 
 ### (string) delete specified characters in string

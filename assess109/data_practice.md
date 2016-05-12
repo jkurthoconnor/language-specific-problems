@@ -160,24 +160,6 @@ def paren_check (str)
     n += 1
   end
 end
-
-# this won't catch every problem with parentheses.   it would be better to employ a principle that governs the ordering of parens, like above
-# def check_parens(string)
-#   split = string.split('')
-#   parens = split.select { |char| char == '(' || char == ')' }
-#   if parens.count('(') != parens.count(')')
-#     puts "unequal numbers of opening and closing parentheses"
-#   elsif parens.first != '('
-#     puts "lacks proper opening to parenthesis series"
-#   elsif parens.last != ')'
-#     puts "lacks proper closing to parenthesis series" 
-#   else
-#     puts "looks good" 
-#   end
-# end
-
-# this won't catch every problem with parentheses.   it would be better to employ a principle that governs the ordering of parens
-#   - at any point, the number of '(' >= number of ')'
 ```
 
 ### write a search method that returns all elements in a hash matching a set of conditions
