@@ -165,19 +165,23 @@ end
 string = 'This (is) my (st)rin)g'
 balanced_paren?(str)
 
-def paren_check (str)
-  if str.count('(') != str.count(')')
-    puts "unequal numbers of opening and closing parentheses."
-    return
-  end
-  n = 1
-  while n <= str.length
-    if str[0, n].count('(') < str[0, n].count(')')
-      puts "closing parentheses exceed opening parentheses at index #{n - 1}"
-      break
+def ordered_parens?(string)
+  opened = 0
+  closed = 0
+  
+  chars = string.split('')
+  chars.each do |char|
+    if char == '('
+      opened += 1
+    elsif char == ')'
+      closed += 1
     end
-    n += 1
+    if opened < closed
+      puts "closed parens before opened!"
+      return false
+    end
   end
+  opened == closed
 end
 ```
 
