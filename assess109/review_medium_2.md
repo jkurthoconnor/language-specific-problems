@@ -47,7 +47,7 @@ p male_age
 
 male_age = 0
 munsters.each_key do |name|
-  if munsters[name]["gender"].start_with?("m") # why must name of hsh be included? it isn't in sample answer for what looks like a similar situation?
+  if munsters[name]["gender"].start_with?("m") 
     male_age = male_age + munsters[name]["age"]
   end
 end

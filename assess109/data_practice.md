@@ -119,6 +119,25 @@ end
 array.select do |color|
   fib.include?(array.index(color))
 end
+
+# or 
+def display_indices(stop)
+  arr = []
+  fib = []
+  a= 0
+  b = 1
+  fib.push a, b
+  while b <= stop -1
+    c = a + b
+    fib.push c
+    a = b
+    b = c
+  end
+  (1..stop).each { |n| arr.push n }
+  arr.each_index do |i| 
+    p arr[i] if fib.include?(i)
+  end
+end
 ```  
 
 ### "write a method to determine if a word is a palindrome, without using the reverse method"
@@ -180,6 +199,7 @@ food = {
  
  search_or(food, 'red', 100)
 ```
+
 ### challenge from video 4: implement this search method
 ```ruby
 PRODUCTS = [
@@ -212,9 +232,14 @@ query2 = {
   q: 'dell'
 }
 
-def search(query)
-  # implementation
+def search(criteria)
+  PRODUCTS.each do |product|
+    if (product[:name].downcase.include?(criteria[:q])) && (product[:price] >= criteria[:price_min]) && (product[:price] <= criteria[:price_max])
+      p product
+    end
+  end
 end
+
 
 search(query)
 # => [ { name: 'Thinkpad x220', price: 250 } ]
@@ -269,5 +294,46 @@ def return_indexes(arr, match)
     ind += 1
   end
   indexes
+end
+```
+
+### write a method to check if a number is a prime
+
+```ruby
+def prime?(n)
+  divisors = []
+  (2...n).each do |divisor|
+    divisors.push divisor if n % divisor == 0
+  end
+  divisors.length == 0
+end
+```
+
+### write a method to output all primes between a start and stop point
+
+```ruby
+def primes_btwn(start, stop)
+  primes = []
+  (start..stop).each do |n|
+    divisors = []
+    (2...n).each do |divisor|
+      divisors.push divisor if n % divisor == 0
+    end
+    primes.push n if divisors.length == 0
+  end
+  p "The prime numbers between #{start} and #{stop} are: #{primes}"
+end
+
+primes_btwn(2, 100)
+```
+
+### write a method to return all the factors of a number
+```ruby
+def factor(number)
+  factors = []
+  (1..number).each do |fac|
+    factors.push fac if number % fac == 0
+  end  
+  factors
 end
 ```

@@ -68,7 +68,8 @@ mini_programs = [
   'write a search method that returns all elements in a hash matching a set of conditions',
   'write a title case method that returns a string with title-appropriate capitalization',
   'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings',
-  'write a method that takes an array and returns the indices of all elements matching a pattern'
+  'write a method that takes an array and returns the indices of all elements matching a pattern',
+  'write a method to return all the factors of a number'
 ]
 
 basic_concepts = [
