@@ -331,7 +331,7 @@ end
 primes_btwn(2, 100)
 ```
 
-### write a method to return all the factors of a number
+### write a method that takes a number and returns all of its factors
 ```ruby
 def factor(number)
   factors = []
