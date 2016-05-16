@@ -64,7 +64,7 @@ str.slice(1, 4)
 str.slice(1..4)
 ```
 
-### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index
+### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index; double bonus: return index of second occurrence of character using one line of code
 ```ruby
 str = 'This is my string.'
 
@@ -73,6 +73,10 @@ str.index('m')
 # bonus
 
 str.index('i', 3)
+
+# double bonus
+
+str.index('i', str.index('i') + 1)
 ```
 
 ### (string) add specified characters to start of string

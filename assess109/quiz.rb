@@ -8,18 +8,17 @@
 #    - [x] prompt on curser line
 
 string_fluency = [
-  'return length / number of characters in string',
-  'return number of characters --not spaces-- in string',
+  "return length of string\n bonus: return number of characters --not spaces, punctuation-- in string",
   'return number of specified characters in string',
   'return number of specified sub-strings (words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  'return index of specified characters in a string (first occurrance); bonus: return index of specified characters (first occurrence) starting at given index',
+  "return index of specified characters in a string (first occurrance)\nbonus: return index of specified characters (first occurrence) starting at given index \ndouble bonus: return index of second occurance of character with one line of code",
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',
   'substitute given character(s) for other(s) in a string',
-  'reverse character order in string (bonus: reverse without using .reverse on array)',
+  "reverse character order in string\nbonus: reverse without using .reverse on array",
   'determine if given characters are present in string',
   'return array of characters matching a pattern',
   'return new string (or modify existing string) to have all characters lowercased',
