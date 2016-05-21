@@ -159,7 +159,7 @@ ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marily
 ````ruby
 ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
 
-ages.min # returns key & value for minimum in hash
+# not `ages.min` as that returns key & value for minimum _key_ in hash
 ages.values.min # returns minimum value in hash
 ages.values.sort[0] # returns minimum value in hash
 
@@ -175,7 +175,9 @@ advice = "Few things in life are as important as house training your pet dinosau
 ```ruby
 advice = "Few things in life are as important as house training your pet dinosaur."
 
-# depending on the return one is seeking
+advice.split.include?('Dino')
+
+# depending on the return one is seeking, these may work, but each would include 'Dino' as part of another word, like 'Dinosaur'.
 advice.include?("Dino") # returns Boolean value
 advice.match('Dino')  # returns match object or nil
 advice.scan('Dino') # returns array of matches

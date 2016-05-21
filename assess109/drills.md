@@ -130,7 +130,7 @@ str.reverse
    end
    reversed.join
    
-   # non-destrctive
+   # non-destructive
    
    string = 'This is my string!'
 
@@ -143,8 +143,21 @@ str.reverse
      n += 1
    end
    reversed_string = reversed_chars.join
-   
    ```
+   
+   - double bonus: reverse order by iterating through string directly (i.e. not via an array) 
+   
+ ```ruby
+str = 'This is The string, is it not?'
+rev = []
+index = 0 
+while index < str.length
+  rev.unshift str[index]
+  index += 1
+end
+p rev.join
+   
+```
    
 ### (string) determine if given characters are present in string
 ```ruby
@@ -389,7 +402,13 @@ total
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
+# to place at end
 arr.push arr.delete_at(4)
+
+# to control point of insertion
+
+arr.insert(1, arr.delete_at(4))
+
 ```
 
 

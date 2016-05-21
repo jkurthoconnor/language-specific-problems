@@ -18,7 +18,7 @@ string_fluency = [
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',
   'substitute given character(s) for other(s) in a string',
-  "reverse character order in string\nbonus: reverse without using .reverse on array",
+  "reverse character order in string\nbonus: reverse without using `.reverse` on array\ndouble bonus: reverse order by iterating through string directly (i.e. not via an array)",
   'determine if given characters are present in string',
   'return array of characters matching a pattern',
   'return new string (or modify existing string) to have all characters lowercased',
