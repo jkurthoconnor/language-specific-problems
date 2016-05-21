@@ -65,6 +65,12 @@ This could be resolved by converting the sum `40 + 2` to a string.  Then `+` cou
 puts "the value of 40 + 2 is " + (40 + 2).to_s
 ```
 
+The type confusion could also be solved by interpolation.  Interpolation would accomplish the same thing.  That is, it would allow the formula to be executed and then converted into a string.
+
+```ruby
+puts "the value of 40 + 2 is #{40 + 2}"
+```
+
 #### Q 4
 What happens when we modify an array while we are iterating over it? What would be output by this code?
 
@@ -263,7 +269,10 @@ Write your own version of the rails `titleize` implementation.
 ```ruby
 title = 'tHis is THe tItle oF ThE bOOk'
 
-title.split.each { |word| word.capitalize! }.join(' ')
+def titleize!(string)
+  string.split.map { |word| word.capitalize! }.join(' ')
+end
+
 
 ```
 
