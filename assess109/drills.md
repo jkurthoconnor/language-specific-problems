@@ -14,7 +14,8 @@ str.length
 str.gsub(' ', '').length
 
 # to count only letter/number characters
-
+str.count('A-z')
+# or
 str.length - str.count(' .')
 ```
 
@@ -25,7 +26,7 @@ str = 'This is my string.'
 str.count('i')
 ```
 
-### (string) return number of specified sub-strings (words) in string
+### (string) return number of specified sub-strings (or words) in string
 ```ruby 
 str = 'So this is my string, is it?'
 
@@ -103,6 +104,14 @@ str.insert(3, 'eee')
 # or 
 str.insert(-2, 'aaa')
 ```
+
+###  insert specified word prior to given existing word
+```ruby
+str = 'Hey, it is Friday!'
+
+str.insert(str.index('Fri'), 'not ')
+```
+
 
 ### (string) substitute given character for another
 ```ruby
