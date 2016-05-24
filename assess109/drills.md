@@ -185,6 +185,13 @@ str = 'Oh, what beautiful weather today!'
 str.scan('t')
 ```
 
+### return an array of words taken from a string that meet given conditions.
+```ruby
+str = 'Oh, what beautiful weather today!'
+
+str.split.select {|word| word.length <= 6 }
+```
+
 ### (string) return new string (or modify existing string) to have all characters lowercased
 ```ruby
 string = 'This IS tHe tEST string'
