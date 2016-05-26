@@ -13,7 +13,7 @@ string_fluency = [
   'return number of specified sub-strings ( or words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  "return index of specified characters in a string (first occurrance)\nbonus: return index of specified characters (first occurrence) starting at given index \ndouble bonus: return index of second occurance of character with one line of code",
+  "return index of specified characters in a string (first occurrance)\nbonus: return index of specified characters (next occurrence) starting at given index \ndouble bonus: return index of next occurance of character with out providing integer for start-from index",
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',
@@ -22,7 +22,7 @@ string_fluency = [
   "reverse character order in string\nbonus: reverse without using `.reverse` on array\ndouble bonus: reverse order by iterating through string directly (i.e. not via an array)",
   'determine if given characters are present in string',
   'return array of characters matching a pattern',
-  'return an array of words taken from a string that meet given conditions',s
+  'return an array of words taken from a string that meet given conditions',
   'return new string (or modify existing string) to have all characters lowercased',
   'return new string (or modify existing string) to have all characters uppercased',
   'return new string (or modify existing string) to have sentence case',

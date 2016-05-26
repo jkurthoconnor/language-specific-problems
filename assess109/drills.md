@@ -496,13 +496,17 @@ hsh.each_pair { |pair| p pair }
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan' }
 
 hsh.each { |food, color| puts "#{fruit} is #{color}" if color.length > 3 }
+ 
  # or
+
 hsh.each do |food, color|
   if color.length > 3
     p food.to_s + ' ' + color
   end
 end
+
 # or
+
 p hsh.select { |food, color| color.include?('n') }
 ```
 
@@ -526,6 +530,7 @@ hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
 hsh.select { |food, color| food.to_s.include?('r') }
 
 ```
+
 ### (hash) delete all key/value pairs where value meets certain conditions
 
 ```ruby
