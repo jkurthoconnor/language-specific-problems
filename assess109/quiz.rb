@@ -44,7 +44,8 @@ array_fluency = [
   'return the index of specified element (first occurance)',
   'return the index of the first object that matches a given block',
   'return number of times an element occurs within the array',
-  'move element in array to new index using one line'
+  'move element in array to new index using one line',
+  'combine two arrays into one'
 ]
 
 hash_fluency = [
@@ -56,7 +57,8 @@ hash_fluency = [
   'print out all key/value pairs where value meets certain conditions',
   'find max / min key/value',
   'return new hash of pairs meeting certain criteria',
-  'delete all key/value pairs where value meets certain conditions'
+  'delete all key/value pairs where value meets certain conditions',
+  'combine two hashes into one'
 ]
 
 mini_programs = [

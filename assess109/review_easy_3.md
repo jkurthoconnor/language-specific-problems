@@ -79,7 +79,12 @@ As a bonus, what happens if you use the `String#slice` method instead?
 ```ruby
 advice = "Few things in life are as important as house training your pet dinosaur."
 
-advice.slice!(0, 39)
+advice.slice!(0, 39) # if one already knew the relevant index
+
+# or
+
+advice.slice!(0, advice.index('house') )
+
 ```
 If I used
 ```ruby

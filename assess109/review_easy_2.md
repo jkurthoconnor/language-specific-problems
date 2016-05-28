@@ -200,6 +200,10 @@ flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 
 flintstones.find_index { |name| name.start_with?('Be')}
 
+# or
+
+flinstones.index { |name| name.start_with?('Be') }
+
 ```
 #### Q 9
 Using array#map!, shorten each of these names to just 3 characters:

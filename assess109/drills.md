@@ -427,6 +427,15 @@ arr.insert(1, arr.delete_at(4))
 
 ```
 
+### combine two arrays into one
+
+```ruby
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
+addition = [ "Dino", "Other_Pet" ]
+
+flintstones.concat(addition)
+```
+
 
 ### (hash) get value of specified key
 ```ruby
@@ -541,3 +550,11 @@ hsh.delete_if { |food, color| color.length > 3 }
 hsh.keep_if { |food, color| food.to_s.include?('r') }
 ```
 
+### combine two hashes into one
+
+```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
+other_hsh = { :apple => 'yellow' }
+
+hsh.merge!(other_hsh)
+```
