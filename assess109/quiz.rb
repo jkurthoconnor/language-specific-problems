@@ -45,7 +45,8 @@ array_fluency = [
   'return the index of the first object that matches a given block',
   'return number of times an element occurs within the array',
   'move element in array to new index using one line',
-  'combine two arrays into one'
+  'combine two arrays into one',
+  'return all indices of occurrences of a specified element'
 ]
 
 hash_fluency = [
@@ -73,7 +74,8 @@ mini_programs = [
   'write a title case method that returns a string with title-appropriate capitalization',
   'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings',
   'write a method that takes an array and returns the indices of all elements matching a pattern (e.g. odd)',
-  'write a method to return all the factors of a number'
+  'write a method to return all the factors of a number',
+  'return the indices of duplicates in an array'
 ]
 
 basic_concepts = [

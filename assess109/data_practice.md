@@ -93,6 +93,23 @@ def fibonacci(stop)
   end
 end
 
+# or 
+
+def make_fib(start, stop)
+  a = start
+  b = start + 1
+  fib = [a, b]
+  while a + b < stop
+    c = a + b
+    fib.push(c)
+    a = b
+    b = c
+  end
+  fib
+end
+
+p make_fib(0, 100)
+
 ```
 
 
@@ -340,4 +357,31 @@ def factor(number)
   end  
   factors
 end
+```
+
+### return the indices of duplicates in an array
+
+```ruby
+#NB: the challenge is that `.index` only returns the  index of first occurrence
+
+arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
+indices = []
+multiples = arr.select { |n| arr.count(n) > 1 }.uniq
+
+index = 0
+while index < arr.length
+  indices.push index if multiples.include?(arr[index])
+  index += 1
+end
+p indices
+
+# or
+
+def index_duplicates(array)
+  array.each_with_index { |n, ind| p ind if array.count(n) > 1 }
+end
+
+arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
+
+index_duplicates(arr)
 ```

@@ -303,6 +303,10 @@ arr.delete_at(-1)
 arr = [1, 2, 3, 4, 5]
 
 arr.delete_at(-1)
+
+# or
+
+arr.slice!(-1)
 ```
 
 
@@ -427,6 +431,14 @@ arr.insert(1, arr.delete_at(4))
 
 ```
 
+### (array) return all indices of occurrences of a specified element
+
+```ruby
+arr = [1, 2, 3, 4, 5, 5, 2, 1, 5]
+
+arr.each_with_index { |n, ind| p ind if n == 5 }
+
+```
 ### combine two arrays into one
 
 ```ruby
