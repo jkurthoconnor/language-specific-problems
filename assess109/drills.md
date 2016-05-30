@@ -13,10 +13,11 @@ str.length
 
 str.gsub(' ', '').length
 
-# to count only letter/number characters
-str.count('A-z')
 # or
-str.length - str.count(' .')
+str.length - str.count(' ')
+
+# to count only alphabetic characters
+str.count('A-Za-z') # NOT `str.count('A-z')`; in ASCII there are 6 non-letter characters between the `Z` and the `a`.
 ```
 
 ### (string) return number of specified characters in string

@@ -69,13 +69,14 @@ mini_programs = [
   'select elements out of the array if its index is a fibonacci number',
   'write a method to generate fibonacci numbers between 0 and a stop point',
   'write a method to determine if a word is a palindrome, without using the reverse method',
-  'write method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
+  'write a method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',
   'write a title case method that returns a string with title-appropriate capitalization',
   'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings',
   'write a method that takes an array and returns the indices of all elements matching a pattern (e.g. odd)',
   'write a method to return all the factors of a number',
-  'return the indices of duplicates in an array'
+  'return the indices of duplicates in an array',
+  'return the max and min values in a array without invoking `.max` or `.min`'
 ]
 
 basic_concepts = [

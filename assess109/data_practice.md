@@ -385,3 +385,25 @@ arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
 
 index_duplicates(arr)
 ```
+
+### return the max and min values in a array without invoking `.max` or `.min`
+
+```ruby
+arr = [ 1, 4, 3, 5, 4, 10, 11, 10 ]
+index = 0
+max = arr[index]
+min = arr[index]
+
+while index < arr.length
+  if arr[index] > max
+    max = arr[index]
+  end
+  if arr[index] < min
+    min = arr[index]
+  end
+  index += 1
+end
+puts "The collection examined is:\n#{arr}"
+p "The largest value in the collection is #{max}."
+p "The smallest value in the collection is #{min}."
+```
