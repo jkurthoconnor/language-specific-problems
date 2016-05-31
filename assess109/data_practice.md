@@ -389,6 +389,21 @@ index_duplicates(arr)
 ### return the max and min values in a array without invoking `.max` or `.min`
 
 ```ruby
+arr = [ 1, 4, 3, 5, 4, 10, 11, 10, 1, 4, 3, 5, 4, 10, -1, 11, 10 ]
+
+max = arr[0]
+min = arr[0]
+
+arr.each do |n|
+  max = n if n > max
+  min = n if n < min
+end
+
+p "max value is #{max}"
+p "min value is #{min}"
+
+# or
+
 arr = [ 1, 4, 3, 5, 4, 10, 11, 10 ]
 index = 0
 max = arr[index]
@@ -406,4 +421,25 @@ end
 puts "The collection examined is:\n#{arr}"
 p "The largest value in the collection is #{max}."
 p "The smallest value in the collection is #{min}."
+```
+
+### return the index of the nth occurrence of an element in an array
+
+```ruby
+arr = [ 1, 4, 3, 5, 4, 10, 11, 10, 1, 4, 3, 5, 4, 10, 11, 10 ]
+element = 10
+target_occurrence = 4
+occurrence = 0
+index = 0
+
+while index < arr.length
+  if arr[index] == element
+    occurrence += 1
+  end
+  if occurrence == target_occurrence
+    p index
+    break 
+  end
+  index += 1
+end
 ```

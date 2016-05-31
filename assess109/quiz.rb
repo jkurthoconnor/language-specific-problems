@@ -76,7 +76,8 @@ mini_programs = [
   'write a method that takes an array and returns the indices of all elements matching a pattern (e.g. odd)',
   'write a method to return all the factors of a number',
   'return the indices of duplicates in an array',
-  'return the max and min values in a array without invoking `.max` or `.min`'
+  'return the max and min values in a array without invoking `.max` or `.min`',
+  'return the index of the nth occurrence of an element in an array'
 ]
 
 basic_concepts = [
