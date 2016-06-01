@@ -96,16 +96,17 @@ end
 # or 
 
 def make_fib(start, stop)
-  a = start
-  b = start + 1
-  fib = [a, b]
+  fib = [start, start + 1]
+  a = fib[0]
+  b = fib[1]
   while a + b < stop
     c = a + b
-    fib.push(c)
+    fib.push c
     a = b
     b = c
   end
   fib
+  end
 end
 
 p make_fib(0, 100)

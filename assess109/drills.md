@@ -571,3 +571,10 @@ other_hsh = { :apple => 'yellow' }
 
 hsh.merge!(other_hsh)
 ```
+
+### change the value stored under a given key
+```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
+
+hsh[:grape] = green
+```

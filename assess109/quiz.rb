@@ -59,7 +59,8 @@ hash_fluency = [
   'find max / min key/value',
   'return new hash of pairs meeting certain criteria',
   'delete all key/value pairs where value meets certain conditions',
-  'combine two hashes into one'
+  'combine two hashes into one',
+  'change the value stored under a given key'
 ]
 
 mini_programs = [
