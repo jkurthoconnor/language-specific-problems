@@ -119,30 +119,51 @@ p make_fib(0, 100)
 array = ["red", "green", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
 fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-array.select do |color|
-  fib.include?(array.index(color))
+array.select do |color| # duplicates in array may pose problems, as `.index` returns the index of the 1st occurrence only
+  fib.include?(array.index(color)) 
 end
+
 # or
-array = ["red", "green", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
+array = ["red", "green", "orange", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
+fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+fib_ind = []
+ind = 0
+
+while ind < array.length
+  fib_ind.push array[ind] if fib.include?(ind)
+  ind += 1
+end
+
+p fib_ind
+
+# or
+
+fib = []
+fib_ind = []
+array = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']
+
 a = 0
-b = 1
-fib = [0, 1]
-while b <= array.length
+b = 0 + 1
+fib.push(a, b)
+
+while a + b < array.length
   c = a + b
   fib.push c
   a = b
   b = c
 end
 
-array.select do |color|
-  fib.include?(array.index(color))
+fib.each do |n|
+  fib_ind.push array[n]
 end
+
+p fib_ind
 
 # or 
 def display_indices(stop)
   arr = []
   fib = []
-  a= 0
+  a = 0
   b = 1
   fib.push a, b
   while b <= stop -1
@@ -262,12 +283,23 @@ def search(criteria)
   end
 end
 
-
 search(query)
 # => [ { name: 'Thinkpad x220', price: 250 } ]
 
 search(query2)
 # => [{name: 'Dell Inspiron", price: 300}, {name: 'Dell Inspiron', price: 450}]
+
+
+# or
+
+def search(items, criteria)
+  items.select {|product| product[:name].downcase.include?(criteria[:q]) && product[:price] >= criteria[:price_min] && 
+  product[:price] <= criteria[:price_max] }
+end
+
+p search(PRODUCTS, query)
+
+p search(PRODUCTS, query2)
 ```
 
 ### write a title case method
