@@ -450,13 +450,13 @@ flintstones.concat(addition)
 ```
 
 
-### (hash) get value of specified key
+### (hash) get value of specified key(s)
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
 hsh[:pear] # returns the value(s)
 # or
-hsh.values_at(:pear) # returns array containing the values
+hsh.values_at(:pear, :grape) # returns array containing the values
 # or
 hsh.fetch(:pear)
 ```
@@ -509,6 +509,11 @@ hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 hsh.each { |pair| p pair }
 # or
 hsh.each_pair { |pair| p pair }
+# or
+for pair in hsh
+  p pair
+end
+
 ```
 
 
@@ -576,5 +581,7 @@ hsh.merge!(other_hsh)
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange', :potato => 'tan'}
 
-hsh[:grape] = green
+hsh[:grape] = 'purple'
+# or
+hsh.store(:grape, 'purple')
 ```

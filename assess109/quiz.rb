@@ -50,7 +50,7 @@ array_fluency = [
 ]
 
 hash_fluency = [
-  'get value of specified key',
+  'get value(s) of specified key(s)',
   'add key/value pair',
   'print out all keys',
   'print out all values',

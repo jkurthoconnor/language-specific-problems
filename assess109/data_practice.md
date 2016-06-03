@@ -21,22 +21,43 @@ end
 ### FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
 ```ruby
 def fizzbuzz(start, stop)
+  fb = []
+  (start..stop).each do |n|
+    if n % 3 == 0 && n % 5 == 0
+      fb.push('FizzBuzz')
+    elsif n % 3 == 0
+      fb.push('Fizz')
+    elsif n % 5 == 0
+      fb.push('Buzz')
+    else
+    fb.push n
+    end
+  end 
+  fb 
+end
+
+puts fizzbuzz(1, 100)
+
+# or use a manual while loop
+def fizzbuzz(start, stop)
+  fb = []
   n = start
   while n <= stop
     if n % 3 == 0 && n % 5 == 0
-      puts 'FizzBuzz'
+      fb.push('FizzBuzz')
     elsif n % 3 == 0
-      puts 'Fizz'
-    elsif n % 5 == 0 
-      puts 'Buzz'
+      fb.push('Fizz')
+    elsif n % 5 == 0
+      fb.push('Buzz')
     else
-      puts n
+    fb.push n
     end
     n += 1
-  end
+  end 
+  fb 
 end
 
-fizzbuzz(1, 50)
+puts fizzbuzz(1, 100)
 ```
 
 ### write a method that takes an array and returns an array of the same string values except with the vowels removed
@@ -303,6 +324,7 @@ p search(PRODUCTS, query2)
 ```
 
 ### write a title case method
+
 ```ruby
 title = 'tHis is MY sample TItlE'
 
@@ -382,14 +404,17 @@ primes_btwn(2, 100)
 ```
 
 ### write a method that takes a number and returns all of its factors
+
 ```ruby
 def factor(number)
   factors = []
-  (1..number).each do |fac|
-    factors.push fac if number % fac == 0
-  end  
+  (1..number).each do |n|
+    factors.push n if number % n == 0
+  end
   factors
 end
+
+puts "The factors of #{factor(100).max} are #{factor(100)}"
 ```
 
 ### return the indices of duplicates in an array
