@@ -8,12 +8,12 @@
 #    - [x] prompt on curser line
 
 string_fluency = [
-  "return length of string\n bonus: return number of characters --not spaces, punctuation-- in string",
-  'return number of specified characters in string',
+  "return length of string\n bonus: return number of alphabetic characters --not spaces, punctuation-- in string",
+  "return number of specified characters in string\n bonus: return number of specified characters without invoking `.count`",
   'return number of specified sub-strings ( or words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  "return index of specified characters in a string (first occurrance)\nbonus: return index of specified characters (next occurrence) starting at given index \ndouble bonus: return index of next occurance of character with out providing integer for start-from index",
+  "return index of specified characters in a string (first occurrance)\nbonus: return index of specified characters (next occurrence) by starting at given index \ndouble bonus: return index of next occurance of character with out providing integer for start-from index",
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',

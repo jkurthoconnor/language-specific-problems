@@ -20,11 +20,22 @@ str.length - str.count(' ')
 str.count('A-Za-z') # NOT `str.count('A-z')`; in ASCII there are 6 non-letter characters between the `Z` and the `a`.
 ```
 
-### (string) return number of specified characters in string
+### (string) return number of specified characters in string. Bonus: return number of specified characters without invoking `.count`
+
 ```ruby
 str = 'This is my string.'
 
 str.count('i')
+
+# bonus
+str = "hello! this this is is not a string?"
+index = 0
+count = 0
+until index == str.length
+  count += 1 if str[index] == 'i'
+  index += 1
+end
+p count
 ```
 
 ### (string) return number of specified sub-strings (or words) in string
@@ -435,9 +446,26 @@ arr.insert(1, arr.delete_at(4))
 ### (array) return all indices of occurrences of a specified element
 
 ```ruby
-arr = [1, 2, 3, 4, 5, 5, 2, 1, 5]
+arr = [2, 5, 3, 2, 7, 8, 2, 5] 
+indices = []
+counted = 5
 
-arr.each_with_index { |n, ind| p ind if n == 5 }
+arr.each_with_index { |n, index| indices.push(index) if n == counted }
+p indices
+
+# or 
+arr = [2, 5, 3, 2, 7, 8, 2, 5] 
+indices = []
+counted = 5
+index = 0
+
+until index == arr.length
+  if arr[index] == counted
+    indices.push(index)
+  end
+  index += 1
+end
+p indices
 
 ```
 ### combine two arrays into one
