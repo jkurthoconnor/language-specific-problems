@@ -1,6 +1,7 @@
 ## Larger Data Manipulation
 
-### "reverse an array without using the built-in reverse method"
+
+### "reverse an array without using the built-in reverse method.  Bonus: do so without sending elements to another array"
 ```ruby
 arr = [1, 2, 3, 4, 5]
 arr_reversed = []
@@ -16,7 +17,18 @@ end
 arr.each do |n|
   arr_reversed.unshift n
 end
-``` 
+
+# Bonus
+arr = ['this', 'is', 'my', 'array']
+index = 0
+
+while index < arr.length
+  arr.insert(0, arr.delete_at(index))
+  index += 1
+end
+p arr
+```
+ 
 
 ### FizzBuzz: write a FizzBuzz method that takes a start and end number as parameters
 ```ruby
@@ -60,6 +72,7 @@ end
 puts fizzbuzz(1, 100)
 ```
 
+
 ### write a method that takes an array and returns an array of the same string values except with the vowels removed
 ```ruby
 def delete_vowels(arr)
@@ -96,8 +109,9 @@ def vowel_deleter(arr)
 end
 
 pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
-
 ```
+
+
 ### "write a method to generate fibonacci numbers between 0 and a stop point"
 ```ruby
 def fibonacci(stop)
@@ -200,6 +214,7 @@ def display_indices(stop)
 end
 ```  
 
+
 ### "write a method to determine if a word is a palindrome, without using the reverse method"
 ```ruby
 def palindrome?(word)
@@ -213,6 +228,7 @@ def palindrome?(word)
   word == reversed_word
 end
 ```
+
 
 ### write method that determines if there is a balanced number of parentheses
   - bonus: add check to ensure parentheses are in correct order
@@ -245,6 +261,7 @@ def ordered_parens?(string)
 end
 ```
 
+
 ### write a search method that returns all elements in a hash matching a set of conditions
 
 ```ruby
@@ -263,6 +280,7 @@ food = {
  
  search_or(food, 'red', 100)
 ```
+
 
 ### challenge from video 4: implement this search method
 ```ruby
@@ -335,8 +353,8 @@ def title_case(string)
   end
   title_words.join(' ')
 end
-  
 ```
+
 
 ### write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matched of multi-char strings
 ```ruby
@@ -354,6 +372,7 @@ def indexer(str, match)
   match_indexes
 end
 ```
+
 
 ### write a method that takes an array and returns the indices of all elements matching a pattern
 
@@ -373,6 +392,7 @@ def return_indexes(arr, match)
 end
 ```
 
+
 ### write a method to check if a number is a prime
 
 ```ruby
@@ -384,6 +404,7 @@ def prime?(n)
   divisors.length == 0
 end
 ```
+
 
 ### write a method to output all primes between a start and stop point
 
@@ -403,12 +424,13 @@ end
 primes_btwn(2, 100)
 ```
 
+
 ### write a method that takes a number and returns all of its factors
 
 ```ruby
 def factor(number)
   factors = []
-  (1..number).each do |n|
+  (1..number/2).each do |n|
     factors.push n if number % n == 0
   end
   factors
@@ -416,6 +438,7 @@ end
 
 puts "The factors of #{factor(100).max} are #{factor(100)}"
 ```
+
 
 ### return the indices of duplicates in an array
 
@@ -443,6 +466,7 @@ arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
 
 index_duplicates(arr)
 ```
+
 
 ### return the max and min values in a array without invoking `.max` or `.min`
 

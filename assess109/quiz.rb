@@ -36,7 +36,7 @@ array_fluency = [
   'prepend `n` to beginning of array',
   'remove specified objects from an array',
   'remove objects from an array at specified indices',
-  'remove duplicates from an array using one method',
+  "remove duplicates from an array using one method\nBonus: remove duplicates by iterating through the array, i.e. without invoking the presumptive method",
   'extract all odds (or evens or ... ) from an array into new array',
   'increment all numbers in an array by 1',
   'find sum of all numbers in an array',
@@ -64,7 +64,7 @@ hash_fluency = [
 ]
 
 mini_programs = [
-  'reverse an array without using the built-in reverse method',
+  "reverse an array without using the built-in reverse method; \nBonus: do so without sending elements to another array",
   'write a solution to FizzBuzz',
   'write a method that takes an array and returns an array of the same string values except with the vowels removed',
   'select elements out of the array if its index is a fibonacci number',

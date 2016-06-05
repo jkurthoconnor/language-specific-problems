@@ -322,12 +322,27 @@ arr.slice!(-1)
 ```
 
 
-### (array) remove duplicates using one method
+### (array) remove duplicates using one method; bonus: do so without invoking the presumptive method
 
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
 
 arr.uniq!
+
+# Bonus
+
+arr = [2, 5, 3, 2, 7, 8, 2, 5, 8] 
+index = 0
+
+until index == arr.length
+  if arr.count(arr[index]) > 1
+    arr.slice!(index)
+  else
+    index += 1
+  end
+end
+
+p arr
 ```
 
 
@@ -389,6 +404,7 @@ arr = [1, 2, 67, 19]
 
 arr.inject { |sum, number| sum += number }
 ```
+
 ### (array) find max / min value in array
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
