@@ -430,7 +430,7 @@ primes_btwn(2, 100)
 ```ruby
 def factor(number)
   factors = []
-  (1..number/2).each do |n|
+  (1..number).each do |n|
     factors.push n if number % n == 0
   end
   factors
@@ -524,4 +524,42 @@ while index < arr.length
   end
   index += 1
 end
+```
+
+### reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder) 
+
+```ruby
+str = "Well, Hello This Is nOt Is nOt my string...well or"
+
+index = 0
+while index < str.length
+  str.insert(0, str.slice!(index))
+  index += 1
+end
+
+p str
+```
+
+### write a method to sort an array
+
+```ruby
+# inefficient but effective
+def sort_array(array)
+  sorted = []
+  while array.length > 0
+    current_max = array[0]
+    for n in array
+      if n > current_max
+        current_max = n
+      end
+    end
+    array.count(current_max).times {sorted.unshift(current_max)}
+    array.delete(current_max)
+  end
+  sorted 
+end
+
+arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
+
+p sort_array(arr)
 ```

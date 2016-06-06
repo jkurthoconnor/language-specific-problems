@@ -166,7 +166,7 @@ str.reverse
    reversed_string = reversed_chars.join
    ```
    
-   - double bonus: reverse order by iterating through string directly (i.e. not via an array) 
+   - double bonus: reverse order without changing string to array first (i.e. without iterating through an array) 
    
  ```ruby
 str = 'This is The string, is it not?'

@@ -78,7 +78,9 @@ mini_programs = [
   'write a method to return all the factors of a number',
   'return the indices of duplicates in an array',
   'return the max and min values in a array without invoking `.max` or `.min`',
-  'return the index of the nth occurrence of an element in an array'
+  'return the index of the nth occurrence of an element in an array',
+  'reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder)',
+  'write a method to sort an array'
 ]
 
 basic_concepts = [
