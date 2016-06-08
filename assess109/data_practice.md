@@ -259,6 +259,26 @@ def ordered_parens?(string)
   end
   opened == closed
 end
+
+# or 
+
+def parens_check(string)
+  if string.count('(') != string.count(')')
+    return "Tested string does not have a balanced number of opening and closing parentheses."
+  end
+  index = 0
+  open_paren = 0
+  close_paren = 0
+  while index < string.length
+    open_paren += 1 if string[index] == ('(')
+    close_paren += 1 if string[index] ==(')')
+    if close_paren > open_paren
+      return "parentheses out of order at index #{index}"
+    end
+    index += 1
+  end
+  "Looks like parentheses are correctly paired and ordered!"
+end
 ```
 
 
@@ -524,6 +544,29 @@ while index < arr.length
   end
   index += 1
 end
+
+# or as method with dialogue
+
+def find_index(series, sought, occurrence)
+  ind = 0
+  counted = 0
+  
+  while ind < series.length
+    if series[ind] == sought
+      counted += 1
+    end
+    if counted == occurrence
+      puts "the #{occurrence} occurrence of #{sought} is at index #{ind}"
+      return
+    end
+    ind += 1
+  end
+  puts "the instance you are looking for does not occur in the series"
+end
+
+arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
+
+find_index(arr, 3, 2)
 ```
 
 ### reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder) 
