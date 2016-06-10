@@ -465,6 +465,19 @@ puts "The factors of #{factor(100).max} are #{factor(100)}"
 ```ruby
 #NB: the challenge is that `.index` only returns the  index of first occurrence
 
+arr = [ 1, 2, 3, 1, 2, 3, 4, 5, 6, 7, 1]
+ele_ind = {} # keys: elements; values: indices in arrays
+arr.each_with_index do |n, ind|
+  if arr.count(n) > 1 && ele_ind.include?(n)
+    ele_ind[n].push ind
+  elsif arr.count(n) > 1 
+    ele_ind[n] = [ind]
+  end
+end
+p ele_ind  
+
+#or if pairing indices with the elements isn't important:
+
 arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
 indices = []
 multiples = arr.select { |n| arr.count(n) > 1 }.uniq
