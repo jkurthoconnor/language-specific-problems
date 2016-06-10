@@ -567,6 +567,25 @@ end
 arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
 
 find_index(arr, 3, 2)
+
+# as above, but more efficient by invoking `.each_with_index`
+def find_index(series, sought, occurrence)
+  counted = 0
+  
+  series.each_with_index do |n, index| 
+    counted += 1 if n == sought
+    if counted == occurrence
+      puts "the #{occurrence} occurrence of #{sought} is at index #{index}"
+      return
+    end
+  end
+  puts "the instance you are looking for does not occur in the series"
+end
+
+arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
+
+find_index(arr, 3, 3) # => instance does not exist
+find_index(arr, 2, 3) # => at 8
 ```
 
 ### reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder) 
