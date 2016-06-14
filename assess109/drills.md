@@ -431,7 +431,7 @@ droids.index { |droid| droid.include?('C') }
 
 ```
 
-###  (array) return number of times an element occurs within the array
+###  (array) return number of times an element occurs within the array; Bonus: return the number of  elements fitting a given description (e.g. are > n)
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
@@ -442,6 +442,10 @@ arr.count(3)
 total = 0
 arr.each { |number| total += 1 if number == 3 }
 total
+
+# Bonus:
+
+arr.count { |n| n.odd? }
 
 
 ```

@@ -154,8 +154,8 @@ p make_fib(0, 100)
 array = ["red", "green", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
 fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-array.select do |color| # duplicates in array may pose problems, as `.index` returns the index of the 1st occurrence only
-  fib.include?(array.index(color)) 
+array.select.with_index do |color, ind| 
+  fib.include?(ind) 
 end
 
 # or

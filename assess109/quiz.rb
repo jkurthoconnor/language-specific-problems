@@ -43,7 +43,7 @@ array_fluency = [
   'find max / min value in an array',
   'return the index of specified element (first occurance)',
   'return the index of the first object that matches a given block',
-  'return number of times an element occurs within the array',
+  "return number of times a given element occurs within the array\nBonus: return number of elements in array fitting a given description (e.g. are odd)",
   'move element in array to new index using one line',
   'combine two arrays into one',
   'return all indices of occurrences of a specified element'
