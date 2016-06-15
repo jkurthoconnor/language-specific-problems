@@ -99,6 +99,18 @@ str = 'Hey, it is Friday!'
 str.prepend('!!')
 ```
 
+### (string) return index of specified characters (last occurrence); bonus: return index of specified characters (last occurrence) prior to a given index
+
+```ruby
+str = 'This is my string, maybe my string.'
+
+str.rindex('m')
+
+# bonus
+
+str.index('m', 20)
+```
+
 ### (string) add specified characters to end of string
 ```ruby
 str = 'Hey, it is Friday!'
@@ -403,6 +415,12 @@ end
 arr = [1, 2, 67, 19]
 
 arr.inject { |sum, number| sum += number }
+```
+
+### find the product of all numbers in an array
+
+```ruby
+arr.inject { |product, number| product *= number }
 ```
 
 ### (array) find max / min value in array
