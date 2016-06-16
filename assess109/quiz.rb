@@ -14,7 +14,7 @@ string_fluency = [
   'delete specified characters in string',
   'delete characters at specified indices in string',
   "return index of specified characters in a string (first occurrance)\nBonus: return index of specified characters (next occurrence) by starting at given index \nDouble bonus: return index of next occurance of character without providing integer for start-from index",
-  "return index of specified characters (last occurrence);\nBonus: return index of specified characters (last occurrence) prior to a given index",
+  "return index of specified characters (last occurrence);\nBonus: return index of specified characters (last occurrence) up to a given index as stop point.\nDouble bonus: return index of next-to-last occurrence of character without providing integer for stop-at index",
   'add specified characters to start of string',
   'add specified characters to end of string',
   'add / insert specified characters at specified indices in string',
@@ -27,7 +27,8 @@ string_fluency = [
   'return new string (or modify existing string) to have all characters lowercased',
   'return new string (or modify existing string) to have all characters uppercased',
   'return new string (or modify existing string) to have sentence case',
-  'return new string (or modify existing string) to have all cases switched'
+  'return new string (or modify existing string) to have all cases switched',
+  "return a given string minus all punctuation and special characters.\nBonus: return an array of words in the string, minus all punctuation and special characters."
 ]
 
 array_fluency = [
@@ -66,7 +67,7 @@ hash_fluency = [
 ]
 
 mini_programs = [
-  "reverse an array without using the built-in reverse method; \nBonus: do so without sending elements to another array",
+  "reverse an array without using the built-in reverse method; \nBonus: do so without sending elements to a holder array",
   'write a solution to FizzBuzz',
   'write a method that takes an array and returns an array of the same string values except with the vowels removed',
   'select elements out of the array if its index is a fibonacci number',
@@ -75,7 +76,7 @@ mini_programs = [
   'write a method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
   'write a search method that returns all elements in a hash matching a set of conditions',
   'write a title case method that returns a string with title-appropriate capitalization',
-  'write a method that takes a string and returns an array of the indices of single characters that match a pattern. bonus: do same with matches of multi-char strings',
+  "write a method that takes a string and returns an array of the indices of single characters that match a pattern.\nBonus: do same with matches of multi-char strings",
   'write a method that takes an array and returns the indices of all elements matching a pattern (e.g. odd)',
   'write a method to return all the factors of a number',
   'return the indices of duplicates in an array',

@@ -99,16 +99,20 @@ str = 'Hey, it is Friday!'
 str.prepend('!!')
 ```
 
-### (string) return index of specified characters (last occurrence); bonus: return index of specified characters (last occurrence) prior to a given index
+### (string) return index of specified characters (last occurrence); Bonus: return index of specified characters (last occurrence) up to a given index as stop point. Double bonus: return index of next-to-last occurrence of character without providing integer for stop-at index
 
 ```ruby
 str = 'This is my string, maybe my string.'
 
-str.rindex('m')
+str.rindex('s')
 
 # bonus
 
-str.index('m', 20)
+str.rindex('s', 20)
+
+# double bonus
+
+str.rindex('s', str.rindex('s') - 1)
 ```
 
 ### (string) add specified characters to end of string
@@ -207,6 +211,9 @@ str.match('O') # returns match object or nil
 str = 'Oh, what beautiful weather today!'
 
 str.scan('t')
+
+# or
+str.chars.select { |char| char < 'l'}
 ```
 
 ### return an array of words taken from a string that meet given conditions.
@@ -246,6 +253,19 @@ string = 'This IS tHe tEST string'
 string.swapcase
 
 string.swapcase!
+```
+
+### From a given string, return the string minus all punctuation and special characters.  Bonus: return an array of words in the string, minus all punctuation and special characters.
+
+```ruby
+str = "WHat? Hello thIS is IS not nOt, IS not, a string???!!??"
+
+str.delete('^ A-Za-z')
+
+# Bonus
+
+str.delete('^ A-Za-z').split
+
 ```
 
 ### (array) iterate over array of numbers and print out each value (iterators v. loops)
@@ -420,7 +440,21 @@ arr.inject { |sum, number| sum += number }
 ### find the product of all numbers in an array
 
 ```ruby
+arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
 arr.inject { |product, number| product *= number }
+
+# or 
+
+arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
+
+ind = 0
+product = arr[0]
+while ind < arr.length - 1
+  product *=  arr[ind + 1]
+  ind += 1
+end
+
+p product
 ```
 
 ### (array) find max / min value in array
