@@ -63,7 +63,8 @@ hash_fluency = [
   'return new hash of pairs meeting certain criteria',
   'delete all key/value pairs where value meets certain conditions',
   'combine two hashes into one',
-  'change the value stored under a given key'
+  'change the value stored under a given key',
+  'from an array of strings, create a hash of all elements meeting a given description (e.g., contain 'is', or are longer than 6 chars).  Make the indices the keys and the elements the values.'
 ]
 
 mini_programs = [

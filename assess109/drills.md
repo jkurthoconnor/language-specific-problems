@@ -685,3 +685,10 @@ hsh[:grape] = 'purple'
 # or
 hsh.store(:grape, 'purple')
 ```
+
+### from an array of strings, create a hash of all elements meeting a given description (e.g., contain 'is', or are longer than 6 chars).  Make the indices the keys and the elements the values.
+
+```ruby
+arr = ["van", "boat", "plane", "van", "car", "bike", "van"]
+arr.each_with_index { |word, ind| hsh4[ind] = word if word == 'van'}
+```
