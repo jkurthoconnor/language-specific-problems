@@ -375,6 +375,18 @@ until index == arr.length
 end
 
 p arr
+
+# non-destructive
+
+arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
+ind = 0
+arr_uniq = []
+
+arr.each do |n|
+  arr_uniq.push(n) if !arr_uniq.include?(n)
+end
+
+p arr_uniq
 ```
 
 
