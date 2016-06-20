@@ -704,3 +704,12 @@ hsh.store(:grape, 'purple')
 arr = ["van", "boat", "plane", "van", "car", "bike", "van"]
 arr.each_with_index { |word, ind| hsh4[ind] = word if word == 'van'}
 ```
+
+### manually iterate though a hash and print each value or key
+
+```ruby
+hsh = { :apple=>'red', :banana=>'yellow', :grape=>'green' }
+
+keys = hsh.keys
+keys.each { |k| p hsh[k]}
+```
