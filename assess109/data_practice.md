@@ -637,4 +637,26 @@ end
 arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
 
 p sort_array(arr)
+
+# or (also inefficient)
+
+
+def sort_this(array)
+  sorted = []
+  while array.length > 0
+    min = array[0]
+    index = 1
+    while index < array.length
+      min = array[index] if array[index] < min  
+      index += 1
+    end
+    array.count(min).times {sorted.push(min)}
+    array.delete(min)
+  end 
+  sorted
+end
+  
+
+arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
+p sort_this(arr)
 ```

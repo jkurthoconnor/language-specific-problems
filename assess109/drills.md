@@ -383,7 +383,7 @@ ind = 0
 arr_uniq = []
 
 arr.each do |n|
-  arr_uniq.push(n) if !arr_uniq.include?(n)
+  arr_uniq.push(n) if !arr_uniq.include?(n) # or `unless arr_uniq.include?(n)
 end
 
 p arr_uniq
