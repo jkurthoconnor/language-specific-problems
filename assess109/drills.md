@@ -28,6 +28,9 @@ str = 'This is my string.'
 str.count('i')
 
 # bonus
+str.scan('i').length
+
+# or 
 str = "hello! this this is is not a string?"
 index = 0
 count = 0

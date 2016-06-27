@@ -89,7 +89,7 @@ delete_vowels(pets)
 def vowel_deleter(arr)
   removed = []
   n = 0
-  while n + 1 <= arr.length
+  while n < arr.length
     removed.push arr[n].delete('aeiou')
     n += 1
   end  
@@ -150,6 +150,7 @@ p make_fib(0, 100)
 
 
 ### "select the element out of the array if its index is a fibonacci number"
+
 ```ruby
 array = ["red", "green", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
 fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
@@ -159,6 +160,7 @@ array.select.with_index do |color, ind|
 end
 
 # or
+
 array = ["red", "green", "orange", "orange", "tan", "purple", "magenta", "yellow", "blue"] 
 fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 fib_ind = []
@@ -382,15 +384,29 @@ str = "ThiS is the String to uSe for single ChAr paTTernS matches"
 
 def indexer(str, match)
   match_indexes = []
-  n = 0
-  str.split('').each do |char|
-    if char == match
-      match_indexes.push n
-    end
-    n += 1
+  str.split('').each_with_index do |char, ind|
+    match_indexes.push ind if char == match
   end
   match_indexes
 end
+
+```
+Bonus
+
+```ruby
+def indices(string, pattern) 
+  indices = []
+  index = 0
+  while index < string.length
+    indices.push index if string[index, pattern.length] == pattern
+    index += 1
+  end
+  
+  indices
+end
+
+str = "thIS IS nOt, IS not, a string?"
+p indices(str, 'IS')
 ```
 
 
