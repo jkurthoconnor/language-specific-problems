@@ -300,7 +300,7 @@ food = {
    end
  end
  
- search_or(food, 'red', 100)
+p search_or(food, 'red', 100)
 ```
 
 
@@ -410,7 +410,25 @@ p indices(str, 'IS')
 ```
 
 
-### write a method that takes an array and returns the indices of all elements matching a pattern
+### write a method that takes an array and returns the indices of all elements meeting given criteria (e.g. odd)
+
+```ruby
+arr = [1, 5, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
+
+def odds(array)
+  indices = []
+  index = 0
+  while index < array.length
+    indices.push(index) if array[index].odd?
+    index += 1
+  end
+  
+  indices
+end
+```
+
+
+### write a method that takes an array and an object to match, and returns the indices of all matches
 
 ```ruby
 arr = [1, 2, 6, 4, 1, 55, 4, 1, 5 ]
@@ -496,11 +514,9 @@ p ele_ind
 
 arr = [ 1, 3, 2, 4, 2, 5, 6, 5, 6, 1 ]
 indices = []
-multiples = arr.select { |n| arr.count(n) > 1 }.uniq
-
 index = 0
 while index < arr.length
-  indices.push index if multiples.include?(arr[index])
+  indices.push index if arr.count(arr[index]) > 1
   index += 1
 end
 p indices

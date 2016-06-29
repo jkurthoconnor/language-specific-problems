@@ -34,8 +34,8 @@ string_fluency = [
 array_fluency = [
   'iterate over array of numbers and print out each value (iterators v. loops)',
   'iterate over array of numbers and print out only those matching certain conditions',
-  'append `n` to end of array',
-  'prepend `n` to beginning of array',
+  "append `n` to end of array\nBonus: append `n`, `o`, `p` to end of array with one line",
+  "prepend `n` to beginning of array\nBonus: prepend `n`, `o`, `p` to start of array with one line",
   'remove specified objects from an array',
   'remove objects from an array at specified indices',
   "remove duplicates from an array using one method\nBonus: remove duplicates by iterating through the array, i.e. without invoking the presumptive method",
@@ -49,7 +49,9 @@ array_fluency = [
   "return number of times a given element occurs within the array\nBonus: return number of elements in array fitting a given description (e.g. are odd)",
   'move element in array to new index using one line',
   'combine two arrays into one',
-  'return all indices of occurrences of a specified element'
+  'return all indices of occurrences of a specified element',
+  "remove the first element in an array\nBonus: remove the first n elements in an array",
+  "remove the last element in an array\nBonus: remove the last n elements in an array"
 ]
 
 hash_fluency = [
@@ -76,10 +78,11 @@ mini_programs = [
   'write a method to generate fibonacci numbers between 0 and a stop point',
   'write a method to determine if a word is a palindrome, without using the reverse method',
   'write a method that determines if there is a balanced number of parentheses; add check to ensure parentheses are in correct order',
-  'write a search method that returns all elements in a hash matching a set of conditions',
+  "write a search method that returns all elements in a hash matching a set of conditions\n e.g. food = {\ngrape: {color: 'red', cost: 75},\npear: {color: 'green', cost: 50},\ncarrot: {color: 'orange', cost: 100},\npotato: {color: 'tan', cost: 150}\n}\nsearch_or(food, 'red', 100) => {grape: {color: 'red', cost: 75}, carrot: {color: 'orange', cost: 100}}",
   'write a title case method that returns a string with title-appropriate capitalization',
   "write a method that takes a string and returns an array of the indices of single characters that match a pattern.\nBonus: do same with matches of multi-char strings",
-  'write a method that takes an array and returns the indices of all elements matching a pattern (e.g. odd)',
+  'write a method that takes an array and returns the indices of all elements meeting given criteria (e.g. odd)',
+  'write a method that takes an array and an object to match, and returns the indices of all matches',
   'write a method to return all the factors of a number',
   'return the indices of duplicates in an array',
   'return the max and min values in a array without invoking `.max` or `.min`',
@@ -98,7 +101,7 @@ basic_concepts = [
   'implicit return value of methods and blocks'
 ]
 
-menu_options = {1=>"string fluency", 2=>"array fluency", 3=>"hash fluency", 4=>"mini-challenges", 5=>"basic concepts", 6=>"exit program"}
+menu_options = {1=>"string fluency", 2=>"array fluency", 3=>"hash fluency", 4=>"small programs", 5=>"basic concepts", 6=>"exit program"}
 
 def random_question(type)
   type[rand(type.length)]
@@ -132,7 +135,7 @@ loop do
   choice = ''
   loop do
     choice = gets.chomp.to_i
-    break if (1..6).cover?(choice)
+    break if (1..6).include?(choice)
     display_please_reenter
   end
   break if choice == 6

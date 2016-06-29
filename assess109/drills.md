@@ -304,7 +304,7 @@ end
 ```
 
 
-### (array) append n to end of array
+### (array) append n to end of array. Bonus: append `n`, `o`, `p` to end of array with one line',
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -312,6 +312,9 @@ arr = [1, 2, 3, 4, 5]
 arr.push 101
 # or 
 arr << 102
+
+# bonus
+arr.push(103, 104, 105)
 
 # if one does not wish to modify the array...
 
@@ -321,7 +324,7 @@ p arr + arr3
 ```
 
 
-### (array) prepend n to beginning of array
+### (array) prepend n to beginning of array. Bonus: prepend `n`, `o`, `p` to start of array with one line',
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -329,6 +332,9 @@ arr = [1, 2, 3, 4, 5]
 arr.unshift 0
 # or
 arr.insert(0, -1)
+
+# bonus
+arr.unshift(10, 11, 12)
 ```
 
 
@@ -523,6 +529,8 @@ arr = [1, 3, 67, 34, 1001, 3, 2]
 
 # to place at end
 arr.push arr.delete_at(4)
+# or 
+arr.push(arr.shift)
 
 # to control point of insertion
 
@@ -564,6 +572,22 @@ addition = [ "Dino", "Other_Pet" ]
 flintstones.concat(addition)
 ```
 
+### remove the first element in an array\nBonus: remove the first n elements in an array
+
+```ruby
+arr = [1, 2, 3, 4, 5, 6]
+arr.shift
+# bonus
+arr.shift(3)
+
+```
+### remove the last element in an array\nBonus: remove the last n elements in an array
+```ruby
+arr = [1, 2, 3, 4, 5, 6]
+arr.pop
+# bonus
+arr.pop(3)
+```
 
 ### (hash) get value of specified key(s)
 ```ruby
