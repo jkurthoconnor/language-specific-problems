@@ -638,7 +638,7 @@ find_index(arr, 2, 3) # => at 8
 ```ruby
 str = "Well, Hello This Is nOt Is nOt my string...well or"
 
-index = 0
+index = 1
 while index < str.length
   str.insert(0, str.slice!(index))
   index += 1

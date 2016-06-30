@@ -20,7 +20,7 @@ string_fluency = [
   'add / insert specified characters at specified indices in string',
   'insert specified word prior to (or after) given existing word (use one line)',
   'substitute given character(s) for other(s) in a string',
-  "reverse character order in string\nbonus: reverse without using `.reverse` on array\ndouble bonus: reverse order by iterating through string directly (i.e. not via an array)",
+  "reverse character order in string\nBonus: reverse without invoking `.reverse`\nDouble bonus: reverse order by iterating through string (i.e. without making the original string into an array)",
   'determine if given characters are present in string',
   'return array of characters matching a pattern',
   'return an array of words taken from a string that meet given conditions',
