@@ -47,13 +47,19 @@ str = 'So this is my string, is it?'
 
 str.split.count('is')
 
-# or
+# NB: to prevent potential problems with punctuation and to target only whole words (unlike with `.scan`)
+str.delete('^ A-Za-z').split.count('is')
+
+# or with manual counting
 total = 0
 str.split.each { |word| total += 1 if word == 'is' }
 total
 
 # or
 str.scan('is').length # NB: this will return a count of an instance of 'is', even within other words
+
+
+
 ```
 
 ### (string) delete specified characters in string
@@ -95,11 +101,18 @@ str.index('i', 3)
 str.index('i', str.index('i') + 1)
 ```
 
-### (string) add specified characters to start of string
+### (string) add specified characters to start of string; Bonus: do so n times using one line
 ```ruby
 str = 'Hey, it is Friday!'
 
 str.prepend('!!')
+```
+  - Bonus: do so n times using one line
+
+```ruby
+str = 'Hey, it is Friday!'
+
+3.times {str.prepend('!!')}
 ```
 
 ### (string) return index of specified characters (last occurrence); Bonus: return index of specified characters (last occurrence) up to a given index as stop point. Double bonus: return index of next-to-last occurrence of character without providing integer for stop-at index
@@ -125,6 +138,14 @@ str = 'Hey, it is Friday!'
 str.concat(' Yes')
 # or
 str << ' yes'
+```
+  - Bonus: do so n times using one line
+  
+```ruby
+str = 'Hey, it is Friday!'
+
+3.times {str.concat(' Yes')}
+
 ```
 
 ### (string) add / insert specified characters at specified indices in string

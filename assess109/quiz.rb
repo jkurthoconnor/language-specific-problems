@@ -15,8 +15,8 @@ string_fluency = [
   'delete characters at specified indices in string',
   "return index of specified characters in a string (first occurrance)\nBonus: return index of specified characters (next occurrence) by starting at given index \nDouble bonus: return index of next occurance of character without providing integer for start-from index",
   "return index of specified characters (last occurrence);\nBonus: return index of specified characters (last occurrence) up to a given index as stop point.\nDouble bonus: return index of next-to-last occurrence of character without providing integer for stop-at index",
-  'add specified characters to start of string',
-  'add specified characters to end of string',
+  "add specified characters to start of string\nBonus: do so n times using one line",
+  "add specified characters to end of string\nBonus: do so n times using one line",
   'add / insert specified characters at specified indices in string',
   'insert specified word prior to (or after) given existing word (use one line)',
   'substitute given character(s) for other(s) in a string',
@@ -70,7 +70,23 @@ hash_fluency = [
   'manually iterate though a hash and print each value or key'
 ]
 
-mini_programs = [
+range_fluency = [
+  'Iterate though an inclusive range to print all capital / lowercase letters in the alphabet',
+  'Iterate though an exclusive range to print all integers from 1 to 50',
+  'Return the object that defines the beginning of a range',
+  'Return the object that defines the end of a range',
+  'Return the object with the maximum value in a range',
+  'Return the object with the minimum value in a range',
+  'Return an array containing each member of a range',
+  'Return the number of members in a numeric range',
+  'Iterate through a range and print every 2nd / 3rd / 4th member',
+  'Iterate through a range and print only those that meet a given condition (e.g.: are odd, are capital letters)',
+  'Return an array of the last n members of a range',
+  'Return an array of the first n members of a range',
+  'Determine if an object is a member of a range',
+  'Determine if an object is between the start and stopping points of a range'
+]
+small_programs = [
   "reverse an array without using the built-in reverse method; \nBonus: do so without sending elements to a holder array",
   'write a solution to FizzBuzz',
   'write a method that takes an array and returns an array of the same string values except with the vowels removed',
@@ -101,7 +117,7 @@ basic_concepts = [
   'implicit return value of methods and blocks'
 ]
 
-menu_options = {1=>"string fluency", 2=>"array fluency", 3=>"hash fluency", 4=>"small programs", 5=>"basic concepts", 6=>"exit program"}
+menu_options = {1=>"string fluency", 2=>"array fluency", 3=>"hash fluency", 4=>"range fluency", 5=>"basic concepts", 6=>"small programs", 7=>"exit program"}
 
 def random_question(type)
   type[rand(type.length)]
@@ -125,7 +141,7 @@ def display_menu(options)
 end
 
 def display_please_reenter
-  prompt('That is not an option.  Please enter 1 - 6.')
+  prompt('That is not an option.  Please enter 1 - 7.')
   print '>> '
 end
   
@@ -135,27 +151,26 @@ loop do
   choice = ''
   loop do
     choice = gets.chomp.to_i
-    break if (1..6).include?(choice)
+    break if (1..7).include?(choice)
     display_please_reenter
   end
-  break if choice == 6
+  break if choice == 7
   question_set = case choice
               when 1 then string_fluency
               when 2 then array_fluency
               when 3 then hash_fluency
-              when 4 then mini_programs
+              when 4 then range_fluency
               when 5 then basic_concepts
+              when 6 then small_programs
               end
 
   loop do
     system 'clear' or system 'cls'
-    5.times do 
-      puts ''
-    end
+    5.times {puts ''}
+    
     prompt(random_question(question_set))
-    5.times do 
-      puts ''
-    end
+    5.times {puts ''}
+    
     prompt("[ENTER to continue, or type 'menu' to return to menu.]")
     print '>> '
     break if gets.chomp == 'menu'
