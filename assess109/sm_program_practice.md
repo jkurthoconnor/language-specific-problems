@@ -1,7 +1,7 @@
 ## Larger Data Manipulation
 
 
-### "reverse an array without using the built-in reverse method.  Bonus: do so without sending elements to another array"
+### "reverse an array without using the built-in reverse method."
 ```ruby
 arr = [1, 2, 3, 4, 5]
 arr_reversed = []
@@ -17,8 +17,11 @@ end
 arr.each do |n|
   arr_reversed.unshift n
 end
+```
 
-# Bonus
+  - Bonus: do so without sending elements to another array
+  
+```ruby
 arr = ['this', 'is', 'my', 'array']
 index = 0
 
@@ -27,6 +30,14 @@ while index < arr.length
   index += 1
 end
 p arr
+
+# or 
+def reverse(array)
+  array.each_with_index do |n, ind|
+    array.unshift(array.delete_at(ind))
+  end
+  array
+end
 ```
  
 
@@ -401,7 +412,22 @@ def indices(string, pattern)
     indices.push index if string[index, pattern.length] == pattern
     index += 1
   end
-  
+  indices
+end
+
+str = "thIS IS nOt, IS not, a string?"
+p indices(str, 'IS')
+
+# or
+
+def indices(string, match)
+  indices = []
+  ind = 0
+  while ind < string.length
+    range = ind...(ind + match.length)
+    indices.push(ind) if string[range] == match
+    ind += 1
+  end
   indices
 end
 

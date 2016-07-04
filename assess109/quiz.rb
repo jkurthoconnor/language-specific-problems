@@ -43,7 +43,7 @@ array_fluency = [
   'increment all numbers in an array by 1',
   'find sum of all numbers in an array',
   'find the product of all numbers in an array',
-  'find max / min value in an array',
+  "find max / min value in an array.\nBonus: find the max / min n elements in array",
   'return the index of specified element (first occurance)',
   'return the index of the first object that matches a given block',
   "return number of times a given element occurs within the array\nBonus: return number of elements in array fitting a given description (e.g. are odd)",
@@ -51,7 +51,10 @@ array_fluency = [
   'combine two arrays into one',
   'return all indices of occurrences of a specified element',
   "remove the first element in an array\nBonus: remove the first n elements in an array",
-  "remove the last element in an array\nBonus: remove the last n elements in an array"
+  "remove the last element in an array\nBonus: remove the last n elements in an array",
+  "return the first element in an array\nBonus: return the first n elements in an array",
+  "return the last element in an array\nBonus: return the last n elements in an array"
+  
 ]
 
 hash_fluency = [
@@ -61,9 +64,9 @@ hash_fluency = [
   'print out all values',
   'print out all key/value pairs',
   'print out all key/value pairs where value meets certain conditions',
-  'find max / min key/value',
+  "return the max / min key / value.\nBonus: return the max / min n pairs / keys / values",
   'return new hash of pairs meeting certain criteria',
-  'delete all key/value pairs where value meets certain conditions',
+  'delete all key / value pairs where value meets certain conditions',
   'combine two hashes into one',
   'change the value stored under a given key',
   "from an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.",

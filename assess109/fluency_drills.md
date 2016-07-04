@@ -610,6 +610,41 @@ arr.pop
 arr.pop(3)
 ```
 
+### return the first element in an array\nBonus: return the first n elements in an array
+
+```ruby
+arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
+arr.first 
+
+#or
+arr[0]
+
+#bonus
+arr.first(3)
+
+#or
+arr[0, 3]
+#or
+arr.slice(0..2)
+```
+
+### return the last element in an array\nBonus: return the last n elements in an array
+
+```ruby
+arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
+arr.last 
+
+#or
+arr[-1]
+
+#bonus
+arr.last(3)
+
+#or
+arr[-3, 3]
+
+```
+
 ### (hash) get value of specified key(s)
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
