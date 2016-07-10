@@ -608,6 +608,10 @@ arr = [1, 2, 3, 4, 5, 6]
 arr.pop
 # bonus
 arr.pop(3)
+# or
+arr.slice!(-3, 3)
+# or
+3.times {arr.delete_at(-1)}
 ```
 
 ### return the first element in an array\nBonus: return the first n elements in an array

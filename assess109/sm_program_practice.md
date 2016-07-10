@@ -81,6 +81,24 @@ def fizzbuzz(start, stop)
 end
 
 puts fizzbuzz(1, 100)
+
+# or take a range directly as parameter and print
+
+def fizzbuzz(range)
+  range.each do |n|
+    if n % 3 == 0 && n % 5 == 0
+      p 'fizzbuzz'
+    elsif n % 3 == 0
+      p 'fizz'
+    elsif n % 5 == 0
+      p 'buzz'
+    else
+      p n
+    end
+  end
+end
+
+fizzbuzz(1..50)
 ```
 
 
@@ -88,6 +106,7 @@ puts fizzbuzz(1, 100)
 ```ruby
 def delete_vowels(arr)
   arr.map { |element| element.delete('aeiou') }
+  # or `arr.map {|element| element.gsub(/[aeiou]/, '')}`
 end
 
 pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
@@ -253,28 +272,10 @@ end
 
 string = 'This (is) my (st)rin)g'
 balanced_paren?(str)
+```
 
-def ordered_parens?(string)
-  opened = 0
-  closed = 0
-  
-  chars = string.split('')
-  chars.each do |char|
-    if char == '('
-      opened += 1
-    elsif char == ')'
-      closed += 1
-    end
-    if opened < closed
-      puts "closed parens before opened!"
-      return false
-    end
-  end
-  opened == closed
-end
-
-# or 
-
+  - Bonus:  
+```ruby
 def parens_check(string)
   if string.count('(') != string.count(')')
     return "Tested string does not have a balanced number of opening and closing parentheses."
@@ -292,6 +293,28 @@ def parens_check(string)
   end
   "Looks like parentheses are correctly paired and ordered!"
 end
+
+# or without manual counting
+
+def balanced_ordered(string)
+  if string.count('(') != string.count(')')
+    return 'unequal number of opening and closing parens'
+  end
+  index = 0
+  until index == string.length
+    if string[0..index].count('(') < string[0..index].count(')')
+      return "closing parens exceed opening at index: #{index}"
+    end
+    index +=1
+  end
+  "good job!"
+end
+  
+p balanced_ordered('(this is balanced)')
+p balanced_ordered('(this is(not balanced)')
+p balanced_ordered('(((balanced, not ordered))))(')
+p balanced_ordered(')(((balanced, not ordered))))((')
+
 ```
 
 
@@ -563,18 +586,17 @@ index_duplicates(arr)
 
 ```ruby
 arr = [ 1, 4, 3, 5, 4, 10, 11, 10, 1, 4, 3, 5, 4, 10, -1, 11, 10 ]
-
-max = arr[0]
-min = arr[0]
-
-arr.each do |n|
-  max = n if n > max
-  min = n if n < min
+def max_min(array)
+  max = array[0]
+  min = array[0]
+  array.each do |n|
+    max = n if n > max
+    min = n if n < min
+  end
+  {:maximum=>max, :minimum=>min} # also: `[max, min]`
 end
 
-p "max value is #{max}"
-p "min value is #{min}"
-
+p max_min(arr)
 # or
 
 arr = [ 1, 4, 3, 5, 4, 10, 11, 10 ]
