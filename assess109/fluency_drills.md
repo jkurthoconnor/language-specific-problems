@@ -28,9 +28,22 @@ str = 'This is my string.'
 str.count('i')
 
 # bonus
+str = 'This is my string.'
 str.scan('i').length
 
-# or 
+# or bonus
+str = 'This is my string.'
+counter = 0
+str.each_char { |char| counter += 1 if char == 'i' }
+p counter
+
+# or bonus
+str = 'This is my string.'
+counter = 0
+(0...str.length).each {|ind| counter += 1 if str[ind] == 'i' }
+p counter
+
+# or bonus
 str = "hello! this this is is not a string?"
 index = 0
 count = 0

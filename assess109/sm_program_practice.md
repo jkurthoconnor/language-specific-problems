@@ -531,15 +531,15 @@ primes_btwn(2, 100)
 ### write a method that takes a number and returns all of its factors
 
 ```ruby
-def factor(number)
+def factor(integer)
   factors = []
-  (1..number).each do |n|
-    factors.push n if number % n == 0
+  (1..integer/2).each do |n|
+    factors.push n if integer % n == 0
   end
+  factors.push(integer)
   factors
 end
 
-puts "The factors of #{factor(100).max} are #{factor(100)}"
 ```
 
 
@@ -621,6 +621,25 @@ p "The smallest value in the collection is #{min}."
 ### return the index of the nth occurrence of an element in an array
 
 ```ruby
+
+def find_index(series, sought, occurrence)
+  counted = 0
+  series.each_with_index do |n, index| 
+    counted += 1 if n == sought
+    if counted == occurrence
+      puts "occurrence #{occurrence} of #{sought} is at index #{index}"
+      return
+    end
+  end
+  puts "the instance you are looking for does not occur in the series"
+end
+
+arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
+
+find_index(arr, 3, 3) # => instance does not exist
+find_index(arr, 2, 3) # => at 8
+
+# or 
 arr = [ 1, 4, 3, 5, 4, 10, 11, 10, 1, 4, 3, 5, 4, 10, 11, 10 ]
 element = 10
 target_occurrence = 4
@@ -628,14 +647,15 @@ occurrence = 0
 index = 0
 
 while index < arr.length
-  if arr[index] == element
-    occurrence += 1
-  end
-  if occurrence == target_occurrence
-    p index
-    break 
-  end
+  occurrence += 1 if arr[index] == element
+  break if occurrence == target_occurrence
   index += 1
+end
+
+if occurrence == target_occurrence
+  p index
+else
+  p "item sought does not occur #{target_occurrence} times"
 end
 
 # or as method with dialogue
@@ -658,33 +678,20 @@ def find_index(series, sought, occurrence)
 end
 
 arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
-
 find_index(arr, 3, 2)
-
-# as above, but more efficient by invoking `.each_with_index`
-def find_index(series, sought, occurrence)
-  counted = 0
-  
-  series.each_with_index do |n, index| 
-    counted += 1 if n == sought
-    if counted == occurrence
-      puts "the #{occurrence} occurrence of #{sought} is at index #{index}"
-      return
-    end
-  end
-  puts "the instance you are looking for does not occur in the series"
-end
-
-arr = [1, 2, 3, 2, 3, 5, 4, 6, 2]
-
-find_index(arr, 3, 3) # => instance does not exist
-find_index(arr, 2, 3) # => at 8
 ```
 
 ### reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder) 
 
 ```ruby
-str = "Well, Hello This Is nOt Is nOt my string...well or"
+#most terse
+str = "Well, Hello This Is nOt Is nOt my string...well"
+
+str.each_char.with_index { |char, index| str.prepend(str.slice!(index))}
+p str
+
+# manual looping
+str = "Well, Hello This Is nOt Is nOt my string...well"
 
 index = 1
 while index < str.length
