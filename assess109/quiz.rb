@@ -13,16 +13,16 @@ string_fluency = [
   'return number of specified sub-strings ( or words) in string',
   'delete specified characters in string',
   'delete characters at specified indices in string',
-  "return index of specified characters in a string (first occurrance)\nBonus: return index of specified characters (next occurrence) by starting at given index \nDouble bonus: return index of next occurance of character without providing integer for start-from index",
-  "return index of specified characters (last occurrence);\nBonus: return index of specified characters (last occurrence) up to a given index as stop point.\nDouble bonus: return index of next-to-last occurrence of character without providing integer for stop-at index",
+  "return index of specified characters [may use regexp] in a string (first occurrance)\nBonus: return index of specified characters (next occurrence) by starting at given index \nDouble bonus: return index of next occurance of character without providing integer for start-from index",
+  "return index of specified characters [may use regexp] (last occurrence);\nBonus: return index of specified characters (last occurrence) up to a given index as stop point.\nDouble bonus: return index of next-to-last occurrence of character without providing integer for stop-at index",
   "add specified characters to start of string\nBonus: do so n times using one line",
   "add specified characters to end of string\nBonus: do so n times using one line",
   'add / insert specified characters at specified indices in string',
   'insert specified word prior to (or after) given existing word (use one line)',
-  'substitute given character(s) for other(s) in a string',
+  'substitute given character(s) [may use regexp] for other(s) in a string',
   "reverse character order in string\nBonus: reverse without invoking `.reverse`\nDouble bonus: reverse order by iterating through string (i.e. without making the original string into an array)",
   'determine if given characters are present in string',
-  'return array of characters matching a pattern',
+  'return array of characters matching a pattern [may use regexp]',
   'return an array of words taken from a string that meet given conditions',
   'return new string (or modify existing string) to have all characters lowercased',
   'return new string (or modify existing string) to have all characters uppercased',
@@ -107,7 +107,9 @@ small_programs = [
   'return the max and min values in a array without invoking `.max` or `.min`',
   'return the index of the nth occurrence of an element in an array',
   'reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder)',
-  'write a method to sort an array'
+  'write a method to sort an array',
+  'write a method to determine if a number is prime.',
+  'write a method to return all the prime numbers between a start and a stop point'
 ]
 
 basic_concepts = [

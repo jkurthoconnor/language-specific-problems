@@ -105,8 +105,8 @@ fizzbuzz(1..50)
 ### write a method that takes an array and returns an array of the same string values except with the vowels removed
 ```ruby
 def delete_vowels(arr)
-  arr.map { |element| element.delete('aeiou') }
-  # or `arr.map {|element| element.gsub(/[aeiou]/, '')}`
+  arr.map {|element| element.downcase.gsub(/[aeiou]/, '')}
+  # or  `arr.map { |element| element.delete('aeiou') }`
 end
 
 pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
@@ -144,6 +144,18 @@ pets = [ 'dog', 'cat', 'bird', 'turtle', 'lizard' ]
 
 ### "write a method to generate fibonacci numbers between 0 and a stop point"
 ```ruby
+def fib(start, stop)
+  fib = [start, start + 1]
+  until fib[-2] + fib[-1] > stop
+    fib.push(fib[-2] + fib[-1])
+  end
+  fib
+end
+
+p fib(0, 1000)
+
+# or
+
 def fibonacci(stop)
   a = 0
   b = 1
@@ -205,45 +217,14 @@ p fib_ind
 
 # or
 
-fib = []
-fib_ind = []
-array = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']
-
-a = 0
-b = 0 + 1
-fib.push(a, b)
-
-while a + b < array.length
-  c = a + b
-  fib.push c
-  a = b
-  b = c
-end
-
-fib.each do |n|
-  fib_ind.push array[n]
-end
-
-p fib_ind
-
-# or 
-def display_indices(stop)
-  arr = []
-  fib = []
-  a = 0
-  b = 1
-  fib.push a, b
-  while b <= stop -1
-    c = a + b
-    fib.push c
-    a = b
-    b = c
+def fib_indices(array)
+  fibon = [0, 1]
+  until fibon[-2] + fibon[-1] > array.length - 1
+    fibon.push(fibon[-2] + fibon[-1])
   end
-  (1..stop).each { |n| arr.push n }
-  arr.each_index do |i| 
-    p arr[i] if fib.include?(i)
-  end
+  array.select.with_index { |ele, ind| fibon.include?(ind) }
 end
+
 ```  
 
 
@@ -471,9 +452,24 @@ def odds(array)
     indices.push(index) if array[index].odd?
     index += 1
   end
-  
   indices
 end
+
+# or invoking an iterator
+
+def indices(array)
+  indices = []
+  array.each_with_index do |element, index|
+    if element.include?('n')
+      indices.push([index, element])
+    end
+  end
+  indices
+end
+
+arr2 = [ 'van', 'boat', 'plane', 'van', 'car', 'bike', 'van', 'skateboard', 'roller skates', 'skateboard']
+
+p indices(arr2)
 ```
 
 
@@ -540,6 +536,15 @@ def factor(integer)
   factors
 end
 
+# or to save 2 iterations b/c results are known
+
+def factor(integer)
+  factors = [1, integer]
+  (2..integer/2).each do |fac|
+    factors.insert(-2, fac) if integer % fac == 0
+  end
+  factors
+end
 ```
 
 

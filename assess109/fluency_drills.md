@@ -29,12 +29,13 @@ str.count('i')
 
 # bonus
 str = 'This is my string.'
-str.scan('i').length
+str.scan('i').length # or `str.scan(/[aeiou]/).length
 
 # or bonus
-str = 'This is my string.'
+str = "thIS IS nOt, IS not, a string?"
 counter = 0
-str.each_char { |char| counter += 1 if char == 'i' }
+lc = 'a'..'z'
+str.each_char { |char| counter += 1 if lc.include?(char) }
 p counter
 
 # or bonus
@@ -70,9 +71,6 @@ total
 
 # or
 str.scan('is').length # NB: this will return a count of an instance of 'is', even within other words
-
-
-
 ```
 
 ### (string) delete specified characters in string
@@ -422,7 +420,6 @@ p arr
 # non-destructive
 
 arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
-ind = 0
 arr_uniq = []
 
 arr.each do |n|
