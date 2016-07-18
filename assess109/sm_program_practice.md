@@ -495,7 +495,7 @@ end
 ### write a method to check if a number is a prime
 
 ```ruby
-def prime?(n)
+def prime?(n) ###add guard clauses for 1 and 2!!
   divisors = []
   (2...n).each do |divisor|
     divisors.push divisor if n % divisor == 0
@@ -507,8 +507,8 @@ end
 
 ### write a method to output all primes between a start and stop point
 
-```ruby
-def primes_btwn(start, stop)
+```ruby  
+def primes_btwn(start, stop) ###add guard clauses for 1 and 2!!
   primes = []
   (start..stop).each do |n|
     divisors = []
