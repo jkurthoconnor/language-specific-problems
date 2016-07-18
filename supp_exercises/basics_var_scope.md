@@ -1,4 +1,4 @@
-## Ruby Basics LaunchSchool exercises: Variable Scope    https://launchschool.com/exercise_sets/ece1c62b 
+## Variable Scope, from Ruby Basics LaunchSchool exercises   (https://launchschool.com/exercise_sets/ece1c62b) 
 
 ### 1
 ```ruby
