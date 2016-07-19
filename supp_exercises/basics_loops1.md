@@ -9,7 +9,7 @@ loop do
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 loop do
@@ -17,6 +17,7 @@ loop do
   break 
 end
 ```
+
 
 ### Loopception
 The code below is an example of a nested loop. Both loops currently loop infinitely. Modify the code so each loop stops after the first iteration.
@@ -33,7 +34,7 @@ end
 puts 'This is outside all loops.'
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 loop do
@@ -50,6 +51,7 @@ end
 puts 'This is outside all loops.'
 ```
 
+
 ### Control the Loop
 Modify the following loop so it iterates 5 times instead of just once.
 
@@ -62,7 +64,7 @@ loop do
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 iterations = 1
@@ -84,6 +86,7 @@ loop do
 end
 ```
 
+
 ### Loop on Command
 Modify the code below so the loop stops iterating when the user inputs 'yes'.
 
@@ -94,7 +97,7 @@ loop do
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 loop do
@@ -103,6 +106,7 @@ loop do
   break if answer == 'yes'
 end
 ```
+
 
 ### Say Hello
 Modify the code below so "Hello!" is printed 5 times.
@@ -116,7 +120,7 @@ while say_hello
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 say_hello = true
@@ -129,6 +133,7 @@ while say_hello
 end
 ```
 
+
 ### Print While
 Using a while loop, print 5 random numbers between 0 and 99. The code below shows an example of how to begin solving this exercise.
 
@@ -140,7 +145,7 @@ while <condition>
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 numbers = []
@@ -154,6 +159,7 @@ end
 puts numbers
 ```
 
+
 ### Count up
 The following code outputs a countdown from 10 to 1. Modify the code so that it counts from 1 to 10 instead.
 
@@ -166,7 +172,7 @@ until count == 0
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 count = 1
@@ -177,6 +183,7 @@ until count == 11
 end
 ```
 
+
 ### Print Until
 Given the array of several numbers below, use an until loop to print each number.
 
@@ -184,7 +191,7 @@ Given the array of several numbers below, use an until loop to print each number
 numbers = [7, 9, 13, 25, 18]
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 numbers = [7, 9, 13, 25, 18]
@@ -196,6 +203,7 @@ until index == numbers.length
 end
 ```
 
+
 ### That's Odd
 The code below shows an example of a for loop. Modify the code so that it only outputs i if i is an odd number.
 
@@ -205,13 +213,14 @@ for i in 1..100
 end
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 for i in 1..100
   puts i if i.odd?
 end
 ```
+
 
 ### Greet Your Friends
 Your friends just showed up! Given the following array of names, use a for loop to greet each friend individually.
@@ -220,7 +229,7 @@ Your friends just showed up! Given the following array of names, use a for loop 
 friends = ['Sarah', 'John', 'Hannah', 'Dave']
 ```
 
-Solution
+#### Solution:
 
 ```ruby
 friends = ['Sarah', 'John', 'Hannah', 'Dave']
@@ -229,5 +238,3 @@ for friend in friends
   p "Hello, " + friend
 end
 ```
-
-
