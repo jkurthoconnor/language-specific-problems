@@ -259,30 +259,68 @@ end
 prompt("The #{term} of the integers between 1 and #{integer} is #{result}.")
 ```
 
-### 
+### String Assignment
+
+Take a look at the following code:
+
+What does this code print out? Think about it for a moment before continuing.
 
 
 ```ruby
+name = 'Bob'
+save_name = name
+name = 'Alice'
+puts name, save_name
+```
 
+If you said that code printed
+```ruby
+Alice
+Bob
+```
+you are 100% correct, and the answer should come as no surprise. Now, let's look at something a bit different:
+```ruby
+name = 'Bob'
+save_name = name
+name.upcase!
+puts name, save_name
+```
+What does this print out? Can you explain these results?
+
+
+#### Solution: 
+The above code prints out
+```ruby
+BOB
+BOB
+```
+After lines 1 and 2, both 'name' and 'save_name' point to the same object, 'Bob'.
+In line 3, 'name' invokes a mutating method `.upcase!`.  This modifies the object to which  'name' points (it is now 'BOB'), but since 'save_name' points to the same object as does 'name', both terms point to 'BOB'
+
+### Mutation
+
+What will the following code print, and why? Don't run the code until you have tried to answer.
+
+```ruby
+array1 = %w(Moe Larry Curly Chemp Harpo Chico Groucho Zeppo)
+array2 = []
+array1.each { |value| array2 << value }
+array1.each { |value| value.upcase! if value.start_with?('C') }
+puts array2
 ```
 
 #### Solution: 
 
+The code above will print
 ```ruby
-
+Moe 
+Larry 
+CURLY 
+CHEMP 
+Harpo 
+CHICO 
+Groucho 
+Zeppo
 ```
-
-### 
-
-
-```ruby
-
-```
-
-#### Solution: 
-
-```ruby
-
-```
-
+The 'C' names are upcased because the contents of array2 were formed by pushing the contents of array1 into it.  Thus, each array contains the same set of objects. Invoking `.upcase!` (a mutating method) in the 4th line mutates certain objects in array1, but as these are the same objects in array2, the contents of array2 are modified accordingly
 
