@@ -71,7 +71,6 @@ end
 
 
 ### Leap Years (pt 1)
-
 In the modern era under the Gregorian Calendar, leap years occur in every year that is evenly divisible by 4, unless the year is also divisible by 100. If the year is evenly divisible by 100, then it is not a leap year unless the year is evenly divisible by 400.
 
 Assume this rule is good for any year greater than year 0. Write a method that takes any year greater than 0 as input, and returns true if the year is a leap year, or false if it is not a leap year.
@@ -120,7 +119,6 @@ leap_year?(100) == false
 leap_year?(400) == true
 ```
 Further Explorations:
-
 The order in which you perform tests for a leap year calculation is important. For what years will leap_year? fail if you rewrite it as:
 
 ```ruby
@@ -151,7 +149,6 @@ end
 ```
 
 ### Leap Years (pt 2)
-
 A continuation of the previous exercise.
 
 The British Empire adopted the Gregorian Calendar in 1752, which was a leap year. Prior to 1752, the Julian Calendar was used. Under the Julian Calendar, leap years occur in any year that is evenly divisible by 4.
@@ -172,8 +169,6 @@ leap_year?(1700) == true
 leap_year?(1) == false
 leap_year?(100) == true
 leap_year?(400) == true
-
-
 ```
 
 #### Solution: 
@@ -227,6 +222,7 @@ multisum(1000) == 234168
 ```ruby
 def multisum(integer)
   multiples = []
+  
   (1..integer).each do |n|
     multiples.push(n) if n % 3 == 0 || n % 5 == 0
   end
@@ -242,10 +238,10 @@ def multisum(integer)
   sum
 end
 
-p multisum(3) == 3
-p multisum(5) == 8
-p multisum(10) == 33
-p multisum(1000) == 234168
+multisum(3) == 3
+multisum(5) == 8
+multisum(10) == 33
+multisum(1000) == 234168
 ```
 
 Further Explorations:
@@ -256,9 +252,11 @@ Answer: using `.inject` is more succinct, but it is not as clear as the manual a
 ```ruby
 def multisum(integer)
   multiples = []
+  
   (1..integer).each do |n|
     multiples.push(n) if n % 3 == 0 || n % 5 == 0
   end
+  
   multiples.inject {|sum, n| sum + n }
 end
 ```
@@ -314,7 +312,6 @@ end
 ```
 
 ### Convert a String to a Number!
-
 The String#to_i method converts a string of numeric characters (including an optional plus or minus sign) to an Integer. String#to_int and Integer behave similarly. In this exercise, you are going to create your own conversion method.
 
 Write a method that takes a String of digits, and returns the appropriate number as an integer. You may not use any of the methods mentioned above.
@@ -342,74 +339,241 @@ def string_to_integer(string)
   end
   
   sum = 0
+  
   string.length.times do |n|
     sum += integers[n] * 10 ** (string.length - (1 + n))
   end
+  
   sum
-
 end
 
 string_to_integer('4321') == 4321
 string_to_integer('570') == 570
 ```
 
-Further Explorations:
+### Convert a String to a Signed Number!
+In the previous exercise, you developed a method that converts simple numeric strings to Integers. In this exercise, you're going to extend that method to work with signed numbers.
+
+Write a method that takes a String of digits, and returns the appropriate number as an integer. The String may have a leading + or - sign; if the first character is a +, your method should return a positive number; if it is a -, your method should return a negative number. If no sign is given, you should return a positive number.
+
+You may assume the string will always contain a valid number.
+
+You may not use any of the standard conversion methods available in Ruby, such as String#to_i, Integer(), etc. You may, however, use the string_to_integer method from the previous lesson.
+
+Examples
 
 ```ruby
-
-```
-
-### 
-```ruby
-
-
-```
-
-#### Solution: 
-
-```ruby
-
-```
-
-Further Explorations:
-
-```ruby
-
-```
-
-### 
-```ruby
-
-
+string_to_signed_integer('4321') == 4321
+string_to_signed_integer('-570') == -570
+string_to_signed_integer('+100') == 100
 ```
 
 #### Solution: 
 
 ```ruby
+NUM_EQUIVS = { "0"=>0, "1"=>1, "2"=>2, "3"=>3, "4"=>4, "5"=>5, "6"=>6, "7"=>7, "8"=>8, "9"=>9 }
 
+def string_to_integer(string)
+  integers = []
+  
+  string.each_char do |digit|
+    integers.push(NUM_EQUIVS[digit])
+  end
+  
+  sum = 0
+  
+  string.length.times do |n|
+    sum += integers[n] * 10 ** (string.length - (1 + n))
+  end
+  
+  sum
+end
+
+def string_to_signed_integer(string)
+   
+  return string_to_integer(string) if NUM_EQUIVS.include?(string[0])
+  
+  sign = string.slice!(0)
+  
+  return string_to_integer(string) if sign == '+'
+  string_to_integer(string) - string_to_integer(string) * 2
+end
+
+string_to_signed_integer('4321') == 4321
+string_to_signed_integer('570') == 570
+string_to_signed_integer('-570') == -570
+string_to_signed_integer('+100') == 100
 ```
 
 Further Explorations:
+In our solution, 
+```ruby
+def string_to_signed_integer(string)
+  case string[0]
+  when '-' then -string_to_integer(string[1..-1])
+  when '+' then string_to_integer(string[1..-1])
+  else          string_to_integer(string)
+  end
+end
+```
+we call string[1..-1] twice, and call string_to_integer three times. This is somewhat repetitive. Refactor our solution so it only makes these two calls once each.
 
 ```ruby
-
+def string_to_signed_integer(string)
+  slice_conversion = string_to_integer(string[1..-1])
+  
+  case string[0]
+  when '-' then -slice_conversion
+  when '+' then slice_conversion
+  else          string_to_integer(string)
+  end
+end
 ```
 
-### 
+### Convert a Number to a String!
+In the previous two exercises, you developed methods that convert simple numeric strings to signed Integers. In this exercise and the next, you're going to reverse those methods.
+
+Write a method that takes a positive integer or zero, and converts it to a string representation.
+
+You may not use any of the standard conversion methods available in Ruby, such as Integer#to_s, String(), Kernel#format, etc. Your method should do this the old-fashioned way and construct the string by analyzing and manipulating the number.
+
+Examples
+
 ```ruby
-
-
+integer_to_string(4321) == '4321'
+integer_to_string(0) == '0'
+integer_to_string(5000) == '5000'
 ```
 
 #### Solution: 
 
 ```ruby
+STR_EQUIVS = { 0=>"0", 1=>"1", 2=>"2", 3=>"3", 4=>"4", 5=>"5", 6=>"6", 7=>"7", 8=>"8", 9=>"9" }
 
+def integer_to_string(integer)
+  return STR_EQUIVS[integer] if integer < 10
+  
+  str_digits = []
+  power = 1
+  
+  until integer / 10 ** power < 10
+    power += 1
+  end
+  
+  until power < 0
+    str_digits.push(STR_EQUIVS[integer / 10 ** power])
+    integer = integer % 10 ** power
+    power -= 1
+  end
+      
+  str_digits.join   
+end
+
+integer_to_string(4321) == '4321'
+integer_to_string(0) == '0'
+integer_to_string(5000) == '5000'
 ```
 
-Further Explorations:
+### Convert a Signed Number to a String!
+In the previous exercise, you developed a method that converts non-negative numbers to strings. In this exercise, you're going to extend that method by adding the ability to represent negative numbers as well.
+
+Write a method that takes an integer, and converts it to a string representation.
+
+You may not use any of the standard conversion methods available in Ruby, such as Integer#to_s, String(), Kernel#format, etc. You may, however, use integer_to_string from the previous exercise.
+
+Examples
 
 ```ruby
+signed_integer_to_string(4321) == '+4321'
+signed_integer_to_string(-123) == '-123'
+signed_integer_to_string(0) == '0'
+```
 
+#### Solution: 
+
+```ruby
+STR_EQUIVS = { 0=>"0", 1=>"1", 2=>"2", 3=>"3", 4=>"4", 5=>"5", 6=>"6", 7=>"7", 8=>"8", 9=>"9" }
+
+def integer_to_string(integer)
+  return STR_EQUIVS[integer] if integer < 10
+  
+  str_digits = []
+  power = 1
+  
+  until integer / 10 ** power < 10
+    power += 1
+  end
+  
+  until power < 0
+    str_digits.push(STR_EQUIVS[integer / 10 ** power])
+    integer = integer % 10 ** power
+    power -= 1
+  end
+      
+  str_digits.join   
+end
+
+def signed_integer_to_string(integer)
+  if integer > 0
+    "+" + integer_to_string(integer)
+  elsif integer < 0
+    "-" + integer_to_string(integer.lcm(1))
+  else
+    integer_to_string(integer)
+  end
+end
+
+signed_integer_to_string(4321) == '+4321'
+signed_integer_to_string(-123) == '-123'
+signed_integer_to_string(0) == '0'
+```
+Further Explorations:
+Refactor our solution 
+
+```ruby
+def signed_integer_to_string(number)
+  case number <=> 0
+  when -1 then "-#{integer_to_string(-number)}"
+  when +1 then "+#{integer_to_string(number)}"
+  else         integer_to_string(number)
+  end
+end
+```
+to reduce the 3 integer_to_string calls to just one.
+
+```ruby
+STR_EQUIVS = { 0=>"0", 1=>"1", 2=>"2", 3=>"3", 4=>"4", 5=>"5", 6=>"6", 7=>"7", 8=>"8", 9=>"9" }
+
+def integer_to_string(integer)
+  return STR_EQUIVS[integer] if integer < 10
+  
+  str_digits = []
+  power = 1
+  
+  until integer / 10 ** power < 10
+    power += 1
+  end
+  
+  until power < 0
+    str_digits.push(STR_EQUIVS[integer / 10 ** power])
+    integer = integer % 10 ** power
+    power -= 1
+  end
+      
+  str_digits.join   
+end
+
+def signed_integer_to_string(number)
+  conversion = integer_to_string(number.lcm(1))
+  case number <=> 0
+  when -1 then "-#{conversion}"
+  when +1 then "+#{conversion}"
+  else         conversion
+  end
+end
+
+signed_integer_to_string(4321) == '+4321'
+signed_integer_to_string(-123) == '-123'
+signed_integer_to_string(0) == '0'
 ```
 
