@@ -752,3 +752,40 @@ end
 arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
 p sort_this(arr)
 ```
+
+### Write a method to turn an integer into an array of its digits.  Expand on this method to make a method to convert an integer into a string without using the standard conversion methods.
+
+```ruby
+# returning the array
+def integer_to_digits(integer)
+  numbers = []
+  value = integer
+  loop do 
+    quotient, remainder = value.divmod(10)
+    numbers.unshift(remainder)
+    value = quotient
+    break if value == 0
+  end
+  numbers
+end
+
+# returning the string
+def integer_to_string(integer)
+  string = ''
+  value = integer
+  loop do
+    quotient, remainder = value.divmod(10)
+    string.prepend(DIGITS[remainder])
+    value = quotient
+    break if value == 0
+  end
+  string
+end
+
+
+p integer_to_string(100)
+p integer_to_string(1001)
+p integer_to_string(5673)
+p integer_to_string(96)
+p integer_to_string(0)
+```

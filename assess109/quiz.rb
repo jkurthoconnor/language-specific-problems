@@ -109,7 +109,8 @@ small_programs = [
   'reverse order of a string by iterating through string directly (i.e. without changing to an array or using a holder)',
   'write a method to sort an array',
   'write a method to determine if a number is prime.',
-  'write a method to return all the prime numbers between a start and a stop point'
+  'write a method to return all the prime numbers between a start and a stop point',
+  'Write a method to turn an integer into an array of its digits.  Expand on this method to make a method to convert an integer into a string without using the standard conversion methods.'
 ]
 
 basic_concepts = [
