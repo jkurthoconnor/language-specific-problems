@@ -10,8 +10,13 @@ str = 'This is my string.'
 str.length
 
 # to count without including spaces
+str.count('^ ')
 
+# or
 str.gsub(' ', '').length
+
+# or 
+str.delete(' ').length
 
 # or
 str.length - str.count(' ')
@@ -25,7 +30,10 @@ str.count('A-Za-z') # NOT `str.count('A-z')`; in ASCII there are 6 non-letter ch
 ```ruby
 str = 'This is my string.'
 
-str.count('i')
+str.count('i') 
+
+# or if counting a number of characters
+str.count('aeiou')
 
 # bonus
 str = 'This is my string.'
@@ -34,8 +42,8 @@ str.scan('i').length # or `str.scan(/[aeiou]/).length
 # or bonus
 str = "thIS IS nOt, IS not, a string?"
 counter = 0
-lc = 'a'..'z'
-str.each_char { |char| counter += 1 if lc.include?(char) }
+letters_counted = 'a'..'z'
+str.each_char { |char| counter += 1 if letters_counted.include?(char) }
 p counter
 
 # or bonus
@@ -77,7 +85,7 @@ str.scan('is').length # NB: this will return a count of an instance of 'is', eve
 ```ruby
 str = 'This is my string.'
 
-str.delete('is')
+str.delete('is') # NB: deletes 'i' and 's' in any occurrence 
 # or 
 str.delete!('is')
 # or 
