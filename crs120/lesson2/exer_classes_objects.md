@@ -73,57 +73,83 @@ bob.last_name             # => 'Adams'
 
 Solution
 ```ruby
-class Person 
+class Person
   attr_accessor :first_name, :last_name
   
   def initialize(full_name)
-    if full_name.split.size == 2
-      self.first_name = full_name.split[0]
-      self.last_name = full_name.split[1]
-    else
-      self.first_name = full_name
-    end  
+    parse_full_name(full_name) 
   end
   
   def name=(full_name)
-    if full_name.split.size == 2
-      self.first_name = full_name.split[0]
-      self.last_name = full_name.split[1]
-      @name = self.first_name + ' ' + self.last_name
-    else
-      self.first_name = full_name
-      @name = self.first_name
-    end  
+    parse_full_name(full_name)  
   end
   
   def name
     "#{first_name} #{last_name}".strip
   end
+  
+  private
+  
+  def parse_full_name(full_name)
+    if full_name.split.size == 2
+      self.first_name = full_name.split[0]
+      self.last_name = full_name.split[1]
+    else
+      self.first_name = full_name
+      self.last_name = ''
+    end 
+  end
 end
 ```
 
-4) 
+4) Using the class definition from step #3, let's create a few more people -- that is, Person objects.
+
 ```ruby
-          
+bob = Person.new('Robert Smith')
+rob = Person.new('Robert Smith')
+```
+
+If we're trying to determine whether the two objects contain the same name, how can we compare the two objects?          
+
+Solution
+We could add a method to compare names to the Person class.  Something like below would work.
+```ruby
+def same_name?(other_person)
+  self.name == other_person.name
+end
+```
+
+5) Continuing with our Person class definition, what does the below print out?
+```ruby
+bob = Person.new("Robert Smith")
+puts "The person's name is: #{bob}"          
 ```
 
 Solution
 ```ruby
-
+# The person's name is #<Person:0x007f93ac870388>
 ```
 
-5) 
+Let's add a to_s method to the class:
 ```ruby
-          
-```
+class Person
+  # ... rest of class omitted for brevity
 
-Solution
+  def to_s
+    name
+  end
+end
+```
+Now, what does the below output?
 ```ruby
-
+bob = Person.new("Robert Smith")
+puts "The person's name is: #{bob}"
 ```
 
-
-
+Solution: 
+```ruby
+# The person's name is: Robert Smith
+```
 
 
 
