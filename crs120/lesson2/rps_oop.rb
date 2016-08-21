@@ -74,6 +74,26 @@ class RPSGame
     puts "Nice game!  Good Bye."
   end
   
+  def display_winner
+    puts "You chose #{human.move}."
+    puts "The computer chose #{computer.move}."
+    
+    case human.move
+    when 'rock'
+      puts "You won!" if computer.move == 'scissors'
+      puts "It's a tie." if computer.move == 'rock'
+      puts "You loose :-( " if computer.move == 'paper'
+    when 'paper'
+      puts "You won!" if computer.move == 'rock'
+      puts "It's a tie." if computer.move == 'paper'
+      puts "You loose :-( " if computer.move == 'scissors'
+    when 'scissors'
+      puts "You won!" if computer.move == 'paper'
+      puts "It's a tie." if computer.move == 'scissors'
+      puts "You loose :-( " if computer.move == 'rock'
+    end
+  end
+  
   def play
     display_welcome
     human.choose
