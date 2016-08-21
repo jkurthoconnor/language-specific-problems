@@ -3,18 +3,47 @@
 # verbs: choose, compare
 
 class Player
+  attr_accessor :move
+  
+  def initialize(player_type = :human) # default player type set; computer must pass in argument at init
+    @player_type = player_type
+    @move = nil
+  end
+  
+  def choose
+    if human?
+      choice = nil
+      loop do
+        puts "Please choose a move: rock, paper, or scissors."
+        choice = gets.chomp
+        break if ['rock', 'paper', 'scissors'].include?(choice)
+        puts "'#{choice}' is not a valid option."
+      end
+      self.move = choice
+    else
+      self.move = ['rock', 'paper', 'scissors'].sample  
+    end
+  end
+  
+  def human?
+    @player_type == :human
+  end
+end
+
+class Human < Player
   def initialize
-    # a name? a move?
+    
   end
   
   def choose
     
   end
+  
 end
 
 class Move
   def initialize
-    # must keep track of choice; move objects: rock, paper, scissors
+    # must keep track of choice; move objects: rock, paper, scissors?
   end
 end
 
@@ -33,12 +62,20 @@ class RPSGame
   attr_accessor :human, :computer
   
   def initialize
-    @human = Player.new
-    @computer = Player.new
+    @human = Player.new 
+    @computer = Player.new(:computer)# argument passed is to be used internally by Player class, so anything would work, so long as are consistent
+  end
+  
+  def display_welcome
+    puts "Welcome to Rock, Paper, Scissors.  Good luck.  (You'll need it.)"
+  end
+  
+  def display_goodbye
+    puts "Nice game!  Good Bye."
   end
   
   def play
-    display welcome
+    display_welcome
     human.choose
     computer.choose
     display_winner
@@ -46,3 +83,5 @@ class RPSGame
   end
 end
 
+
+RPSGame.new.play
