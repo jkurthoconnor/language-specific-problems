@@ -94,11 +94,27 @@ class RPSGame
     end
   end
   
+  def play_again?
+    answer = nil
+    loop do
+      puts "Would you like a rematch?  Enter 'y' or 'n'."
+      answer = gets.chomp
+      break if ['y', 'n'].include?(answer.downcase)
+      puts "'#{answer}' is an invalid entry."
+    end
+    
+    return true if answer == 'y'
+    return false
+  end
+  
   def play
     display_welcome
-    human.choose
-    computer.choose
-    display_winner
+    loop do
+      human.choose
+      computer.choose
+      display_winner
+      break unless play_again?
+    end
     display_goodbye
   end
 end
