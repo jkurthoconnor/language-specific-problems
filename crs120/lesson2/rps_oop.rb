@@ -3,11 +3,29 @@
 # verbs: choose, compare
 
 class Player
-  attr_accessor :move
+  attr_accessor :move, :name
   
   def initialize(player_type = :human) # default player type set; computer must pass in argument at init
     @player_type = player_type
     @move = nil
+    set_name
+  end
+  
+  def set_name
+    if human?
+      n = nil
+      loop do
+        puts "Please enter your name."
+        n = gets.chomp
+        break unless n.empty?
+        puts "You must enter a name."
+      end
+      self.name = n
+      
+    else
+      self.name = ['Data', 'C3PO', 'BB8', 'R2D2'].sample
+      
+    end
   end
   
   def choose
@@ -67,16 +85,16 @@ class RPSGame
   end
   
   def display_welcome
-    puts "Welcome to Rock, Paper, Scissors.  Good luck.  (You'll need it.)"
+    puts "Welcome to Rock, Paper, Scissors.  Good luck, #{human.name}.  (You'll need it.)"
   end
   
   def display_goodbye
-    puts "Nice game!  Good Bye."
+    puts "Nice game, #{human.name}!  Good Bye."
   end
   
   def display_winner
-    puts "You chose #{human.move}."
-    puts "The computer chose #{computer.move}."
+    puts "#{human.name} chose #{human.move}."
+    puts "#{computer.name} chose #{computer.move}."
     
     case human.move
     when 'rock'
@@ -118,6 +136,5 @@ class RPSGame
     display_goodbye
   end
 end
-
 
 RPSGame.new.play
