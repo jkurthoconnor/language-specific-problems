@@ -171,12 +171,12 @@ puts reverse_words('Launch School')         # => hcnuaL loohcS
 ```ruby
 def reverse_words(string)
   words = string.split
-  
+
   words.each do |word|
     word.reverse! if word.length >= 5
   end
-  
-    words.join(' ')
+
+  words.join(' ')
 end
 
 puts reverse_words('Professional')          # => lanoisseforP
@@ -201,12 +201,12 @@ puts stringy(7) == '1010101'
 ```ruby
 def stringy(integer)
   string = ''
-  
+
   integer.times do |n|
     string << '1' if n.even? 
     string << '0' if n.odd?
   end
-  
+
   string  
 end
 
@@ -221,7 +221,7 @@ Further Explorations
 ```ruby
 def stringy(integer, initial = 1)
   string = ''
-  
+
   case initial
   when 1 
     even = '1'
@@ -230,12 +230,12 @@ def stringy(integer, initial = 1)
     even = '0'
     odd = '1'
   end
-  
+
   integer.times do |n|
     string << even if n.even? 
     string << odd if n.odd?
   end
-  
+
   string  
 end
 
