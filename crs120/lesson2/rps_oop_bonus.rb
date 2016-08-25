@@ -129,14 +129,20 @@ class RPSGame
   end
 
   def play
-    display_welcome
     loop do
-      human.choose
-      computer.choose
-      display_moves
-      display_winner
+      display_welcome
+
+      loop do
+        human.choose
+        computer.choose
+        display_moves
+        display_winner
+        break if human.score == 5 || computer.score == 5
+      end
+      # add first-to-n-winner display
       break unless play_again?
     end
+
     display_goodbye
   end
 end
