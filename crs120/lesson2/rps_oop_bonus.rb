@@ -1,5 +1,3 @@
-# architecture and implementation modelled off of Launch School tutorial
-
 class Move
   VALUES = ['rock', 'paper', 'scissors']
 
@@ -39,9 +37,10 @@ class Move
 end
 
 class Player
-  attr_accessor :move, :name
+  attr_accessor :move, :name, :score
 
   def initialize
+    self.score = 0
     set_name
   end
 end
@@ -102,14 +101,18 @@ class RPSGame
     puts "#{computer.name} chose #{computer.move}."
   end
 
-  def display_winner
+  def display_winner # break into calculate/record method and display method?
     if human.move > computer.move
       puts "You won!"
+      human.score += 1
     elsif human.move < computer.move
       puts "You loose :-( "
+      computer.score += 1
     else
       puts "It's a tie."
     end
+    puts "#{human.name}'s score is: #{human.score}."
+    puts "#{computer.name}'s score is: #{computer.score}."
   end
 
   def play_again?
