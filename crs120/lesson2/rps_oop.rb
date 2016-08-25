@@ -7,18 +7,6 @@ class Move
     @value = value
   end
 
-  def rock?
-    @value == 'rock'
-  end
-
-  def paper?
-    @value == 'paper'
-  end
-
-  def scissors?
-    @value == 'scissors'
-  end
-
   def >(other_move)
     (rock? && other_move.scissors?) ||
       (paper? && other_move.rock?) ||
@@ -33,6 +21,20 @@ class Move
 
   def to_s
     @value
+  end
+  
+  protected
+  
+  def rock?
+    @value == 'rock'
+  end
+
+  def paper?
+    @value == 'paper'
+  end
+
+  def scissors?
+    @value == 'scissors'
   end
 end
 
