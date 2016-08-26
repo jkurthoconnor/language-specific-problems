@@ -20,9 +20,9 @@ class Move
   def to_s
     @value
   end
-  
+
   protected
-  
+
   def rock?
     @value == 'rock'
   end
@@ -37,10 +37,11 @@ class Move
 end
 
 class Player
-  attr_accessor :move, :name, :score
+  attr_accessor :move, :name, :score, :move_history
 
   def initialize
     self.score = 0
+    self.move_history = []
     set_name
   end
 end
@@ -66,6 +67,7 @@ class Human < Player
       puts "'#{choice}' is not a valid option."
     end
     self.move = Move.new(choice)
+    move_history.push(move)
   end
 end
 
@@ -76,6 +78,7 @@ class Computer < Player
 
   def choose
     self.move = Move.new(Move::VALUES.sample)
+    move_history.push(move)
   end
 end
 
@@ -101,7 +104,7 @@ class RPSGame
     puts "#{computer.name} chose #{computer.move}."
   end
 
-  def display_round_winner # break into calculate/record method and display method?
+  def display_round_winner
     if human.move > computer.move
       puts "You won!"
       human.score += 1
@@ -111,21 +114,30 @@ class RPSGame
     else
       puts "It's a tie."
     end
-    
+  end
+
+  def display_score
     puts "#{human.name}'s score is: #{human.score}."
     puts "#{computer.name}'s score is: #{computer.score}."
   end
-  
+
   def game_winner?
     human.score == 3 || computer.score == 3
   end
-  
+
   def display_game_winner
     if human.score == 3
       puts "Congratulations #{human.name}.  You have won the game!"
     else
       puts "Sorry, #{human.name}.  #{computer.name} beat you."
     end
+  end
+
+  def display_move_history
+    puts "#{human.name}'s move history:"
+    human.move_history.each { |m| puts '>>> ' + m.to_s }
+    puts "#{computer.name}'s move history:"
+    computer.move_history.each { |m| puts '>>> ' + m.to_s }
   end
 
   def play_again?
@@ -140,7 +152,7 @@ class RPSGame
     return false if answer == 'n'
     return true if answer == 'y'
   end
-  
+
   def reset_score
     human.score = 0
     computer.score = 0
@@ -155,10 +167,12 @@ class RPSGame
         computer.choose
         display_moves
         display_round_winner
+        display_score
         break if game_winner?
       end
 
       display_game_winner
+      display_move_history
       reset_score
       break unless play_again?
     end
