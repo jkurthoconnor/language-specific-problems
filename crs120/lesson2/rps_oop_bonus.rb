@@ -61,7 +61,7 @@ class Human < Player
   def choose
     choice = nil
     loop do
-      puts "Please choose a move: rock, paper, or scissors."
+      puts "\nPlease choose a move: rock, paper, or scissors."
       choice = gets.chomp
       break if Move::VALUES.include?(choice)
       puts "'#{choice}' is not a valid option."
@@ -91,17 +91,18 @@ class RPSGame
   end
 
   def display_welcome
-    puts "Welcome to Rock, Paper, Scissors.  Good luck, #{human.name}.
-      (You'll need it.)"
+    system 'clear' or system 'cls'
+    puts "\nHello, #{human.name}.Welcome to Rock, Paper, Scissors."
+    puts "\nYour opponent today is #{computer.name}."
+    sleep 2.0
   end
 
   def display_goodbye
-    puts "Nice game, #{human.name}!  Good Bye."
+    puts "\nNice game, #{human.name}!  Good bye."
   end
 
   def display_moves
-    puts "#{human.name} chose #{human.move}."
-    puts "#{computer.name} chose #{computer.move}."
+    puts "\nYou chose #{human.move}. #{computer.name} chose #{computer.move}."
   end
 
   def display_round_winner
@@ -114,11 +115,12 @@ class RPSGame
     else
       puts "It's a tie."
     end
+    sleep 2.0
   end
 
   def display_score
-    puts "#{human.name}'s score is: #{human.score}."
-    puts "#{computer.name}'s score is: #{computer.score}."
+    system 'clear' or system 'cls'
+    puts "\nScore: You: #{human.score} || #{computer.name}:  #{computer.score}."
   end
 
   def game_winner?
@@ -127,23 +129,23 @@ class RPSGame
 
   def display_game_winner
     if human.score == 3
-      puts "Congratulations #{human.name}.  You have won the game!"
+      puts "\nCongratulations #{human.name}.  You have won the game!"
     else
-      puts "Sorry, #{human.name}.  #{computer.name} beat you."
+      puts "\nSorry, #{human.name}.  #{computer.name} beat you."
     end
   end
 
   def display_move_history
-    puts "#{human.name}'s move history:"
+    puts "\n#{human.name}'s move history:"
     human.move_history.each { |m| puts '>>> ' + m.to_s }
-    puts "#{computer.name}'s move history:"
+    puts "\n#{computer.name}'s move history:"
     computer.move_history.each { |m| puts '>>> ' + m.to_s }
   end
 
   def play_again?
     answer = nil
     loop do
-      puts "Would you like a rematch?  Enter 'y' or 'n'."
+      puts "\nWould you like a rematch?  Enter 'y' or 'n'."
       answer = gets.chomp.downcase
       break if ['y', 'n'].include?(answer)
       puts "'#{answer}' is an invalid entry."
@@ -163,14 +165,15 @@ class RPSGame
       display_welcome
 
       loop do
+        display_score
         human.choose
         computer.choose
         display_moves
         display_round_winner
-        display_score
         break if game_winner?
       end
 
+      display_score
       display_game_winner
       display_move_history
       reset_score
