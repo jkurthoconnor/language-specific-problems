@@ -89,6 +89,7 @@ end
 
 converter
 ```
+
 ### Tip Calculator
 Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip and then display both the tip and the total amount of the bill.
 
@@ -218,6 +219,10 @@ Repeat this exercise with a technique different from the one you just used, and 
 ```ruby
 odds = (1..99).to_a.select { |n| n % 2 == 1 }
 puts odds
+
+# or
+
+puts (1..99).select { |n| n.odd? }
 ```
 
 ### Even Numbers
