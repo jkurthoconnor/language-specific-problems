@@ -73,7 +73,21 @@ Further Explorations
 Modify this program to ask for the input measurements in feet, and display the results in square feet, square inches, and square centimeters.
 
 ```ruby
+SQFEET_TO_SQCM = 929.03
+SQFEET_TO_SQIN = 144
 
+def converter
+  puts "Enter the length of the room in feet:"
+  feet_length = gets.chomp.to_f
+  puts "Enter the width of the room in feet:"
+  feet_width = gets.chomp.to_f
+  
+  area = feet_length * feet_width
+  
+  puts "The area of the room is #{area.round(2)} square feet,  #{(area * SQFEET_TO_SQIN).round(2)} square inches, and #{(area * SQFEET_TO_SQCM).round(2)} square centimeters."
+end
+
+converter
 ```
 ### Tip Calculator
 Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip and then display both the tip and the total amount of the bill.
