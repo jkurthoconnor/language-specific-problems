@@ -378,7 +378,7 @@ arr.unshift(10, 11, 12)
 ```
 
 
-### (array) remove specified objects
+### (array) remove specified objects.  Bonus: remove (or keep) objects that meet given conditions
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -386,6 +386,11 @@ arr = [1, 2, 3, 4, 5]
 arr.delete(2)
 # or
 arr.delete_at(-1)
+
+#Bonus
+arr = [1, 2, 3, 4, 5]
+arr.delete_if {|n| n > 4 }
+arr.keep_if { |n| n < 3 }
 
 ```
 
