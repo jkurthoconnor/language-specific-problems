@@ -38,7 +38,7 @@ array_fluency = [
   "prepend `n` to beginning of array\nBonus: prepend `n`, `o`, `p` to start of array with one line",
   'remove specified objects from an array',
   'remove objects from an array at specified indices',
-  "remove duplicates from an array using one method\nBonus: remove duplicates by iterating through the array, i.e. without invoking the presumptive method",
+  "remove duplicates from an array using one method\nBonus: remove duplicates by looping through the array, i.e. without invoking the presumptive method",
   'extract all odds (or evens or ... ) from an array into new array',
   'increment all numbers in an array by 1',
   'find sum of all numbers in an array',
