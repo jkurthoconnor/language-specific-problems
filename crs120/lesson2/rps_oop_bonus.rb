@@ -83,11 +83,23 @@ class Computer < Player
 end
 
 class RPSGame
-  attr_accessor :human, :computer
+  attr_accessor :human, :computer, :win_level
 
   def initialize
     @human = Human.new
     @computer = Computer.new
+    @win_level = set_win_level
+  end
+
+  def set_win_level
+    wins = nil
+    puts "How many wins should it take to win the game?"
+    loop do
+      wins = gets.chomp.to_i
+      break if wins != 0
+      puts "That is not a valid entry."
+    end
+    wins
   end
 
   def display_welcome
@@ -122,18 +134,19 @@ class RPSGame
     system 'clear' or system 'cls'
     puts "Rock, Paper, Scissors"
     puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
+    puts "The first to win #{win_level} rounds wins the game."
     puts "\n#{human.name}'s past moves:"
-    p human.move_history.map { |m| m.to_s }
+    p human.move_history.map(&:to_s)
     puts "\n#{computer.name}'s past moves:"
-    p computer.move_history.map { |m| m.to_s }
+    p computer.move_history.map(&:to_s)
   end
 
   def game_winner?
-    human.score == 3 || computer.score == 3
+    human.score == win_level || computer.score == win_level
   end
 
   def display_game_winner
-    if human.score == 3
+    if human.score == win_level
       puts "\nCongratulations #{human.name}.  You have won the game!"
     else
       puts "\nSorry, #{human.name}.  #{computer.name} beat you."
