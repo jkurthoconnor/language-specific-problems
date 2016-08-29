@@ -92,7 +92,7 @@ class RPSGame
 
   def display_welcome
     system 'clear' or system 'cls'
-    puts "\nHello, #{human.name}.Welcome to Rock, Paper, Scissors."
+    puts "\nHello, #{human.name}.  Welcome to Rock, Paper, Scissors."
     puts "\nYour opponent today is #{computer.name}."
     sleep 2.0
   end
@@ -118,9 +118,14 @@ class RPSGame
     sleep 2.0
   end
 
-  def display_score
+  def display_header
     system 'clear' or system 'cls'
-    puts "\nScore: You: #{human.score} || #{computer.name}:  #{computer.score}."
+    puts "Rock, Paper, Scissors"
+    puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
+    puts "\n#{human.name}'s past moves:"
+    p human.move_history.map { |m| m.to_s }
+    puts "\n#{computer.name}'s past moves:"
+    p computer.move_history.map { |m| m.to_s }
   end
 
   def game_winner?
@@ -133,13 +138,6 @@ class RPSGame
     else
       puts "\nSorry, #{human.name}.  #{computer.name} beat you."
     end
-  end
-
-  def display_move_history
-    puts "\n#{human.name}'s move history:"
-    human.move_history.each { |m| puts '>>> ' + m.to_s }
-    puts "\n#{computer.name}'s move history:"
-    computer.move_history.each { |m| puts '>>> ' + m.to_s }
   end
 
   def play_again?
@@ -165,17 +163,17 @@ class RPSGame
       display_welcome
 
       loop do
-        display_score
+        display_header
         human.choose
         computer.choose
+        display_header
         display_moves
         display_round_winner
         break if game_winner?
       end
 
-      display_score
+      display_header
       display_game_winner
-      display_move_history
       reset_score
       break unless play_again?
     end
