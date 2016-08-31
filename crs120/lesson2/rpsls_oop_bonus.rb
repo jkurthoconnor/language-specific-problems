@@ -1,8 +1,10 @@
 class Move
+  attr_accessor :value
+  
   VALUES = ['rock', 'paper', 'scissors', 'lizard', 'Spock'].freeze
 
   def initialize(value)
-    @value = value
+    self.value = value
   end
 
   def >(other_move)
@@ -22,29 +24,29 @@ class Move
   end
 
   def to_s
-    @value
+    value
   end
 
   protected
 
   def rock?
-    @value == 'rock'
+    value == 'rock'
   end
 
   def paper?
-    @value == 'paper'
+    value == 'paper'
   end
 
   def scissors?
-    @value == 'scissors'
+    value == 'scissors'
   end
 
   def lizard?
-    @value == 'lizard'
+    value == 'lizard'
   end
 
   def spock?
-    @value == 'Spock'
+    value == 'Spock'
   end
 end
 
