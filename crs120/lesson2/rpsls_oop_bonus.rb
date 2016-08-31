@@ -100,9 +100,9 @@ class RPSGame
   attr_accessor :human, :computer, :win_level
 
   def initialize
-    @human = Human.new
-    @computer = Computer.new
-    @win_level = set_win_level
+    self.human = Human.new
+    self.computer = Computer.new
+    self.win_level = set_win_level
   end
 
   def set_win_level
