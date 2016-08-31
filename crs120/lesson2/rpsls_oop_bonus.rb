@@ -146,8 +146,8 @@ class RPSGame
   def display_header
     system 'clear' or system 'cls'
     puts "Rock, Paper, Scissors, Lizard, Spock"
-    puts "\nScore: #{human.name}: #{human.score} || #{computer.name}: #{computer.score}"
-    puts "The first to win #{win_level} rounds wins the game."
+    puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
+    puts "The first player to #{win_level} wins the game."
     puts "\n#{human.name}'s past moves:"
     p human.move_history.map(&:to_s)
     puts "\n#{computer.name}'s past moves:"
@@ -171,7 +171,14 @@ class RPSGame
     loop do
       puts "\nWould you like a rematch?  Enter 'y' or 'n'."
       answer = gets.chomp.downcase
-      break if ['y', 'n'].include?(answer)
+
+      break if answer == 'n'
+      if answer == 'y'
+        puts "Excellent!  Here we go..."
+        sleep 1.25
+        break
+      end
+
       puts "'#{answer}' is an invalid entry."
     end
 
@@ -185,9 +192,9 @@ class RPSGame
   end
 
   def play
-    loop do
-      display_welcome
+    display_welcome
 
+    loop do
       loop do
         display_header
         human.choose
