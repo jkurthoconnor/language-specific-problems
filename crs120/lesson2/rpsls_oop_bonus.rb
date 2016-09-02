@@ -1,6 +1,6 @@
 class Move
   attr_accessor :value
-  
+
   VALUES = ['rock', 'paper', 'scissors', 'lizard', 'Spock'].freeze
 
   def initialize(value)
@@ -51,12 +51,23 @@ class Move
 end
 
 class Player
-  attr_accessor :move, :name, :score, :move_history
+  attr_accessor :move, :name, :score, :move_history, :loss_stats
 
   def initialize
     self.score = 0
     self.move_history = []
+    self.loss_stats = {
+      'rock' => [count_moves('rock'), 0],
+      'paper' => [count_moves('paper'), 0],
+      'scissors' => [count_moves('scissors'), 0],
+      'lizard' => [count_moves('lizard'), 0],
+      'Spock' => [count_moves('Spock'), 0]
+    }
     set_name
+  end
+
+  def count_moves(move)
+    move_history.map(&:to_s).count(move)
   end
 end
 
@@ -82,6 +93,7 @@ class Human < Player
     end
     self.move = Move.new(choice)
     move_history.push(move)
+    loss_stats[move.to_s][0] = count_moves(move.to_s)
   end
 end
 
@@ -93,6 +105,7 @@ class Computer < Player
   def choose
     self.move = Move.new(Move::VALUES.sample)
     move_history.push(move)
+    loss_stats[move.to_s][0] = count_moves(move.to_s)
   end
 end
 
@@ -136,9 +149,11 @@ class RPSGame
     if human.move > computer.move
       puts "You won!"
       human.score += 1
+      computer.loss_stats[computer.move.to_s][1] += 1
     elsif human.move < computer.move
       puts "You loose :-( "
       computer.score += 1
+      human.loss_stats[human.move.to_s][1] += 1
     else
       puts "It's a tie."
     end
@@ -152,8 +167,10 @@ class RPSGame
     puts "The first player to #{win_level} wins the game."
     puts "\n#{human.name}'s past moves:"
     p human.move_history.map(&:to_s)
+    p human.loss_stats
     puts "\n#{computer.name}'s past moves:"
     p computer.move_history.map(&:to_s)
+    p computer.loss_stats
   end
 
   def game_winner?
