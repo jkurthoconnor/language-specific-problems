@@ -96,7 +96,19 @@ class Computer < Player
     self.name = ['Data', 'C3PO', 'BB8', 'R2D2'].sample
   end
 
+  def calculate_loss_percentage(loss_record)
+    loss_percentage = {}
+    loss_record.each do |k, v|
+      next if v[1] == 0
+      loss_percentage[k] = v[0].to_f / v[1].to_f
+    end
+
+    loss_percentage
+  end
+
   def choose
+    calculate_loss_percentage(losses_with_moves)
+    # invoke method to alter choice probability based on loss percentages
     self.move = Move.new(Move::VALUES.sample)
     losses_with_moves[move.to_s][1] += 1
   end
