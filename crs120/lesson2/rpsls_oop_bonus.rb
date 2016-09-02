@@ -51,11 +51,11 @@ class Move
 end
 
 class Player
-  attr_accessor :move, :name, :score, :moves_loss_stats
+  attr_accessor :move, :name, :score, :losses_with_moves
 
   def initialize
     self.score = 0
-    self.moves_loss_stats = {
+    self.losses_with_moves = {
       'rock' => [0, 0],
       'paper' => [0, 0],
       'scissors' => [0, 0],
@@ -87,7 +87,7 @@ class Human < Player
       puts "'#{choice}' is not a valid option."
     end
     self.move = Move.new(choice)
-    moves_loss_stats[move.to_s][0] += 1
+    losses_with_moves[move.to_s][1] += 1
   end
 end
 
@@ -98,7 +98,7 @@ class Computer < Player
 
   def choose
     self.move = Move.new(Move::VALUES.sample)
-    moves_loss_stats[move.to_s][0] += 1
+    losses_with_moves[move.to_s][1] += 1
   end
 end
 
@@ -142,11 +142,11 @@ class RPSGame
     if human.move > computer.move
       puts "You won!"
       human.score += 1
-      computer.moves_loss_stats[computer.move.to_s][1] += 1
+      computer.losses_with_moves[computer.move.to_s][0] += 1
     elsif human.move < computer.move
       puts "You loose :-( "
       computer.score += 1
-      human.moves_loss_stats[human.move.to_s][1] += 1
+      human.losses_with_moves[human.move.to_s][0] += 1
     else
       puts "It's a tie."
     end
@@ -158,10 +158,10 @@ class RPSGame
     puts "Rock, Paper, Scissors, Lizard, Spock"
     puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
     puts "The first player to #{win_level} wins the game."
-    puts "\n#{human.name}'s past moves & losses:"
-    p human.moves_loss_stats
-    puts "\n#{computer.name}'s past moves & losses:"
-    p computer.moves_loss_stats
+    puts "\n#{human.name}'s past losses with moves:"
+    p human.losses_with_moves
+    puts "\n#{computer.name}'s past losses with moves:"
+    p computer.losses_with_moves
   end
 
   def game_winner?
