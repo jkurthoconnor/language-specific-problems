@@ -8,6 +8,7 @@
 #    - [x] prompt on curser line
 
 string_fluency = [
+  "return a portion of a string based on index / indices.",
   "return length of string\n bonus: return number of alphabetic characters --not spaces, punctuation-- in string",
   "return number of specified characters in string\n bonus: return number of specified characters without invoking `.count`",
   'return number of specified sub-strings ( or words) in string',

@@ -3,6 +3,15 @@ Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
 
+### (string) return a portion of string based on character index / indices.
+```ruby
+'hello'.slice(0)
+# or 
+'hello'.slice(0..2)
+# or
+'hello'.slice(0, 2)
+```
+
 ### (string) return length/ number of characters in string.  Bonus: return length without spaces
 ```ruby
 str = 'This is my string.'
@@ -96,13 +105,10 @@ str.delete('a-z', '^i-s')
 ```ruby
 str = 'This is my string.'
 
-str.slice(1)
-# or 
+
 str.slice!(1)
 # or
-str.slice(1, 4) 
-# or 
-str.slice(1..4)
+str.slice!(1..4)
 ```
 
 ### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index; double bonus: return index of second occurrence of character using one line of code
