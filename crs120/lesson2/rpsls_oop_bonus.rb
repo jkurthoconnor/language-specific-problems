@@ -161,19 +161,31 @@ class RPSGame
   def display_moves
     puts "\nYou chose #{human.move}. #{computer.name} chose #{computer.move}."
   end
-
-  def display_round_winner
+  
+  def process_round_results
     if human.move > computer.move
-      puts "You won!"
       human.score += 1
       computer.losses_with_moves[computer.move.to_s][0] += 1
+      return 'human'
     elsif human.move < computer.move
-      puts "You loose :-( "
       computer.score += 1
       human.losses_with_moves[human.move.to_s][0] += 1
-    else
+      return 'computer'
+    end
+
+    'tie'
+  end
+
+  def display_round_winner(results)
+    case results
+    when 'human'
+      puts "You won!"
+    when 'computer'
+      puts "You loose :-( "
+    when 'tie'
       puts "It's a tie."
     end
+    
     sleep 2.0
   end
 
@@ -183,9 +195,9 @@ class RPSGame
     puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
     puts "The first player to #{win_level} wins the game."
     puts "\n#{human.name}'s past losses with moves:"
-    p human.losses_with_moves
+    puts human.losses_with_moves
     puts "\n#{computer.name}'s past losses with moves:"
-    p computer.losses_with_moves
+    puts computer.losses_with_moves
   end
 
   def game_winner?
@@ -233,9 +245,8 @@ class RPSGame
         display_header
         human.choose
         computer.choose
-        display_header
         display_moves
-        display_round_winner
+        display_round_winner(process_round_results)
         break if game_winner?
       end
 
