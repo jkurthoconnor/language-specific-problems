@@ -162,22 +162,29 @@ class RPSGame
     puts "\nYou chose #{human.move}. #{computer.name} chose #{computer.move}."
   end
   
-  def process_round_results
-    if human.move > computer.move
-      human.score += 1
-      computer.losses_with_moves[computer.move.to_s][0] += 1
-      return 'human'
-    elsif human.move < computer.move
-      computer.score += 1
-      human.losses_with_moves[human.move.to_s][0] += 1
-      return 'computer'
-    end
-
+  def determine_round_results
+    return 'human' if human.move > computer.move  
+    return 'computer' if human.move < computer.move
     'tie'
   end
+  
+  def process_round_results
+    round_results = determine_round_results
+    
+    case round_results
+    when 'human'
+      human.score += 1
+      computer.losses_with_moves[computer.move.to_s][0] += 1
+    when 'computer'
+      computer.score += 1
+      human.losses_with_moves[human.move.to_s][0] += 1
+    end
+    
+    round_results
+  end
 
-  def display_round_winner(results)
-    case results
+  def display_round_winner(round_results)
+    case round_results
     when 'human'
       puts "You won!"
     when 'computer'
