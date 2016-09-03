@@ -154,50 +154,10 @@ class RPSGame
     sleep 2.0
   end
 
-  def players_choose_moves
-    human.choose
-    computer.choose
-  end
-
-  def display_results
-    display_moves
-    display_round_winner(process_round_results)
-  end
-
-  def display_moves
-    puts "\nYou chose #{human.move}. #{computer.name} chose #{computer.move}."
-  end
-
-  def determine_round_results
-    return 'human' if human.move > computer.move
-    return 'computer' if human.move < computer.move
-    'tie'
-  end
-
-  def process_round_results
-    case determine_round_results
-    when 'human'
-      human.score += 1
-      computer.losses_with_moves[computer.move.to_s][0] += 1
-    when 'computer'
-      computer.score += 1
-      human.losses_with_moves[human.move.to_s][0] += 1
-    end
-
-    determine_round_results
-  end
-
-  def display_round_winner(round_results)
-    case round_results
-    when 'human'
-      puts "You won!"
-    when 'computer'
-      puts "You loose :-( "
-    when 'tie'
-      puts "It's a tie."
-    end
-
-    sleep 2.0
+  def display_header
+    system 'clear' or system 'cls'
+    display_scoreboard
+    display_history
   end
 
   def display_scoreboard
@@ -213,10 +173,50 @@ class RPSGame
     puts computer.losses_with_moves
   end
 
-  def display_header
-    system 'clear' or system 'cls'
-    display_scoreboard
-    display_history
+  def players_choose_moves
+    human.choose
+    computer.choose
+  end
+
+  def display_results
+    display_moves
+    display_round_winner(process_round_results)
+  end
+
+  def display_moves
+    puts "\nYou chose #{human.move}. #{computer.name} chose #{computer.move}."
+  end
+
+  def display_round_winner(round_results)
+    case round_results
+    when 'human'
+      puts "You won!"
+    when 'computer'
+      puts "You loose :-( "
+    when 'tie'
+      puts "It's a tie."
+    end
+
+    sleep 2.0
+  end
+
+  def process_round_results
+    case determine_round_results
+    when 'human'
+      human.score += 1
+      computer.losses_with_moves[computer.move.to_s][0] += 1
+    when 'computer'
+      computer.score += 1
+      human.losses_with_moves[human.move.to_s][0] += 1
+    end
+
+    determine_round_results
+  end
+
+  def determine_round_results
+    return 'human' if human.move > computer.move
+    return 'computer' if human.move < computer.move
+    'tie'
   end
 
   def game_winner?
