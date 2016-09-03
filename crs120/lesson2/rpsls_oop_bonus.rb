@@ -97,9 +97,13 @@ class Computer < Player
   end
 
   def calculate_loss_percentage(loss_record)
-    loss_percentage = {}
+    loss_percentage = {
+      'rock' => 0.0, 'paper' => 0.0, 'scissors' => 0.0,
+      'lizard' => 0.0, 'Spock' => 0.0
+    }
+
     loss_record.each do |k, v|
-      next if v[1] == 0
+      next if (v[1]).zero?
       loss_percentage[k] = v[0].to_f / v[1].to_f
     end
 
@@ -107,9 +111,17 @@ class Computer < Player
   end
 
   def choose
-    calculate_loss_percentage(losses_with_moves)
-    # invoke method to alter choice probability based on loss percentages
-    self.move = Move.new(Move::VALUES.sample)
+    move_risk = calculate_loss_percentage(losses_with_moves)
+    choice = nil
+
+    loop do
+      choice = Move::VALUES.sample
+      break if move_risk[choice] < 0.4
+      confirm_choice = Move::VALUES.sample
+      break if confirm_choice == choice
+    end
+
+    self.move = Move.new(choice)
     losses_with_moves[move.to_s][1] += 1
   end
 end
@@ -129,7 +141,7 @@ class RPSGame
     puts "How many wins should it take to win the game?"
     loop do
       wins = gets.chomp.to_i
-      break if wins != 0
+      break if wins.nonzero?
       puts "That is not a valid entry."
     end
     wins
