@@ -154,8 +154,14 @@ class RPSGame
     sleep 2.0
   end
 
-  def display_goodbye
-    puts "\nNice game, #{human.name}!  Good bye."
+  def players_choose_moves
+    human.choose
+    computer.choose
+  end
+
+  def display_results
+    display_moves
+    display_round_winner(process_round_results)
   end
 
   def display_moves
@@ -194,15 +200,23 @@ class RPSGame
     sleep 2.0
   end
 
-  def display_header
-    system 'clear' or system 'cls'
+  def display_scoreboard
     puts "Rock, Paper, Scissors, Lizard, Spock"
-    puts "\nScore: #{human.name}: #{human.score} || #{computer.name}:  #{computer.score}."
     puts "The first player to #{win_level} wins the game."
+    puts "\n#{human.name}: #{human.score} | #{computer.name}: #{computer.score}"
+  end
+
+  def display_history
     puts "\n#{human.name}'s past losses with moves:"
     puts human.losses_with_moves
     puts "\n#{computer.name}'s past losses with moves:"
     puts computer.losses_with_moves
+  end
+
+  def display_header
+    system 'clear' or system 'cls'
+    display_scoreboard
+    display_history
   end
 
   def game_winner?
@@ -242,16 +256,18 @@ class RPSGame
     computer.score = 0
   end
 
+  def display_goodbye
+    puts "\nNice game, #{human.name}!  Good bye."
+  end
+
   def play
     display_welcome
 
     loop do
       loop do
         display_header
-        human.choose
-        computer.choose
-        display_moves
-        display_round_winner(process_round_results)
+        players_choose_moves
+        display_results
         break if game_winner?
       end
 
