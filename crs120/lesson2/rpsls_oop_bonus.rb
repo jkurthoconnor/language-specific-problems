@@ -247,8 +247,7 @@ class RPSGame
       puts "'#{answer}' is an invalid entry."
     end
 
-    return false if answer == 'n'
-    return true if answer == 'y'
+    answer == 'y'
   end
 
   def reset_score
