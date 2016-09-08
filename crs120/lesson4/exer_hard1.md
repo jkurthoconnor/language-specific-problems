@@ -131,11 +131,219 @@ This new class does not fit well with the object hierarchy defined so far. Catam
 
 Solution:
 
-extract from WheeledVehicle and create Module for efficiency and range, and ?  How to pass in ivars?
+```ruby
+module Vehicle
+  attr_accessor :speed, :heading
+  attr_writer :fuel_efficiency, :fuel_capacity
 
-maybe start with hierarchial classes only
-Vehicle
---WheeledVehicle
-----Auto
-----Motorcyle
---Catamaran (same level as WheeledVehicle or more specific?)
+  def range
+    @fuel_capacity * @fuel_efficiency
+  end
+end
+
+class WheeledVehicle
+  include Vehicle
+
+  def initialize(tire_array, km_traveled_per_liter, liters_of_fuel_capacity)
+    @tires = tire_array
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+
+  def tire_pressure(tire_index)
+    @tires[tire_index]
+  end
+
+  def inflate_tire(tire_index, pressure)
+    @tires[tire_index] = pressure
+  end
+end
+
+class Auto < WheeledVehicle
+  def initialize
+    # 4 tires are various tire pressures
+    super([30,30,32,32], 50, 25.0)
+  end
+end
+
+class Motorcycle < WheeledVehicle
+  def initialize
+    # 2 tires are various tire pressures
+    super([20,20], 80, 8.0)
+  end
+end
+
+class Catamaran
+  include Vehicle
+
+  attr_accessor :propeller_count, :hull_count
+
+  def initialize(num_propellers, num_hulls, km_traveled_per_liter=20, liters_of_fuel_capacity=100)
+    @propeller_count = num_propellers
+    @hull_count = num_hulls
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+end
+```
+
+3) Building on the prior vehicles question, we now must also track a basic motorboat. A motorboat has a single propeller and hull, but otherwise behaves similar to a catamaran. Therefore, creators of Motorboat instances don't need to specify number of hulls or propellers. How would you modify the vehicles code to incorporate a new Motorboat class?
+
+Solution:
+
+I would create a `HulledVehicle` class from which both `Catamaran` and `Motorboat` inherit.  The `Vehicle` module would be included in `HulledVehicle`.  The initializer would be moved to the `HulledVehicle` class, with specific values being passed in from the `Catamaran` and `Motorboat` at instantiation.
+
+```ruby
+module Vehicle
+  attr_accessor :speed, :heading
+  attr_writer :fuel_efficiency, :fuel_capacity
+
+  def range
+    @fuel_capacity * @fuel_efficiency
+  end
+end
+
+class WheeledVehicle
+  include Vehicle
+
+  def initialize(tire_array, km_traveled_per_liter, liters_of_fuel_capacity)
+    @tires = tire_array
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+
+  def tire_pressure(tire_index)
+    @tires[tire_index]
+  end
+
+  def inflate_tire(tire_index, pressure)
+    @tires[tire_index] = pressure
+  end
+end
+
+class Auto < WheeledVehicle
+  def initialize
+    # 4 tires are various tire pressures
+    super([30,30,32,32], 50, 25.0)
+  end
+end
+
+class Motorcycle < WheeledVehicle
+  def initialize
+    # 2 tires are various tire pressures
+    super([20,20], 80, 8.0)
+  end
+end
+
+class HulledVehicle
+  include Vehicle
+
+  attr_accessor :propeller_count, :hull_count
+
+  def initialize(num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity)
+    self.propeller_count = num_propellers
+    self.hull_count = num_hulls
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+end
+
+class Catamaran < HulledVehicle
+  def initialize
+    # num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity
+    super(2, 2, 20, 100)
+  end
+end
+
+class Motorboat < HulledVehicle
+  def initialize
+    # num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity
+    super(1, 1, 15, 100)
+  end
+end
+```
+
+4) The designers of the vehicle management system now want to make an adjustment for how the range of vehicles is calculated. For the seaborne vehicles, due to prevailing ocean currents, they want to add an additional 10km of range even if the vehicle is out of fuel.
+
+Alter the code related to vehicles so that the range for autos and motorcycles is still calculated as before, but for catamarans and motorboats, the range method will return an additional 10km.
+
+Solution:
+
+I would overwrite the `Vehicle` module `range` method in `HulledVehicle`, and use `super` to add 10km to the return of `Vehicle` `range`.
+
+```ruby
+module Vehicle
+  attr_accessor :speed, :heading
+  attr_writer :fuel_efficiency, :fuel_capacity
+
+  def range
+    if self.superclass == HulledVehicle 
+      @fuel_capacity * @fuel_efficiency + 10
+    end
+    @fuel_capacity * @fuel_efficiency
+  end
+end
+
+class WheeledVehicle
+  include Vehicle
+
+  def initialize(tire_array, km_traveled_per_liter, liters_of_fuel_capacity)
+    @tires = tire_array
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+
+  def tire_pressure(tire_index)
+    @tires[tire_index]
+  end
+
+  def inflate_tire(tire_index, pressure)
+    @tires[tire_index] = pressure
+  end
+end
+
+class Auto < WheeledVehicle
+  def initialize
+    # 4 tires are various tire pressures
+    super([30,30,32,32], 50, 25.0)
+  end
+end
+
+class Motorcycle < WheeledVehicle
+  def initialize
+    # 2 tires are various tire pressures
+    super([20,20], 80, 8.0)
+  end
+end
+
+class HulledVehicle
+  include Vehicle
+
+  attr_accessor :propeller_count, :hull_count
+
+  def initialize(num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity)
+    self.propeller_count = num_propellers
+    self.hull_count = num_hulls
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+  end
+
+  def range
+    super + 10
+  end
+end
+
+class Catamaran < HulledVehicle
+  def initialize
+    # num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity
+    super(2, 2, 20, 100)
+  end
+end
+
+class Motorboat < HulledVehicle
+  def initialize
+    # num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity
+    super(1, 1, 15, 100)
+  end
+end
+```
