@@ -710,7 +710,32 @@ p str
 ### write a method to sort an array
 
 ```ruby
-# inefficient but effective
+
+# sorting / mutating array
+
+def sort(array)
+  start = 0
+
+  while start < array.length
+    min = array[start]
+
+    (start...array.length).each do |index|
+       if array[index] < min
+         min = array[index]
+         array.insert(start, array.delete_at(index))
+       end
+    end
+
+    start += 1
+    end
+
+  array
+end
+
+p sort([43, 2, 1, 11, 1, 2,  -1])
+p sort(['bam', 'tomato', 'ape', 'tomato', 'carrot', 'lunch'])
+
+# inefficient but effective; return new sorted array
 def sort_array(array)
   sorted = []
   while array.length > 0
@@ -730,27 +755,6 @@ arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
 
 p sort_array(arr)
 
-# or (also inefficient)
-
-
-def sort_this(array)
-  sorted = []
-  while array.length > 0
-    min = array[0]
-    index = 1
-    while index < array.length
-      min = array[index] if array[index] < min  
-      index += 1
-    end
-    array.count(min).times {sorted.push(min)}
-    array.delete(min)
-  end 
-  sorted
-end
-  
-
-arr = [1, 21, 5, 8, 21, 5, 6, 1, 6]
-p sort_this(arr)
 ```
 
 ### Write a method to turn an integer into an array of its digits.  Expand on this method to make a method to convert an integer into a string without using the standard conversion methods.
