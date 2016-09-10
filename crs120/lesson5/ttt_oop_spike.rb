@@ -11,7 +11,7 @@
 require 'pry'
 
 class Board
-  INITIAL_MARKER = "R"
+  INITIAL_MARKER = " "
   def initialize
     @squares = {}
     (1..9).each {|key| @squares[key] = Square.new(INITIAL_MARKER)}
@@ -23,6 +23,10 @@ class Board
   
   def set_square_at(key, marker)
     @squares[key].marker = marker
+  end
+  
+  def unmarked_keys
+    (1..9).select {|key| @squares[key].unmarked? }
   end
 end
 
@@ -37,6 +41,10 @@ class Square
   def to_s
     @marker
   end
+  
+  def unmarked?
+    marker == Board::INITIAL_MARKER
+  end
 
 end
 
@@ -50,12 +58,15 @@ end
 
 
 class TTTGame
+  HUMAN_MARKER = "X"
+  COMPUTER_MARKER = "O"
+  
   attr_reader :board, :human, :computer
   
   def initialize
     @board = Board.new
-    @human = Player.new('X')
-    @computer = Player.new('O')
+    @human = Player.new(HUMAN_MARKER)
+    @computer = Player.new(COMPUTER_MARKER)
   end
   
   def display_welcome_message
@@ -84,29 +95,32 @@ class TTTGame
   end
 
   def human_moves
-    puts "Select a square 1 - 9: "
+    puts "Select a square: #{board.unmarked_keys}"
     square = nil
     loop do
       square = gets.chomp.to_i
-      break if (1..9).include?(square)
-      puts "Please select a square, 1 - 9"
+      break if board.unmarked_keys.include?(square)
+      puts "Please select from these options: #{board.unmarked_keys}"
     end
-    binding.pry
     board.set_square_at(square, human.marker)
+  end
+  
+  def computer_moves
+    board.set_square_at(board.unmarked_keys.sample, computer.marker)
   end
   
   def play
     display_welcome_message
+    display_board 
 
     loop do
-      display_board 
       human_moves
-      display_board
-      break
-      break if someone_won? || board_full?
+      # break if someone_won? || board_full?
 
       computer_moves
-      break if someone_won? || board_full?
+      # break if someone_won? || board_full?
+
+      display_board
     end
 
     # display_result
