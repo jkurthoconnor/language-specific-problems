@@ -29,7 +29,7 @@ class Board
     (1..9).select {|key| @squares[key].unmarked?}
   end
   
-  def board_full?
+  def full?
     unmarked_keys.length.zero?
   end
 end
@@ -119,10 +119,10 @@ class TTTGame
 
     loop do
       human_moves
-      break if board.board_full? # || someone_won?
+      break if board.full? # || someone_won?
 
       computer_moves
-      break if board.board_full? # || someone_won? 
+      break if board.full? # || someone_won? 
 
       display_board
     end
