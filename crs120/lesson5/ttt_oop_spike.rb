@@ -83,6 +83,7 @@ class TTTGame
   end
   
   def display_board
+    system 'clear' or system 'cls'
     puts ""
     puts "     |     |"
     puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
@@ -112,6 +113,12 @@ class TTTGame
   def computer_moves
     board.set_square_at(board.unmarked_keys.sample, computer.marker)
   end
+
+  def display_result
+    display_board
+    puts ""
+    puts "The board is full."
+  end
   
   def play
     display_welcome_message
@@ -127,7 +134,7 @@ class TTTGame
       display_board
     end
 
-    # display_result
+    display_result
     display_goodbye_message
   end
 end
