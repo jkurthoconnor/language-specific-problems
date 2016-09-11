@@ -34,18 +34,6 @@ class Board
     unmarked_keys.empty?
   end
 
-  # def detect_winner
-  #   WINNING_LINES.each do |line|
-  #     line_marks = []
-  #     line.each do |key|
-  #       line_marks.push(@squares[key].to_s)
-  #     end
-  #     return TTTGame::HUMAN_MARKER if line_marks.uniq == [TTTGame::HUMAN_MARKER]
-  #     return TTTGame::COMPUTER_MARKER if line_marks.uniq == [TTTGame::COMPUTER_MARKER]
-  #   end
-  #   nil
-  # end
-  
   def detect_winner
     WINNING_LINES.each do |line|
       line_marks = []
@@ -93,13 +81,39 @@ class TTTGame
   HUMAN_MARKER = "X"
   COMPUTER_MARKER = "O"
 
-  attr_reader :board, :human, :computer
-
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
   end
+
+  def play
+    display_welcome_message
+    loop do
+      display_board
+
+      loop do
+        human_moves
+        break if board.someone_won? || board.full?
+
+        computer_moves
+        break if board.someone_won? || board.full?
+
+        clear_screen_and_display_board
+      end
+
+      display_result
+      break unless play_again?
+      reset
+      display_play_again_message
+    end
+
+    display_goodbye_message
+  end
+  
+  private
+
+  attr_reader :board, :human, :computer
 
   def display_welcome_message
     clear
@@ -175,30 +189,6 @@ class TTTGame
     clear
     puts "Nice game.  Goodbye!"
     puts ""
-  end
-
-  def play
-    display_welcome_message
-    loop do
-      display_board
-
-      loop do
-        human_moves
-        break if board.someone_won? || board.full?
-
-        computer_moves
-        break if board.someone_won? || board.full?
-
-        clear_screen_and_display_board
-      end
-
-      display_result
-      break unless play_again?
-      reset
-      display_play_again_message
-    end
-
-    display_goodbye_message
   end
 end
 
