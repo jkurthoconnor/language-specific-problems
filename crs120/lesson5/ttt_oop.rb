@@ -81,22 +81,22 @@ class TTTGame
   end
 
   def display_welcome_message
+    clear
     puts ""
     puts "Welcome to Tick, Tack, Toe."
     puts ""
   end
 
-  def display_goodbye_message
-    puts ""
-    puts "Nice game.  Goodbye!"
-  end
-
   def clear
     system 'clear' or system 'cls'
   end
+  
+  def clear_screen_and_display_board
+    clear
+    display_board
+  end
 
-  def display_board(clear_screen=true)
-    clear unless !clear_screen
+  def display_board
     puts ""
     puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
     puts ""
@@ -131,7 +131,7 @@ class TTTGame
   end
 
   def display_result
-    display_board
+    clear_screen_and_display_board
     puts ""
     puts "Looks like a tie." if board.full?
     puts "Congratulations. You won!" if board.detect_winner == HUMAN_MARKER
@@ -151,14 +151,22 @@ class TTTGame
     true
   end
 
-  def reset_board
+  def reset
+    clear
     @board = Board.new
+    puts "\nExcellent! Let's go..."
+  end
+
+  def display_goodbye_message
+    clear
+    puts "Nice game.  Goodbye!"
+    puts ""
   end
 
   def play
     display_welcome_message
     loop do
-      display_board(false) 
+      display_board
 
       loop do
         human_moves
@@ -167,14 +175,14 @@ class TTTGame
         computer_moves
         break if board.someone_won? || board.full?
 
-        display_board
+        clear_screen_and_display_board
       end
 
       display_result
       break unless play_again?
-      puts "\nExcellent! Let's go..."
-      reset_board
+      reset
     end
+    
     display_goodbye_message
   end
 end
