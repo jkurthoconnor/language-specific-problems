@@ -11,10 +11,13 @@
 require 'pry'
 
 class Board
-  INITIAL_MARKER = " "
+  WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
+                  [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
+                  [[1, 5, 9], [3, 5, 7]]
+  
   def initialize
     @squares = {}
-    (1..9).each {|key| @squares[key] = Square.new(INITIAL_MARKER)}
+    (1..9).each {|key| @squares[key] = Square.new}
   end
   
   def get_square_at(key)
@@ -32,13 +35,31 @@ class Board
   def full?
     unmarked_keys.length.zero?
   end
+  
+  def someone_won?
+    !!detect_winner
+  end
+  #returns winning marker or nil
+  def detect_winner
+    WINNING_LINES.each do |line|
+      line_marks = []
+      line.each do |key|
+        line_marks.push(@squares[key].to_s)
+      end
+      return TTTGame::HUMAN_MARKER if line_marks.uniq == [TTTGame::HUMAN_MARKER]
+      return TTTGame::COMPUTER_MARKER if line_marks.uniq == [TTTGame::COMPUTER_MARKER]
+    end
+    nil
+  end
 end
 
 
 class Square
+  INITIAL_MARKER = " "
+
   attr_accessor :marker
   
-  def initialize(marker)
+  def initialize(marker=INITIAL_MARKER)
     @marker = marker
   end
   
@@ -47,9 +68,8 @@ class Square
   end
   
   def unmarked?
-    marker == Board::INITIAL_MARKER
+    marker == INITIAL_MARKER
   end
-
 end
 
 class Player
@@ -76,6 +96,8 @@ class TTTGame
   def display_welcome_message
     puts "Welcome to Tick, Tack, Toe."
     puts ""
+    puts "Your mark is #{HUMAN_MARKER} .  The computer's mark is #{COMPUTER_MARKER}"
+    sleep 2.0
   end
   
   def display_goodbye_message
@@ -84,6 +106,8 @@ class TTTGame
   
   def display_board
     system 'clear' or system 'cls'
+    puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
+    puts ""
     puts ""
     puts "     |     |"
     puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
@@ -117,7 +141,9 @@ class TTTGame
   def display_result
     display_board
     puts ""
-    puts "The board is full."
+    puts "The board is full." if board.full?
+    puts "Congratulations. You won!" if board.detect_winner == HUMAN_MARKER
+    puts "I'm sorry. You have lost." if board.detect_winner == COMPUTER_MARKER
   end
   
   def play
@@ -126,10 +152,10 @@ class TTTGame
 
     loop do
       human_moves
-      break if board.full? # || someone_won?
+      break if board.someone_won? || board.full?
 
       computer_moves
-      break if board.full? # || someone_won? 
+      break if board.someone_won? || board.full?
 
       display_board
     end
