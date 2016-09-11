@@ -91,12 +91,12 @@ class TTTGame
     puts "Nice game.  Goodbye!"
   end
 
-  def clear_screen
+  def clear
     system 'clear' or system 'cls'
   end
 
-  def display_board(clear=true)
-    clear_screen unless !clear
+  def display_board(clear_screen=true)
+    clear unless !clear_screen
     puts ""
     puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
     puts ""
