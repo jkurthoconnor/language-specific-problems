@@ -7,6 +7,20 @@ class Board
     @squares = {}
     (1..9).each {|key| @squares[key] = Square.new}
   end
+  
+  def draw
+    puts "     |     |"
+    puts "  #{get_square_at(1)}  |  #{get_square_at(2)}  |  #{get_square_at(3)}"
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{get_square_at(4)}  |  #{get_square_at(5)}  |  #{get_square_at(6)}"
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{get_square_at(7)}  |  #{get_square_at(8)}  |  #{get_square_at(9)}"
+    puts "     |     |"
+  end
 
   def get_square_at(key)
     @squares[key]
@@ -101,17 +115,7 @@ class TTTGame
     puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
     puts ""
     puts ""
-    puts "     |     |"
-    puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "  #{board.get_square_at(4)}  |  #{board.get_square_at(5)}  |  #{board.get_square_at(6)}"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "  #{board.get_square_at(7)}  |  #{board.get_square_at(8)}  |  #{board.get_square_at(9)}"
-    puts "     |     |"
+    board.draw
     puts ""
   end
 
@@ -133,9 +137,9 @@ class TTTGame
   def display_result
     clear_screen_and_display_board
     puts ""
-    puts "Looks like a tie." if board.full?
     puts "Congratulations. You won!" if board.detect_winner == HUMAN_MARKER
     puts "I'm sorry. You have lost." if board.detect_winner == COMPUTER_MARKER
+    puts "Looks like a tie." if !board.someone_won?
   end
 
   def play_again?
@@ -154,6 +158,9 @@ class TTTGame
   def reset
     clear
     @board = Board.new
+  end
+
+  def display_play_again_message
     puts "\nExcellent! Let's go..."
   end
 
@@ -181,8 +188,9 @@ class TTTGame
       display_result
       break unless play_again?
       reset
+      display_play_again_message
     end
-    
+
     display_goodbye_message
   end
 end
