@@ -80,12 +80,13 @@ end
 class TTTGame
   HUMAN_MARKER = "X"
   COMPUTER_MARKER = "O"
+  FIRST_MOVE = HUMAN_MARKER
 
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
-    @current_player = @human
+    @current_move = FIRST_MOVE
   end
 
   def play
@@ -111,7 +112,7 @@ class TTTGame
   private
 
   attr_reader :human, :computer
-  attr_accessor :board, :current_player
+  attr_accessor :board, :current_move
 
   def display_welcome_message
     clear
@@ -139,12 +140,12 @@ class TTTGame
   end
 
   def current_player_moves
-    if current_player == human
+    if current_move == HUMAN_MARKER
       human_moves
-      self.current_player = computer
+      self.current_move = COMPUTER_MARKER
     else
       computer_moves
-      self.current_player = human
+      self.current_move = HUMAN_MARKER
     end
   end
   
@@ -187,7 +188,7 @@ class TTTGame
   def reset
     clear
     self.board = Board.new
-    self.current_player = human
+    self.current_move = FIRST_MOVE
   end
 
   def display_play_again_message
