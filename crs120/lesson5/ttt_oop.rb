@@ -24,10 +24,6 @@ class Board
     unmarked_keys.empty?
   end
 
-  def someone_won?
-    !!detect_winner
-  end
-
   def detect_winner
     WINNING_LINES.each do |line|
       line_marks = []
@@ -39,8 +35,11 @@ class Board
     end
     nil
   end
-end
 
+  def someone_won?
+    !!detect_winner
+  end
+end
 
 class Square
   INITIAL_MARKER = " "
@@ -92,8 +91,12 @@ class TTTGame
     puts "Nice game.  Goodbye!"
   end
 
-  def display_board(clear_screen=true)
-    system 'clear' or system 'cls' unless !clear_screen
+  def clear_screen
+    system 'clear' or system 'cls'
+  end
+
+  def display_board(clear=true)
+    clear_screen unless !clear
     puts ""
     puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
     puts ""
