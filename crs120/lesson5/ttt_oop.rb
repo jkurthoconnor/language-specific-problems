@@ -22,10 +22,14 @@ class Board
     puts "     |     |"
   end
 
-  def set_square_at(key, marker)
+  # def set_square_at(key, marker)
+  #   @squares[key].marker = marker
+  # end
+
+  def []=(key, marker)
     @squares[key].marker = marker
   end
-
+  
   def unmarked_keys
     (1..9).select {|key| @squares[key].unmarked?}
   end
@@ -123,11 +127,11 @@ class TTTGame
       break if board.unmarked_keys.include?(square)
       puts "Please select from these options: #{board.unmarked_keys}"
     end
-    board.set_square_at(square, human.marker)
+    board[square] = human.marker
   end
 
   def computer_moves
-    board.set_square_at(board.unmarked_keys.sample, computer.marker)
+    board[board.unmarked_keys.sample] = computer.marker
   end
 
   def display_result
