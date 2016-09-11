@@ -22,10 +22,6 @@ class Board
     puts "     |     |"
   end
 
-  # def set_square_at(key, marker)
-  #   @squares[key].marker = marker
-  # end
-
   def []=(key, marker)
     @squares[key].marker = marker
   end
@@ -38,14 +34,25 @@ class Board
     unmarked_keys.empty?
   end
 
+  # def detect_winner
+  #   WINNING_LINES.each do |line|
+  #     line_marks = []
+  #     line.each do |key|
+  #       line_marks.push(@squares[key].to_s)
+  #     end
+  #     return TTTGame::HUMAN_MARKER if line_marks.uniq == [TTTGame::HUMAN_MARKER]
+  #     return TTTGame::COMPUTER_MARKER if line_marks.uniq == [TTTGame::COMPUTER_MARKER]
+  #   end
+  #   nil
+  # end
+  
   def detect_winner
     WINNING_LINES.each do |line|
       line_marks = []
       line.each do |key|
         line_marks.push(@squares[key].to_s)
       end
-      return TTTGame::HUMAN_MARKER if line_marks.uniq == [TTTGame::HUMAN_MARKER]
-      return TTTGame::COMPUTER_MARKER if line_marks.uniq == [TTTGame::COMPUTER_MARKER]
+      return line_marks[0] if (line_marks.uniq.size == 1 && line_marks[0] != ' ')
     end
     nil
   end
