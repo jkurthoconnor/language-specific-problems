@@ -85,6 +85,7 @@ class TTTGame
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
+    @current_player = @human
   end
 
   def play
@@ -93,12 +94,8 @@ class TTTGame
       display_board
 
       loop do
-        human_moves
+        current_player_moves
         break if board.someone_won? || board.full?
-
-        computer_moves
-        break if board.someone_won? || board.full?
-
         clear_screen_and_display_board
       end
 
@@ -110,10 +107,11 @@ class TTTGame
 
     display_goodbye_message
   end
-  
+
   private
 
-  attr_reader :board, :human, :computer
+  attr_reader :human, :computer
+  attr_accessor :board, :current_player
 
   def display_welcome_message
     clear
@@ -125,7 +123,7 @@ class TTTGame
   def clear
     system 'clear' or system 'cls'
   end
-  
+
   def clear_screen_and_display_board
     clear
     display_board
@@ -140,6 +138,16 @@ class TTTGame
     puts ""
   end
 
+  def current_player_moves
+    if current_player == human
+      human_moves
+      self.current_player = computer
+    else
+      computer_moves
+      self.current_player = human
+    end
+  end
+  
   def human_moves
     puts "Select a square: #{board.unmarked_keys}"
     square = nil
@@ -178,7 +186,8 @@ class TTTGame
 
   def reset
     clear
-    @board = Board.new
+    self.board = Board.new
+    self.current_player = human
   end
 
   def display_play_again_message
