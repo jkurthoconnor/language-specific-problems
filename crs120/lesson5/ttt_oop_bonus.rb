@@ -150,13 +150,19 @@ class TTTGame
     end
   end
 
+  def option_joiner(array, spacer=', ', word='or')
+    return array[0] if array.size == 1
+    array.join(spacer).insert(-2, word + ' ')
+  end
+
   def human_moves
-    puts "Select a square: #{board.unmarked_keys}"
+    puts "Select a square: #{option_joiner(board.unmarked_keys)}"
     square = nil
     loop do
       square = gets.chomp.to_i
       break if board.unmarked_keys.include?(square)
-      puts "Please select from these options: #{board.unmarked_keys}"
+      puts "\nThat is not a valid square."
+      puts "Select from these options: #{option_joiner(board.unmarked_keys)}"
     end
     board[square] = human.marker
   end
