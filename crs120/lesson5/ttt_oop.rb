@@ -5,9 +5,10 @@ class Board
 
   def initialize
     @squares = {}
-    (1..9).each {|key| @squares[key] = Square.new}
+    (1..9).each { |key| @squares[key] = Square.new }
   end
 
+  # rubocop:disable Metrics/AbcSize
   def draw
     puts "     |     |"
     puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
@@ -21,13 +22,14 @@ class Board
     puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
     puts "     |     |"
   end
+  # rubocop:enable Metrics/AbcSize
 
   def []=(key, marker)
     @squares[key].marker = marker
   end
-  
+
   def unmarked_keys
-    (1..9).select {|key| @squares[key].unmarked?}
+    (1..9).select { |key| @squares[key].unmarked? }
   end
 
   def full?
@@ -40,7 +42,7 @@ class Board
       line.each do |key|
         line_marks.push(@squares[key].to_s)
       end
-      return line_marks[0] if (line_marks.uniq.size == 1 && line_marks[0] != ' ')
+      return line_marks[0] if line_marks.uniq.size == 1 && line_marks[0] != ' '
     end
     nil
   end
@@ -51,7 +53,7 @@ class Board
 end
 
 class Square
-  INITIAL_MARKER = " "
+  INITIAL_MARKER = " ".freeze
 
   attr_accessor :marker
 
@@ -74,12 +76,11 @@ class Player
   def initialize(marker)
     @marker = marker
   end
-end 
-
+end
 
 class TTTGame
-  HUMAN_MARKER = "X"
-  COMPUTER_MARKER = "O"
+  HUMAN_MARKER = "X".freeze
+  COMPUTER_MARKER = "O".freeze
   FIRST_MOVE = HUMAN_MARKER
 
   def initialize
@@ -148,7 +149,7 @@ class TTTGame
       self.current_move = HUMAN_MARKER
     end
   end
-  
+
   def human_moves
     puts "Select a square: #{board.unmarked_keys}"
     square = nil
@@ -201,7 +202,6 @@ class TTTGame
     puts ""
   end
 end
-
 
 game = TTTGame.new
 game.play
