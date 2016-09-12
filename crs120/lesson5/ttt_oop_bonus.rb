@@ -88,6 +88,7 @@ class TTTGame
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
     @current_move = FIRST_MOVE
+    @score = [0, 0] #[human score, computer score]
   end
 
   def play
@@ -101,6 +102,7 @@ class TTTGame
         clear_screen_and_display_board
       end
 
+      increment_score
       display_result
       break unless play_again?
       reset
@@ -113,12 +115,11 @@ class TTTGame
   private
 
   attr_reader :human, :computer
-  attr_accessor :board, :current_move
+  attr_accessor :board, :current_move, :score
 
   def display_welcome_message
     clear
-    puts ""
-    puts "Welcome to Tick, Tack, Toe."
+    puts "\nWelcome to Tick, Tack, Toe."
     puts ""
   end
 
@@ -132,9 +133,8 @@ class TTTGame
   end
 
   def display_board
-    puts ""
-    puts "You: '#{HUMAN_MARKER}'  || Computer: '#{COMPUTER_MARKER}'"
-    puts ""
+    puts "\nYour Mark: '#{HUMAN_MARKER}'  Computer Mark: '#{COMPUTER_MARKER}'"
+    puts "\nYour Score: #{score[0]}   Computer Score: #{score[1]}"
     puts ""
     board.draw
     puts ""
@@ -179,6 +179,11 @@ class TTTGame
     puts "Looks like a tie." if !board.someone_won?
   end
 
+  def increment_score
+    score[0] += 1 if board.detect_winner == HUMAN_MARKER
+    score[1] += 1 if board.detect_winner == COMPUTER_MARKER
+  end
+  
   def play_again?
     puts ""
     puts "Would you like to play again? (Enter 'y' or 'n'.)"
