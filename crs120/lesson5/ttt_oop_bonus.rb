@@ -231,9 +231,9 @@ class TTTGame
     board[square] = human.marker
   end
 
-  def identify_strategic_computer_move
+  def identify_strategic_computer_move # refactor
     options = board.unmarked_keys
-    Board::WINNING_LINES.each do |line|
+    Board::WINNING_LINES.each do |line| # finds winning move
       marks = board.marks_on_line(line)
       next if marks.count(Square::INITIAL_MARKER).zero? ||
               marks.count(COMPUTER_MARKER) != 2
@@ -241,8 +241,14 @@ class TTTGame
         return square_key if options.include?(square_key)
       end
     end
-    # add: return any move that will block a human win
-      # identify winning line with 2 human markd and 1 initial mark
+    Board::WINNING_LINES.each do |line| # finds blocking move
+      marks = board.marks_on_line(line)
+      next if marks.count(Square::INITIAL_MARKER).zero? ||
+              marks.count(HUMAN_MARKER) != 2
+      line.each do |square_key|
+        return square_key if options.include?(square_key)
+      end
+    end
     return 5 if options.include?(5)
     nil
   end
