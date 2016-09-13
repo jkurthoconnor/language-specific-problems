@@ -147,7 +147,7 @@ class TTTGame
   end
 
   def set_human_name
-    puts "\nWhat name do you wish to compete under?:"
+    puts "\nPlease enter your name."
     name_choice = nil
     loop do
       name_choice = gets.chomp
@@ -231,22 +231,16 @@ class TTTGame
     board[square] = human.marker
   end
 
-  def identify_strategic_computer_move # refactor
+  def identify_strategic_computer_move
     options = board.unmarked_keys
-    Board::WINNING_LINES.each do |line| # finds winning move
-      marks = board.marks_on_line(line)
-      next if marks.count(Square::INITIAL_MARKER).zero? ||
-              marks.count(COMPUTER_MARKER) != 2
-      line.each do |square_key|
-        return square_key if options.include?(square_key)
-      end
-    end
-    Board::WINNING_LINES.each do |line| # finds blocking move
-      marks = board.marks_on_line(line)
-      next if marks.count(Square::INITIAL_MARKER).zero? ||
-              marks.count(HUMAN_MARKER) != 2
-      line.each do |square_key|
-        return square_key if options.include?(square_key)
+    [COMPUTER_MARKER, HUMAN_MARKER].each do |m|
+      Board::WINNING_LINES.each do |line|
+        marks = board.marks_on_line(line)
+        next if marks.count(Square::INITIAL_MARKER).zero? ||
+                marks.count(m) != 2
+        line.each do |square_key|
+          return square_key if options.include?(square_key)
+        end
       end
     end
     return 5 if options.include?(5)
