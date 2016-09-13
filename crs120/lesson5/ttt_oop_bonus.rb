@@ -38,17 +38,17 @@ class Board
     unmarked_keys.empty?
   end
 
-  def line_markings(line)
-    line_marks = []
-    line.each do |key|
-      line_marks.push(@squares[key].to_s)
+  def marks_on_line(line_array)
+    marks = []
+    line_array.each do |key|
+      marks.push(@squares[key].to_s)
     end
-    line_marks
+    marks
   end
-  
+
   def detect_winner
     WINNING_LINES.each do |line|
-      marks = line_markings(line)
+      marks = marks_on_line(line)
       return marks[0] if marks.uniq.size == 1 && marks[0] != ' '
     end
     nil
@@ -233,8 +233,14 @@ class TTTGame
 
   def identify_strategic_computer_move
     options = board.unmarked_keys
-    # add: return any move that will win round
-      # identify winning lines with 2 computer marks and 1 initial mark
+    Board::WINNING_LINES.each do |line|
+      marks = board.marks_on_line(line)
+      next if marks.count(Square::INITIAL_MARKER).zero? ||
+              marks.count(COMPUTER_MARKER) != 2
+      line.each do |square_key|
+        return square_key if options.include?(square_key)
+      end
+    end
     # add: return any move that will block a human win
       # identify winning line with 2 human markd and 1 initial mark
     return 5 if options.include?(5)
