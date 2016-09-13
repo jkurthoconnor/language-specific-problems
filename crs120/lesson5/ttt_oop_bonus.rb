@@ -4,7 +4,6 @@ class Board
                   [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                   [[1, 5, 9], [3, 5, 7]]
 
-
   def initialize
     @squares = {}
     (1..9).each { |key| @squares[key] = Square.new }
@@ -87,8 +86,8 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = "X"
-  COMPUTER_MARKER = "O"
+  HUMAN_MARKER = "X".freeze
+  COMPUTER_MARKER = "O".freeze
   FIRST_MOVE = HUMAN_MARKER
 
   def initialize
@@ -105,7 +104,7 @@ class TTTGame
       loop do
         display_board
 
-        loop do 
+        loop do
           current_player_moves
           break if board.someone_won_round? || board.full?
           clear_screen_and_display_board
@@ -137,33 +136,32 @@ class TTTGame
     display_matchup
 
     # add marker customization
-      # if customize_marker?
-      #   set_marker
-      # end
-    
+    # if customize_marker?
+    # set_marker
+    # end
   end
 
   def set_names
     set_human_name
     set_computer_name
   end
-  
+
   def set_human_name
     puts "\nWhat name do you wish to compete under?:"
     name_choice = nil
     loop do
       name_choice = gets.chomp
       break if !name_choice.delete(' ').empty?
-      puts "\nI'm sorry.  I can't use that as a player name. " + 
-      "Try again."
+      puts "\nI'm sorry.  I can't use that as a player name. " \
+           "Try again."
     end
     human.name = name_choice
   end
-  
+
   def set_computer_name
     computer.name = ['R2D2', 'BB8', 'C3PO'].sample
   end
-  
+
   def display_matchup
     puts "\n#{human.name}, you will be playing #{computer.name}"
   end
@@ -171,21 +169,21 @@ class TTTGame
   # def customize_marker?
   #   opt_to_change = nil
   #   puts "\nYour default marker is '#{HUMAN_MARKER}'.  Would you like " +
-  #   "to change it? ('y' or 'n')." 
+  #   "to change it? ('y' or 'n')."
   #   loop do
   #     opt_to_change = gets.chomp.downcase
   #     break if ['y', 'n'].include?(opt_to_change)
   #     puts "That is not an option. (Type 'y' or 'n')."
   #   end
-  # 
+  #
   #   return false if opt_to_change == 'n'
   #   return true if opt_to_change == 'y'
   # end
-  # 
+  #
   # def set_marker
-  #   
+  #
   # end
-  # 
+  #
 
   def clear
     system 'clear' or system 'cls'
@@ -197,8 +195,10 @@ class TTTGame
   end
 
   def display_board
-    puts "\n#{human.name}'s Mark: '#{HUMAN_MARKER}'  #{computer.name}'s Mark: '#{COMPUTER_MARKER}'"
-    puts "\n#{human.name}'s Score: #{score[0]}   #{computer.name}'s Score: #{score[1]}"
+    puts "\n#{human.name}'s Mark: '#{HUMAN_MARKER}'    " \
+         "#{computer.name}'s Mark: '#{COMPUTER_MARKER}'"
+    puts "\n#{human.name}'s Score: #{score[0]}    " \
+         "#{computer.name}'s Score: #{score[1]}"
     puts "(The first to 5 wins the game.)"
     puts ""
     board.draw
@@ -255,7 +255,7 @@ class TTTGame
 
   def computer_moves
     best_move_key = identify_strategic_computer_move
-    if best_move_key == nil
+    if best_move_key.nil?
       board[board.unmarked_keys.sample] = computer.marker
     else
       board[best_move_key] = computer.marker
@@ -264,9 +264,15 @@ class TTTGame
 
   def display_round_result
     clear_screen_and_display_board
-    puts "\n#{human.name}, you won this round!" if board.detect_winner == HUMAN_MARKER
-    puts "\nYou lost this round, #{human.name}." if board.detect_winner == COMPUTER_MARKER
-    puts "\nLooks like the round's a tie." if !board.someone_won_round?
+
+    if board.detect_winner == HUMAN_MARKER
+      puts "\n#{human.name}, you won this round!"
+    elsif board.detect_winner == COMPUTER_MARKER
+      puts "\nYou lost this round, #{human.name}."
+    else
+      puts "\nLooks like the round's a tie."
+    end
+
     sleep 1.5
   end
 
@@ -283,7 +289,8 @@ class TTTGame
     clear_screen_and_display_board
     case score.index(5)
     when 0
-      puts "\nCongratulations #{human.name}.  You're the first to five.  You've won the game!"
+      puts "\nCongratulations #{human.name}.  You're the first to five." \
+           "  You've won the game!"
     when 1
       puts "\nI'm sorry #{human.name}.  You've lost the game."
     end
