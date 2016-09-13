@@ -1,7 +1,9 @@
+require 'pry'
 class Board
   WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                   [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                   [[1, 5, 9], [3, 5, 7]]
+
 
   def initialize
     @squares = {}
@@ -36,13 +38,18 @@ class Board
     unmarked_keys.empty?
   end
 
+  def line_markings(line)
+    line_marks = []
+    line.each do |key|
+      line_marks.push(@squares[key].to_s)
+    end
+    line_marks
+  end
+  
   def detect_winner
     WINNING_LINES.each do |line|
-      line_marks = []
-      line.each do |key|
-        line_marks.push(@squares[key].to_s)
-      end
-      return line_marks[0] if line_marks.uniq.size == 1 && line_marks[0] != ' '
+      marks = line_markings(line)
+      return marks[0] if marks.uniq.size == 1 && marks[0] != ' '
     end
     nil
   end
@@ -71,6 +78,7 @@ class Square
 end
 
 class Player
+  attr_accessor :name
   attr_reader :marker
 
   def initialize(marker)
@@ -79,8 +87,8 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = "X".freeze
-  COMPUTER_MARKER = "O".freeze
+  HUMAN_MARKER = "X"
+  COMPUTER_MARKER = "O"
   FIRST_MOVE = HUMAN_MARKER
 
   def initialize
@@ -88,16 +96,16 @@ class TTTGame
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
     @current_move = FIRST_MOVE
-    @score = [0, 0] #[human score, computer score]
+    @score = [0, 0] # [human score, computer score]
   end
 
   def play
-    loop do # new game loop
-      display_welcome_message
-      loop do # first to 5 rounds loop
+    setup_sequence
+    loop do
+      loop do
         display_board
 
-        loop do # individual round loop
+        loop do 
           current_player_moves
           break if board.someone_won_round? || board.full?
           clear_screen_and_display_board
@@ -106,7 +114,7 @@ class TTTGame
         display_round_result
         increment_score
         break if someone_won_game?
-        reset_round 
+        reset_round
       end
 
       display_game_result
@@ -122,10 +130,62 @@ class TTTGame
   attr_reader :human, :computer
   attr_accessor :board, :current_move, :score
 
-  def display_welcome_message
+  def setup_sequence
     clear
     puts "\nWelcome to Tick, Tack, Toe."
+    set_names
+    display_matchup
+
+    # add marker customization
+      # if customize_marker?
+      #   set_marker
+      # end
+    
   end
+
+  def set_names
+    set_human_name
+    set_computer_name
+  end
+  
+  def set_human_name
+    puts "\nWhat name do you wish to compete under?:"
+    name_choice = nil
+    loop do
+      name_choice = gets.chomp
+      break if !name_choice.delete(' ').empty?
+      puts "\nI'm sorry.  I can't use that as a player name. " + 
+      "Try again."
+    end
+    human.name = name_choice
+  end
+  
+  def set_computer_name
+    computer.name = ['R2D2', 'BB8', 'C3PO'].sample
+  end
+  
+  def display_matchup
+    puts "\n#{human.name}, you will be playing #{computer.name}"
+  end
+
+  # def customize_marker?
+  #   opt_to_change = nil
+  #   puts "\nYour default marker is '#{HUMAN_MARKER}'.  Would you like " +
+  #   "to change it? ('y' or 'n')." 
+  #   loop do
+  #     opt_to_change = gets.chomp.downcase
+  #     break if ['y', 'n'].include?(opt_to_change)
+  #     puts "That is not an option. (Type 'y' or 'n')."
+  #   end
+  # 
+  #   return false if opt_to_change == 'n'
+  #   return true if opt_to_change == 'y'
+  # end
+  # 
+  # def set_marker
+  #   
+  # end
+  # 
 
   def clear
     system 'clear' or system 'cls'
@@ -137,8 +197,8 @@ class TTTGame
   end
 
   def display_board
-    puts "\nYour Mark: '#{HUMAN_MARKER}'  Computer Mark: '#{COMPUTER_MARKER}'"
-    puts "\nYour Score: #{score[0]}   Computer Score: #{score[1]}"
+    puts "\n#{human.name}'s Mark: '#{HUMAN_MARKER}'  #{computer.name}'s Mark: '#{COMPUTER_MARKER}'"
+    puts "\n#{human.name}'s Score: #{score[0]}   #{computer.name}'s Score: #{score[1]}"
     puts "(The first to 5 wins the game.)"
     puts ""
     board.draw
@@ -171,14 +231,29 @@ class TTTGame
     board[square] = human.marker
   end
 
+  def identify_strategic_computer_move
+    options = board.unmarked_keys
+    # add: return any move that will win round
+      # identify winning lines with 2 computer marks and 1 initial mark
+    # add: return any move that will block a human win
+      # identify winning line with 2 human markd and 1 initial mark
+    return 5 if options.include?(5)
+    nil
+  end
+
   def computer_moves
-    board[board.unmarked_keys.sample] = computer.marker
+    best_move_key = identify_strategic_computer_move
+    if best_move_key == nil
+      board[board.unmarked_keys.sample] = computer.marker
+    else
+      board[best_move_key] = computer.marker
+    end
   end
 
   def display_round_result
     clear_screen_and_display_board
-    puts "\nYou've won this round!" if board.detect_winner == HUMAN_MARKER
-    puts "\nYou lost this round." if board.detect_winner == COMPUTER_MARKER
+    puts "\n#{human.name}, you won this round!" if board.detect_winner == HUMAN_MARKER
+    puts "\nYou lost this round, #{human.name}." if board.detect_winner == COMPUTER_MARKER
     puts "\nLooks like the round's a tie." if !board.someone_won_round?
     sleep 1.5
   end
@@ -196,12 +271,12 @@ class TTTGame
     clear_screen_and_display_board
     case score.index(5)
     when 0
-      puts "\nCongratulations.  You're the first to five.  You've won the game!!"
+      puts "\nCongratulations #{human.name}.  You're the first to five.  You've won the game!"
     when 1
-      puts "\nI'm sorry.  You've lost the game."
+      puts "\nI'm sorry #{human.name}.  You've lost the game."
     end
   end
-  
+
   def play_again?
     puts "\nWould you like to play again? (Enter 'y' or 'n'.)"
     choice = gets.chomp
@@ -232,7 +307,7 @@ class TTTGame
 
   def display_goodbye_message
     clear
-    puts "\nNice game.  Goodbye!"
+    puts "\nNice game #{human.name}.  Goodbye!"
     puts ""
   end
 end
