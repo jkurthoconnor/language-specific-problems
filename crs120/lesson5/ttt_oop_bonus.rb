@@ -89,22 +89,24 @@ class TTTGame
     puts "\nWelcome to Tick, Tack, Toe."
 
     markers_selected = select_markers
-    human_marker = markers_selected[0]
-    computer_marker = markers_selected[-1]
+    human_marker = markers_selected[0].freeze
+    computer_marker = markers_selected[-1].freeze
 
-    first_move = move_first? ? human_marker : computer_marker
+    first_move = (move_first? ? human_marker : computer_marker).freeze
 
     return human_marker, computer_marker, first_move
   end
 
   def self.select_markers
-    marks = ''
-    loop do
-      puts "\nPlease enter your preferred one-character marker "\
-            "\nfollowed by your choice of opponent's marker."
-      marks = gets.chomp
-      break if marks.delete('^!-z').length == 2
-      puts "\nI'm sorry.  Your entry is invalid."
+    marks = []
+    ["your", "your opponent's"].each_with_index do |player, index|
+      loop do
+        puts "\nPlease enter #{player} one-character marker."
+        marks[index] = gets.chomp
+        break if ('!'..'z').cover?(marks[index]) &&
+                 marks[index].length == 1
+        puts "\nI'm sorry.  Your entry is invalid."
+      end
     end
     marks
   end
