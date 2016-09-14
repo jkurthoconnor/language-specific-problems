@@ -132,6 +132,7 @@ class TTTGame
     @score = [0, 0] # [human score, computer score]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def play
     naming_sequence
     loop do
@@ -144,19 +145,20 @@ class TTTGame
           clear_screen_and_display_board
         end
 
-        display_round_result
-        increment_score
+        conclude_round
         break if someone_won_game?
         reset_round
       end
 
-      display_game_result
+      conclude_game
       break unless play_again?
       display_play_again_message
       reset_game
     end
+
     display_goodbye_message
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -230,13 +232,13 @@ class TTTGame
   end
 
   def human_moves
-    puts "\nSelect a square: #{option_joiner(board.unmarked_keys)}"
+    options = option_joiner(board.unmarked_keys)
     square = nil
     loop do
+      puts "\nSelect a square: #{options}"
       square = gets.chomp.to_i
       break if board.unmarked_keys.include?(square)
-      puts "\nThat is not a valid square."
-      puts "Select from these options: #{option_joiner(board.unmarked_keys)}"
+      puts "\nThat is not an available square."
     end
     board[square] = human.marker
   end
@@ -285,11 +287,16 @@ class TTTGame
     score[1] += 1 if board.detect_winner == COMPUTER_MARKER
   end
 
+  def conclude_round
+    display_round_result
+    increment_score
+  end
+
   def someone_won_game?
     score[0] == 5 || score[1] == 5
   end
 
-  def display_game_result
+  def conclude_game
     clear_screen_and_display_board
     case score.index(5)
     when 0
