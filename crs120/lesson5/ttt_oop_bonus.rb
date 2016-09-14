@@ -1,4 +1,3 @@
-require 'pry'
 class Board
   WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                   [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
@@ -86,9 +85,44 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = "X".freeze
-  COMPUTER_MARKER = "O".freeze
-  FIRST_MOVE = HUMAN_MARKER
+  def self.set_marker_and_order_options
+    puts "\nWelcome to Tick, Tack, Toe."
+
+    marks_selected = self.select_markers
+    human_marker = marks_selected[0]
+    computer_marker = marks_selected[-1]
+
+    first_move = self.select_play_order
+    first_move = human_marker if first_move == 'y'
+    first_move = computer_marker if first_move == 'n'
+
+    return human_marker, computer_marker, first_move
+  end
+
+  def self.select_markers
+    marks = ''
+    loop do
+      puts "\nPlease enter your preferred one-character marker "\
+            "\nfollowed by your choice of opponent's marker."
+      marks = gets.chomp
+      break if marks.delete('^!-z').length == 2
+      puts "\nI'm sorry.  Your entry is invalid."
+    end
+    marks
+  end
+
+  def self.select_play_order
+    first_move = ''
+    loop do
+      puts "\nWould you like to move first?  ('y' or 'n')"
+      first_move = gets.chomp.downcase
+      break if ['y', 'n'].include?(first_move)
+      puts "\nI'm sorry.  Your entry is invalid."
+    end
+    first_move
+  end
+
+  HUMAN_MARKER, COMPUTER_MARKER, FIRST_MOVE = select_options
 
   def initialize
     @board = Board.new
@@ -99,7 +133,7 @@ class TTTGame
   end
 
   def play
-    setup_sequence
+    naming_sequence
     loop do
       loop do
         display_board
@@ -129,21 +163,16 @@ class TTTGame
   attr_reader :human, :computer
   attr_accessor :board, :current_move, :score
 
-  def setup_sequence
+  def naming_sequence
     clear
-    puts "\nWelcome to Tick, Tack, Toe."
     set_names
     display_matchup
-
-    # add marker customization
-    # if customize_marker?
-    # set_marker
-    # end
   end
 
   def set_names
     set_human_name
     set_computer_name
+    clear
   end
 
   def set_human_name
@@ -165,25 +194,6 @@ class TTTGame
   def display_matchup
     puts "\n#{human.name}, you will be playing #{computer.name}"
   end
-
-  # def customize_marker?
-  #   opt_to_change = nil
-  #   puts "\nYour default marker is '#{HUMAN_MARKER}'.  Would you like " +
-  #   "to change it? ('y' or 'n')."
-  #   loop do
-  #     opt_to_change = gets.chomp.downcase
-  #     break if ['y', 'n'].include?(opt_to_change)
-  #     puts "That is not an option. (Type 'y' or 'n')."
-  #   end
-  #
-  #   return false if opt_to_change == 'n'
-  #   return true if opt_to_change == 'y'
-  # end
-  #
-  # def set_marker
-  #
-  # end
-  #
 
   def clear
     system 'clear' or system 'cls'
