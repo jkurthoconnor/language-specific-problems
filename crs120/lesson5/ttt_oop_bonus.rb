@@ -85,16 +85,14 @@ class Player
 end
 
 class TTTGame
-  def self.set_marker_and_order_options
+  def self.set_markers_and_order
     puts "\nWelcome to Tick, Tack, Toe."
 
-    marks_selected = self.select_markers
-    human_marker = marks_selected[0]
-    computer_marker = marks_selected[-1]
+    markers_selected = select_markers
+    human_marker = markers_selected[0]
+    computer_marker = markers_selected[-1]
 
-    first_move = self.select_play_order
-    first_move = human_marker if first_move == 'y'
-    first_move = computer_marker if first_move == 'n'
+    first_move = move_first? ? human_marker : computer_marker
 
     return human_marker, computer_marker, first_move
   end
@@ -111,7 +109,7 @@ class TTTGame
     marks
   end
 
-  def self.select_play_order
+  def self.move_first?
     first_move = ''
     loop do
       puts "\nWould you like to move first?  ('y' or 'n')"
@@ -119,10 +117,10 @@ class TTTGame
       break if ['y', 'n'].include?(first_move)
       puts "\nI'm sorry.  Your entry is invalid."
     end
-    first_move
+    first_move == 'y' ? true : false
   end
 
-  HUMAN_MARKER, COMPUTER_MARKER, FIRST_MOVE = select_options
+  HUMAN_MARKER, COMPUTER_MARKER, FIRST_MOVE = set_markers_and_order
 
   def initialize
     @board = Board.new
