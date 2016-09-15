@@ -182,7 +182,7 @@ class TTTGame
     name_choice = nil
     loop do
       name_choice = gets.chomp
-      break if !name_choice.delete(' ').empty?
+      break if !name_choice.strip.empty?
       puts "\nI'm sorry.  I can't use that as a player name. " \
            "Try again."
     end
