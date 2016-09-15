@@ -119,7 +119,7 @@ class TTTGame
       break if ['y', 'n'].include?(first_move)
       puts "\nI'm sorry.  Your entry is invalid."
     end
-    first_move == 'y' ? true : false
+    first_move == 'y'
   end
 
   HUMAN_MARKER, COMPUTER_MARKER, FIRST_MOVE = set_markers_and_order
