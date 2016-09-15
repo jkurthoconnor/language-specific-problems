@@ -129,7 +129,7 @@ class TTTGame
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
     @current_move = FIRST_MOVE
-    @score = [0, 0] # [human score, computer score]
+    @score = { :person => 0, :droid => 0 }
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -210,8 +210,8 @@ class TTTGame
   def display_board
     puts "\n#{human.name}'s Mark: '#{HUMAN_MARKER}'    " \
          "#{computer.name}'s Mark: '#{COMPUTER_MARKER}'"
-    puts "\n#{human.name}'s Score: #{score[0]}    " \
-         "#{computer.name}'s Score: #{score[1]}"
+    puts "\n#{human.name}'s Score: #{score[:person]}    " \
+         "#{computer.name}'s Score: #{score[:droid]}"
     puts "(The first to 5 wins the game.)"
     puts ""
     board.draw
@@ -290,8 +290,8 @@ class TTTGame
   end
 
   def increment_score
-    score[0] += 1 if board.detect_winner == HUMAN_MARKER
-    score[1] += 1 if board.detect_winner == COMPUTER_MARKER
+    score[:person] += 1 if board.detect_winner == HUMAN_MARKER
+    score[:droid] += 1 if board.detect_winner == COMPUTER_MARKER
   end
 
   def conclude_round
@@ -300,16 +300,16 @@ class TTTGame
   end
 
   def someone_won_game?
-    score[0] == 5 || score[1] == 5
+    score[:person] == 5 || score[:droid] == 5
   end
 
   def conclude_game
     clear_screen_and_display_board
-    case score.index(5)
-    when 0
+    case score.key(5)
+    when :person
       puts "\nCongratulations #{human.name}.  You're the first to five." \
            "  You've won the game!"
-    when 1
+    when :droid
       puts "\nI'm sorry #{human.name}.  You've lost the game."
     end
   end
@@ -334,7 +334,7 @@ class TTTGame
 
   def reset_game
     reset_round
-    self.score = [0, 0]
+    self.score = { :person => 0, :droid => 0 }
   end
 
   def display_play_again_message
