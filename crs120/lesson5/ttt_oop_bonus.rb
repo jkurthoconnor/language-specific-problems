@@ -47,7 +47,7 @@ class Board
   def detect_winner
     WINNING_LINES.each do |line|
       marks = marks_on_line(line)
-      return marks[0] if marks.uniq.size == 1 && marks[0] != ' '
+      return marks[0] if marks.uniq.size == 1 && !marks.include?(' ')
     end
     nil
   end
