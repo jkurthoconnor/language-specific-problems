@@ -143,6 +143,7 @@ class TTTGame
           current_player_moves
           break if board.someone_won_round? || board.full?
           clear_screen_and_display_board
+          switch_current_player
         end
 
         conclude_round
@@ -219,9 +220,15 @@ class TTTGame
   def current_player_moves
     if current_move == HUMAN_MARKER
       human_moves
-      self.current_move = COMPUTER_MARKER
     else
       computer_moves
+    end
+  end
+  
+  def switch_current_player
+    if current_move == HUMAN_MARKER
+      self.current_move = COMPUTER_MARKER
+    else
       self.current_move = HUMAN_MARKER
     end
   end
