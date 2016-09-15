@@ -700,6 +700,13 @@ hsh.values_at(:pear, :grape) # returns array containing the values
 hsh.fetch(:pear)
 ```
 
+### get the key for a given value
+```ruby
+hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
+
+hsh.key('green')
+```
+
 ### (hash) add key/value pair 
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
