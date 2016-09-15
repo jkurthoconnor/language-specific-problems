@@ -242,7 +242,18 @@ while index < str.length
   index += 1
 end
 p rev.join
-   
+
+# or to change in place
+
+str = 'This is The string, is it not?'
+
+index = 1
+while index < str.length
+  str.insert(0, str.slice!(index)
+  index += 1
+end
+
+str   
 ```
    
 ### (string) determine if given characters are present in string
