@@ -36,12 +36,9 @@ class Board
     unmarked_keys.empty?
   end
 
-  def marks_on_line(line_array)
-    marks = []
-    line_array.each do |key|
-      marks.push(@squares[key].to_s)
-    end
-    marks
+  def marks_on_line(line_arr)
+    squares = @squares.values_at(line_arr[0], line_arr[1], line_arr[2])
+    squares.map(&:to_s)
   end
 
   def detect_winner
@@ -129,7 +126,7 @@ class TTTGame
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
     @current_move = FIRST_MOVE
-    @score = { :person => 0, :droid => 0 }
+    @score = { person: 0, droid: 0 }
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -224,7 +221,7 @@ class TTTGame
       computer_moves
     end
   end
-  
+
   def switch_current_player
     if current_move == HUMAN_MARKER
       self.current_move = COMPUTER_MARKER
@@ -334,7 +331,7 @@ class TTTGame
 
   def reset_game
     reset_round
-    self.score = { :person => 0, :droid => 0 }
+    self.score = { person: 0, droid: 0 }
   end
 
   def display_play_again_message
