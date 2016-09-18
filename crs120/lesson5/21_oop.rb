@@ -1,10 +1,11 @@
+require 'pry'
 
 class Participant
   attr_accessor :hand, :name
   
   def initialize
-    @hand 
-    @name = set_name
+    @hand = []
+    # @name = set_name
   end
 
   def hit
@@ -16,6 +17,7 @@ end
 
 class Player < Participant
   def initialize
+    super
     # what states uniquely apply to player? total? ...well each will have a card total, but that could be handled by Participant
   end
 
@@ -29,6 +31,7 @@ end
 
 class Dealer < Participant
   def initialize
+    super
     # what states apply to being a dealer?
   end
 
@@ -39,21 +42,24 @@ class Dealer < Participant
   def total
     # related to cards
   end
-  
-  # def deal (?)
-  # end
+
 end
 
 class Deck
-  attr_reader :cards
+  attr_reader :shuffled_cards
 
   def initialize
-    @cards = []
+    @new_deck = []
     Card::SUITS.each do |suit|
       Card::VALUES.each do |value|
-        @cards.push Card.new(value, suit)
+        @new_deck.push Card.new(value, suit)
       end
     end
+    @shuffled_cards = shuffle
+  end
+
+  def shuffle
+    @new_deck.shuffle!
   end
 end
 
@@ -78,23 +84,30 @@ class Game
   attr_accessor :player, :dealer, :deck
 
   def initialize
-    # @player = Player.new
-    # @dealer = Dealer.new
+    @player = Player.new
+    @dealer = Dealer.new
     @deck = Deck.new
   end
 
+  def deal_cards
+    2.times do 
+      player.hand.unshift(deck.shuffled_cards.shift)
+      dealer.hand.unshift(deck.shuffled_cards.shift)
+    end
+  end
+  
   def play
     deal_cards
-    show_initial_cards
-    player_turn
-    dealer_turn
-    show_result
+    # show_initial_cards
+    # player_turn
+    # dealer_turn
+    # show_result
   end
 end
 
 twenty_one = Game.new
-p twenty_one.deck
-puts twenty_one.deck
 
-p twenty_one.deck.cards
-puts twenty_one.deck.cards
+twenty_one.play
+
+p twenty_one.player.hand
+p twenty_one.dealer.hand
