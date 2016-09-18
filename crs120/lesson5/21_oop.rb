@@ -96,9 +96,17 @@ class Game
     end
   end
   
+  def show_initial_cards
+    player.hand.each do |card|
+      puts "Player is holding #{card}"
+    end
+
+    puts "Dealer is holding #{dealer.hand[0]} and one concealed card."
+  end
+
   def play
     deal_cards
-    # show_initial_cards
+    show_initial_cards
     # player_turn
     # dealer_turn
     # show_result
