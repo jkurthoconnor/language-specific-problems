@@ -2,28 +2,41 @@ require 'pry'
 
 class Participant
   attr_accessor :hand, :name
-  
+
   def initialize
     @hand = []
-    # @name = set_name
+    # @name = value passed in from 'children'
   end
 
   def hit
   end
-  
+
   def stay
   end
 end
 
 class Player < Participant
+  attr_reader :name
+
   def initialize
     super
-    # what states uniquely apply to player? total? ...well each will have a card total, but that could be handled by Participant
+    @name = choose_name
+  end
+
+  def choose_name
+    puts "Please enter your name."
+    name_choice = nil
+    loop do
+      name_choice = gets.chomp
+      break if !name_choice.strip.empty?
+      puts "I can't use that as a player name.  Please try again."
+    end
+    name_choice
   end
 
   def busted?
   end
-  
+
   def total
     # related to cards
   end
@@ -34,7 +47,6 @@ class Dealer < Participant
     super
     # what states apply to being a dealer?
   end
-
 
   def busted?
   end
@@ -95,10 +107,10 @@ class Game
       dealer.hand.unshift(deck.shuffled_cards.shift)
     end
   end
-  
+
   def show_initial_cards
     player.hand.each do |card|
-      puts "Player is holding #{card}"
+      puts "#{player.name} is holding #{card}"
     end
 
     puts "Dealer is holding #{dealer.hand[0]} and one concealed card."
@@ -107,6 +119,7 @@ class Game
   def play
     deal_cards
     show_initial_cards
+    p player.name
     # player_turn
     # dealer_turn
     # show_result
@@ -116,6 +129,3 @@ end
 twenty_one = Game.new
 
 twenty_one.play
-
-p twenty_one.player.hand
-p twenty_one.dealer.hand
