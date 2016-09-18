@@ -82,7 +82,6 @@ Create a new class called Cat, which can do everything a dog can, except swim or
 
 Solution:
 ```ruby
-
 class HouseMammal
   def run
     'running!'
@@ -97,11 +96,11 @@ class Dog < HouseMammal
   def speak
     'bark!'
   end
-  
+
   def swim
     'swimming!'
   end
-  
+
   def fetch
     'fetching!'
   end
@@ -112,17 +111,17 @@ class BullDog < Dog
     "Can't swim!"
   end
 end
-  
+
 class Cat < HouseMammal
   def speak
     'meow!'
   end
 
   def fetch
-    "Really?  I am a #{self.class.to_s.downcase}.  I don't do that."
+    "Fetch? Really?  I am a #{self.class.to_s.downcase}.  I don't do that."
   end
 end
-  
+
 fido = Dog.new
 puts fido.speak
 tiger = Cat.new
@@ -130,7 +129,6 @@ puts tiger.speak
 puts tiger.fetch
 butch = Dog.new
 puts butch.swim
-
 ```
 
 3) Draw a class hierarchy diagram of the classes from step #2
@@ -138,12 +136,10 @@ puts butch.swim
 Solution:
 
 HouseMammal
-
-- Dog    
-    - BullDog  
-
+- Dog
+-- BullDog
 - Cat
-        
+
 
 4) What is the method lookup path and how is it important?
 
@@ -155,10 +151,10 @@ The order is as follows:
 
 1) check the calling object's class' own methods. 
 
-2) check the modules mixed into the calling object's own class
+2) check the modules mixed into the calling object's own class; begin with the most recently included module and work backward to the first included.
 
 3) check the calling object's class' superclass
   
-  4) check the modules mixed into the superclass
+4) check the modules mixed into the superclass
   
 Recognizing the order is important because it allows one to override an inherited method by including a different method by the same name earlier in the path.
