@@ -32,7 +32,7 @@ class Truck
 end
 ```
 
-Solution:  We can mix in the `Speed` module to the `Car` and the `Truck` class by adding `include Speed` to each class' definition.  We can then check that this works by adding this line to the program: `my_car.go_fast`.  (see below)
+Solution:  We can mix in the `Speed` module to the `Car` and the `Truck` class by adding `include Speed` to each class definition.  We can then check that this works by adding this line to the program: `my_car.go_fast`.  (see below)
 
 ```ruby
 module Speed
@@ -131,7 +131,7 @@ end
 
 7) What is the default thing that Ruby will print to the screen if you call `to_s` on an object? Where could you go to find out if you want to be sure?
 
-Solution:  By default, calling `to_s` returns a string representing the object; this string includes the object's class and its object_id.  To be sure I could check Ruby Docs.
+Solution:  By default, calling `to_s` returns a string representing the object; this string includes the object's class and an encoded version of its object_id.  To be sure I could check Ruby Docs.
 
 
 8) If we have a class such as the one below:
