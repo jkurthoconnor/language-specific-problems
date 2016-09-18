@@ -117,12 +117,17 @@ class Cat < HouseMammal
   def speak
     'meow!'
   end
+
+  def fetch
+    "Really?  I am a #{self.class.to_s.downcase}.  I don't do that."
+  end
 end
   
 fido = Dog.new
 puts fido.speak
 tiger = Cat.new
 puts tiger.speak
+puts tiger.fetch
 butch = Dog.new
 puts butch.swim
 
