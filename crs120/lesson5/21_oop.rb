@@ -1,10 +1,10 @@
 
 class Participant
+  attr_accessor :hand, :name
+  
   def initialize
-    # what states apply to both player and dealer?
-      # both have hands composed of cards (collaborator objects)
-      # both will have names
-      @name = set_name
+    @hand 
+    @name = set_name
   end
 
   def hit
@@ -40,26 +40,49 @@ class Dealer < Participant
     # related to cards
   end
   
-  def deal (?)
-  end
+  # def deal (?)
+  # end
 end
 
 class Deck
-  def initialize
-    # need some data structure for cards (collaborators)
-  end
+  attr_reader :cards
 
-  def deal (?)
+  def initialize
+    @cards = []
+    Card::SUITS.each do |suit|
+      Card::VALUES.each do |value|
+        @cards.push Card.new(value, suit)
+      end
+    end
   end
 end
 
 class Card
-  def initialize
-    # what are states of being a card? number, value, suit
+  attr_reader :value, :suit
+
+  VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10"] +
+           ["Jack", "Queen", "King", "Ace"]
+  SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+  
+  def initialize(value, suit)
+    @value = value
+    @suit = suit
+  end
+
+  def to_s
+    "#{value} of #{suit}"
   end
 end
 
 class Game
+  attr_accessor :player, :dealer, :deck
+
+  def initialize
+    # @player = Player.new
+    # @dealer = Dealer.new
+    @deck = Deck.new
+  end
+
   def play
     deal_cards
     show_initial_cards
@@ -69,4 +92,9 @@ class Game
   end
 end
 
-Game.new.play
+twenty_one = Game.new
+p twenty_one.deck
+puts twenty_one.deck
+
+p twenty_one.deck.cards
+puts twenty_one.deck.cards
