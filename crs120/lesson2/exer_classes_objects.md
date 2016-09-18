@@ -35,16 +35,19 @@ Hint: let first_name and last_name be "states" and create an instance method cal
 Solution
 ```ruby
 class Person
-  attr_accessor :first_name, :last_name
+  attr_reader :first_name, :last_name
   
-  def initialize(fn, ln='')
-    self.first_name = fn
-    self.last_name = ln
+  def initialize(name)
+    @first_name = name.split[0]
+    @last_name = name.split.length > 1 ? name.split[- 1] : ''
+  end
+  
+  def last_name=(last_name)
+    @last_name = last_name
   end
   
   def name
-    return "#{self.first_name}" if self.last_name == ''
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}".strip
   end
 end
 
