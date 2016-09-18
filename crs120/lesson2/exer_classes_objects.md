@@ -13,7 +13,7 @@ Solution
 ```ruby
 class Person
   attr_accessor :name
-  
+
   def initialize(n)
     self.name = n
   end  
@@ -36,16 +36,16 @@ Solution
 ```ruby
 class Person
   attr_reader :first_name, :last_name
-  
+
   def initialize(name)
     @first_name = name.split[0]
     @last_name = name.split.length > 1 ? name.split[- 1] : ''
   end
-  
+
   def last_name=(last_name)
     @last_name = last_name
   end
-  
+
   def name
     "#{first_name} #{last_name}".strip
   end
@@ -77,31 +77,27 @@ bob.last_name             # => 'Adams'
 Solution
 ```ruby
 class Person
-  attr_accessor :first_name, :last_name
-  
-  def initialize(full_name)
-    parse_full_name(full_name) 
+  attr_reader :first_name, :last_name
+
+  def initialize(name)
+    parse_name(name) 
   end
-  
-  def name=(full_name)
-    parse_full_name(full_name)  
+
+  def name=(name)
+    parse_name(name)  
   end
-  
+
   def name
     "#{first_name} #{last_name}".strip
   end
-  
+
   private
-  
-  def parse_full_name(full_name)
-    if full_name.split.size == 2
-      self.first_name = full_name.split[0]
-      self.last_name = full_name.split[1]
-    else
-      self.first_name = full_name
-      self.last_name = ''
-    end 
+
+  def parse_name(name)
+    @first_name = name.split[0]
+    @last_name = name.split.length > 1 ? name.split[-1] : ''
   end
+
 end
 ```
 
