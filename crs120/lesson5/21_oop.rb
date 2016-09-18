@@ -43,9 +43,10 @@ class Player < Participant
 end
 
 class Dealer < Participant
+  attr_reader :name
   def initialize
     super
-    # what states apply to being a dealer?
+    @name = ['R2D2', 'BB8', 'C3PO'].sample
   end
 
   def busted?
@@ -113,13 +114,13 @@ class Game
       puts "#{player.name} is holding #{card}"
     end
 
-    puts "Dealer is holding #{dealer.hand[0]} and one concealed card."
+    puts "#{dealer.name} is holding #{dealer.hand[0]} and one concealed card."
   end
 
   def play
     deal_cards
     show_initial_cards
-    p player.name
+    
     # player_turn
     # dealer_turn
     # show_result
