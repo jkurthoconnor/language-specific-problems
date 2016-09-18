@@ -46,7 +46,7 @@ trip = RoadTrip.new
 trip.predict_the_future
 ```
 
-Solution:  The code will return "You will " plus a string sampled from the `RoadTrip` class `choices` method.  This is because `RoadTrip` class `choices` method overwrites the `Oracle` class method of the same name. The overwriting occurs because the method lookup path begins with the calling object's class, and goes no further if finds a method by the relevant name. But it _will not print_ this return value to the screen.
+Solution:  The code will return "You will " plus a string sampled from  `RoadTrip#choices` method.  This is because `RoadTrip#choices` method overwrites the `Oracle` class method of the same name. The overwriting occurs because the method lookup path begins with the calling object's class, and goes no further if finds a method by the relevant name. But it _will not print_ this return value to the screen.
 
 3) How do you find where Ruby will look for a method when that method is called? How can you find an object's ancestors?
 ```ruby
@@ -69,8 +69,8 @@ What is the lookup chain for Orange and HotSauce?
 
 Solution: Ruby looks for a method by following the method lookup path.  This path begins with the class of the calling object, and then looks to any of the class' mixed in modules in reverse order of inclusion.  From there, the path runs to the calling object's superclass.  If the method is still not found, the path runs to the superclass' mixins, again in reverse order of inclusion.
 
-Given the code above, the path for an object of the Orange class is: Orange, Taste.
-Given the code above, the path for an object of the HotSauce class is: HotSauce, Taste.
+Given the code above, the path for an object of the Orange class is: Orange, Taste, Object, Kernel, BasicObject.
+Given the code above, the path for an object of the HotSauce class is: HotSauce, Taste, Object, Kernel, BasicObject.
 
 Calling `Class#ancestors` on an object will reveal the full path.
 
@@ -95,7 +95,7 @@ class BeesWax
 end
 ```
 
-Solution: To simplify the `BeesWax` class, we could add the shorthand for defining reader and writer methods.  This would allow us to remove the `type` and the `type=()` classes. Since we already have a type getter method.  Removing the `@` prefix on `type` in the `describe_type` method is also helpful.  This calls the `type` getter method instead of directly appealing to the instance variable.See below.
+Solution: To simplify the `BeesWax` class, we could add the shorthand for defining reader and writer methods.  This would allow us to remove the `type` and the `type=()` classes. Since we already have a type getter method, removing the `@` prefix on `type` in the `describe_type` method is also helpful.  This calls the `type` getter method instead of directly appealing to the instance variable.See below.
 
 ```ruby
 class BeesWax
@@ -231,7 +231,7 @@ end
 
 What would happen if we added a `play` method to the `Bingo` class, keeping in mind that there is already a method of this name in the `Game` class that the `Bingo` class inherits from.
 .
-Solution:  If a `play` method were added to the `Bingo` class, this would overwrite the `Game` `play` method whenever `play` was called by an instance of the `Bingo` class.  Which is to say that Ruby would execute `Bingo#play` method, and not `Game#play` method.
+Solution:  If a `Bingo#play` method were added, this would overwrite the `Game#play` method whenever `play` was called by an instance of the `Bingo` class.  Which is to say that Ruby would execute `Bingo#play` method, and not `Game#play` method.
 
 
 10) What are the benefits of using Object Oriented Programming in Ruby? Think of as many as you can.
