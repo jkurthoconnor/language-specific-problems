@@ -82,7 +82,7 @@ class Card
   VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10"] +
            ["Jack", "Queen", "King", "Ace"]
   SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
-  
+
   def initialize(value, suit)
     @value = value
     @suit = suit
@@ -109,7 +109,7 @@ class Game
     end
   end
 
-  def show_initial_cards
+  def show_cards # improve output to appear as a list
     player.hand.each do |card|
       puts "#{player.name} is holding #{card}"
     end
@@ -117,11 +117,35 @@ class Game
     puts "#{dealer.name} is holding #{dealer.hand[0]} and one concealed card."
   end
 
+  def player_turn
+    loop do
+      move = move_choice
+      break unless move == 'hit'
+      hit
+      show_cards
+    end
+  end
+
+  def move_choice
+    puts "Would you like to 'hit' or 'stay'?"
+    move = nil
+    loop do
+      move = gets.chomp
+      break if ['hit', 'stay'].include?(move.downcase)
+      puts "#{move} is not an option.  Enter 'hit' or 'stay'."
+    end
+    move
+  end
+
+  def hit
+    player.hand.unshift(deck.shuffled_cards.shift)
+  end
+
   def play
     deal_cards
-    show_initial_cards
+    show_cards
+    player_turn
     
-    # player_turn
     # dealer_turn
     # show_result
   end
