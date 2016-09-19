@@ -109,12 +109,12 @@ class Game
     end
   end
 
-  def show_cards # improve output to appear as a list
-    player.hand.each do |card|
-      puts "#{player.name} is holding #{card}"
-    end
+  def show_cards
+    puts "#{player.name} is holding: "\
+         "#{player.hand.map { |card| card.to_s }.join(', ')}"
 
-    puts "#{dealer.name} is holding #{dealer.hand[0]} and one concealed card."
+    puts "#{dealer.name} is holding: "\
+         "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed card(s)."
   end
 
   def player_turn
@@ -152,5 +152,7 @@ class Game
 end
 
 twenty_one = Game.new
+
+
 
 twenty_one.play
