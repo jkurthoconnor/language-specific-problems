@@ -54,7 +54,6 @@ class Player < Participant
 
   def initialize
     super
-    @name = choose_name
   end
 
   def choose_name
@@ -65,7 +64,7 @@ class Player < Participant
       break if !name_choice.strip.empty?
       puts "I can't use that as a player name.  Please try again."
     end
-    name_choice
+    @name = name_choice
   end
 end
 
@@ -117,12 +116,24 @@ class Card
 end
 
 class Game
+   MESSAGE_PAUSE = 1.0
+   GAME_WON_AT = 5
+
   attr_accessor :player, :dealer, :deck
 
   def initialize
     @player = Player.new
     @dealer = Dealer.new
     @deck = Deck.new
+  end
+
+  def clear_screen
+    system 'clear' or system 'cls'
+  end
+
+  def welcome_sequence
+    welcome_message
+    player.choose_name
   end
 
   def deal_cards
@@ -133,7 +144,7 @@ class Game
   end
 
   def show_cards
-    system 'clear' or system 'cls'
+    clear_screen
     puts "#{player.name}'s hand: "\
          "#{player.hand.map(&:to_s).join(', ')}"
     puts ""
@@ -174,14 +185,21 @@ class Game
     move
   end
 
+  def welcome_message
+    clear_screen
+    puts "Welcome to 21.\n\nYour dealer today is #{dealer.name}."
+    puts "The first to win #{GAME_WON_AT} hands wins the game."
+    5.times { puts "\n" }
+  end
+
   def hit_message(participant)
     puts "#{participant.name} hits."
-    sleep 1.0
+    sleep MESSAGE_PAUSE
   end
 
   def stay_message(participant)
     puts "#{participant.name} stays."
-    sleep 1.0
+    sleep MESSAGE_PAUSE
   end
 
   def busted_message(participant)
@@ -199,7 +217,7 @@ class Game
       puts "#{dealer.name} takes one card."
     end
 
-    sleep 2.0
+    sleep  MESSAGE_PAUSE
   end
 
   def hand_result
@@ -217,20 +235,30 @@ class Game
     end
   end
 
-  def show_hand_result
+  def display_score_board
+    display_game_score
+    display_hand_result
+  end
+
+  def display_hand_result #rename to display hands and include cards?
     puts "#{player.name}'s score is #{player.hand_value};"\
          " #{dealer.name}'s score is #{dealer.hand_value}."
     puts "\n#{hand_result}"
   end
+  
+  def display_game_score
+    puts "Here's the score:"
+  end
 
   def play
-    # welcome sequence: welcome message; player pick name; anounce dealer/ opponent; state terms: i.e. first to 5 wins game
+    welcome_sequence # state terms: i.e. first to 5 wins game
+    # loop
     # initial dealing: deal cards; show cards
     deal_cards
     show_cards
     player_turn
     dealer_turn unless player.busted?
-    show_hand_result # << add revealing dealer's entire hand
+    display_score_board # << add revealing dealer's entire hand
   end
 end
 
