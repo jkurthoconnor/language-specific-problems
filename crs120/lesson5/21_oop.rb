@@ -144,7 +144,7 @@ class Game
 
   def player_turn
     loop do
-      break if player.busted?
+      return busted_message(player) if player.busted?
       move = move_choice
       return stay_message(player) if move == 'stay'
       hit_message(player)
@@ -155,7 +155,7 @@ class Game
 
   def dealer_turn
     loop do
-      break if dealer.busted?
+      return busted_message(dealer) if dealer.busted?
       return stay_message(dealer) if dealer.stay?
       hit_message(dealer)
       hit(dealer)
@@ -184,6 +184,10 @@ class Game
     sleep 1.0
   end
 
+  def busted_message(participant)
+    puts "#{participant.name} busted!"
+  end
+
   def hit(participant)
     new_card = deck.shuffled_cards.shift
     participant.hand.unshift(new_card)
@@ -192,25 +196,17 @@ class Game
   end
 
   def hand_result
-    return "Both bust!" if player.hand_value > Scoring::GOAL &&
-            dealer.hand_value > Scoring::GOAL
+    return "#{dealer.name} wins; #{player.name} busts." if player.hand_value >
+          Scoring::GOAL
+    return "#{player.name} wins; #{dealer.name} busts." if dealer.hand_value >
+          Scoring::GOAL
 
     comparison = player.hand_value <=> dealer.hand_value
 
     case comparison
-    when 0 then 'Tie.'
-    when 1
-      if player.hand_value <= Scoring::GOAL
-        'Player wins.'
-      else
-        'Dealer wins; player busts.'
-      end
-    when -1
-      if dealer.hand_value <= Scoring::GOAL
-        'Dealer wins.'
-      else
-        'Player wins; dealer busts.'
-      end
+    when 0 then "Tie."
+    when 1 then "#{player.name} wins."
+    when -1 then "#{dealer.name} wins."
     end
   end
 
@@ -232,7 +228,7 @@ class Game
     deal_cards
     show_cards
     player_turn
-    dealer_turn
+    dealer_turn unless player.busted?
     show_hand_result
   end
 end
