@@ -1,17 +1,51 @@
 require 'pry'
 
+module Scoring
+  GOAL = 21
+
+  def hand_value
+    points = 0
+    aces = 0
+
+    hand.each do |card|
+      if ('2'..'10').include?(card.value)
+        points += card.value.to_i
+      elsif ["Jack", "Queen", "King"].include?(card.value)
+        points += 10
+      else
+        points += 11
+        aces += 1
+      end
+    end
+
+    if aces.positive? && points > GOAL
+      points = ace_score_adjustment(aces, points)
+    end
+
+    points
+  end
+
+  def ace_score_adjustment(aces, points)
+    aces.times do
+      points -= 10
+      break if points <= GOAL
+    end
+    points
+  end
+
+  def busted?
+    hand_value > GOAL
+  end
+end
+
 class Participant
+  include Scoring
+
   attr_accessor :hand, :name
 
   def initialize
     @hand = []
     # @name = value passed in from 'children'
-  end
-
-  def hit
-  end
-
-  def stay
   end
 end
 
@@ -33,13 +67,6 @@ class Player < Participant
     end
     name_choice
   end
-
-  def busted?
-  end
-
-  def total
-    # related to cards
-  end
 end
 
 class Dealer < Participant
@@ -49,13 +76,9 @@ class Dealer < Participant
     @name = ['R2D2', 'BB8', 'C3PO'].sample
   end
 
-  def busted?
+  def hold?
+    hand_value >= 17
   end
-
-  def total
-    # related to cards
-  end
-
 end
 
 class Deck
@@ -81,7 +104,7 @@ class Card
 
   VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10"] +
            ["Jack", "Queen", "King", "Ace"]
-  SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+  SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades'].freeze
 
   def initialize(value, suit)
     @value = value
@@ -103,7 +126,7 @@ class Game
   end
 
   def deal_cards
-    2.times do 
+    2.times do
       player.hand.unshift(deck.shuffled_cards.shift)
       dealer.hand.unshift(deck.shuffled_cards.shift)
     end
@@ -111,19 +134,29 @@ class Game
 
   def show_cards
     puts "#{player.name} is holding: "\
-         "#{player.hand.map { |card| card.to_s }.join(', ')}"
+         "#{player.hand.map(&:to_s).join(', ')}"
 
     puts "#{dealer.name} is holding: "\
          "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed card(s)."
+    puts "\n\n"
   end
 
   def player_turn
     loop do
       move = move_choice
       break unless move == 'hit'
-      hit
+      hit(player)
       show_cards
+      break unless !player.busted?
     end
+  end
+
+  def dealer_turn
+    loop do
+      break if dealer.hold? || dealer.busted?
+      hit(dealer)
+    end
+    show_cards
   end
 
   def move_choice
@@ -137,22 +170,57 @@ class Game
     move
   end
 
-  def hit
-    player.hand.unshift(deck.shuffled_cards.shift)
+  def hit(participant)
+    new_card = deck.shuffled_cards.shift
+    participant.hand.unshift(new_card)
+    puts "The new card is: #{new_card}"
+  end
+
+  def hand_result
+    return "Both bust!" if player.hand_value > Scoring::GOAL &&
+            dealer.hand_value > Scoring::GOAL
+            
+    comparison = player.hand_value <=> dealer.hand_value
+
+    case comparison
+    when 0 then 'Tie.'
+    when 1
+      if player.hand_value <= Scoring::GOAL
+        'Player wins.'
+      else
+        'Dealer wins; player busts.'
+      end
+    when -1
+      if dealer.hand_value <= Scoring::GOAL
+        'Dealer wins.'
+      else
+        'Player wins; dealer busts.'
+      end
+    end
+  end
+
+  def show_hand_result
+    puts "#{player.name}'s score is #{player.hand_value};"\
+         " #{dealer.name}'s score is #{dealer.hand_value}."
+    puts "\n#{hand_result}"
   end
 
   def play
+    # welcome sequence
+      # welcome message
+      # player pick name
+      # anounce dealer/ opponent
+      # state terms: i.e. first to 5 wins game
+    # initial dealing
+      # deal cards
+      # show cards
     deal_cards
     show_cards
     player_turn
-    
-    # dealer_turn
-    # show_result
+    dealer_turn
+    show_hand_result
   end
 end
 
 twenty_one = Game.new
-
-
-
 twenty_one.play
