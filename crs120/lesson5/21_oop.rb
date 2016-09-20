@@ -76,7 +76,7 @@ class Dealer < Participant
     @name = ['R2D2', 'BB8', 'C3PO'].sample
   end
 
-  def hold?
+  def stay?
     hand_value >= 17
   end
 end
@@ -133,34 +133,38 @@ class Game
   end
 
   def show_cards
-    puts "#{player.name} is holding: "\
+    system 'clear' or system 'cls'
+    puts "#{player.name}'s hand: "\
          "#{player.hand.map(&:to_s).join(', ')}"
-
-    puts "#{dealer.name} is holding: "\
+    puts ""
+    puts "#{dealer.name}'s hand: "\
          "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed card(s)."
-    puts "\n\n"
+    5.times { puts "\n" }
   end
 
   def player_turn
     loop do
+      break if player.busted?
       move = move_choice
-      break unless move == 'hit'
+      return stay_message(player) if move == 'stay'
+      hit_message(player)
       hit(player)
       show_cards
-      break unless !player.busted?
     end
   end
 
   def dealer_turn
     loop do
-      break if dealer.hold? || dealer.busted?
+      break if dealer.busted?
+      return stay_message(dealer) if dealer.stay?
+      hit_message(dealer)
       hit(dealer)
+      show_cards
     end
-    show_cards
   end
 
   def move_choice
-    puts "Would you like to 'hit' or 'stay'?"
+    puts "#{player.name}, would you like to 'hit' or 'stay'?"
     move = nil
     loop do
       move = gets.chomp
@@ -170,16 +174,27 @@ class Game
     move
   end
 
+  def hit_message(participant)
+    puts "#{participant.name} hits."
+    sleep 1.0
+  end
+
+  def stay_message(participant)
+    puts "#{participant.name} stays."
+    sleep 1.0
+  end
+
   def hit(participant)
     new_card = deck.shuffled_cards.shift
     participant.hand.unshift(new_card)
     puts "The new card is: #{new_card}"
+    sleep 2.0
   end
 
   def hand_result
     return "Both bust!" if player.hand_value > Scoring::GOAL &&
             dealer.hand_value > Scoring::GOAL
-            
+
     comparison = player.hand_value <=> dealer.hand_value
 
     case comparison
