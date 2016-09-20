@@ -138,7 +138,7 @@ class Game
          "#{player.hand.map(&:to_s).join(', ')}"
     puts ""
     puts "#{dealer.name}'s hand: "\
-         "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed card(s)."
+         "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed."
     5.times { puts "\n" }
   end
 
@@ -191,15 +191,22 @@ class Game
   def hit(participant)
     new_card = deck.shuffled_cards.shift
     participant.hand.unshift(new_card)
-    puts "The new card is: #{new_card}"
+    
+    case participant
+    when player
+      puts "Your new card is: #{new_card}"
+    when dealer
+      puts "#{dealer.name} takes one card."
+    end
+
     sleep 2.0
   end
 
   def hand_result
     return "#{dealer.name} wins; #{player.name} busts." if player.hand_value >
-          Scoring::GOAL
+                                                           Scoring::GOAL
     return "#{player.name} wins; #{dealer.name} busts." if dealer.hand_value >
-          Scoring::GOAL
+                                                           Scoring::GOAL
 
     comparison = player.hand_value <=> dealer.hand_value
 
@@ -217,19 +224,13 @@ class Game
   end
 
   def play
-    # welcome sequence
-      # welcome message
-      # player pick name
-      # anounce dealer/ opponent
-      # state terms: i.e. first to 5 wins game
-    # initial dealing
-      # deal cards
-      # show cards
+    # welcome sequence: welcome message; player pick name; anounce dealer/ opponent; state terms: i.e. first to 5 wins game
+    # initial dealing: deal cards; show cards
     deal_cards
     show_cards
     player_turn
     dealer_turn unless player.busted?
-    show_hand_result
+    show_hand_result # << add revealing dealer's entire hand
   end
 end
 
