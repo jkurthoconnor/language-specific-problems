@@ -58,8 +58,7 @@ end
 
 class Participant
   include Scoring
-
-  attr_accessor :hand#, :name
+  attr_accessor :hand
 
   def initialize
     @hand = []
@@ -68,10 +67,6 @@ end
 
 class Player < Participant
   attr_reader :name
-
-  # def initialize
-  #   super
-  # end
 
   def choose_name
     puts "Please enter your name."
@@ -231,16 +226,6 @@ class Game
     end
   end
 
-  def dealers_turn
-    loop do
-      display_scoreboard_during_hand
-      return stay_message(dealer) if dealer.stay?
-      hit_message(dealer)
-      hit(dealer)
-      return busted_message(dealer) if dealer.busted?
-    end
-  end
-
   def move_choice
     puts "#{player.name}, would you like to 'hit' or 'stay'?"
     move = nil
@@ -279,6 +264,16 @@ class Game
     end
 
     sleep MESSAGE_PAUSE
+  end
+
+  def dealers_turn
+    loop do
+      display_scoreboard_during_hand
+      return stay_message(dealer) if dealer.stay?
+      hit_message(dealer)
+      hit(dealer)
+      return busted_message(dealer) if dealer.busted?
+    end
   end
 
   def results
@@ -352,16 +347,16 @@ class Game
     puts "\n#{game_result}"
   end
 
-  def display_goodbye_message
-    puts "\nThanks for playing. Goodbye!"
-  end
-
   def game_result
     if score[:p] == GAME_WON_AT
       "Congratulations #{player.name}. You won!"
     else
       "I'm sorry.  #{dealer.name} beat you."
     end
+  end
+
+  def display_goodbye_message
+    puts "\nThanks for playing. Goodbye!"
   end
 
   def play
