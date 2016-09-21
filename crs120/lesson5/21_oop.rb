@@ -33,6 +33,7 @@ module Scoring
     [points, aces]
   end
 
+  # rubocop: disable Performance/RangeInclude
   def evaluate_numbered_cards
     points = 0
 
@@ -42,6 +43,7 @@ module Scoring
 
     points
   end
+  # rubocop: enable Performance/RangeInclude
 
   def ace_score_adjustment(aces, points)
     aces.times do
@@ -146,9 +148,11 @@ class Game
     dealer.hand = []
   end
 
+  # rubocop: disable Style/AndOr
   def clear_screen
     system 'clear' or system 'cls'
   end
+  # rubocop: enable Style/AndOr
 
   def welcome_sequence
     clear_screen
@@ -170,17 +174,18 @@ class Game
 
   def display_dealing_message
     puts "\n#{dealer.name} just opened a new deck."
+    puts "\nShuffling"
     puts ""
     3.times do
-      '......shuffling.'.chars.each do |char|
-        sleep 0.02
+      '_\|/_\|/_\|/_'.chars.each do |char|
+        sleep 0.03
         print char
       end
     end
 
     puts ""
     puts "\nDone. Let's play!"
-    sleep MESSAGE_PAUSE / 2
+    sleep MESSAGE_PAUSE
   end
 
   def deal_cards
