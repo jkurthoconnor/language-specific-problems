@@ -7,19 +7,37 @@ module Scoring
     points = 0
     aces = 0
 
+    points += evaluate_face_cards[0]
+    aces += evaluate_face_cards[1]
+    points += evaluate_numbered_cards
+
+    if aces.positive? && points > GOAL
+      points = ace_score_adjustment(aces, points)
+    end
+
+    points
+  end
+
+  def evaluate_face_cards
+    points = 0
+    aces = 0
+
     hand.each do |card|
-      if ('2'..'10').include?(card.value)
-        points += card.value.to_i
-      elsif ["Jack", "Queen", "King"].include?(card.value)
-        points += 10
-      else
+      points += 10 if ["Jack", "Queen", "King"].include?(card.value)
+      if card.value == "Ace"
         points += 11
         aces += 1
       end
     end
 
-    if aces.positive? && points > GOAL
-      points = ace_score_adjustment(aces, points)
+    [points, aces]
+  end
+
+  def evaluate_numbered_cards
+    points = 0
+
+    hand.each do |card|
+      points += card.value.to_i if ('2'..'10').include?(card.value)
     end
 
     points
@@ -41,20 +59,19 @@ end
 class Participant
   include Scoring
 
-  attr_accessor :hand, :name
+  attr_accessor :hand#, :name
 
   def initialize
     @hand = []
-    # @name = value passed in from 'children'
   end
 end
 
 class Player < Participant
   attr_reader :name
 
-  def initialize
-    super
-  end
+  # def initialize
+  #   super
+  # end
 
   def choose_name
     puts "Please enter your name."
@@ -116,15 +133,22 @@ class Card
 end
 
 class Game
-   MESSAGE_PAUSE = 1.0
-   GAME_WON_AT = 5
+  MESSAGE_PAUSE = 1.0
+  GAME_WON_AT = 5
 
-  attr_accessor :player, :dealer, :deck
+  attr_accessor :player, :dealer, :deck, :score
 
   def initialize
     @player = Player.new
     @dealer = Dealer.new
     @deck = Deck.new
+    @score = { p: 0, d: 0 }
+  end
+
+  def reset_hand
+    @deck = Deck.new
+    player.hand = []
+    dealer.hand = []
   end
 
   def clear_screen
@@ -132,8 +156,36 @@ class Game
   end
 
   def welcome_sequence
+    clear_screen
     welcome_message
     player.choose_name
+  end
+
+  def welcome_message
+    puts "Welcome to 21.\n\nYour dealer today is #{dealer.name}."
+    puts "\nThe first to win #{GAME_WON_AT} hands wins the game."
+    5.times { puts "\n" }
+  end
+
+  def dealing_sequence
+    clear_screen
+    display_dealing_message
+    deal_cards
+  end
+
+  def display_dealing_message
+    puts "\n#{dealer.name} just opened a new deck."
+    puts ""
+    3.times do
+      '......shuffling.'.chars.each do |char|
+        sleep 0.02
+        print char
+      end
+    end
+
+    puts ""
+    puts "\nDone. Let's play!"
+    sleep MESSAGE_PAUSE / 2
   end
 
   def deal_cards
@@ -143,34 +195,49 @@ class Game
     end
   end
 
-  def show_cards
-    clear_screen
-    puts "#{player.name}'s hand: "\
-         "#{player.hand.map(&:to_s).join(', ')}"
-    puts ""
-    puts "#{dealer.name}'s hand: "\
-         "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed."
-    5.times { puts "\n" }
+  def display_cards_during_hand
+    display_player_cards
+    display_dealer_cards_during_hand
   end
 
-  def player_turn
+  def display_cards_after_hand
+    display_player_cards
+    display_dealer_cards_after_hand
+  end
+
+  def display_player_cards
+    puts "\n#{player.name}'s hand: "\
+       "#{player.hand.map(&:to_s).join(', ')}"
+  end
+
+  def display_dealer_cards_during_hand
+    puts "\n#{dealer.name}'s hand: "\
+         "#{dealer.hand[0]} and #{dealer.hand.size - 1} concealed."
+  end
+
+  def display_dealer_cards_after_hand
+    puts "\n#{dealer.name}'s hand: "\
+       "#{dealer.hand.map(&:to_s).join(', ')}"
+  end
+
+  def players_turn
     loop do
-      return busted_message(player) if player.busted?
+      display_scoreboard_during_hand
       move = move_choice
       return stay_message(player) if move == 'stay'
       hit_message(player)
       hit(player)
-      show_cards
+      return busted_message(player) if player.busted?
     end
   end
 
-  def dealer_turn
+  def dealers_turn
     loop do
-      return busted_message(dealer) if dealer.busted?
+      display_scoreboard_during_hand
       return stay_message(dealer) if dealer.stay?
       hit_message(dealer)
       hit(dealer)
-      show_cards
+      return busted_message(dealer) if dealer.busted?
     end
   end
 
@@ -185,80 +252,130 @@ class Game
     move
   end
 
-  def welcome_message
-    clear_screen
-    puts "Welcome to 21.\n\nYour dealer today is #{dealer.name}."
-    puts "The first to win #{GAME_WON_AT} hands wins the game."
-    5.times { puts "\n" }
-  end
-
   def hit_message(participant)
-    puts "#{participant.name} hits."
-    sleep MESSAGE_PAUSE
+    puts "\n#{participant.name} hits."
+    sleep MESSAGE_PAUSE / 2
   end
 
   def stay_message(participant)
-    puts "#{participant.name} stays."
+    puts "\n#{participant.name} stays."
     sleep MESSAGE_PAUSE
   end
 
   def busted_message(participant)
-    puts "#{participant.name} busted!"
+    puts "\n#{participant.name} busted!"
+    sleep MESSAGE_PAUSE
   end
 
   def hit(participant)
     new_card = deck.shuffled_cards.shift
     participant.hand.unshift(new_card)
-    
+
     case participant
     when player
-      puts "Your new card is: #{new_card}"
+      puts "The new card is: #{new_card}"
     when dealer
-      puts "#{dealer.name} takes one card."
+      puts "#{dealer.name} takes a card."
     end
 
-    sleep  MESSAGE_PAUSE
+    sleep MESSAGE_PAUSE
   end
 
+  def results
+    display_scoreboard_with_result
+    increment_score
+  end
+
+  # rubocop:disable Metrics/AbcSize
   def hand_result
-    return "#{dealer.name} wins; #{player.name} busts." if player.hand_value >
-                                                           Scoring::GOAL
-    return "#{player.name} wins; #{dealer.name} busts." if dealer.hand_value >
-                                                           Scoring::GOAL
-
-    comparison = player.hand_value <=> dealer.hand_value
-
-    case comparison
-    when 0 then "Tie."
-    when 1 then "#{player.name} wins."
-    when -1 then "#{dealer.name} wins."
-    end
+    return "#{dealer.name} wins." if player.hand_value > Scoring::GOAL
+    return "#{player.name} wins." if dealer.hand_value > Scoring::GOAL
+    return "#{player.name} wins." if player.hand_value > dealer.hand_value
+    return "#{dealer.name} wins." if player.hand_value < dealer.hand_value
+    return "It's a tie." if player.hand_value == dealer.hand_value
   end
+  # rubocop:enable Metrics/AbcSize
 
-  def display_score_board
+  def display_scoreboard_during_hand
+    clear_screen
     display_game_score
-    display_hand_result
+    display_cards_during_hand
+    5.times { puts "\n" }
   end
 
-  def display_hand_result #rename to display hands and include cards?
-    puts "#{player.name}'s score is #{player.hand_value};"\
-         " #{dealer.name}'s score is #{dealer.hand_value}."
+  def display_scoreboard_with_result
+    clear_screen
+    display_game_score
+    display_cards_after_hand
+    display_hand_result
+    5.times { puts "\n" }
+  end
+
+  def display_hand_result
+    puts "\nHand values: #{player.name}: #{player.hand_value} |||"\
+         " #{dealer.name}: #{dealer.hand_value}."
     puts "\n#{hand_result}"
   end
-  
+
+  def increment_score
+    case hand_result
+    when "#{dealer.name} wins."
+      score[:d] += 1
+    when "#{player.name} wins."
+      score[:p] += 1
+    end
+  end
+
+  def quit?
+    puts "Type 'y' to play the next hand. Any other key will end the game."
+    choice = gets.chomp
+    choice.casecmp('y').nonzero?
+  end
+
   def display_game_score
-    puts "Here's the score:"
+    puts "\nGames won: #{player.name}: #{score[:p]} |||"\
+         " #{dealer.name}: #{score[:d]}"
+  end
+
+  def someone_won_game?
+    score[:p] == GAME_WON_AT || score[:d] == GAME_WON_AT
+  end
+
+  def closing_sequence
+    clear_screen
+    display_game_result
+    display_goodbye_message
+  end
+
+  def display_game_result
+    display_game_score
+    puts "\n#{game_result}"
+  end
+
+  def display_goodbye_message
+    puts "\nThanks for playing. Goodbye!"
+  end
+
+  def game_result
+    if score[:p] == GAME_WON_AT
+      "Congratulations #{player.name}. You won!"
+    else
+      "I'm sorry.  #{dealer.name} beat you."
+    end
   end
 
   def play
-    welcome_sequence # state terms: i.e. first to 5 wins game
-    # loop
-    # initial dealing: deal cards; show cards
-    deal_cards
-    show_cards
-    player_turn
-    dealer_turn unless player.busted?
-    display_score_board # << add revealing dealer's entire hand
+    welcome_sequence
+    loop do
+      dealing_sequence
+      players_turn
+      dealers_turn unless player.busted?
+      results
+      break if someone_won_game?
+      break if quit?
+      reset_hand
+    end
+    closing_sequence
   end
 end
 
