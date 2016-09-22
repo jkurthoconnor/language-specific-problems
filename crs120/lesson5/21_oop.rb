@@ -1,5 +1,3 @@
-require 'pry'
-
 module Scoring
   GOAL = 21
 
@@ -7,8 +5,8 @@ module Scoring
     points = 0
     aces = 0
 
-    points += evaluate_face_cards[0]
-    aces += evaluate_face_cards[1]
+    points += evaluate_face_cards[:points]
+    aces += evaluate_face_cards[:aces]
     points += evaluate_numbered_cards
 
     if aces.positive? && points > GOAL
@@ -19,18 +17,17 @@ module Scoring
   end
 
   def evaluate_face_cards
-    points = 0
-    aces = 0
+    values = { points: 0, aces: 0 }
 
     hand.each do |card|
-      points += 10 if ["Jack", "Queen", "King"].include?(card.value)
+      values[:points] += 10 if ["Jack", "Queen", "King"].include?(card.value)
       if card.value == "Ace"
-        points += 11
-        aces += 1
+        values[:points] += 11
+        values[:aces] += 1
       end
     end
 
-    [points, aces]
+    values
   end
 
   # rubocop: disable Performance/RangeInclude
@@ -108,7 +105,7 @@ class Deck
   end
 
   def shuffle
-    @new_deck.shuffle!
+    @new_deck.shuffle
   end
 end
 
