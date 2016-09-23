@@ -24,14 +24,15 @@ def reduce(array, default=0)
     collector = yield(collector, array[index])
     index += 1
   end
-  
+
   collector
 end
 
 # method invocation
 array = [1, 2, 3, 4, 5]
 
-p reduce(array) { |acc, num| acc + num }                    # 15
-p reduce(array, 10) { |acc, num| acc + num }                # 25
-p reduce(array, 15) { |acc, num| acc + num }                # 30
-p reduce(array) { |acc, num| acc + num if num.odd? }        # NoMethodError: undefined method `+' for nil:NilClass
+p reduce(array) { |acc, num| acc + num }                # 15
+p reduce(array, 10) { |acc, num| acc + num }            # 25
+p reduce(array, 15) { |acc, num| acc + num }            # 30
+p reduce(array) { |acc, num| acc + num if num.odd? }    # NoMethodError: undefined method `+' for nil:NilClass
+p reduce(array)                                         # no block given (LocalJumpError)
