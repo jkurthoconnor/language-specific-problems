@@ -16,8 +16,9 @@
 
 # method implementation
 
-def reduce(array, collector=0)
+def reduce(array, default=0)
   index = 0
+  collector = default
 
   while index < array.length
     collector = yield(collector, array[index])
