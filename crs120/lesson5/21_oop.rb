@@ -362,7 +362,7 @@ class Game
   end
 
   def play
-    welcome_sequence
+    welcome_sequence # welcome; player set name
     loop do
       dealing_sequence
       players_turn
