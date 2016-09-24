@@ -29,7 +29,7 @@ class Todo
 end
 
 class TodoList
-  attr_accessor :title, :todos
+  attr_accessor :title
 
   def initialize(title)
     @title = title
@@ -38,13 +38,13 @@ class TodoList
   
   def to_s
     header = "---- #{title} ----\n"
-    header + todos.map(&:to_s).join("\n")
+    header + @todos.map(&:to_s).join("\n")
   end
   
   def each
     index = 0
-    until index == todos.length
-      yield(todos[index])
+    until index == @todos.length
+      yield(@todos[index])
       index += 1
     end
 
@@ -53,28 +53,28 @@ class TodoList
 
   def add(todo_object)
     raise TypeError, 'Can only add Todo objects' unless todo_object.instance_of?(Todo)
-    self.todos.push(todo_object)
+    @todos.push(todo_object)
 
     alias << add
 
-    todos
+    @todos
   end
   
   def size
-    todos.size
+    @todos.size
   end
   
   def first
-    todos.first
+    @todos.first
   end
   
   def last
-    todos.last
+    @todos.last
   end
   
   def item_at(index)
-    raise IndexError if index >= todos.size
-    todos[index]
+    raise IndexError if index >= @todos.size
+    @todos[index]
   end
   
   def mark_done_at(index)
@@ -86,15 +86,15 @@ class TodoList
   end
   
   def remove_at(index)
-    todos.delete(item_at(index))
+    @todos.delete(item_at(index))
   end
-  
+
   def shift
-    todos.shift
+    @todos.shift
   end
   
   def pop
-    todos.pop
+    @todos.pop
   end
 end
 
