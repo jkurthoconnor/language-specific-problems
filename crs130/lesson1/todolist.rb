@@ -36,16 +36,16 @@ class TodoList
     @todos = []
   end
   
-  # def to_s          # disentangle `each` 
-  #   puts "---- #{title} ----"
-  #   todos.each { |item| puts item }
-  # end
+  def to_s
+    header = "---- #{title} ----\n"
+    header + todos.map(&:to_s).join("\n")
+  end
   
   def each
-    counter = 0
-    until counter == todos.length
-      yield(todos[counter])
-      counter += 1
+    index = 0
+    until index == todos.length
+      yield(todos[index])
+      index += 1
     end
 
     self
@@ -178,8 +178,8 @@ puts ""
 # ---- Outputting the list -----
 
 # to_s
-list.to_s                      # returns string representation of the list
-
+puts list.to_s                      # returns string representation of the list
+puts ""
 
 # ---- Today's Todos ----
 # [ ] Buy milk
