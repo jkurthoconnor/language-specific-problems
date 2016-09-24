@@ -60,6 +60,12 @@ class TodoList
     selected
   end
   
+  def done!
+    self.each do |todo|
+      todo.done!
+    end
+  end
+ # def done?
 
   def add(todo_object)
     raise TypeError, 'Can only add Todo objects' unless todo_object.instance_of?(Todo)
@@ -86,7 +92,7 @@ class TodoList
     raise IndexError if index >= @todos.size
     @todos[index]
   end
-  
+ 
   def mark_done_at(index)
     item_at(index).done!
   end
@@ -106,6 +112,10 @@ class TodoList
   def pop
     @todos.pop
   end
+  
+  # def to_s
+  # def done!
+  # def done?
 end
 
 
@@ -132,3 +142,5 @@ puts ""
 results = list.select {|todo| todo.done? }
 
 puts results.inspect
+list.done!
+puts list
