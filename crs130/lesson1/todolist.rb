@@ -35,16 +35,16 @@ class TodoList
     @title = title
     @todos = []
   end
-  
+
   def to_s
     header = "---- #{title} ----\n"
     header + @todos.map(&:to_s).join("\n")
   end
-  
+
   def to_a
     @todos
   end
-  
+
   def each
     index = 0
     until index == @todos.length
@@ -54,7 +54,7 @@ class TodoList
 
     self
   end
-  
+
   def select
     selected = TodoList.new("Selections from #{title}")
     self.each do |todo|
@@ -63,13 +63,19 @@ class TodoList
 
     selected
   end
-  
-  def done!
+
+  def mark_all_done
     @todos.each do |todo|
       todo.done!
     end
   end
-  
+
+  def mark_all_undone
+    @todos.each do |todo|
+      todo.undone!
+    end
+  end
+
   def done?
     @todos.each do |todo|
       return false if !todo.done?
@@ -85,32 +91,32 @@ class TodoList
 
     @todos
   end
-  
+
   def size
     @todos.size
   end
-  
+
   def first
     @todos.first
   end
-  
+
   def last
     @todos.last
   end
-  
+
   def item_at(index)
     raise IndexError if index >= @todos.size
     @todos[index]
   end
- 
+
   def mark_done_at(index)
     item_at(index).done!
   end
-  
+
   def mark_undone_at(index)
     item_at(index).undone!
   end
-  
+
   def remove_at(index)
     @todos.delete(item_at(index))
   end
@@ -118,15 +124,11 @@ class TodoList
   def shift
     @todos.shift
   end
-  
+
   def pop
     @todos.pop
   end
-  
-  # def to_s
-
 end
-
 
 # given
 todo1 = Todo.new("Buy milk")
@@ -154,6 +156,9 @@ puts results.inspect
 
 puts list.done?
 
-list.done!
+list.mark_all_done
+puts list
+puts list.done?
+list.mark_all_undone
 puts list
 puts list.done?
