@@ -72,9 +72,11 @@ class TodoList
     @todos.each do |todo|
       return todo if todo.title == string
     end
+    nil
   end
   
   def mark_item_done(title)
+    return "No task by that title!" if find_by_title(title).nil?
     find_by_title(title).done!
   end
 
@@ -189,3 +191,5 @@ puts list.find_by_title("Clean room")
 p list.find_by_title("Clean room")
 list.mark_item_done("Clean room")
 puts list
+p list.find_by_title("do stuff")
+p list.mark_item_done("do stuff")
