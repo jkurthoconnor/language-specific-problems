@@ -68,6 +68,16 @@ class TodoList
     selected
   end
 
+  def find_by_title(string)
+    @todos.each do |todo|
+      return todo if todo.title == string
+    end
+  end
+  
+  def mark_item_done(title)
+    find_by_title(title).done!
+  end
+
   def mark_all_done
     @todos.each do |todo|
       todo.done!
@@ -156,21 +166,13 @@ list.add(todo3)                 # adds todo3 to end of list, returns list
 
 todo4 = Todo.new('test alias')
 puts list << todo4
-
 todo2.done!
-
 puts list
 puts ""
-
 puts todo2.undone?
 puts todo2.done?
 puts ""
-results = list.select {|todo| todo.done? }
-
-puts results.inspect
-
 puts list.done?
-
 list.mark_all_done
 puts list
 puts list.done?
@@ -182,3 +184,8 @@ puts list.id_all_undone_items
 todo3.done!
 puts ""
 puts list.id_all_done_items
+puts ""
+puts list.find_by_title("Clean room")
+p list.find_by_title("Clean room")
+list.mark_item_done("Clean room")
+puts list
