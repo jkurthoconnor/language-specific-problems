@@ -65,7 +65,13 @@ class TodoList
       todo.done!
     end
   end
- # def done?
+  
+  def done?
+    self.each do |todo|
+      return false if !todo.done?
+    end
+    true
+  end
 
   def add(todo_object)
     raise TypeError, 'Can only add Todo objects' unless todo_object.instance_of?(Todo)
@@ -114,8 +120,7 @@ class TodoList
   end
   
   # def to_s
-  # def done!
-  # def done?
+
 end
 
 
@@ -142,5 +147,9 @@ puts ""
 results = list.select {|todo| todo.done? }
 
 puts results.inspect
+
+puts list.done?
+
 list.done!
 puts list
+puts list.done?
