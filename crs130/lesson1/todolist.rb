@@ -50,6 +50,16 @@ class TodoList
 
     self
   end
+  
+  def select
+    selected = []
+    self.each do |todo|
+      selected.push(todo) if yield(todo)
+    end
+
+    selected
+  end
+  
 
   def add(todo_object)
     raise TypeError, 'Can only add Todo objects' unless todo_object.instance_of?(Todo)
@@ -105,94 +115,20 @@ todo2 = Todo.new("Clean room")
 todo3 = Todo.new("Go to gym")
 list = TodoList.new("Today's Todos")
 
-# ---- Adding to the list -----
-# add
 
 list.add(todo1)                 # adds todo1 to end of list, returns list
 list.add(todo2)                 # adds todo2 to end of list, returns list
 list.add(todo3)                 # adds todo3 to end of list, returns list
-# list.add(1)                     # raises TypeError with message "Can only add Todo objects"
 
-# << 
-# same behavior as add
 
 todo4 = Todo.new('test alias')
 puts list << todo4
+
+todo2.done!
+
+puts list
 puts ""
 
-# ---- Interrogating the list -----
-# size
+results = list.select {|todo| todo.done? }
 
-puts list.size                       # returns 4
-puts ""
-# 
-# first
-puts list.first                      # returns todo1, which is the first item in the list
-puts ""
-# 
-# last
-puts list.last                       # returns todo4, which is the last item in the list
-puts ""
-# 
-# ---- Retrieving an item in the list ----
-# item_at
-
-# puts list.item_at                    # raises ArgumentError
-puts list.item_at(1)                 # returns 2nd item in list (zero based index)
-puts ""
-# puts list.item_at(100)               # raises IndexError
-# 
-# ---- Marking items in the list -----
-# mark_done_at
-
-# list.mark_done_at               # raises ArgumentError
-list.mark_done_at(1)            # marks the 2nd item as done
-puts todo2
-puts ""
-# list.mark_done_at(100)          # raises IndexError
-# 
-# mark_undone_at
-
-# list.mark_undone_at             # raises ArgumentError
-list.mark_undone_at(1)          # marks the 2nd item as not done,
-puts todo2
-puts ""
-# list.mark_undone_at(100)        # raises IndexError
-
-# ---- Deleting from the the list -----
-
-# shift
-# puts list.shift                      # removes and returns the first item in list
-# puts ""
-
-# pop
-# puts list.pop                        # removes and returns the last item in list
-# puts ""
-
-# remove_at
-# list.remove_at                  # raises ArgumentError
-# puts list.remove_at(1)                 # removes and returns the 2nd item
-# puts ""
-# puts list.remove_at(100)             # raises IndexError
-# 
-# ---- Outputting the list -----
-
-# to_s
-puts list.to_s                      # returns string representation of the list
-puts ""
-
-# ---- Today's Todos ----
-# [ ] Buy milk
-# [ ] Clean room
-# [ ] Go to gym
-
-# or, if any todos are done
-
-# ---- Today's Todos ----
-# [ ] Buy milk
-# [X] Clean room
-# [ ] Go to gym
-
-list.each do |todo|
-  puts todo
-end
+puts results.inspect
