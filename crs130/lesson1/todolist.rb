@@ -18,6 +18,10 @@ class Todo
   def done?
     done
   end
+  
+  def undone?
+    !done
+  end
 
   def undone!
     self.done = false
@@ -74,6 +78,14 @@ class TodoList
     @todos.each do |todo|
       todo.undone!
     end
+  end
+
+  def id_all_done_items
+    @todos.select { |todo| todo.done? }
+  end
+  
+  def id_all_undone_items
+    @todos.select { |todo| todo.undone? }
   end
 
   def done?
@@ -150,6 +162,9 @@ todo2.done!
 puts list
 puts ""
 
+puts todo2.undone?
+puts todo2.done?
+puts ""
 results = list.select {|todo| todo.done? }
 
 puts results.inspect
@@ -162,3 +177,8 @@ puts list.done?
 list.mark_all_undone
 puts list
 puts list.done?
+puts ""
+puts list.id_all_undone_items
+todo3.done!
+puts ""
+puts list.id_all_done_items
