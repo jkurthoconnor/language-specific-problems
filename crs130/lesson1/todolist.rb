@@ -41,6 +41,10 @@ class TodoList
     header + @todos.map(&:to_s).join("\n")
   end
   
+  def to_a
+    @todos
+  end
+  
   def each
     index = 0
     until index == @todos.length
