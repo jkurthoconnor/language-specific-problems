@@ -52,9 +52,9 @@ class TodoList
   end
   
   def select
-    selected = []
+    selected = TodoList.new("Selections from #{title}")
     self.each do |todo|
-      selected.push(todo) if yield(todo)
+      selected.add(todo) if yield(todo)
     end
 
     selected
