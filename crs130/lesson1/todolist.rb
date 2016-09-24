@@ -65,13 +65,13 @@ class TodoList
   end
   
   def done!
-    self.each do |todo|
+    @todos.each do |todo|
       todo.done!
     end
   end
   
   def done?
-    self.each do |todo|
+    @todos.each do |todo|
       return false if !todo.done?
     end
     true
