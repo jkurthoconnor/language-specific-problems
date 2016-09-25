@@ -1,11 +1,12 @@
-
+# This class represents a todo item and its
+# related data and status as done/undone.
 class Todo
-  DONE_MARKER = 'X'
-  UNDONE_MARKER = ' '
+  DONE_MARKER = 'X'.freeze
+  UNDONE_MARKER = ' '.freeze
 
   attr_accessor :title, :description, :done
 
-  def initialize(title, description='')
+  def initialize(title, description = '')
     @title = title
     @description = description
     @done = false
@@ -18,7 +19,7 @@ class Todo
   def done?
     done
   end
-  
+
   def undone?
     !done
   end
@@ -32,6 +33,7 @@ class Todo
   end
 end
 
+# This class represents a collection of Todo items.
 class TodoList
   attr_accessor :title
 
@@ -61,7 +63,7 @@ class TodoList
 
   def select
     selected = TodoList.new("Selections from #{title}")
-    self.each do |todo|
+    each do |todo|
       selected.add(todo) if yield(todo)
     end
 
@@ -74,9 +76,9 @@ class TodoList
     end
     nil
   end
-  
+
   def mark_item_done(title)
-    return "No task by that title!" if find_by_title(title).nil?
+    return 'No task by that title!' if find_by_title(title).nil?
     find_by_title(title).done!
   end
 
@@ -95,14 +97,14 @@ class TodoList
   def id_all_done_items
     @todos.select { |todo| todo.done? }
   end
-  
+
   def id_all_undone_items
     @todos.select { |todo| todo.undone? }
   end
 
   def done?
     @todos.each do |todo|
-      return false if !todo.done?
+      return false unless todo.done?
     end
     true
   end
@@ -155,25 +157,23 @@ class TodoList
 end
 
 # given
-todo1 = Todo.new("Buy milk")
-todo2 = Todo.new("Clean room")
-todo3 = Todo.new("Go to gym")
+todo1 = Todo.new('Buy milk')
+todo2 = Todo.new('Clean room')
+todo3 = Todo.new('Go to gym')
 list = TodoList.new("Today's Todos")
 
-
-list.add(todo1)                 # adds todo1 to end of list, returns list
-list.add(todo2)                 # adds todo2 to end of list, returns list
-list.add(todo3)                 # adds todo3 to end of list, returns list
-
+puts list.add(todo1)                 # adds todo1 to end of list, returns list
+puts list.add(todo2)                 # adds todo2 to end of list, returns list
+puts list.add(todo3)                 # adds todo3 to end of list, returns list
 
 todo4 = Todo.new('test alias')
 puts list << todo4
 todo2.done!
 puts list
-puts ""
+puts ''
 puts todo2.undone?
 puts todo2.done?
-puts ""
+puts ''
 puts list.done?
 list.mark_all_done
 puts list
@@ -181,15 +181,14 @@ puts list.done?
 list.mark_all_undone
 puts list
 puts list.done?
-puts ""
+puts ''
 puts list.id_all_undone_items
 todo3.done!
-puts ""
+puts ''
 puts list.id_all_done_items
-puts ""
-puts list.find_by_title("Clean room")
-p list.find_by_title("Clean room")
-list.mark_item_done("Clean room")
+puts ''
+puts list.find_by_title('Clean room')
+list.mark_item_done('Clean room')
 puts list
-p list.find_by_title("do stuff")
-p list.mark_item_done("do stuff")
+p list.find_by_title('do stuff')
+puts list.mark_item_done('do stuff')
