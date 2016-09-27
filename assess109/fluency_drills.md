@@ -412,7 +412,7 @@ arr.keep_if { |n| n < 3 }
 ```
 
 
-### (array) remove objects at specified indices
+### (array) remove objects at specified indices. Bonus: remove objects from an array using a range of indices
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
@@ -422,6 +422,10 @@ arr.delete_at(-1)
 # or
 
 arr.slice!(-1)
+
+# Bonus
+
+arr.slice!(1..3)
 ```
 
 
@@ -624,13 +628,17 @@ end
 p indices
 
 ```
-### combine two arrays into one
+### combine two arrays into one:  1) and return a new array, 2) by mutating original array. Subtract the elements of one component array from the combined array to return an original.
 
 ```ruby
 flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
 addition = [ "Dino", "Other_Pet" ]
 
+flintstones + addition
+
 flintstones.concat(addition)
+
+flintstones - addition
 ```
 
 ### remove the first element in an array\nBonus: remove the first n elements in an array
