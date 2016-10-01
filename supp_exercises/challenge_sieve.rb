@@ -14,6 +14,7 @@
 
 class Sieve
   def initialize(limit)
+    raise ArgumentError if limit < 2
     @range = (2..limit).to_a
   end
 
