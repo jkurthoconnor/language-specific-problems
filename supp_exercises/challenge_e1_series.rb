@@ -23,7 +23,11 @@ def slices(slice_size)
   results = []
   index = 0
   until index + slice_size > @string.length
-    results.push([@string[index, slice_size]]) # need to return integers, not strings
+    set = []
+    (index...index + slice_size).each do |ind|
+      set.push(@string[ind].to_i)
+    end
+    results.push(set)
     index += 1
   end
   results
@@ -36,7 +40,7 @@ to_eight = Series.new("12345678")
 to_four_too = Series.new("1234")
 to_zero = Series.new("1234567890")
 
-puts to_four.slices(2)
-puts to_four_too.slices(4)
-puts to_eight.slices(3)
-puts to_zero.slices(5)
+p to_four.slices(2)
+p to_four_too.slices(4)
+p to_eight.slices(3)
+p to_zero.slices(5)
