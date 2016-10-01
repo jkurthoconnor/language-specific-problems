@@ -20,6 +20,7 @@ class Series
   end
   
 def slices(slice_size)
+  raise ArgumentError if slice_size > @string.length
   results = []
   index = 0
   until index + slice_size > @string.length
