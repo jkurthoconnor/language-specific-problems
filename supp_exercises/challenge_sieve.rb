@@ -18,7 +18,7 @@ class Sieve
   end
 
   def primes
-    composite = []
+    composites = []
     range = (2..@up_to).to_a
     unmarked = range
     index = 0
@@ -26,9 +26,10 @@ class Sieve
     while index < unmarked.length
       unmarked.each do |n|
         next if n == unmarked[index]
-        composite.push(n) if n % unmarked[index] == 0
+        composites.push(n) if n % unmarked[index] == 0
       end
-      unmarked = range - composite
+
+      unmarked = range - composites
       index += 1
     end
 
