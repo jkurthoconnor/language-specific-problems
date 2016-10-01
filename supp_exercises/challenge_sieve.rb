@@ -14,13 +14,12 @@
 
 class Sieve
   def initialize(limit)
-    @up_to = limit
+    @range = (2..limit).to_a
   end
 
   def primes
     composites = []
-    range = (2..@up_to).to_a
-    unmarked = range
+    unmarked = @range
     index = 0
 
     while index < unmarked.length
@@ -29,7 +28,7 @@ class Sieve
         composites.push(n) if n % unmarked[index] == 0
       end
 
-      unmarked = range - composites
+      unmarked = @range - composites
       index += 1
     end
 
