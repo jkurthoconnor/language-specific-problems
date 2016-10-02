@@ -31,10 +31,9 @@
 # = 155
 
 class Octal
-  attr_accessor :octal_digits, :octal_string, :offset
+  attr_accessor :octal_digits, :offset
   def initialize(string)
-    @octal_string = validate(string)
-    @octal_digits = octal_string.chars.map(&:to_i)
+    @octal_digits = validate(string).chars.map(&:to_i)
     @offset = @octal_digits.length - 1
   end
 
