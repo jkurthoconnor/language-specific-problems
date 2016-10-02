@@ -31,21 +31,31 @@
 # = 155
 
 class Octal
-  attr_accessor :octal_digits, :offset
-  def initialize(octal_string)
+  attr_accessor :octal_digits, :octal_string, :offset
+  def initialize(string)
+    @octal_string = validate(string)
     @octal_digits = octal_string.chars.map(&:to_i)
     @offset = @octal_digits.length - 1
   end
 
+  def validate(input)
+    return '0' if input.delete('^0-7').length != input.length
+    input
+  end
+
   def to_decimal
-    @octal_digits.map!.with_index do |digit, index| 
+    digits = @octal_digits.clone
+    digits.map!.with_index do |digit, index| 
       digit*(8**(offset - index))
     end
-    @octal_digits.reduce(&:+)
+    digits.reduce(&:+)
   end
 end
 
 sample = Octal.new('233')
 # p sample.octal_digits
-# p sample.to_decimal
-p sample.octal_digits
+p sample.to_decimal
+# p sample.octal_digits
+
+sample_too = Octal.new('8')
+p sample_too.to_decimal
