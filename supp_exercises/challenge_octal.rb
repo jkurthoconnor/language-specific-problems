@@ -31,16 +31,21 @@
 # = 155
 
 class Octal
+  attr_accessor :octal_digits, :offset
   def initialize(octal_string)
     @octal_digits = octal_string.chars.map(&:to_i)
+    @offset = @octal_digits.length - 1
   end
-  
+
   def to_decimal
-    @octal_digits
-    # loop_with_index to convert to decimal
-    
+    @octal_digits.map!.with_index do |digit, index| 
+      digit*(8**(offset - index))
+    end
+    @octal_digits.reduce(&:+)
   end
 end
 
-sample = Octal.new('101')
-p sample.to_decimal
+sample = Octal.new('233')
+# p sample.octal_digits
+# p sample.to_decimal
+p sample.octal_digits
