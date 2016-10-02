@@ -52,9 +52,7 @@ class Octal
 end
 
 sample = Octal.new('233')
-# p sample.octal_digits
-p sample.to_decimal
-# p sample.octal_digits
+sample.to_decimal
 
 sample_too = Octal.new('8')
-p sample_too.to_decimal
+sample_too.to_decimal
