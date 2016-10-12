@@ -6,6 +6,12 @@ class Anagram
   end
 
   def match(possibilities)
-    # checks `possibilities` against `@word` and returns all and only those elements in `possibilities` that are anagrams of `@word`.  a `select` like function
+    sorted_chars = @word.downcase.chars.sort
+
+    possibilities.delete_if { |poss| poss.downcase == @word.downcase }
+
+    possibilities.select do |ana|
+      ana.downcase.chars.sort == sorted_chars
+    end
   end
 end
