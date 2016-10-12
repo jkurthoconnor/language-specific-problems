@@ -1,7 +1,12 @@
 
 class Trinary
   def initialize(string)
-    @trinary_dig = string.chars.map(&:to_i) # add validation / conversion
+    @trinary_dig = clean_and_convert(string)
+  end
+
+  def clean_and_convert(string)
+    return string.chars.map(&:to_i) if string.count('^012').zero?
+    string = [0]
   end
 
   def to_decimal
@@ -9,3 +14,6 @@ class Trinary
     @trinary_dig.map.with_index { |digit, index| digit*3**(n - index) }.reduce(&:+)
   end
 end
+
+# zero = Trinary.new('0')
+# p zero.to_decimal
