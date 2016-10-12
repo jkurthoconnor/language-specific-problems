@@ -5,10 +5,18 @@
 # Write a program that can find the sum of the multiples of a given set of numbers. If no set of numbers is given, default to 3 and 5.
 
 class SumOfMultiples
-  def initialize(integer)
-    @up_to = integer
+  @@default = [3, 5]
+
+  def initialize(numbers = [3, 5])
+    @numbers = numbers
   end
   
-  def to(@up_to)
+  def self.to(limit)
+    multiples = (0...limit).select do |n| 
+      (n % @@default[0]).zero? || (n % @@default[1]).zero?
+    end
+    multiples.reduce(&:+)
   end
 end
+
+# SumOfMultiples.new
