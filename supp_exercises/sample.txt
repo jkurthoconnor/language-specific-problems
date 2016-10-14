@@ -1,0 +1,8 @@
+This is a sample text file.
+
+
+This is a line in a sample text file.
+This should count as a new line but not as a new paragraph.
+
+
+The third paragraph.
