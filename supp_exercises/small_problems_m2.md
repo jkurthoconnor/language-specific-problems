@@ -37,17 +37,14 @@ array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
 
 ```ruby
 def bubble_sort!(array)
-  initial_state = array
-  final_state = []
-
-  until initial_state == final_state
+  loop do
     initial_state = array.clone
     array.each_cons(2).with_index do |span, index|
       if span[0] > span[1]
         array.insert(index, array.delete_at(index + 1))
       end
     end
-    final_state = array
+    break if initial_state == array
   end
   array  
 end
