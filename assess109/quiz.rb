@@ -2,12 +2,10 @@
 # - [x] add case modification questions to string_fluency
 # - 
 # - move questions to separate file (yaml?)
-# - revise questioning prompt display;
-#    - [x] clear after each question
-#    - [] re-position text
-#    - [x] prompt on curser line
+
 
 string_fluency = [
+  'remove leading and trailing whitespace from a string',
   "return a portion of a string based on index / indices.",
   "return length of string\n bonus: return number of alphabetic characters --not spaces, punctuation-- in string",
   "return number of specified characters in string\n bonus: return number of specified characters without invoking `.count`",
@@ -22,17 +20,19 @@ string_fluency = [
   'insert specified word prior to (or after) given existing word (use one line)',
   'substitute given character(s) [may use regexp] for other(s) in a string',
   "reverse character order in string\nBonus: reverse without invoking `.reverse`\nDouble bonus: reverse order by iterating through string (i.e. without making the original string into an array)",
-  'determine if given characters are present in string',
+  'determine if given characters are present in string. use both regex and non-regex methods',
   'return array of characters matching a pattern [may use regexp]',
   'return an array of words taken from a string that meet given conditions',
   'return new string (or modify existing string) to have all characters lowercased',
   'return new string (or modify existing string) to have all characters uppercased',
   'return new string (or modify existing string) to have sentence case',
   'return new string (or modify existing string) to have all cases switched',
-  "return a given string minus all punctuation and special characters.\nBonus: return an array of words in the string, minus all punctuation and special characters."
+  "return a given string minus all punctuation and special characters.\nBonus: return an array of words in the string, minus all punctuation and special characters.",
+  "swap the places of two characters in a string using one line.\nBonus: swap places 'manually.'"
 ]
 
 array_fluency = [
+  "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
   'iterate over array of numbers and print out each value (iterators v. loops)',
   'iterate over array of numbers and print out only those matching certain conditions',
   "append `n` to end of array\nBonus: append `n`, `o`, `p` to end of array with one line",
