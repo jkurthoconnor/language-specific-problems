@@ -3,6 +3,14 @@ Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
 
+### (string) remove leading and trailing whitespace
+```ruby
+string = ' Well now! '
+string.strip!
+# or if one simply wants to return without mutating caller
+string.strip
+```
+
 ### (string) return a portion of string based on character index / indices.
 ```ruby
 'hello'.slice(0)
@@ -256,14 +264,18 @@ end
 str   
 ```
    
-### (string) determine if given characters are present in string
+### (string) determine if given characters are present in string. (use regex and non-regex methods)
 ```ruby
 str = 'Oh, what beautiful weather today!'
 
 str.include?('O')
 # also effective, depending on the return one is seeking
 str.scan('O') # returns array of matched patterns
-str.match('O') # returns match object or nil
+
+# regex
+
+str=~(/[ao]/)
+str.match(/[ao]/)
 ```
 
 ### (string) return array of characters matching a pattern
@@ -274,6 +286,9 @@ str.scan('t')
 
 # or
 str.chars.select { |char| char < 'l'}
+
+# or
+str.scan(/[aeiou]/)
 ```
 
 ### return an array of words taken from a string that meet given conditions.
@@ -325,7 +340,22 @@ str.delete('^ A-Za-z')
 # Bonus
 
 str.delete('^ A-Za-z').split
+```
 
+### swap the places of two characters in a string using one line. Bonus: swap places 'manually'.
+
+```ruby
+string = 'Hello!'
+
+string[0], string[1] = string[1], string[0]
+```
+
+### swap the places of two elements in an array using one line. Bonus: swap places 'manually'.
+
+```ruby
+array = [1, 2, 3, 4]
+
+array[1], array[-1] = array[-1], array[1]
 ```
 
 ### (array) iterate over array of numbers and print out each value (iterators v. loops)
