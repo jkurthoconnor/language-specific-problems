@@ -350,6 +350,24 @@ string = 'Hello!'
 string[0], string[1] = string[1], string[0]
 ```
 
+### slice the array into groups of n elements and print each slice.  Bonus: do so manually.
+
+```ruby 
+array = [1, 3, 4, 5, 7, 8]
+
+array.each_slice(2) { |slice| p slice }
+
+# manually
+array = [1, 3, 4, 5, 7, 8]
+index = 0
+
+while index + 1 < array.length
+  p array[index, 2]
+  index += 2
+end
+```
+
+
 ### swap the places of two elements in an array using one line. Bonus: swap places 'manually'.
 
 ```ruby
