@@ -1,6 +1,4 @@
 ## changes
-# - [x] add case modification questions to string_fluency
-# - 
 # - move questions to separate file (yaml?)
 
 
@@ -32,6 +30,7 @@ string_fluency = [
 ]
 
 array_fluency = [
+  "slice the array into groups of n elements and print each slice.\nBonus: do so manually",
   "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
   'iterate over array of numbers and print out each value (iterators v. loops)',
   'iterate over array of numbers and print out only those matching certain conditions',
