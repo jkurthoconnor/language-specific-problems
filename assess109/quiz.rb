@@ -30,7 +30,7 @@ string_fluency = [
 ]
 
 array_fluency = [
-  "iterate through the array and print successive 'chunks' of n elements.\nBonus: do so manually",
+  "iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus: do so manually",
   "slice the array into groups of n elements and print each slice.\nBonus: do so manually",
   "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
   'iterate over array of numbers and print out each value (iterators v. loops)',
