@@ -348,14 +348,19 @@ str.delete('^ A-Za-z').split
 string = 'Hello!'
 
 string[0], string[1] = string[1], string[0]
+
+# manually
+
 ```
 
-### "iterate through the array and print successive 'chunks' of n elements. Bonus: do so manually."
+### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually."
 
 ```ruby
 array = [1, 3, 4, 5, 7, 8]
 
 array.each_cons(3) { |span| p span }
+
+array.each_cons(3) { |a, b, c| p b }
 
 # manually
 array = [1, 3, 4, 5, 7, 8]
@@ -363,10 +368,10 @@ index = 0
 elements = 3
 
 while index + elements - 1 < array.length
-  p array[index, elements]
+  p array[index, elements] 
+  # p array[index + 1]   # <- substitute this line for previous for second part of question
   index += 1
 end
-
 ```
 
 ### slice the array into groups of n elements and print each slice.  Bonus: do so manually.
@@ -394,6 +399,15 @@ end
 array = [1, 2, 3, 4]
 
 array[1], array[-1] = array[-1], array[1]
+
+# manually
+
+swap_index1 = 0
+swap_index2 = 2
+
+array.insert(swap_index1, array.delete_at(swap_index2))
+array.insert(swap_index2, array.delete_at(swap_index1 + 1))
+# array.insert(swap_index2, array.delete_at(swap_index1 - 1)) # use this line in place of previous if `swap_index1` > `swap_index2`
 ```
 
 ### (array) iterate over array of numbers and print out each value (iterators v. loops)
