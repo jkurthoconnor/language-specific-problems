@@ -350,6 +350,25 @@ string = 'Hello!'
 string[0], string[1] = string[1], string[0]
 ```
 
+### "iterate through the array and print successive 'chunks' of n elements. Bonus: do so manually."
+
+```ruby
+array = [1, 3, 4, 5, 7, 8]
+
+array.each_cons(3) { |span| p span }
+
+# manually
+array = [1, 3, 4, 5, 7, 8]
+index = 0
+elements = 3
+
+while index + elements - 1 < array.length
+  p array[index, elements]
+  index += 1
+end
+
+```
+
 ### slice the array into groups of n elements and print each slice.  Bonus: do so manually.
 
 ```ruby 
@@ -360,10 +379,11 @@ array.each_slice(2) { |slice| p slice }
 # manually
 array = [1, 3, 4, 5, 7, 8]
 index = 0
+slice = 2
 
-while index + 1 < array.length
-  p array[index, 2]
-  index += 2
+while index + slice - 1 < array.length
+  p array[index, slice]
+  index += slice
 end
 ```
 
