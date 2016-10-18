@@ -109,8 +109,98 @@ last_name = 'Doe'
 full_name = "#{first_name} #{last_name}"
 puts full_name
 ```
-### 6
-### 7
-### 8
-### 9
-### 10
+### 6. Tricky Formatting
+
+Using the following code, capitalize the value of state then print the modified value. Note that state should have the modified value both before and after you print it.
+
+```ruby
+state = 'tExAs'
+```
+Expected output:
+Texas
+
+### Solution:
+
+```ruby
+state = 'tExAs'
+state.capitalize!
+puts state
+```
+
+### 7. Goodbye, not Hello
+
+Given the following code, invoke a destructive method on greeting so that Goodbye! is printed instead of Hello!.
+
+```ruby
+greeting = 'Hello!'
+puts greeting
+```
+
+Expected output:
+
+Goodbye!
+
+### Solution:
+
+```ruby
+greeting = 'Hello!'
+greeting.sub!('Hello!', 'Goodbye!')
+```
+### 8. Print the Alphabet
+
+Using the following code, split the value of alphabet by individual characters and print each character.
+
+```ruby
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+```
+
+### Solution:
+
+```ruby
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+puts alphabet.chars
+```
+
+### 9. Pluralize
+
+Given the following code, use Array#each to print the plural of each word in words.
+
+```ruvy
+words = 'car human elephant airplane'
+```
+Expected output:
+
+cars
+humans
+elephants
+airplanes
+
+### Solution:
+
+```ruby
+words = 'car human elephant airplane'
+
+words.split.each do |word|
+  p word + 's'
+end
+```
+### 10. Are You There?
+
+Using the following code, print true if colors includes the color 'yellow' and print false if it doesn't. Then, print true if colors includes the color 'purple' and print false if it doesn't.
+
+```ruby
+colors = 'blue pink yellow orange'
+```
+Expected output:
+
+true
+false
+
+### Solution:
+
+```ruby
+colors = 'blue pink yellow orange'
+
+colors.include?('yellow') ? puts(true) : puts(false)
+colors.include?('purple') ? puts(true) : puts(false)
+```
