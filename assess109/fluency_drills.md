@@ -382,11 +382,11 @@ array = [1, 3, 4, 5, 7, 8]
 array.each_slice(2) { |slice| p slice }
 
 # manually
-array = [1, 3, 4, 5, 7, 8]
+array = [1, 3, 4, 5, 7, 8, 9]
 index = 0
 slice = 2
 
-while index + slice - 1 < array.length
+while index < array.length
   p array[index, slice]
   index += slice
 end
