@@ -353,6 +353,12 @@ string[0], string[1] = string[1], string[0]
 
 ```
 
+### create a new array with n elements, each with a default value of v (any immutable object)
+
+```ruby
+array = Array.new(4, true)
+```
+
 ### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
 
 ```ruby
