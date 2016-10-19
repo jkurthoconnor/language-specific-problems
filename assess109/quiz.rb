@@ -30,8 +30,8 @@ string_fluency = [
 ]
 
 array_fluency = [
-  "iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus: do so manually",
-  "slice the array into groups of n elements and print each slice.\nBonus: do so manually",
+  "iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus: do so manually. no chunk may contain less than n elements.",
+  "slice the array into groups of n elements and print each slice.\nBonus: do so manually. [Final slice will contain < n elements if (ele.size % n != 0)]",
   "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
   'iterate over array of numbers and print out each value (iterators v. loops)',
   'iterate over array of numbers and print out only those matching certain conditions',
