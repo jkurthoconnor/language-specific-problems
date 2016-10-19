@@ -353,7 +353,7 @@ string[0], string[1] = string[1], string[0]
 
 ```
 
-### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually."
+### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
 
 ```ruby
 array = [1, 3, 4, 5, 7, 8]
@@ -369,15 +369,15 @@ elements = 3
 
 while index + elements - 1 < array.length
   p array[index, elements] 
-  # p array[index + 1]   # <- substitute this line for previous for second part of question
+  # p array[index + 1]   # <- substitute this line for previous line for second part of question
   index += 1
 end
 ```
 
-### slice the array into groups of n elements and print each slice.  Bonus: do so manually.
+### slice the array into groups of n elements and print each slice.  Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
 
 ```ruby 
-array = [1, 3, 4, 5, 7, 8]
+array = [1, 3, 4, 5, 7, 8, 9]
 
 array.each_slice(2) { |slice| p slice }
 
