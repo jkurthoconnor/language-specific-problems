@@ -778,6 +778,12 @@ arr.last(3)
 arr[-3, 3]
 
 ```
+### create a new empty hash with a non-nil default value.
+
+```ruby
+sample = Hash.new(0)
+```
+
 
 ### (hash) get value of specified key(s)
 ```ruby

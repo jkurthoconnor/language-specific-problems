@@ -59,6 +59,7 @@ array_fluency = [
 ]
 
 hash_fluency = [
+  'create a new empty hash with a default value not set to `nil`',
   'get value(s) of specified key(s)',
   'get the key for a given value',
   'add key/value pair',
