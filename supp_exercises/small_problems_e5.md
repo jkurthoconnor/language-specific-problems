@@ -146,24 +146,43 @@ def swap(string)
 end
 ```
 
-### 
+### 5. Clean up the words
+
+Given a string that consists of some words and an assortment of non-alphabetic characters, write a method that returns that string with all of the non-alphabetic characters replaced by spaces. If one or more non-alphabetic characters occur in a row, you should only have one space in the result (the result should never have consecutive spaces).
+
+Examples:
 
 ```ruby
-
+cleanup("---what's my +*& line?") == ' what s my line '
 ```
 
 #### Solution: 
 
 ```ruby
+def cleanup(string)
+  clean = string.gsub(/\W/, ' ').chars
 
+  index = 0
+  while index + 1 < clean.length
+    if clean[index, 2].uniq == [' ']
+      clean.delete_at(index)
+      next
+    end
+    index += 1
+  end
+
+  clean.join
+end
 ```
 
 Further Explorations
-
 ```ruby
-
+def cleanup(string)
+  clean = string.gsub(/\W/, ' ').squeeze(' ')
+end
 ```
-### 
+
+### 6.
 
 ```ruby
 
