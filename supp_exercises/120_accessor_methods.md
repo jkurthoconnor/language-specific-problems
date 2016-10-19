@@ -168,7 +168,7 @@ puts person1.first_equals_last?
 
 5) Who is Older?
 
-Using the following code, add the appropriate accessor methods. Keep in mind that @age should only be visible to instances of Person.
+Using the following code, add the appropriate accessor methods. Keep in mind that @age should only be visible ~~to instances of Person.~~ outside of the class 
 
 ```ruby
 class Person
