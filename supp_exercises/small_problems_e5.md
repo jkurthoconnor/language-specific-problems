@@ -257,34 +257,99 @@ alphabetic_number_sort((0..19).to_a) == [
   8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17,
   6, 16, 10, 13, 3, 12, 2, 0
 ]
-
 ```
 
 #### Solution: 
 
 ```ruby
+EQUIVALENTS = {
+              0=>'zero', 1=>'one', 2=>'two', 3=>'three', 4=>'four', 5=>'five',
+              6=>'six', 7=>'seven', 8=>'eight', 9=>'nine', 10=>'ten',
+              11=>'eleven', 12=>'twelve', 13=>'thirteen', 14=>'fourteen',
+              15=>'fifteen', 16=>'sixteen', 17=>'seventeen', 18=>'eighteen',
+              19=>'nineteen'
+            }
 
+def alphabetic_number_sort(array)
+
+  words = array.map { |n| EQUIVALENTS[n] }
+
+  words.sort.map { |word| EQUIVALENTS.key(word) }
+end
 ```
 
-Further Explorations
+### 9. ddaaiillyy ddoouubbllee
+
+Write a method that takes a string argument and returns a new string that contains the value of the original string with all consecutive duplicate characters collapsed into a single character.
+
+Examples:
 
 ```ruby
-
-```
-### 
-
-```ruby
-
+crunch('ddaaiillyy ddoouubbllee') == 'daily double'
+crunch('4444abcabccba') == '4abcabcba'
+crunch('ggggggggggggggg') == 'g'
+crunch('a') == 'a'
+crunch('') == ''
 ```
 
 #### Solution: 
 
 ```ruby
-
+def crunch(string)
+  string.squeeze
+end
 ```
 
 Further Explorations
 
 ```ruby
+def crunch(string)
+  return string if string.empty?
 
+  chars = string.chars
+  index = 0
+
+  until index + 1 == chars.length
+    if chars[index] == chars[index + 1]
+      chars.delete_at(index)
+      next
+    end
+    index += 1
+  end
+  chars.join
+end
+```
+
+### 10. Bannerizer
+
+Write a method that will take a short line of text, and print it within a box.
+
+Example:
+
+```ruby
+print_in_box('To boldly go where no one has gone before.')
++--------------------------------------------+
+|                                            |
+| To boldly go where no one has gone before. |
+|                                            |
++--------------------------------------------+
+print_in_box('')
++--+
+|  |
+|  |
+|  |
++--+
+```
+You may assume that the input will always fit in your terminal window.
+
+### Solution:
+
+```ruby
+def print_in_box(string)
+  puts '+-' + '-' * string.length + '-+'
+  puts '| ' + ' ' * string.length + ' |'
+  puts '| ' + string + ' |'
+  puts '| ' + ' ' * string.length + ' |'
+  puts '+-' + '-' * string.length + '-+'
+end
 ```
