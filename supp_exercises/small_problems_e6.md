@@ -52,11 +52,165 @@ def remove_vowels(array)
 end
 ```
 
-### 3.
-### 4.
-### 5.
-### 6.
-### 7.
+### 3. Fibonacci Number Location By Length
+
+The Fibonacci series is a series of numbers (1, 1, 2, 3, 5, 8, 13, 21, ...) such that the first 2 numbers are 1 by definition, and each subsequent number is the sum of the two previous numbers. This series appears throughout the natural world.
+
+Write a method that calculates and returns the index of the first Fibonacci number that has the number of digits specified as an argument. (The first Fibonacci number has index 1.)
+
+Examples:
+```ruby
+find_fibonacci_index_by_length(2) == 7
+find_fibonacci_index_by_length(10) == 45
+find_fibonacci_index_by_length(100) == 476
+find_fibonacci_index_by_length(1000) == 4782
+find_fibonacci_index_by_length(10000) == 47847
+```
+
+You may assume that the argument is always greater than or equal to 2.
+
+```ruby
+def find_fibonacci_index_by_length(length)
+  exponent = length - 1
+  series = [1, 1]
+  a, b = series[0], series[1]
+
+  loop do
+    c = a + b
+    series.push(c)
+    return series.length if (c / 10**exponent) >= 1
+    a = b
+    b = c
+  end
+end
+```
+### 4. Reversed Arrays (Part 1)
+
+Write a method that takes an Array as an argument, and reverses its elements in place; that is, mutate the Array passed in to this method. The return value should be the same Array object.
+
+You may not use Array#reverse or Array#reverse!.
+
+Examples:
+
+```ruby
+list = [1,2,3,4]
+result = reverse!(list) # => [4,3,2,1]
+list == [4, 3, 2, 1]
+list.object_id == result.object_id
+
+list = %w(a b c d e)
+reverse!(list) # => ["e", "d", "c", "b", "a"]
+list == ["e", "d", "c", "b", "a"]
+
+list = ['abc']
+reverse!(list) # => ["abc"]
+list == ["abc"]
+
+list = []
+reverse!([]) # => []
+list == []
+```
+
+### Solution:
+
+```ruby
+def reverse!(array)
+  index = 0
+  while index < array.length
+    array.unshift(array.delete_at(index))
+    index += 1
+  end
+  array
+end
+```
+
+### 5. Reversed Arrays (Part 2)
+
+Write a method that takes an Array, and returns a new Array with the elements of the original list in reverse order. Do not modify the original list.
+
+You may not use Array#reverse or Array#reverse!, nor may you use the method you wrote in the previous exercise.
+
+Examples:
+```ruby
+reverse([1,2,3,4]) == [4,3,2,1]          # => true
+reverse(%w(a b c d e)) == %w(e d c b a)  # => true
+reverse(['abc']) == ['abc']              # => true
+reverse([]) == []                        # => true
+
+list = [1, 2, 3]                      # => [1, 2, 3]
+new_list = reverse(list)              # => [3, 2, 1]
+list.object_id != new_list.object_id  # => true
+list == [1, 2, 3]                     # => true
+new_list == [3, 2, 1]                 # => true
+```
+
+### Solution:
+
+```ruby
+def reverse(array)
+  reversed = []
+  array.each { |element| reversed.unshift(element) }
+  reversed
+end
+```
+
+### Further Exploration
+
+An even shorter solution is possible by using either inject or each_with_object. Just for fun, read about these methods in the Enumerable module documentation, and try using one in your reverse method.
+
+### Solution
+
+```ruby
+def reverse(array)
+  array.each_with_object([]) { |element, object| object.unshift(element) }
+end
+```
+
+### 6. Combining Arrays
+
+Write a method that takes two Arrays as arguments, and returns an Array that contains all of the values from the argument Arrays. There should be no duplication of values in the returned Array, even if there are duplicates in the original Arrays.
+
+Example
+
+```ruby
+merge([1, 3, 5], [3, 6, 9]) == [1, 3, 5, 6, 9]
+```
+
+### Solution:
+
+```ruby
+def merge(array1, array2)
+  (array1 + array2).uniq
+end
+```
+
+### 7. Halvsies
+
+Write a method that takes an Array as an argument, and returns two Arrays that contain the first half and second half of the original Array, respectively. If the original array contains an odd number of elements, the middle element should be placed in the first half Array.
+
+Examples:
+
+```ruby
+halvsies([1, 2, 3, 4]) == [[1, 2], [3, 4]]
+halvsies([1, 5, 2, 4, 3]) == [[1, 5, 2], [4, 3]]
+halvsies([5]) == [[5], []]
+halvsies([]) == [[], []]
+```
+
+### Solution:
+
+```ruby
+def halvsies(array)
+  half = array.length / 2
+
+  if array.length.even?
+    [ array[0, half], array[half, half] ]
+  else
+    [ array[0, half + 1], array[half + 1, half + 1] ]
+  end
+end
+```
+
 ### 8.
 ### 9.
 ### 10.
