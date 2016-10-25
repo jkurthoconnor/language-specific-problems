@@ -41,7 +41,7 @@ array_fluency = [
   "remove specified objects from an array\nBonus: remove objects that meet given conditions",
   "remove objects from an array at specified indices.\nBonus: remove objects from an array using a range of indices",
   "remove duplicates from an array using one method\nBonus: remove duplicates by looping through the array, i.e. without invoking the presumptive method",
-  'extract all odds (or evens or ... ) from an array into new array',
+  'extract all elements meeting given conditions (e.g. odds/evens, match a regex pattern) from an array into new array',
   'increment all numbers in an array by 1',
   'find sum of all numbers in an array',
   'find the product of all numbers in an array',

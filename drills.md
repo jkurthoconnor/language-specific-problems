@@ -552,7 +552,7 @@ p arr_uniq
 ```
 
 
-### (array) extract all odds (or evens, or other criteria) into new array
+### (array) extract all odds (or evens, or match regex) into new array 
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
 new_arr = []
@@ -566,6 +566,11 @@ end
 # or
 
 new_arr = arr.select { |number| number.even? }
+
+# or
+
+arr = ['apples', 'pears', 'bananas', 'plantains']
+arr.select { |fruit| fruit.match(/pl/) }
 ```
 
 
