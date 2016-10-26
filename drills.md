@@ -416,7 +416,7 @@ array.insert(swap_index2, array.delete_at(swap_index1 + 1))
 # array.insert(swap_index2, array.delete_at(swap_index1 - 1)) # use this line in place of previous if `swap_index1` > `swap_index2`
 ```
 
-### (array) iterate over array of numbers and print out each value (iterators v. loops)
+### (array) iterate over array of numbers and print out each value; do the same in reverse.\nBonus: solve with iterators and then with manual loop)
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -425,6 +425,21 @@ arr.each { |number| p number }
 arr.each do |number|
   p number
 end
+
+# reverse manually
+
+arr = (1..10).to_a
+
+index = arr.index(arr.last)
+
+while index >= 0
+  p arr[index]
+  index -= 1
+end
+
+# reverse with iterators
+
+arr.reverse_each { |ele| p ele }
 ```
 
 ### (array) iterate over array of numbers and print out only those matching certain conditions
