@@ -5,7 +5,7 @@ class Trinary
   end
 
   def clean_and_convert(string)
-    return string.chars.map(&:to_i) if !string.match(/[^012]/)
+    return string.chars.map(&:to_i) unless string.match(/[^012]/)
     string = [0]
   end
 
