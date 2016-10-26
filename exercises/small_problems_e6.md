@@ -316,13 +316,20 @@ end
 
 Try modifying your solution so it prints the triangle upside down from its current orientation. Try modifying your solution again so that you can display the triangle with the right angle at any corner of the grid.
 
-### Solution 1:
+### Solution 1: Upside Down
 
 ```ruby
-
+def triangle(side_size)
+  num_stars = 1
+  
+  until num_stars > side_size
+    puts "*" * (num_stars) + " " * (side_size - num_stars)
+    num_stars += 1
+  end
+end
 ```
 
-### Solution 2:
+### Solution 2: Any Orientation
 
 ```ruby
 
