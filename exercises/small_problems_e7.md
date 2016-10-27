@@ -138,21 +138,153 @@ staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
 
 ### Solution:
 
-### 6.
+```ruby
+def staggered_case(string)
+  chars = string.chars.map.with_index do |char, ind|
+    ind.even? ? char.upcase : char.downcase
+  end
+  chars.join
+end
+```
+
+### Further Exploration:
+Modify this method so the caller can request that the first character be downcased rather than upcased? 
 
 ### Solution:
 
-### 7.
+```ruby
+def staggered_case(string, first_cap = :even)
+  case first_cap
+  when :even
+    string.chars.map.with_index { |char, ind| ind.even? ? char.upcase :
+                                  char.downcase }.join
+  when :odd
+    string.chars.map.with_index { |char, ind| ind.odd? ? char.upcase :
+                                  char.downcase }.join
+  end
+end
+```
+
+### 6. Staggered Caps (Part 2)
+
+Modify the method from the previous exercise so it ignores non-alphabetic characters when determining whether it should uppercase or lowercase each letter. The non-alphabetic characters should still be included in the return value; they just don't count when toggling the desired case.
+
+Example:
+
+```ruby
+staggered_case('I Love Launch School!') == 'I lOvE lAuNcH sChOoL!'
+staggered_case('ALL CAPS') == 'AlL cApS'
+staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 nUmBeRs'
+```
 
 ### Solution:
 
-### 8.
+```ruby
+def staggered_case(string, cap = true)
+  staggered = []
+
+  string.chars.each do |char|
+    cap ? staggered.push(char.upcase) : staggered.push(char.downcase)
+    next if char =~(/[^a-z]/i)
+    cap = !cap
+  end
+
+  staggered.join
+end
+```
+### 7. Multiplicative Average
+
+Write a method that takes an Array of integers as input, multiplies all of the numbers together, divides the result by the number of entries in the Array, and then prints the result rounded to 3 decimal places.
+
+Examples
+
+```ruby
+show_multiplicative_average([3, 5])
+The result is 7.500
+
+show_multiplicative_average([2, 5, 7, 11, 13, 17])
+The result is 28361.667
+```
 
 ### Solution:
 
-### 9.
+```ruby
+def show_multiplicative_average(array)
+  product = array.reduce(&:*)
+  average = product.to_f / array.size
+  puts "The result is #{format('%.3f', average)}"
+end
+```
+
+### Further Exploration:
+What happens if you omit the call to #to_f on the first line of our method?
 
 ### Solution:
+Without calling `to_f` the division involved in caluclating the average will not include decimals.  It will be integer division.
+
+### 8. Multiply Lists
+
+Write a method that takes two Array arguments in which each Array contains a list of numbers, and returns a new Array that contains the product of each pair of numbers from the arguments that have the same index. You may assume that the arguments contain the same number of elements.
+
+Examples:
+
+```ruby
+multiply_list([3, 5, 7], [9, 10, 11]) == [27, 50, 77]
+```
+
+### Solution:
+
+```ruby
+def multiply_list(array1, array2)
+  products = []
+  index = 0
+
+  while index < array1.length
+    products.push(array1[index] * array2[index])
+    index += 1
+  end
+
+  products
+end
+```
+
+### Further Exploration:
+The Array#zip method can be used to produce an extremely compact solution to this method. Read the documentation for zip, and see if you can come up with a one line solution (not counting the def and end lines)
+
+### Solution:
+```ruby
+def multiply_list(array1, array2)
+  array1.zip(array2).map { |array| array.reduce(&:*) }
+end
+```
+
+### 9. Multiply All Pairs
+
+Write a method that takes two Array arguments in which each Array contains a list of numbers, and returns a new Array that contains the product of every pair of numbers that can be formed between the elements of the two Arrays. The results should be sorted by increasing value.
+
+You may assume that neither argument is an empty Array.
+
+Examples:
+
+```ruby
+multiply_all_pairs([2, 4], [4, 3, 1, 2]) == [2, 4, 4, 6, 8, 8, 12, 16]
+```
+
+### Solution:
+
+```ruby
+def multiply_all_pairs(array1, array2)
+  products = []
+
+  array1.each do |n1|
+    array2.each do |n2|
+      products.push(n1 * n2)
+    end
+  end
+
+  products.sort
+end
+```
 
 ### 10.
 
