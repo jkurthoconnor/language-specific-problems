@@ -183,22 +183,72 @@ def palindromes(string)
 end
 ```
 
-### 6. 
+### 6. fizzbuzz
 
+Write a method that takes two arguments: the first is the starting number, and the second is the ending number. Print out all numbers between the two numbers, except if a number is divisible by 3, print "Fizz", if a number is divisible by 5, print "Buzz", and finally if a number is divisible by 3 and 5, print "FizzBuzz".
 
-### Solution:
+Example:
 
 ```ruby
-
+fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
 ```
 
-### 1. 
+### Solution:
 
+```ruby
+def fizzbuzz(start, stop)
+  result = []
+  (start..stop).each do |n|
+    if (n % 3).zero? && (n % 5).zero?
+      result.push('FizzBuzz')
+    elsif (n % 3).zero? 
+      result.push('Fizz')
+    elsif (n % 5).zero?
+      result.push('Buzz')
+    else
+      result.push(n)
+    end 
+  end
+  result.join(', ')
+end
+```
+
+### 7. Double Char (Part 1)
+
+Write a method that takes a string, and returns a new string in which every character is doubled.
+
+Examples:
+```ruby
+repeater('Hello') == "HHeelllloo"
+repeater("Good job!") == "GGoooodd  jjoobb!!"
+repeater('') == '' 
+```
 
 ### Solution:
 
 ```ruby
+def repeater(string)
+  index = 0
+  end_point = string.length * 2
 
+  while index < end_point
+    string.insert(index, string[index])
+    index += 2
+  end
+
+  string
+end
+
+# or
+
+def repeater(string)
+  doubled = ''
+  string.each_char do |char|
+    doubled << (char*2)
+  end
+
+  doubled
+end
 ```
 
 ### 1. 
