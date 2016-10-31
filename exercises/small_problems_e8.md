@@ -282,21 +282,62 @@ def double_consonants(string)
 end
 ```
 
-### 9. 
+### 9. Convert number to reversed array of digits
 
-
-### Solution:
+Write a method that takes a positive integer as an argument and returns that number with its digits reversed. Examples:
 
 ```ruby
-
+reversed_number(12345) == 54321
+reversed_number(12213) == 31221
+reversed_number(456) == 654
+reversed_number(12000) == 21 # Note that zeros get dropped!
+reversed_number(1) == 1
 ```
 
-### 1. 
+### Solution:
 
+```ruby
+def reversed_number(int)
+  int.to_s.reverse.to_i
+end
+```
+
+### Further Exploration
+See if you can transform our solution into a one-liner.
+
+### Solution:
+My original solution seems to meet the requirements of the Further Exploration, so here's another way:
+
+```ruby
+def reversed_number(int)
+  reversed = ''
+  digits = int.to_s
+
+  digits.each_char { |char| reversed.prepend(char) }
+  reversed.to_i
+end
+```
+
+### 10. Get The Middle Character
+
+Write a method that takes a non-empty string argument, and returns the middle character or characters of the argument. If the argument has an odd length, you should return exactly one character. If the argument has an even length, you should return exactly two characters.
+
+Examples:
+
+```ruby
+center_of('I love ruby') == 'e'
+center_of('Launch School') == ' '
+center_of('Launch') == 'un'
+center_of('Launchschool') == 'hs'
+center_of('x') == 'x'
+```
 
 ### Solution:
 
 ```ruby
-
+def center_of(string)
+  base_index = string.size / 2
+  string.size.odd? ? string[base_index] : string[base_index - 1, 2]
+end
 ```
 
