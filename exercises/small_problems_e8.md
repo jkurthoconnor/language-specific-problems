@@ -251,16 +251,38 @@ def repeater(string)
 end
 ```
 
-### 1. 
+### 8. Double Char (Part 2)
 
+Write a method that takes a string, and returns a new string in which every consonant character is doubled. Vowels (a,e,i,o,u), digits, punctuation, and whitespace should not be doubled.
+
+Examples:
+
+```ruby
+double_consonants('String') == "SSttrrinngg"
+double_consonants("Hello-World!") == "HHellllo-WWorrlldd!"
+double_consonants("July 4th") == "JJullyy 4tthh"
+double_consonants('') == ""
+```
 
 ### Solution:
 
 ```ruby
+def double_consonants(string)
+  doubled = ''
 
+  string.each_char do |char|
+    if char =~(/[a-z&&[^aeiou]]/i)
+      doubled << (char *2)
+    else
+      doubled << (char)
+    end
+  end
+
+  doubled
+end
 ```
 
-### 1. 
+### 9. 
 
 
 ### Solution:
