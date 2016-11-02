@@ -26,7 +26,7 @@ class CashRegisterTest < MiniTest::Test
 end
 ```
 
-### 2. Test Accept Money Method - Cash Register
+### 3. Test Accept Money Method - Cash Register
 
 We now have the foundation of our CashRegister test class set up. Let's start testing! We'll start with the CashRegister#accept_money method. Write a test for the #accept_money method.
 
@@ -40,7 +40,7 @@ We now have the foundation of our CashRegister test class set up. Let's start te
   end
 ```
 
-### 3. Test Change Method - Cash Register
+### 4. Test Change Method - Cash Register
 
 Write a test for the method, CashRegister#change.
 
@@ -52,7 +52,7 @@ def test_change
 end
 ```
 
-### 4. Test Give Receipt Method - Cash Register
+### 5. Test Give Receipt Method - Cash Register
 
 Write a test for method CashRegister#give_receipt that ensures it displays a valid receipt.
 
@@ -73,7 +73,7 @@ def test_give_receipt
 end
 ```
 
-### 5. Test Prompt For Payment Method- Transaction
+### 6. Test Prompt For Payment Method- Transaction
 
 Write a test that verifies that Transaction#prompt_for_payment sets the amount_paid correctly. We've changed the transaction class a bit to make testing this a bit easier.
 
@@ -89,14 +89,14 @@ def test_prompt_for_payment
 end
 ```
 
-### 6. Alter Prompt for Payment Method - Transaction
+### 7. Alter Prompt for Payment Method - Transaction
 
  Your task for this exercise is to make it so that we have "clean" output when running this test.
  
 ### Solution:
 My test is already without the noise.
 
-### 7. Swap Letters Sample Text and Starter File
+### 8. Swap Letters Sample Text and Starter File
 
 Sample Text:
 
@@ -121,7 +121,7 @@ class Text
 end
 ```
 
-### 8. Test swap method - Text
+### 9. Test swap method - Text
 
 For this exercise you'll be given a sample text file and a starter class [above]. The sample text's contents will be saved as a String to an instance variable in the starter class.
 
@@ -155,19 +155,13 @@ class TextTest < MiniTest::Test
 end
 ```
 
-### 9. Test word_count method - Text
+### 10. Test word_count method - Text
 
 Recall that in the last exercise we only had to test one method of our Text class. One of the useful facets of the setup and teardown methods is that they are automatically run before and after each test respectively. To show this we'll be adding one more method to our Text class, word_count.
 
 ```ruby
 class Text
-  def initialize(text)
-    @text = text
-  end
-
-  def swap(letter_one, letter_two)
-    @text.gsub(letter_one, letter_two)
-  end
+  # code omitted
 
   def word_count
     @text.split.count
@@ -176,3 +170,33 @@ end
 ```
 
 Write a test for this new method. Make sure to utilize the setup and teardown methods for any file related operations.
+
+### Solution:
+
+```ruby
+class TextTest < MiniTest::Test
+  attr_reader :text, :string
+
+  def setup
+    @file = File.open('sample2.txt', 'r')
+    puts "File is now open for reading: {#@file.open?}"
+    @string =  @file.read
+    @text = Text.new(string)
+  end
+
+  def test_swap
+    expected_string = string.gsub('a', 'e')
+    assert_equal(expected_string, text.swap('a', 'e'))
+  end
+  
+  def test_word_count
+    expected_count = string.split.count
+    assert_equal(expected_count, text.word_count)
+  end
+
+  def teardown
+    @file.close
+    puts "File is now closed: #{@file.closed?}"
+  end
+end
+```
