@@ -19,7 +19,8 @@ class TransactionTest < Minitest::Test
     assert_output(message) do
       transaction.prompt_for_payment(input: cash)
     end
-    assert_equal(100, amount_paid)
+
+    assert_equal(100, transaction.amount_paid)
   end
 end
 
