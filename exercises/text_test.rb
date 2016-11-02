@@ -26,7 +26,3 @@ class TextTest < MiniTest::Test
     puts "File is now closed: #{@file.closed?}"
   end
 end
-
-# def word_count
-#   @text.split.count
-# end
