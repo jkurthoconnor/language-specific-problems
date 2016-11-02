@@ -12,8 +12,6 @@ Let's start things from the ground up. We want to make a simple test suite for o
 # cash_register_test.rb
 
 require 'minitest/autorun'
-require "minitest/reporters"
-Minitest::Reporters.use!
 
 require_relative 'cash_register'
 require_relative 'transaction'
@@ -64,6 +62,14 @@ Write a test for method CashRegister#give_receipt that ensures it displays a val
 def test_give_receipt
   message = "You've paid $50.\n"
   assert_output(message) { register.give_receipt(transaction) }
+end
+
+# or
+
+def test_give_receipt
+  assert_output("You've paid $#{transaction.item_cost}.\n") do
+    register.give_receipt(transaction)
+  end
 end
 ```
 
