@@ -14,7 +14,12 @@ class TransactionTest < Minitest::Test
   end
 
   def test_prompt_for_payment
-    
+    message = "You owe $#{transaction.item_cost}.\nHow much are you paying?\n"
+    cash = StringIO.new('100\n')
+    assert_output(message) do
+      transaction.prompt_for_payment(input: cash)
+    end
+    assert_equal(100, amount_paid)
   end
 end
 
