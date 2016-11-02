@@ -5,14 +5,17 @@ class TextTest < MiniTest::Test
   attr_reader :text, :string
 
   def setup
-    @string = File.open('sample2.txt', 'r') do |str|
-      str.read
-    end
+    @file = File.open('sample2.txt', 'r')
+    @string =  @file.read
     @text = Text.new(string)
   end
 
   def test_swap
     expected_string = string.gsub('a', 'e')
     assert_equal(expected_string, text.swap('a', 'e'))
+  end
+  
+  def teardown
+    @file.close
   end
 end
