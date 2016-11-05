@@ -1,4 +1,5 @@
-
+# class facilitates calculating Hamming Difference between two DNA strands;
+# handles input of strands of differing length
 class DNA
   def initialize(strand)
     @strand = strand
@@ -12,12 +13,10 @@ class DNA
     loop do
       distance += 1 if strand[ind] != other_strand[ind]
       ind += 1
-      break if ind >= end_point
+      return distance if ind >= end_point
     end
-
-    distance
   end
-  
+
   def calc_end_point(other_strand)
     case strand.length <=> other_strand.length
     when 1 then other_strand.length
@@ -29,5 +28,3 @@ class DNA
 
   attr_reader :strand
 end
-
-p DNA.new('').hamming_distance('')
