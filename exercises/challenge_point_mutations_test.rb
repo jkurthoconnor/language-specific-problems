@@ -7,12 +7,10 @@ class DNATest < Minitest::Test
   end
 
   def test_no_difference_between_identical_strands
-    skip
     assert_equal 0, DNA.new('GGACTGA').hamming_distance('GGACTGA')
   end
 
   def test_complete_hamming_distance_in_small_strand
-    skip
     assert_equal 3, DNA.new('ACT').hamming_distance('GGA')
   end
 
