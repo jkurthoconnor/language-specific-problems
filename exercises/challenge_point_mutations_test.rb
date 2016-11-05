@@ -15,36 +15,30 @@ class DNATest < Minitest::Test
   end
 
   def test_hamming_distance_in_off_by_one_strand
-    skip
     strand = 'GGACGGATTCTGACCTGGACTAATTTTGGGG'
     distance = 'AGGACGGATTCTGACCTGGACTAATTTTGGGG'
     assert_equal 19, DNA.new(strand).hamming_distance(distance)
   end
 
   def test_small_hamming_distance_in_middle_somewhere
-    skip
     assert_equal 1, DNA.new('GGACG').hamming_distance('GGTCG')
   end
 
   def test_larger_distance
-    skip
     assert_equal 2, DNA.new('ACCAGGG').hamming_distance('ACTATGG')
   end
 
   def test_ignores_extra_length_on_other_strand_when_longer
-    skip
     assert_equal 3, DNA.new('AAACTAGGGG').hamming_distance('AGGCTAGCGGTAGGAC')
   end
 
   def test_ignores_extra_length_on_original_strand_when_longer
-    skip
     strand = 'GACTACGGACAGGGTAGGGAAT'
     distance = 'GACATCGCACACC'
     assert_equal 5, DNA.new(strand).hamming_distance(distance)
   end
 
   def test_does_not_actually_shorten_original_strand
-    skip
     dna = DNA.new('AGACAACAGCCAGCCGCCGGATT')
     assert_equal 1, dna.hamming_distance('AGGCAA')
     assert_equal 4, dna.hamming_distance('AGACATCTTTCAGCCGCCGGATTAGGCAA')
