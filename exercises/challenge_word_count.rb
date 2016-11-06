@@ -6,7 +6,7 @@ class Phrase
   attr_accessor :phrase, :count
 
   def initialize(string)
-    @phrase = string.downcase.split
+    @phrase = string.downcase.delete("^ ,'a-z0-9").split
   end
 
   def word_count
