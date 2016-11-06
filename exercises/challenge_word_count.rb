@@ -6,7 +6,7 @@ class Phrase
   attr_accessor :phrase, :count
 
   def initialize(string)
-    @phrase = string.split
+    @phrase = string.downcase.split
   end
 
   def word_count
@@ -16,5 +16,3 @@ class Phrase
   end
 end
 
-phrase = Phrase.new('word')
-phrase2 = Phrase.new('one of each')
