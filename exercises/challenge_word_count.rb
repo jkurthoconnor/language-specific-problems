@@ -13,10 +13,9 @@ class Phrase
     count
   end
 
-  def clean_string
+  def clean_string # consolidate regex
     words = phrase.downcase.gsub(',', ' ').delete("^ 'a-z0-9")
-    minus_lft_quote = words.gsub(/ '/, ' ')
-    minus_lft_quote.gsub(/' /, ' ').split
+    words.gsub(/ '/, ' ').gsub(/' /, ' ').split
   end
 end
 
