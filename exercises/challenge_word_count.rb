@@ -1,4 +1,4 @@
-
+# class facilitates counting words in a string
 class Phrase
   attr_accessor :phrase, :count
 
@@ -13,9 +13,7 @@ class Phrase
     count
   end
 
-  def clean_string # consolidate regex
-    words = phrase.downcase.gsub(',', ' ').delete("^ 'a-z0-9")
-    words.gsub(/ '/, ' ').gsub(/' /, ' ').split
+  def clean_string
+    phrase.downcase.gsub(/( '|' |,)/, ' ').delete("^ 'a-z0-9").split
   end
 end
-
