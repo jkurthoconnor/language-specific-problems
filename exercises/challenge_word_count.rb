@@ -1,6 +1,3 @@
-# Write a program that given a phrase can count the occurrences of each word in that phrase.
-# input: phrase string
-# output: hash with unique words from phrase as keys, ordered as they appear in phrase; values are corresponding word counts
 
 class Phrase
   attr_accessor :phrase, :count
@@ -17,7 +14,9 @@ class Phrase
   end
 
   def clean_string
-    phrase.downcase.gsub(',', ' ').delete("^ 'a-z0-9").split
+    words = phrase.downcase.gsub(',', ' ').delete("^ 'a-z0-9")
+    minus_lft_quote = words.gsub(/ '/, ' ')
+    minus_lft_quote.gsub(/' /, ' ').split
   end
 end
 
