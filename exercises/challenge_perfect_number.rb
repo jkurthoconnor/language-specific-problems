@@ -2,7 +2,7 @@
 # per Nicomachus' classification
 class PerfectNumber
   def self.classify(n)
-    raise(RuntimeError) if n <= 1
+    raise(RuntimeError, 'No Aliquot sum for n < 2') if n <= 1
 
     result = factor(n).reduce(&:+) <=> n
     case result
