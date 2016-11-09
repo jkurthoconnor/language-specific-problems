@@ -26,11 +26,12 @@ string_fluency = [
   'return new string (or modify existing string) to have sentence case',
   'return new string (or modify existing string) to have all cases switched',
   "return a given string minus all punctuation and special characters.\nBonus: return an array of words in the string, minus all punctuation and special characters.",
-  "swap the places of two characters in a string using one line.\nBonus: swap places 'manually.'"
+  "swap the places of two characters in a string using one line; then reassign a slice of the string to new values. Bonus: swap places / reassign 'manually'."
 ]
 
 array_fluency = [
   'create a new array with n elements, each with a default value of v (where v is an immutable object)',
+  "swap the places of two elements in an array using one line; then reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.",
   "iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus: do so manually. no chunk may contain less than n elements.",
   "slice the array into groups of n elements and print each slice.\nBonus: do so manually. [Final slice will contain < n elements if (ele.size % n != 0)]",
   "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
