@@ -342,16 +342,32 @@ str.delete('^ A-Za-z')
 str.delete('^ A-Za-z').split
 ```
 
-### swap the places of two characters in a string using one line. Bonus: swap places 'manually'.
+### swap the places of two characters in a string using one line. reassign a slice of the string to new values. Bonus: swap places / reassign 'manually'.
 
 ```ruby
 string = 'Hello!'
 
 string[0], string[1] = string[1], string[0]
 
+string[-2..-1] = '!!'
+
 # manually
 
 ```
+
+### swap the places of two characters in an array using one line. reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.
+
+```ruby
+array = [1, 2, 3, 4]
+
+array[1], array[2] = array[2], array[1]
+
+array[-2..-1] = [:hello, :new]
+
+# manually
+
+```
+
 
 ### create a new array with n elements, each with a default value of v (any immutable object)
 
