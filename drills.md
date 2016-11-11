@@ -570,6 +570,13 @@ end
 
 p arr
 
+# or
+arr = [2, 5, 3, 2, 7, 8, 2, 5, 8] 
+
+arr.each do |ele|
+  arr.delete_at(arr.rindex(ele)) if arr.count(ele) > 1
+end
+
 # non-destructive
 
 arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
