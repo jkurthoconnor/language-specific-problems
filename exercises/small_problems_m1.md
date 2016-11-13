@@ -158,9 +158,9 @@ def toggle_lights(lights_number)
   (1..lights_number).each { |n| bulbs[n] = false }
   bulbs
 
-  bulbs.keys.max.times do |rep|
+  (1..lights_number).each do |rep|
     bulbs.map do |bulb, state|
-      bulbs[bulb] = !state if (bulb % (rep + 1)).zero?
+      bulbs[bulb] = !state if (bulb % rep).zero?
     end
   end
 
