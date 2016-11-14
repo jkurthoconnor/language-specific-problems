@@ -365,6 +365,14 @@ array[1], array[2] = array[2], array[1]
 array[-2..-1] = [:hello, :new]
 
 # manually
+array = [1, 90, 2, 1, 2, 4, 3, 10, 45]
+
+mv2 = array.delete_at(5)
+mv1 = array.delete_at(1)
+
+array.insert(1, mv2)
+array.insert(5, mv1)
+
 
 ```
 
@@ -412,24 +420,6 @@ while index < array.length
   p array[index, slice]
   index += slice
 end
-```
-
-
-### swap the places of two elements in an array using one line. Bonus: swap places 'manually'.
-
-```ruby
-array = [1, 2, 3, 4]
-
-array[1], array[-1] = array[-1], array[1]
-
-# manually
-
-swap_index1 = 0
-swap_index2 = 2
-
-array.insert(swap_index1, array.delete_at(swap_index2))
-array.insert(swap_index2, array.delete_at(swap_index1 + 1))
-# array.insert(swap_index2, array.delete_at(swap_index1 - 1)) # use this line in place of previous if `swap_index1` > `swap_index2`
 ```
 
 ### (array) iterate over array of numbers and print out each value; do the same in reverse.\nBonus: solve with iterators and then with manual loop)

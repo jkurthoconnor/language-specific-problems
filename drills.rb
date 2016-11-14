@@ -34,7 +34,6 @@ array_fluency = [
   "swap the places of two elements in an array using one line; then reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.",
   "iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus: do so manually. no chunk may contain less than n elements.",
   "slice the array into groups of n elements and print each slice.\nBonus: do so manually. [Final slice will contain < n elements if (ele.size % n != 0)]",
-  "swap the places of two elements in an array using one line.\nBonus: swap places 'manually.'",
   "iterate over array of numbers and print out each value; do the same in reverse.\nBonus: solve with iterators and then with manual loop)",
   'iterate over array of numbers and print out only those matching certain conditions',
   "append `n` to end of array\nBonus: append `n`, `o`, `p` to end of array with one line",
