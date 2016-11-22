@@ -173,13 +173,48 @@ def report_status(lights)
 end
 ```
 
-### 5.
+### 5. Diamonds!
+
+Write a method that displays a 4-pointed diamond in an n x n grid, where n is an odd integer that is supplied as an argument to the method. You may assume that the argument will always be an odd integer.
 
 ```ruby
+diamond(1)
+
+*
+```
+
+```ruby
+diamond(3)
+
+ *
+***
+ *
+ ```
+ 
+ ```ruby
+diamond(9)
+
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
 ```
 ### Solution:
 
 ```ruby
+def diamond(n)
+  top = (1..n).step(2).to_a
+  diamonds = top + top[0..-2].reverse
+
+  diamonds.each do |number|
+    puts " " * ((n - number)/ 2) + "*" * number
+  end
+end
 ```
 
 ### 6.
