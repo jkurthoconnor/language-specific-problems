@@ -12,7 +12,7 @@ def parse_request(request)
   [method, path, params]
 end
 
-server = TCPServer.new('localhost', 3003)
+server = TCPServer.new("localhost", 3003)
 
 loop do
   client = server.accept
@@ -22,11 +22,25 @@ loop do
   puts request_line
 
   http_method, path, params = parse_request(request_line)
-  client.puts request_line
-  client.puts http_method, path, params
+  # client.puts request_line # << this prevented the response from being understood; all text printed instead; inspector showed the entire output was wrapped in `<pre>` tags
+  client.puts "HTTP/1.1 200 OK"
+  client.puts "Content-Type: text/html"
+  client.puts
+  client.puts "<html>"
+  client.puts "<body>"
+  client.puts "<pre>"
+  client.puts http_method
+  client.puts path
+  client.puts params
+  client.puts "</pre>"
+  client.puts "<h1>Rolls!</h1>"
 
   params['rolls'].to_i.times do
-    client.puts rand(params['sides'].to_i) + 1
+    client.puts "<p>", rand(params['sides'].to_i) + 1, "</p>"
   end
+
+  client.puts "</body>"
+  client.puts "</html>"
+
   client.close
 end
