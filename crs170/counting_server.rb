@@ -4,7 +4,7 @@ def parse_request(request)
   method, path_and_querry, _null = request.split
   path, param_string = path_and_querry.split('?')
 
-  params = param_string.split('&').each_with_object({}) do |query, hash|
+  params = (param_string || "").split('&').each_with_object({}) do |query, hash|
     pair = query.split('=')
     hash[pair[0]] = pair[1]
   end
@@ -34,9 +34,19 @@ loop do
   client.puts params
   client.puts "</pre>"
 
+  client.puts "<h1>Counter</h1>"
+  number = params["number"].to_i
+
+  client.puts "<p>The current number is #{number}</p>"
+  client.puts "<p><a href='http://localhost:3003/?number=#{number + 1}'>Increase number</a></p>"
+  client.puts "<p><a href='http://localhost:3003/?number=#{number - 1}'>Decrease number</a></p>"
+
 
   client.puts "</body>"
   client.puts "</html>"
 
   client.close
 end
+
+# since HTTP is stateless, there is nowhere to store the current number;
+# must provide `number` with each request
