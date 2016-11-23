@@ -38,8 +38,8 @@ loop do
   number = params["number"].to_i
 
   client.puts "<p>The current number is #{number}</p>"
-  client.puts "<p><a href='http://localhost:3003/?number=#{number + 1}'>Increase number</a></p>"
-  client.puts "<p><a href='http://localhost:3003/?number=#{number - 1}'>Decrease number</a></p>"
+  client.puts "<p><a href='?number=#{number + 1}'>Increase number</a></p>"
+  client.puts "<p><a href='?number=#{number - 1}'>Decrease number</a></p>"
 
 
   client.puts "</body>"
