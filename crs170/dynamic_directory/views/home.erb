@@ -1,13 +1,15 @@
 <DOCTYPE! html>
 <html>
   <head>
-      <title>Directory</title>
+    <title>Directory</title>
   </head>
   <body>
     <h1>Directory</h1>
       <ul>
         <%@paths_files.each do |file_name| %>
-        <li><%= File.basename(file_name, ".*") %></li>
+          <% link_name = File.basename(file_name) %>
+          <% display_name = link_name.split('.').first %>
+          <li><a href="<%= link_name %>"><%= display_name %></a></li>
         <% end %>
       </ul>
   </body>
