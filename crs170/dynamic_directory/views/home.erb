@@ -1,0 +1,14 @@
+<DOCTYPE! html>
+<html>
+  <head>
+      <title>Directory</title>
+  </head>
+  <body>
+    <h1>Directory</h1>
+      <ul>
+        <%@paths_files.each do |file_name| %>
+        <li><%= File.basename(file_name, ".*") %></li>
+        <% end %>
+      </ul>
+  </body>
+</html>
