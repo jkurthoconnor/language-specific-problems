@@ -10,7 +10,7 @@ get "/" do
 end
 
 get "/chapters/:number" do
-  number = params['number']
+  number = params[:number]
   @title = "Chapter #{number}"
   @toc = File.readlines("data/toc.txt")
   @chapter = File.readlines("data/chp#{number}.txt", "\n\n")
