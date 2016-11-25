@@ -7,10 +7,18 @@
     <h1>Directory</h1>
       <ul>
         <%@paths_files.each do |file_name| %>
-          <% link_name = File.basename(file_name) %>
-          <% display_name = link_name.split('.').first %>
-          <li><a href="<%= link_name %>"><%= display_name %></a></li>
+          <% resource = File.basename(file_name) %>
+          <% display_text = resource.split('.').first %>
+          <li><a href="<%= resource %>"><%= display_text %></a></li>
         <% end %>
       </ul>
+      <% if @paths_files.sort == @paths_files %>
+        <% resource = "/?order=reverse" %>
+        <% display_text = "Sort Descending" %>
+      <% else %>
+      <% resource = "/" %>
+      <% display_text = "Sort Ascending" %>
+      <% end %>
+      <a href="<%= resource %>"><%= display_text %></a>
   </body>
 </html>
