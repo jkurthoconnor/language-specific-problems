@@ -1,0 +1,16 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if @hits.size > 0 %>
+<h2 class="content-subhead">Results for '<%= @term %>'</h2>
+  <ul>
+    <%= list_search_results %>
+  </ul>
+<% else %>
+  <p>Sorry, no matches were found.</p>
+<% end %>
+
