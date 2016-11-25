@@ -2,6 +2,17 @@ require "tilt/erubis"
 require "sinatra"
 require "sinatra/reloader"
 
+def search_results
+  chapters_with_hits = []
+  unless (@term.nil?) || (@term == '')
+    @toc.size.times do |n|
+      chapter = File.read("data/chp#{n + 1}.txt")
+      chapters_with_hits.push(n + 1) if chapter.include?(@term)
+    end
+  end
+  chapters_with_hits
+end
+
 before do
   @toc = File.readlines("data/toc.txt")
 end
@@ -15,7 +26,7 @@ helpers do
   def show_search_message
     return unless @term
 
-    if @hits.size == 0
+    if @hits.empty?
       "<p>Sorry, no matches were found.</p>"
     else
       "<h2 class=\"content-subhead\">Results for '#{ @term }'</h2>" \
@@ -48,16 +59,8 @@ get "/chapters/:number" do
 end
 
 get "/search" do
-  @chapter = File.read("data/chp1.txt")
   @term = params[:query]
-  @hits = []
-
-  unless (@term.nil?) || (@term == '')
-    @toc.size.times do |n|
-      chapter = File.read("data/chp#{n + 1}.txt")
-      @hits.push(n + 1) if chapter.include?(@term)
-    end
-  end
+  @hits = search_results
 
   erb :search
 end
