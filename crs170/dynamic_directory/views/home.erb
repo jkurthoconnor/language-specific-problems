@@ -13,12 +13,9 @@
         <% end %>
       </ul>
       <% if @paths_files.sort == @paths_files %>
-        <% resource = "/?order=reverse" %>
-        <% display_text = "Sort Descending" %>
+        <a href="/?order=reverse">Sort Descending</a>
       <% else %>
-      <% resource = "/" %>
-      <% display_text = "Sort Ascending" %>
+      <a href="/">Sort Ascending</a>
       <% end %>
-      <a href="<%= resource %>"><%= display_text %></a>
   </body>
 </html>
