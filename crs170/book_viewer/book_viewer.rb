@@ -2,7 +2,7 @@ require "tilt/erubis"
 require "sinatra"
 require "sinatra/reloader"
 
-def search_results
+def search_results # modify to include paragraph id of search hits
   chapters_with_hits = []
   unless (@term.nil?) || (@term == '')
     @toc.size.times do |n|
@@ -20,7 +20,7 @@ end
 helpers do
   def in_paragraphs(text)
     paragraphs = text.split("\n\n")
-    paragraphs.map { |para| "<p>#{para}</p>" }.join
+    paragraphs.map.with_index { |para, ind| "<p id=\"#{ind}\">#{para}</p>" }.join
   end
 
   def show_search_message
