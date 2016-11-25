@@ -20,9 +20,14 @@ get "/" do
 end
 
 get "/chapters/:number" do
-  number = params[:number]
-  @title = @toc[number.to_i - 1]
+  number = params[:number].to_i
+  redirect "/" if number > @toc.size
+  @title = @toc[number - 1]
   @chapter = File.read("data/chp#{number}.txt")
 
   erb :chapter
+end
+
+not_found do
+  redirect "/"
 end
