@@ -11,8 +11,8 @@ end
 
 get "/chapters/:number" do
   number = params[:number]
-  @title = "Chapter #{number}"
   @toc = File.readlines("data/toc.txt")
+  @title = @toc[number.to_i - 1]
   @chapter = File.readlines("data/chp#{number}.txt", "\n\n")
 
   erb :chapter
