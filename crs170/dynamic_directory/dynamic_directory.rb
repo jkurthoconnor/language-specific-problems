@@ -5,11 +5,9 @@ require 'sinatra/reloader'
 get '/' do
   path = request.fullpath
   option = path.split('=').last
-  if option == 'reverse'
-    @paths_files = Dir.glob('public/*').reverse
-  else
-    @paths_files = Dir.glob('public/*')
-  end
+
+  @paths_files = Dir.glob('public/*').sort
+  @paths_files.reverse! if option == 'reverse'
 
   erb :home
 end
