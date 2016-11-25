@@ -11,11 +11,16 @@ helpers do
     paragraphs = text.split("\n\n")
     paragraphs.map { |para| "<p>#{para}</p>" }.join
   end
-  
-  def show_search_message(hits)
-    # show results heading and list if hits
-    # show no matches message if no hits
-    # show no message if no search terms entered
+
+  def show_search_message
+    return unless @term
+
+    if @hits.size == 0
+      "<p>Sorry, no matches were found.</p>"
+    else
+      "<h2 class=\"content-subhead\">Results for '#{ @term }'</h2>" \
+      "<ul>#{ list_search_results }</ul>"
+    end
   end
 
   def list_search_results
@@ -47,7 +52,7 @@ get "/search" do
   @term = params[:query]
   @hits = []
 
-  if @term
+  unless (@term.nil?) || (@term == '')
     @toc.size.times do |n|
       chapter = File.read("data/chp#{n + 1}.txt")
       @hits.push(n + 1) if chapter.include?(@term)
