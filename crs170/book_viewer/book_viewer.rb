@@ -39,8 +39,13 @@ helpers do
     end
   end
 
-  def return_text(chapter, paragraph)
-    File.readlines("data/chp#{chapter}.txt", "\n\n")[paragraph]
+  def return_text(chapter, paragraph_num)
+    paragraph = File.readlines("data/chp#{chapter}.txt", "\n\n")[paragraph_num]
+    bold_search_terms(paragraph)
+  end
+
+  def bold_search_terms(text)
+    text.gsub(@term, "<strong>#{@term}</strong>")
   end
 end
 
