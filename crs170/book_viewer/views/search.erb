@@ -9,12 +9,13 @@
 <% if @hits.any? %>
   <% @hits.each do |ch, paragraphs| %>
   <ul>
-    <li><%= @toc[ch - 1] %></li>
-    <ul>
-    <% paragraphs.each do |para| %>
-      <li><a href="/chapters/<%= ch %>#<%= para %>"><%= return_text(ch, para) %></a></li>
-    <% end %>
-    </ul>
+    <li><h4><%= @toc[ch - 1] %></h4>
+      <ul>
+      <% paragraphs.each do |para| %>
+        <li><a href="/chapters/<%= ch %>#<%= para %>"><%= return_text(ch, para) %></a></li>
+      <% end %>
+      </ul>
+    </li>
   </ul>
   <% end %>
 <% end %>

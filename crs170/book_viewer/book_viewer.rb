@@ -26,7 +26,7 @@ end
 helpers do
   def in_paragraphs(text)
     paragraphs = text.split("\n\n")
-    paragraphs.map.with_index { |para, ind| "<p id=\"#{ind}\">#{para}</p>" }.join
+    paragraphs.map.with_index { |para, ind| "<p id=\"paragraph_#{ind}\">#{para}</p>" }.join
   end
 
   def show_search_message
