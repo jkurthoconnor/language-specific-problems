@@ -1,3 +1,12 @@
-<h2><%= @user_name.capitalize %>'s Page</h2>
+<h2><%= @name.capitalize %>'s Page</h2>
 <p>Contact: <%= @user_profile[:email] %></p>
 <p>Interests: <%= @user_profile[:interests].join(', ') %></p>
+<% other_users = identify_other_users %>
+<h4>Check out the Other Users!</h4>
+<ul>
+  <% other_users.each do |user| %>
+  <li><a href="/users/<%= user %>"><%= user.capitalize %></a></li>
+  <% end %>
+</ul>
+
+

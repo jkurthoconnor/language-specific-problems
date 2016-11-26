@@ -5,7 +5,14 @@ require 'yaml'
 
 before do
   @data = YAML.load_file('users.yaml')
+  @users = @data.keys
   # {:jamy=>{:email=>"jamy.rustenburg@gmail.com", :interests=>["woodworking", "cooking", "reading"]},   :nora=>{:email=>"nora.alnes@yahoo.com", :interests=>["cycling", "basketball", "economics"]}, :hiroko=>{:email=>"hiroko.ohara@hotmail.com", :interests=>["politics", "history", "birding"]}}
+end
+
+helpers do
+  def identify_other_users
+    @users.select { |user| user != @name }
+  end
 end
 
 get '/' do
@@ -21,10 +28,10 @@ get '/users/list' do
 end
 
 get '/users/:name' do
-  redirect 'users/list' unless @data.keys.include?(params[:name].to_sym)
+  redirect 'users/list' unless @users.include?(params[:name].to_sym)
 
-  @user_name = params[:name].to_sym
-  @user_profile = @data[@user_name]
+  @name = params[:name].to_sym
+  @user_profile = @data[@name]
 
   erb :user_page
 end
