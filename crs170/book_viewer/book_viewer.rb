@@ -2,15 +2,21 @@ require "tilt/erubis"
 require "sinatra"
 require "sinatra/reloader"
 
-def search_results # modify to include paragraph id of search hits
-  chapters_with_hits = []
+def search_results
+  chapter_and_hits = {}
+
   unless (@term.nil?) || (@term == '')
-    @toc.size.times do |n|
-      chapter = File.read("data/chp#{n + 1}.txt")
-      chapters_with_hits.push(n + 1) if chapter.include?(@term)
+    (1..@toc.size).each do |chap|
+      chapter_paragraphs = File.readlines("data/chp#{chap}.txt", ("\n\n"))
+      para_with_hits = []
+      chapter_paragraphs.each_with_index do |para, index|
+        para_with_hits << index if para.include?(@term)
+      end
+      chapter_and_hits[chap] = para_with_hits unless para_with_hits.empty?
     end
   end
-  chapters_with_hits
+
+  chapter_and_hits
 end
 
 before do
@@ -29,17 +35,12 @@ helpers do
     if @hits.empty?
       "<p>Sorry, no matches were found.</p>"
     else
-      "<h2 class=\"content-subhead\">Results for '#{ @term }'</h2>" \
-      "<ul>#{ list_search_results }</ul>"
+      "<h2 class=\"content-subhead\">Results for '#{ @term }'</h2>"
     end
   end
 
-  def list_search_results
-    links = @hits.map do |hit| 
-      "<li><a href='/chapters/#{hit}'>#{@toc[hit - 1]}</a></li>"
-    end
-
-    links.join
+  def return_text(chapter, paragraph)
+    File.readlines("data/chp#{chapter}.txt", "\n\n")[paragraph]
   end
 end
 
