@@ -4,14 +4,22 @@ require 'sinatra/reloader'
 require 'yaml'
 
 before do
+  @title = 'User Interests Network'
   @data = YAML.load_file('users.yaml')
   @users = @data.keys
-  # {:jamy=>{:email=>"jamy.rustenburg@gmail.com", :interests=>["woodworking", "cooking", "reading"]},   :nora=>{:email=>"nora.alnes@yahoo.com", :interests=>["cycling", "basketball", "economics"]}, :hiroko=>{:email=>"hiroko.ohara@hotmail.com", :interests=>["politics", "history", "birding"]}}
 end
 
 helpers do
   def identify_other_users
     @users.select { |user| user != @name }
+  end
+
+  def count_users
+    @users.size
+  end
+
+  def count_interests
+    @data.map { |user, _| @data[user][:interests].count }.reduce(&:+)
   end
 end
 
@@ -29,7 +37,7 @@ end
 
 get '/users/:name' do
   redirect 'users/list' unless @users.include?(params[:name].to_sym)
-
+  @params = params
   @name = params[:name].to_sym
   @user_profile = @data[@name]
 
@@ -39,5 +47,3 @@ end
 not_found do
   redirect 'users/list'
 end
-  
-  
