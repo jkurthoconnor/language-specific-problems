@@ -12,7 +12,7 @@
 
   <body>
     <div id="layout">
-      
+
       <div class="header">
         <h1> <%= @title %> </h1>
         <h2> A Place to Connect </h2>
@@ -23,15 +23,13 @@
       <div class="footer">
         <h2>There are <%= count_users %> users with a total of <%= count_interests %> interests.</h2>
         <h3>Check 'em Out!</h3>
-          <ul>
             <% other_users = identify_other_users %>
             <% other_users.each do |user| %>
-            <li><a href="/users/<%= user %>"><%= user.capitalize %></a></li>
+            <p><a href="/users/<%= user %>"><%= user.capitalize %></a></p>
             <% end %>
-          </ul>
         <h3>Join Today!</h3>
       </div>
-      
+
     </div>
 
   </body>

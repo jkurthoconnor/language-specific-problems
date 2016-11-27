@@ -1,12 +1,8 @@
 
 body {
-  font-family: 'Vollkorn', serif;
-}
-
-body {
+    font-family: 'Vollkorn', serif;
     color: #777;
 }
-
 
 .content {
     margin: 0 auto;
@@ -32,10 +28,10 @@ body {
     }
      .header h2 {
         font-weight: 300;
-        color: #ccc;
+        color: #333333, 0.73;
         padding: 0;
         margin-top: 0;
-    }
+      }
   
 .footer {
       margin: 0:
@@ -43,5 +39,14 @@ body {
       text-align: center;
       padding: 2.5en 2em 0;
       border-top: 1px solid #eee;
+}
+      
+    .footer h2, h3 {
+      font-weight: 300;
+      color: #333333, 0.73;
+      padding: 0;
+      margin-top: 0;
+    }
+
 
 
