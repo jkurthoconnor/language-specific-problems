@@ -11,7 +11,46 @@
 # J, X                               8
 # Q, Z                               10
 #
-# Examples
-# 
-# "cabbage" should be scored as worth 14 points:
 
+class Scrabble
+  def initialize(string)
+    @string = string
+    @points = 0
+  end
+
+  def valid_input?
+     @string.is_a?(String) &&
+     @string =~ /\A[a-z]+\z/i
+  end
+
+  def score
+    return @points unless valid_input?
+    @string.upcase.each_char do |char|
+      @points += look_up_points(char)
+    end
+
+    @points
+  end
+  
+  def self.score(string)
+    Scrabble.new(string).score
+  end
+
+  def look_up_points(char)
+    if ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'].include?(char)
+      1
+    elsif ['D', 'G'].include?(char)
+      2
+    elsif ['B', 'C', 'M', 'P'].include?(char)
+      3
+    elsif ['F', 'H', 'V', 'W', 'Y'].include?(char)
+      4
+    elsif ['K'].include?(char)
+      5
+    elsif ['J', 'X'].include?(char)
+      8
+    elsif ['Q', 'Z'].include?(char)
+      10
+    end
+  end
+end
