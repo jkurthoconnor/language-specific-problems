@@ -35,11 +35,7 @@ class BeerSong
   end
 
   def eval_pronoun(number)
-    if number > 1
-      then "one"
-    else
-      "it"
-    end
+    number > 1 ? "one" : "it"
   end
 
   def lyrics
