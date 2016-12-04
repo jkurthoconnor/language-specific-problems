@@ -353,6 +353,16 @@ string[-2..-1] = '!!'
 
 # manually
 
+str = "Hi, hello world!"
+
+def swapper(string, index1, index2)
+  last = string.slice!(index2)
+  first = string.slice!(index1)
+  string.insert(index1, last)
+  string.insert(index2, first)
+  string
+end
+
 ```
 
 ### swap the places of two characters in an array using one line. reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.
@@ -372,8 +382,6 @@ mv1 = array.delete_at(1)
 
 array.insert(1, mv2)
 array.insert(5, mv1)
-
-
 ```
 
 
