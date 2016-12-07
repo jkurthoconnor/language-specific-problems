@@ -54,6 +54,14 @@ def rotate_rightmost_digits(digits, place)
   chars = digits.to_s.chars
   chars.push(chars.delete_at(-place)).join.to_i
 end
+
+# or 
+
+def rotate_rightmost_digits(integer, digit)
+  str = integer.to_s
+  last = str.slice!(-digit)
+  (str << last).to_i
+end
 ```
 
 ### 3. Rotation (Part 3)
@@ -106,6 +114,21 @@ def max_rotation(number)
     digits.push(digits.delete_at(idx))
     idx += 1
   end
+  digits.join.to_i
+end
+
+# or
+
+def max_rotation(integer)
+  digits = integer.to_s.chars
+  index = 0
+
+  while index < digits.size - 1
+    last = digits.delete_at(index)
+    digits = digits << last
+    index += 1
+  end
+
   digits.join.to_i
 end
 ```
