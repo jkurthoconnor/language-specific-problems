@@ -249,19 +249,56 @@ end
 ```ruby
 ```
 
-### 7.
+### 7. Word to Digit
 
+Write a method that takes a sentence string as input, and returns a new string that contains the original string with any sequence of the words 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine' converted to a string of digits.
+
+Example:
 ```ruby
+word_to_digit('Please call me at five five five one two three four. Thanks.') == 'Please call me at 5 5 5 1 2 3 4. Thanks.')
 ```
 ### Solution:
 
 ```ruby
+DIGITS = {
+  'zero' => 0, 'one' => 1, 'two' => 2, 'three' => 3, 'four' => 4,
+  'five' => 5, 'six' => 6, 'seven' => 7, 'eight' => 8, 'nine' => 9
+}.freeze
+
+def word_to_digit(string)
+  words = string.split(/\b/)
+  words.map { |word| DIGITS[word] || word }.join
+end
+```
+
+### Further Explorations
+Can you modify this so that spaces between the inserted numbers are eliminated? If the sentence already contains 2 or more space separated numbers (not words), don't delete the space between them: only the spaces between the converted number words should be eliminated.
+
+What about dealing with phone numbers? Is there any easy way to format our string to account for phone numbers? For our purposes, assume that any 10 digit number is a phone number, and that the proper format should be "(123) 456-7890".
+
+### Solution
+
+```ruby
+DIGITS = {
+  'zero' => 0, 'one' => 1, 'two' => 2, 'three' => 3, 'four' => 4,
+  'five' => 5, 'six' => 6, 'seven' => 7, 'eight' => 8, 'nine' => 9
+}.freeze
+
+def word_to_digit(string)
+  words = string.split(/\b/)
+  converted = words.map { |word| DIGITS[word.downcase] || word }.join
+  digits_to_phone(converted)
+end
+
+def digits_to_phone(string)
+  stripped_digits = string.gsub(/(\d)\s/, '\1')
+  stripped_digits.gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3')
+end
 ```
 
 ### 8.
 
-```ruby
-```
+
 ### Solution:
 
 ```ruby
