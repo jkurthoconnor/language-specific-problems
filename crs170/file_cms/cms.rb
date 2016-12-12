@@ -21,6 +21,6 @@ end
 get '/:filename' do
   @text = File.read(root + '/data/' + params[:filename])
 
-  headers['Content-Type'] = 'text/plain'  # sets template content type; Default depends on template language.
+  headers['Content-Type'] = 'text/plain'  # sets content type; appears in response header; Default depends on template language.
   erb :document
 end
