@@ -1,4 +1,7 @@
-<p><%= session.delete(:error) %></p>
+<% if session[:error] %>
+  <p><%= session.delete(:error) %></p>
+<% end %>
+
 <ul>
 <% @files.each do |filename| %>
 <% clean_name = clean_filename(filename) %>

@@ -6,7 +6,7 @@ require 'tilt/erubis'
 
 configure do
   enable :sessions
-  set :session_secret, 'secret'
+  set :session_secret, 'mickey mouse'
 
 end
 
@@ -24,18 +24,11 @@ get '/' do
   erb :index
 end
 
-def file_exists?(short_filename)
-  @files.any? do |full_path|
-    File.basename(full_path) == (short_filename)
-  end
-end
-
 
 get '/:filename' do
-  @files = Dir.glob(root + '/data/*')
-
-  if file_exists?(params[:filename])
-    @text = File.read(root + '/data/' + params[:filename])
+  resource = root + '/data/' + params[:filename]
+  if File.file?(resource)
+    @text = File.read(resource)
     headers['Content-Type'] = 'text/plain'  # sets content type in response header
     erb :document
   else
