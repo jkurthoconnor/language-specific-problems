@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/content_for'
 require 'tilt/erubis'
+require 'redcarpet'
 
 
 configure do
@@ -27,12 +28,21 @@ end
 
 get '/:filename' do
   resource = root + '/data/' + params[:filename]
-  if File.file?(resource)
-    @text = File.read(resource)
-    headers['Content-Type'] = 'text/plain'  # sets content type in response header
-    erb :document
-  else
-    session[:error] = "#{params[:filename]} does not exist"
-    redirect '/'
+
+  unless File.file?(resource)
+  session[:error] = "#{params[:filename]} does not exist"
+  redirect '/'
   end
+
+  file = File.read(resource)
+
+  case File.extname(resource)
+  when '.txt'
+    @text = file
+    headers['Content-Type'] = 'text/plain'  # sets content type in response header
+  when '.md'
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @text = markdown.render(file)
+  end
+  erb :document
 end
