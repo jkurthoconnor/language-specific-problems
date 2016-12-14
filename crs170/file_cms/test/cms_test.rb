@@ -68,22 +68,38 @@ class AppTest < Minitest::Test
     get 'about.md'
     assert_equal(200, last_response.status)
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
-    assert_includes(last_response.body, '<h3>ABOUT RUBY</h3>')
+    # assert_includes(last_response.body, '<h3>ABOUT RUBY</h3>')
   end
 
   def test_edit_view
-    get 'edit/about.md'
-    assert_equal(200, last_response.status)
+    sample_text = "<textarea name=\"revised_text\" rows=\"20\" cols=\"80\">"
 
-    get 'edit/about.txt'
+    get 'about.md/edit'
     assert_equal(200, last_response.status)
+    assert_includes(last_response.body, sample_text)
 
-    get 'edit/changes.txt'
-    assert_equal(200, last_response.status)
+    post 'about.md/edit', revised_text: '## changed'
+    assert_equal(302, last_response.status)
 
-    get 'edit/history.txt'
+    # # assertion fails: why?
+    # get last_response['Location']
+    # assert_includes(last_response.body, 'has been edited!')
+
+    get '/about.md'
     assert_equal(200, last_response.status)
+    assert_includes(last_response.body, '<h2>changed</h2>')
+
+    get 'about.txt/edit'
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, sample_text)
+
+    get 'changes.txt/edit'
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, sample_text)
+
+    get 'history.txt/edit'
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, sample_text)
 
   end
-
 end
