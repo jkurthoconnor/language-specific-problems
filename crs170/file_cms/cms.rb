@@ -26,6 +26,11 @@ get '/' do
 end
 
 
+def render_markdown(file)
+  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+  markdown.render(file)
+end
+
 get '/:filename' do
   resource = root + '/data/' + params[:filename]
 
@@ -41,8 +46,7 @@ get '/:filename' do
     @text = file
     headers['Content-Type'] = 'text/plain'  # sets content type in response header
   when '.md'
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    @text = markdown.render(file)
+    @text = render_markdown(file)
   end
   erb :document
 end
