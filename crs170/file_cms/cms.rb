@@ -58,3 +58,8 @@ get '/:filename' do
 
   erb :document
 end
+
+get '/edit/:filename' do
+
+  erb :edit
+end

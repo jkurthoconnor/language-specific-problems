@@ -5,6 +5,9 @@
 <ul>
 <% @files.each do |filename| %>
 <% clean_name = clean_filename(filename) %>
-  <li><a href="<%= clean_name %>"><%= clean_name %></a></li>
+  <li>
+    <a href="<%= clean_name %>"><%= clean_name %></a>
+    <a href="edit/<%= clean_name %>">Edit Document</a>
+  </li>
 <% end %>
 </ul>
