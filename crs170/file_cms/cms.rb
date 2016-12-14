@@ -44,13 +44,14 @@ def load_content(resource)
 end
 
 
+# display file contents
 get '/:filename' do
   redirect '/' if params[:filename] =~ /favicon/
 
   path = root + '/data/' + params[:filename]
 
   unless File.file?(path)
-  session[:error] = "#{params[:filename]} does not exist"
+  session[:message] = "#{params[:filename]} does not exist"
   redirect '/'
   end
 
@@ -59,7 +60,24 @@ get '/:filename' do
   erb :document
 end
 
-get '/edit/:filename' do
 
+# render edit file page
+get '/:filename/edit' do
+  path = root + '/data/' + params[:filename]
+  @text = File.read(path)
   erb :edit
+end
+
+
+# edit file
+post '/:filename/edit' do
+  path = root + '/data/' + params[:filename]
+
+  File.open(path, 'w') do |file|
+    file.write(params[:revised_text])
+    file.close
+  end
+
+  session[:message] = "#{params[:filename]} has been edited!"
+  redirect '/'
 end

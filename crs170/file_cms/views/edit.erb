@@ -1,1 +1,10 @@
 <p>Edit content of: <%= params[:filename] %></p>
+<form action="/<%= params[:filename] %>/edit" method="post">
+  <textarea name="revised_text" rows="20" cols="80"><%= @text %></textarea>
+  <p><button type="submit">Save Changes</button></p>
+</form>
+
+
+<!-- <form action="/lists/<%= params[:id] %>/delete" method="post" class="delete">
+  <button type="submit" class="delete">Delete List</button>
+</form> -->

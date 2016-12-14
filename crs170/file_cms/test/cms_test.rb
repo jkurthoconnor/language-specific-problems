@@ -71,7 +71,7 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, '<h3>ABOUT RUBY</h3>')
   end
 
-  def test_edit_page
+  def test_edit_view
     get 'edit/about.md'
     assert_equal(200, last_response.status)
 
