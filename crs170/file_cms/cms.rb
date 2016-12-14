@@ -8,7 +8,6 @@ require 'redcarpet'
 configure do
   enable :sessions
   set :session_secret, 'mickey mouse'
-
 end
 
 
@@ -32,6 +31,8 @@ def render_markdown(file)
 end
 
 get '/:filename' do
+  redirect '/' if params[:filename] =~ /favicon/
+
   resource = root + '/data/' + params[:filename]
 
   unless File.file?(resource)
