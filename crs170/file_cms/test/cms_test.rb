@@ -43,7 +43,7 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, 'RUBY HISTORY')
   end
 
-  def test_nonexitent_doc
+  def test_nonexistent_doc
     get '/nonexistent.doc'
     assert_equal(302, last_response.status)
 
@@ -54,4 +54,21 @@ class AppTest < Minitest::Test
     get '/'
     refute_includes(last_response.body, 'does not exist')
   end
+
+  def test_favicon_redirect
+    get '/favicon.ico'
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+    assert_equal(200, last_response.status)
+    refute_includes(last_response.body, 'does not exist')
+  end
+
+  def test_markdown_file
+    get 'about.md'
+    assert_equal(200, last_response.status)
+    assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
+    assert_includes(last_response.body, '<h3>ABOUT RUBY</h3>')
+  end
+
 end
