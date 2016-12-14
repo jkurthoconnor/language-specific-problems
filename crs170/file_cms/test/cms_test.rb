@@ -16,7 +16,7 @@ class AppTest < Minitest::Test
     get '/'
     assert_equal(200, last_response.status)
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
-
+    assert_includes(last_response.body, 'about.md')
     assert_includes(last_response.body, 'about.txt')
     assert_includes(last_response.body, 'changes.txt')
     assert_includes(last_response.body, 'history.txt')
