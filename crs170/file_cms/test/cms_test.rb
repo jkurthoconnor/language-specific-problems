@@ -17,6 +17,10 @@ class AppTest < Minitest::Test
     FileUtils.mkdir_p(data_path)
   end
 
+  def teardown
+    FileUtils.rm_rf(data_path)
+  end
+
   def create_document(name, content = "")
      File.open(File.join(data_path, name), "w") do |file|
        file.write(content)
@@ -108,9 +112,5 @@ class AppTest < Minitest::Test
 
     assert_equal(200, last_response.status)
     assert_includes(last_response.body, sample_text)
-  end
-
-  def teardown
-    FileUtils.rm_rf(data_path)
   end
 end
