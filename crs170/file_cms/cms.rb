@@ -44,10 +44,10 @@ def load_content(resource)
 
   case File.extname(resource)
   when '.txt'
-    @text = content
     headers['Content-Type'] = 'text/plain'  # sets content type in response header
+    content
   when '.md'
-    @text = render_markdown(content)
+    erb render_markdown(content)
   end
 end
 
@@ -64,8 +64,6 @@ get '/:filename' do
   end
 
   load_content(path)
-
-  erb :document
 end
 
 

@@ -1,13 +1,10 @@
-<% if session[:message] %>
-  <p><%= session.delete(:message) %></p>
-<% end %>
 
 <ul>
-<% @files.each do |filename| %>
-<% clean_name = clean_filename(filename) %>
-  <li>
-    <a href="<%= clean_name %>"><%= clean_name %></a>
-    <a href="<%= clean_name %>/edit">Edit Document</a>
-  </li>
-<% end %>
+  <% @files.each do |filename| %>
+    <% clean_name = clean_filename(filename) %>
+    <li>
+      <a href="/<%= clean_name %>"><%= clean_name %></a>
+      <a href="/<%= clean_name %>/edit">Edit Document</a>
+    </li>
+  <% end %>
 </ul>
