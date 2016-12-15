@@ -64,17 +64,6 @@ class AppTest < Minitest::Test
     refute_includes(last_response.body, 'does not exist')
   end
 
-  def test_favicon_redirect
-    get '/favicon.ico'
-
-    assert_equal(302, last_response.status)
-
-    get last_response['Location']
-
-    assert_equal(200, last_response.status)
-    refute_includes(last_response.body, 'does not exist')
-  end
-
   def test_markdown_file
     create_document('about.md', '## Header')
 

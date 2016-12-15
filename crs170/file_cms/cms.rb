@@ -54,7 +54,7 @@ end
 
 # display file contents
 get '/:filename' do
-  redirect '/' if params[:filename] =~ /favicon/
+  # redirect '/' if params[:filename] =~ /favicon/
 
   path = File.join(data_path, params[:filename])
 
