@@ -55,7 +55,7 @@ def rotate_rightmost_digits(digits, place)
   chars.push(chars.delete_at(-place)).join.to_i
 end
 
-# or 
+# or
 
 def rotate_rightmost_digits(integer, digit)
   str = integer.to_s
@@ -101,7 +101,7 @@ end
 ```
 
 ### Further Exploration:
-Assume you do not have the rotate_rightmost_digits or rotate_array methods. How would you approach this problem? 
+Assume you do not have the rotate_rightmost_digits or rotate_array methods. How would you approach this problem?
 
 ### Solution:
 
@@ -213,7 +213,7 @@ diamond(3)
 ***
  *
  ```
- 
+
  ```ruby
 diamond(9)
 
@@ -296,28 +296,87 @@ def digits_to_phone(string)
 end
 ```
 
-### 8.
+### 8. Fibonacci (Recursive)
 
+```ruby
+def sum(n) # calculates sum of integers btwn 1 and n
+  return 1 if n == 1
+  n + sum(n - 1)
+end
+```
+A good recursive method has 3 main qualities:
+
+  - it calls itself at least once
+  - it has an ending condition (if n == 1 above)
+  - the results of each recursion are used in each step (n + sum(n - 1) uses sum(n - 1)).
+
+
+Write a recursive method that computes the nth Fibonacci number, where nth is an argument to the method.
 
 ### Solution:
 
 ```ruby
+def fibonacci(n)
+  return 1 if n < 3
+  fibonacci(n - 1) + fibonacci(n - 2)
+end
 ```
 
-### 9.
+### 9. Fibonacci (Procedural)
 
+Rewrite your recursive fibonacci method so that it computes its results without recursion.
+
+Examples:
 ```ruby
+fibonacci(20) == 6765
+fibonacci(100) == 354224848179261915075
+fibonacci(100_001) # => 4202692702.....8285979669707537501
+
 ```
 ### Solution:
 
 ```ruby
+def fibonacci(n)
+  a, b = [1, 1]
+  (3..n).each do
+    a, b = [b, a + b]
+  end
+  b
+end
 ```
 
 ### 10.
+compute a method that returns the last digit of the nth Fibonacci number.
 
+Examples:
 ```ruby
+fibonacci_last(15)        # -> 0  (the 15th Fibonacci number is 610)
+fibonacci_last(20)        # -> 5 (the 20th Fibonacci number is 6765)
+fibonacci_last(100)       # -> 5 (the 100th Fibonacci number is 354224848179261915075)
+fibonacci_last(100_001)   # -> 1 (this is a 20899 digit number)
+fibonacci_last(1_000_007) # -> 3 (this is a 208989 digit number)
+fibonacci_last(123456789) # -> 4
+
 ```
+
 ### Solution:
 
 ```ruby
+def fibonacci(n)
+  a, b = [1, 1]
+  (3..n).each do
+    a, b = [b, a + b]
+  end
+  b
+end
+
+def fibonacci_last(n)
+  fibonacci(n) % 10
+end
+
+# or faster
+
+def fibonacci_last(n)
+  fibonacci(n).to_s[-1].to_i
+end
 ```
