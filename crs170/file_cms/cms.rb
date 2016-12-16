@@ -24,11 +24,11 @@ def data_path
   end
 end
 
-# root = File.expand_path('..', __FILE__)
 
 get '/' do
   pattern = File.join(data_path, '*') # returns new string, with arguments joined by File::SEPARATOR ('/' or '\' based on OS)
   @files = Dir.glob(pattern)
+
   erb :index
 end
 
@@ -52,10 +52,34 @@ def load_content(resource)
 end
 
 
+# render add new document form
+get '/new' do
+  erb :new
+end
+
+
+def valid_filename?(filename)
+  filename.strip.size > 0
+end
+
+
+# add new file
+post '/new' do
+  unless valid_filename?(params[:new_filename])
+    session[:message] = "A non-empty name is required."
+    redirect '/new'
+  end
+
+  path = File.join(data_path, params[:new_filename])
+
+  File.open(path, 'w') { |file| file.write('')}
+  session[:message] = "#{params[:new_filename]} has been created!"
+  redirect '/'
+end
+
+
 # display file contents
 get '/:filename' do
-  # redirect '/' if params[:filename] =~ /favicon/
-
   path = File.join(data_path, params[:filename])
 
   unless File.file?(path)
@@ -71,6 +95,7 @@ end
 get '/:filename/edit' do
   path = File.join(data_path, params[:filename])
   @text = File.read(path)
+
   erb :edit
 end
 
