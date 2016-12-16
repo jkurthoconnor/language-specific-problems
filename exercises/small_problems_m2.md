@@ -5,8 +5,20 @@
 
 Write a program that reads the content of a text file and then prints the longest sentence in the file based on number of words. Sentences may end with periods (.), exclamation points (!), or question marks (?). Any sequence of characters that are not spaces or sentence-ending characters should be treated as a word. You should also print the number of words in the longest sentence.
 
-Example text:
+### Solution:
+```ruby
+def find_longest_sentence(text)
+  sentences = text.split(/[.!?]\s/)
+  hash = {}
+  sentences.each { |sent| hash[sent.split.count] = sent }
+  result = hash.assoc(hash.keys.max)
+  size, sentence = result[0], result[1]
+  "Longest sentence consists of #{size} words and is: '#{sentence}'"
+end
 
+content = File.read('scrap_sample_text.txt')
+puts find_longest_sentence(content)
+```
 ### 2)
 ### 3)
 ### 4)
