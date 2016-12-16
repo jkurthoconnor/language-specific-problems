@@ -37,6 +37,7 @@ class AppTest < Minitest::Test
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
     assert_includes(last_response.body, 'about.md')
     assert_includes(last_response.body, 'changes.txt')
+    assert_includes(last_response.body, "<form action=\"/about.md/delete\"")
   end
 
   def test_text_document
@@ -136,5 +137,21 @@ class AppTest < Minitest::Test
 
     get last_response['Location']
     assert_includes(last_response.body, "A non-empty name is required.")
+  end
+
+  def test_document_deletion
+    create_document('delete_me.txt', 'I will be deleted.')
+
+    post '/delete_me.txt/delete'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_includes(last_response.body, 'delete_me.txt has been deleted!')
+
+    get '/'
+
+    refute_includes(last_response.body, 'delete_me.txt')
   end
 end
