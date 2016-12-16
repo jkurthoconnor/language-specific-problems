@@ -37,7 +37,7 @@ class AppTest < Minitest::Test
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
     assert_includes(last_response.body, 'about.md')
     assert_includes(last_response.body, 'changes.txt')
-    assert_includes(last_response.body, "<form action=\"/about.md/delete\"")
+    assert_includes(last_response.body, "action=\"/about.md/delete\"")
   end
 
   def test_text_document
