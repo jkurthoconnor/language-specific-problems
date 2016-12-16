@@ -90,7 +90,9 @@ class AppTest < Minitest::Test
 
     # # assertion fails: why?
     # get last_response['Location']
-    # assert_includes(last_response.body, 'has been edited!')
+    # response_message = "<div class=\"message\">about.md has been edited!</div>"
+    #
+    # assert_includes(last_response.body, response_message)
 
     get '/about.md'
 
@@ -101,5 +103,38 @@ class AppTest < Minitest::Test
 
     assert_equal(200, last_response.status)
     assert_includes(last_response.body, sample_text)
+  end
+
+  def test_view_new_document_form
+    get '/new'
+    body_content = "<form action=\"/new\" method=\"post\">"
+
+    assert_equal(200, last_response.status)
+    assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
+    assert_includes(last_response.body, body_content)
+  end
+
+  def test_create_new_document
+    post '/new', new_filename: 'test_file.md'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+    response_message = "<div class=\"message\">test_file.md has been created!</div>"
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, response_message)
+
+    get '/'
+
+    assert_includes(last_response.body, 'test_file.md')
+
+  end
+
+  def test_filename_validator
+    post '/new', new_filename: ''
+
+    get last_response['Location']
+    assert_includes(last_response.body, "A non-empty name is required.")
   end
 end
