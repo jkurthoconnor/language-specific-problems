@@ -123,3 +123,36 @@ post '/:filename/delete' do
 
   redirect '/'
 end
+
+
+# render sign in page
+get '/users/signin' do
+
+erb :signin
+end
+
+
+# check signin credentials
+post '/users/signin' do
+  if params[:username] == 'admin' && params[:password] == 'secret'
+    session[:signed_in] = true
+    session[:message] = "Welcome! #{params[:username]}"
+    redirect '/'
+  else
+    session[:message] = 'Invalid Credentials'
+    session[:username] = params[:username]
+    redirect '/users/signin'
+  end
+end
+
+
+# sign out
+post '/users/signout' do
+  session[:signed_in] = false
+  session[:message] = "You have signed out."
+  redirect '/'
+end
+
+
+# remove persisting failed username
+# add 'logged in as n' message
