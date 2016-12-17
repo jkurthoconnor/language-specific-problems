@@ -127,32 +127,28 @@ end
 
 # render sign in page
 get '/users/signin' do
-
-erb :signin
+  erb :signin
 end
 
 
 # check signin credentials
 post '/users/signin' do
+
   if params[:username] == 'admin' && params[:password] == 'secret'
-    session[:signed_in] = true
-    session[:message] = "Welcome! #{params[:username]}"
+    session[:username] = params[:username]
+    session[:message] = "Welcome! #{session[:username]}"
     redirect '/'
   else
-    session[:message] = 'Invalid Credentials'
-    session[:username] = params[:username]
-    redirect '/users/signin'
+    session[:message] = 'Invalid Credentials.'
+    status 422
+    erb :signin
   end
 end
 
 
 # sign out
 post '/users/signout' do
-  session[:signed_in] = false
   session[:message] = "You have signed out."
+  session.delete(:username)
   redirect '/'
 end
-
-
-# remove persisting failed username
-# add 'logged in as n' message

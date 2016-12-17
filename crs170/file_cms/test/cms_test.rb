@@ -27,7 +27,7 @@ class AppTest < Minitest::Test
      end
    end
 
-  def test_index
+  def test_index # currently fails, b/c my index view is a button unless signed in?
     create_document('about.md')
     create_document('changes.txt')
 
@@ -40,7 +40,7 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, "action=\"/about.md/delete\"")
   end
 
-  def test_text_document
+  def test_text_document # currently fails, b/c my index view is a button unless signed in?
     create_document('about.txt', 'ABOUT RUBY')
 
     get '/about.txt'
@@ -88,12 +88,6 @@ class AppTest < Minitest::Test
     post 'about.md/edit', revised_text: '## changed'
 
     assert_equal(302, last_response.status)
-
-    # # assertion fails: why?
-    # get last_response['Location']
-    # response_message = "<div class=\"message\">about.md has been edited!</div>"
-    #
-    # assert_includes(last_response.body, response_message)
 
     get '/about.md'
 
@@ -153,5 +147,29 @@ class AppTest < Minitest::Test
     get '/'
 
     refute_includes(last_response.body, 'delete_me.txt')
+  end
+
+  def test_sign_in_form
+    get 'users/signin'
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, "<form action=\"/users/signin\"")
+    assert_includes(last_response.body, "<input name=\"username\"")
+    assert_includes(last_response.body, "<button type=\"submit\">")
+  end
+
+  def test_signin # won't pass
+    post 'users/signin', username: 'admin', password: 'secret'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, "Welcome")
+
+    post 'users/signin', username: 'admin', password: 'fjdka'
+
+    assert_equal(422, last_response.status)
+    assert_includes(last_response.body, 'Invalid Credentials.')
   end
 end

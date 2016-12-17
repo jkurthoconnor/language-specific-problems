@@ -13,6 +13,15 @@
   <% end %>
 
   <%= yield %>
-  
+
+  <% if session[:username] %>
+    <div class="signed_in">
+      <p>You are signed in as <%= session[:username] %>
+      <form action="users/signout" method="post">
+        <button type="submit" >Sign Out</button>
+      </form>
+    </p>
+    </div>
+  <% end %>
 </body>
 </html>

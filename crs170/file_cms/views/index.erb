@@ -1,4 +1,4 @@
-<% if session[:signed_in] %>
+<% if session[:username] %>
   <ul>
     <% @files.each do |filename| %>
       <% clean_name = clean_filename(filename) %>
@@ -14,12 +14,6 @@
 
   <p><a href="/new">New Document</a></p>
 
-
-  <p>Signed in as
-    <form action="users/signout" method="post">
-      <button type="submit" >Sign Out</button>
-    </form>
-  </p>
 <% else %>
 
 <form action="users/signin" method="get">

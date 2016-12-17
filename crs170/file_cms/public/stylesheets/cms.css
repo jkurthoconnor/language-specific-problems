@@ -11,3 +11,7 @@ body {
 form.inline {
   display: inline;
 }
+
+.signed_in {
+  font-style: italic;
+}
