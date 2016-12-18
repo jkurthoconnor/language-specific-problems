@@ -1,4 +1,4 @@
 ---
-admin1 : secret1
-admin2 : secret2
-admin3 : secret3
+admin1 : $2a$10$QCnCuDIMTKPU.bOBTtTd5uNsZt3mEQqt7NOYhfX9Txs0HANZRs7e6
+admin2 : $2a$10$uJbWKB6DuLSDNnC0sJdAJ.0Hx2BEUaQ16GVATFfRtmgzHJqA6f8ze
+admin3 : $2a$10$MdHEkyz1HpTjtbKeJAo7kOgmsvrzyajb.sO6AjGA9G4qMqYUY1Q8i

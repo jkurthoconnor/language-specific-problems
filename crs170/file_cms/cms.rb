@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'tilt/erubis'
 require 'redcarpet'
 require 'yaml'
+require 'bcrypt'
 
 
 configure do
@@ -161,7 +162,7 @@ def valid_credentials?(username, password)
   path = File.join(user_data_path, 'users.yml')
   creds = YAML.load_file(path)
 
-  creds[username] == password
+  creds[username] && BCrypt::Password.new(creds[username]) == password
 end
 
 

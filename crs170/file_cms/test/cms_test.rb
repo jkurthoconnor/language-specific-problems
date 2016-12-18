@@ -199,7 +199,7 @@ class AppTest < Minitest::Test
   end
 
   def test_signin_bad_credentials
-    post 'users/signin', username: 'admin', password: 'fjdka'
+    post 'users/signin', username: 'billy', password: 'fjdka'
 
     assert_equal(422, last_response.status)
     assert_equal(nil, session[:username])
