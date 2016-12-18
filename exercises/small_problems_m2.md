@@ -19,7 +19,39 @@ end
 content = File.read('scrap_sample_text.txt')
 puts find_longest_sentence(content)
 ```
-### 2)
+### 2) ABCs
+A collection of spelling blocks has two letters per block, as shown in this list:
+
+B:O   X:K   D:Q   C:P   N:A
+G:T   R:E   F:S   J:W   H:U
+V:I   L:Y   Z:M
+
+This limits the words you can spell with the blocks to just those words that do not use both letters from any given block. Each block can only be used once.
+
+Write a method that returns true if the word passed in as an argument can be spelled from this set of blocks, false otherwise.
+
+Examples:
+
+block_word?('BATCH') == true
+block_word?('BUTCH') == false
+block_word?('jest') == true
+
+### Solution:
+```ruby
+BLOCKS = {'B'=>'O', 'X'=>'K', 'D'=>'Q', 'C'=>'P', 'N'=>'A', 'G'=>'T',
+         'R'=>'E', 'F'=>'S', 'J'=>'W', 'H'=>'U', 'V'=>'I', 'L'=>'Y',
+         'Z'=>'M'}
+
+def block_word?(string)
+  blocks = BLOCKS.clone
+  string.upcase.chars.each do |ltr|
+    return false unless blocks.flatten.include?(ltr)
+    blocks.delete(ltr) || blocks.delete(blocks.key(ltr))
+  end
+  true
+end
+```
+
 ### 3)
 ### 4)
 ### 5)
