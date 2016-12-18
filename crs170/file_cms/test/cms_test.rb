@@ -25,34 +25,26 @@ class AppTest < Minitest::Test
     last_request.env['rack.session']
   end
 
-  def create_document(name, content = "")
-     File.open(File.join(data_path, name), "w") do |file|
-       file.write(content)
-     end
-   end
-
-  def test_index_as_signed_in_user
-    create_document('about.md')
-    create_document('changes.txt')
-    get '/', {}, {'rack.session' => {username: 'admin'}}
-
-    assert_equal(200, last_response.status)
-    assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
-    assert_includes(last_response.body, 'about.md')
-    assert_includes(last_response.body, 'changes.txt')
-    assert_includes(last_response.body, "action=\"/about.md/delete\"")
+  def log_in_user
+    {'rack.session' => {username: 'admin'}}
   end
 
-  def test_index_not_signed_in
+  def create_document(name, content = "")
+    File.open(File.join(data_path, name), "w") do |file|
+     file.write(content)
+    end
+  end
+
+  def test_index_as_signed_in_user
     create_document('about.md')
     create_document('changes.txt')
     get '/'
 
     assert_equal(200, last_response.status)
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
-    refute_includes(last_response.body, 'about.md')
-    refute_includes(last_response.body, 'changes.txt')
-    refute_includes(last_response.body, "action=\"/about.md/delete\"")
+    assert_includes(last_response.body, 'about.md')
+    assert_includes(last_response.body, 'changes.txt')
+    assert_includes(last_response.body, "action=\"/about.md/delete\"")
   end
 
   def test_text_document
@@ -87,20 +79,27 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, '<h2>Header</h2>')
   end
 
-  def test_edit_view
+  def test_edit_view_signed_in
     sample_text = "<textarea name=\"revised_text\" rows=\"20\" cols=\"80\">"
     create_document('about.md', sample_text)
 
-    get 'about.md/edit'
-
+    get 'about.md/edit', {}, log_in_user
     assert_equal(200, last_response.status)
     assert_includes(last_response.body, sample_text)
   end
 
-  def test_edit_doc
+  def test_edit_view_not_signed_in
+    create_document('about.md', 'text')
+    get 'about.md/edit'
+
+    assert_equal(302, last_response.status)
+    assert_equal("You must be signed in to do that.", session[:message])
+  end
+
+  def test_edit_doc_signed_in
     create_document('about.md', 'sample')
 
-    post 'about.md/edit', revised_text: '## changed'
+    post 'about.md/edit', {revised_text: '## changed'}, log_in_user
 
     assert_equal('about.md has been edited!', session[:message])
     assert_equal(302, last_response.status)
@@ -111,8 +110,17 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, '<h2>changed</h2>')
   end
 
-  def test_view_new_document_form
-    get '/new'
+  def test_edit_doc_not_signed_in
+    create_document('about.md', 'sample')
+
+    post 'about.md/edit', {revised_text: '## changed'}
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+
+  def test_view_new_document_form_signed_in
+    get '/new', {}, log_in_user
     body_content = "<form action=\"/new\" method=\"post\">"
 
     assert_equal(200, last_response.status)
@@ -120,8 +128,15 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, body_content)
   end
 
-  def test_create_new_document
-    post '/new', {new_filename: 'test_file.md'}, {'rack.session' => { username: 'admin'}}
+  def test_view_new_document_form_not_signed_in
+    get '/new'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+
+  def test_create_new_document_signed_in
+    post '/new', {new_filename: 'test_file.md'}, log_in_user
 
     assert_equal(302, last_response.status)
     assert_equal('test_file.md has been created!', session[:message])
@@ -131,16 +146,23 @@ class AppTest < Minitest::Test
     assert_includes(last_response.body, 'test_file.md')
   end
 
+  def test_create_new_document_not_signed_in
+    post '/new', {new_filename: 'test_file.md'}
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+
   def test_filename_validator
-    post '/new', new_filename: ''
+    post '/new', {new_filename: ''}, log_in_user
 
     assert_equal('A non-empty name is required.', session[:message])
   end
 
-  def test_document_deletion
+  def test_document_deletion_signed_in
     create_document('delete_me.txt', 'I will be deleted.')
 
-    post '/delete_me.txt/delete'
+    post '/delete_me.txt/delete', {}, log_in_user
 
     assert_equal(302, last_response.status)
     assert_equal('delete_me.txt has been deleted!', session[:message])
@@ -148,6 +170,15 @@ class AppTest < Minitest::Test
     get '/', {}, {'rack.session' => {message: nil} }
 
     refute_includes(last_response.body, 'delete_me.txt')
+  end
+
+  def test_document_deletion_not_signed_in
+    create_document('delete_me.txt', 'I will be deleted.')
+
+    post '/delete_me.txt/delete'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
   end
 
   def test_sign_in_form

@@ -52,8 +52,16 @@ def load_content(resource)
 end
 
 
+def require_authentication
+  unless session[:username]
+    session[:message] = "You must be signed in to do that."
+    redirect '/'
+  end
+end
+
 # render add new document form
 get '/new' do
+  require_authentication
   erb :new
 end
 
@@ -65,6 +73,8 @@ end
 
 # add new file
 post '/new' do
+  require_authentication
+
   unless valid_filename?(params[:new_filename])
     session[:message] = "A non-empty name is required."
     redirect '/new'
@@ -93,6 +103,8 @@ end
 
 # render edit file page
 get '/:filename/edit' do
+  require_authentication
+
   path = File.join(data_path, params[:filename])
   @text = File.read(path)
 
@@ -102,6 +114,8 @@ end
 
 # edit file
 post '/:filename/edit' do
+  require_authentication
+
   path = File.join(data_path, params[:filename])
 
   File.open(path, 'w') do |file|
@@ -116,6 +130,8 @@ end
 
 #delete file
 post '/:filename/delete' do
+  require_authentication
+
   path = File.join(data_path, params[:filename])
 
   File.delete(path)

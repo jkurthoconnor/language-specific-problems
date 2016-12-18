@@ -1,4 +1,3 @@
-<% if session[:username] %>
   <ul>
     <% @files.each do |filename| %>
       <% clean_name = clean_filename(filename) %>
@@ -14,7 +13,7 @@
 
   <p><a href="/new">New Document</a></p>
 
-<% else %>
+<% unless session[:username] %>
 
 <form action="users/signin" method="get">
   <button type="submit" >Sign in</button>
