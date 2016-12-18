@@ -136,7 +136,7 @@ post '/users/signin' do
 
   if params[:username] == 'admin' && params[:password] == 'secret'
     session[:username] = params[:username]
-    session[:message] = "Welcome! #{session[:username]}"
+    session[:message] = "Welcome #{session[:username]}!"
     redirect '/'
   else
     session[:message] = 'Invalid Credentials.'
@@ -148,7 +148,7 @@ end
 
 # sign out
 post '/users/signout' do
-  session[:message] = "You have signed out."
+  session[:message] = 'You have signed out.'
   session.delete(:username)
   redirect '/'
 end
