@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'tilt/erubis'
 require 'redcarpet'
+require 'yaml'
 
 
 configure do
@@ -23,6 +24,15 @@ def data_path
     File.expand_path('../data', __FILE__)   # e.g.: => "/home/jko/coding/lsch/crs170/file_cms/data"
   end
 end
+
+def user_data_path
+  if ENV['RACK_ENV'] == 'test'
+    File.expand_path('../test', __FILE__)
+  else
+    File.expand_path('../', __FILE__)
+  end
+end
+
 
 
 get '/' do
@@ -147,10 +157,17 @@ get '/users/signin' do
 end
 
 
+def valid_credentials?(username, password)
+  path = File.join(user_data_path, 'users.yml')
+  creds = YAML.load_file(path)
+
+  creds[username] == password
+end
+
+
 # check signin credentials
 post '/users/signin' do
-
-  if params[:username] == 'admin' && params[:password] == 'secret'
+  if valid_credentials?(params[:username], params[:password])
     session[:username] = params[:username]
     session[:message] = "Welcome #{session[:username]}!"
     redirect '/'

@@ -26,7 +26,7 @@ class AppTest < Minitest::Test
   end
 
   def log_in_user
-    {'rack.session' => {username: 'admin'}}
+    {'rack.session' => {username: 'admin1'}}
   end
 
   def create_document(name, content = "")
@@ -191,11 +191,11 @@ class AppTest < Minitest::Test
   end
 
   def test_signin_good_credentials
-    post 'users/signin', username: 'admin', password: 'secret'
+    post 'users/signin', username: 'admin1', password: 'secret1'
 
     assert_equal(302, last_response.status)
-    assert_equal('admin', session[:username])
-    assert_equal('Welcome admin!', session[:message])
+    assert_equal('admin1', session[:username])
+    assert_equal('Welcome admin1!', session[:message])
   end
 
   def test_signin_bad_credentials

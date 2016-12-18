@@ -5,6 +5,7 @@ GEM
     erubis (2.7.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    psych (2.0.17)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
@@ -30,6 +31,7 @@ PLATFORMS
 DEPENDENCIES
   erubis
   minitest
+  psych
   redcarpet
   sinatra (~> 1.4.7)
   sinatra-contrib
