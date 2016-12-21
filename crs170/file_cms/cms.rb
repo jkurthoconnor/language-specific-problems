@@ -4,6 +4,7 @@ require 'tilt/erubis'
 require 'redcarpet'
 require 'yaml'
 require 'bcrypt'
+require 'fileutils'
 
 
 configure do
@@ -11,6 +12,7 @@ configure do
   set :session_secret, 'mickey mouse'
 end
 
+FILE_EXTENTIONS = ['.txt', '.md'].freeze
 
 helpers do
   def clean_filename(filename) # input e.g.: "/Users/oconnor/dropbox/coding/lsch/crs170/file_cms/data/about.txt"
@@ -81,6 +83,14 @@ def valid_filename?(filename)
   filename.strip.size > 0
 end
 
+def valid_extension?(filename)
+  FILE_EXTENTIONS.include?(File.extname(filename))
+end
+
+def list_extensions
+  "#{FILE_EXTENTIONS[0..-2].join(', ')} or #{FILE_EXTENTIONS[-1]}"
+end
+
 
 # add new file
 post '/new' do
@@ -91,11 +101,33 @@ post '/new' do
     redirect '/new'
   end
 
+  unless valid_extension?(params[:new_filename])
+    session[:message] = "Invalid file type. Extension must be #{list_extensions}"
+    redirect '/new'
+  end
+
   path = File.join(data_path, params[:new_filename])
 
   File.open(path, 'w') { |file| file.write('')}
   session[:message] = "#{params[:new_filename]} has been created!"
   redirect '/'
+end
+
+
+# duplicate existing file 
+# # allow name entry include `name1.ext` as default
+# # improve new_filename: add original_filename? method; include in new file path
+post '/:filename/duplicate' do
+require_authentication
+
+filename = params[:filename]
+src = File.join(data_path, filename)
+new_filename = filename.insert(filename.index('.'), '1')
+destination = File.join(data_path, new_filename)
+
+FileUtils.cp(src, destination)
+session[:message] = "#{new_filename} has been created!"
+redirect '/'
 end
 
 
