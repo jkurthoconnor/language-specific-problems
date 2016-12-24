@@ -40,7 +40,7 @@ end
 
 get '/' do
   pattern = File.join(data_path, '*') # returns new string, with arguments joined by File::SEPARATOR ('/' or '\' based on OS)
-  @files = Dir.glob(pattern)
+  session[:files] = Dir.glob(pattern)
 
   erb :index
 end
@@ -85,6 +85,10 @@ end
 
 def valid_extension?(filename)
   FILE_EXTENTIONS.include?(File.extname(filename))
+end
+
+def original_filename?(filename)
+  
 end
 
 def list_extensions

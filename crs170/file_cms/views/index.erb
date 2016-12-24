@@ -1,5 +1,5 @@
   <ul>
-    <% @files.each do |filename| %>
+    <% session[:files].each do |filename| %>
       <% clean_name = clean_filename(filename) %>
       <li>
         <a href="/<%= clean_name %>"><%= clean_name %></a>
