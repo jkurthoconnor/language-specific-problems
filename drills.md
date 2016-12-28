@@ -3,13 +3,6 @@ Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
 
-### (string) remove leading and trailing whitespace
-```ruby
-string = ' Well now! '
-string.strip!
-# or if one simply wants to return without mutating caller
-string.strip
-```
 
 ### (string) return a portion of string based on character index / indices.
 ```ruby
@@ -364,6 +357,47 @@ def swapper(string, index1, index2)
 end
 
 ```
+
+### 1) Return a new string with leading and trailing whitespace removed.  2) Remove leading and trailing whitespace from a string.  3) Perform previous tasks on only leading or only trailing whitespace.
+
+```ruby
+str = '   hello   '
+# 1
+str.strip
+
+# 2
+str.strip!
+
+# 3
+str.lstrip
+# or
+str.rstrip
+```
+
+
+### 1) Return a new string with each consecutive run of any character replaced by single instance of the character.  2) Return a new string with all consecutive runs of given characters replaced by a single instance of the character.  3) Do either of the previous tasks manually.
+
+```ruby
+str = '  this issss my,, string'
+
+# 1
+str.squeeze
+
+# 2
+str.squeeze(' ,')
+
+# 3
+
+squeezed = ''
+
+str.chars.each do |char|
+  next if char == squeezed[-1]
+  squeezed << char
+end
+
+p squeezed
+```
+
 
 ### swap the places of two characters in an array using one line. reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.
 
