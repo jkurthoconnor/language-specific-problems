@@ -398,6 +398,14 @@ end
 p squeezed
 ```
 
+### Identify and return the first element that matches a block.
+
+```ruby
+arr = [1, 2, 3, 4, 5]
+
+arr.find { |n| n > 3 }
+```
+
 
 ### swap the places of two characters in an array using one line. reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.
 
