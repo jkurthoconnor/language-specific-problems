@@ -16,7 +16,7 @@ FILE_EXTENTIONS = ['.txt', '.md'].freeze
 
 helpers do
   def clean_filename(filename) # input e.g.: "/Users/oconnor/dropbox/coding/lsch/crs170/file_cms/data/about.txt"
-  File.basename(filename) # output: "about.txt"
+    File.basename(filename) # output: "about.txt"
   end
 end
 
@@ -35,7 +35,6 @@ def user_data_path
     File.expand_path('../', __FILE__)
   end
 end
-
 
 
 get '/' do
