@@ -1,1 +1,6 @@
-<%= @date %>
+<h3>Assignment for <%= day_name(@date) %>, <%= day_num(@date) %> <%= month_name(@date) %></h3>
+<% @homework.each do |hw| %>
+  <ul>
+    <li><%= hw %></li>
+  </ul>
+  <% end %>
