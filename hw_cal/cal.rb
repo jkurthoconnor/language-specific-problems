@@ -3,15 +3,29 @@ require 'sinatra/reloader'
 require 'tilt/erubis'
 require 'yaml'
 
+data_path = File.expand_path('../data', __FILE__)
+assignments_path = File.join(data_path, 'assignments.yml')
 
+before do
+  @assignments = YAML.load_file(assignments_path)
+end
+
+
+helpers do
+  def get_dates(cal_data)
+    cal_data.keys
+  end
+end
+
+
+# display index of assignment dates
 get '/' do
-  # generates and displays links for all class days; data stored in yml file(s) in `/data`
-  # use single file to store all day and homework info? use one file per day?
   erb :index
 end
 
 
+# display page homework assignments for given date
 get '/:date' do
-  # serve page for homework assignments for given date
+  @date = @assignments[params[:date].to_i]
   erb :day
 end
