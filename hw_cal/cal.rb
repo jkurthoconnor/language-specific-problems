@@ -59,3 +59,7 @@ get '/:date' do
 end
 
 # ## add redirection to index for any invalid url requests
+  ## add link to index on day page
+  ## create content for header to display <assignment date> on day page and 
+  ## 'Available Dates' on index
+  ## fix path to not rely on any given separators?
