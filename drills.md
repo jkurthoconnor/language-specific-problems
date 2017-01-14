@@ -271,7 +271,7 @@ str=~(/[ao]/)
 str.match(/[ao]/)
 ```
 
-### (string) return array of characters matching a pattern
+### (string) return array of characters matching a pattern (may use regex)
 ```ruby
 str = 'Oh, what beautiful weather today!'
 
@@ -284,11 +284,14 @@ str.chars.select { |char| char < 'l'}
 str.scan(/[aeiou]/)
 ```
 
-### return an array of words taken from a string that meet given conditions.
+### return an array of words taken from a string that meet given conditions (may use regex).
 ```ruby
 str = 'Oh, what beautiful weather today!'
 
 str.split.select {|word| word.length <= 6 }
+
+#or 
+str.scan(/\b\w{2,4}\b/)
 ```
 
 ### (string) return new string (or modify existing string) to have all characters lowercased
