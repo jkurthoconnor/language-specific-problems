@@ -1,3 +1,4 @@
+<%= session.delete(:message) %>
 <ul>
   <% @files.each do |file| %>
     <% filename = shortname(file) %>
