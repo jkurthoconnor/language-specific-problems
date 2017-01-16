@@ -34,10 +34,12 @@ class CmsTest < Minitest::Test
     get '/idontexist.txt'
     assert_equal(302, last_response.status)
 
-    get '/'
+    get last_response['Location']
+    assert_equal(200, last_response.status)
     assert_includes(last_response.body, 'idontexist.txt does not exist.')
 
     get '/'
+    assert_equal(200, last_response.status)
     refute_includes(last_response.body, 'idontexist.txt does not exist.')
   end
 end
