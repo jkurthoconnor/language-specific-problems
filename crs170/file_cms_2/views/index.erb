@@ -1,5 +1,6 @@
 <ul>
   <% @files.each do |file| %>
-    <li><%= shortname(file) %></li>
+    <% filename = shortname(file) %>
+    <li><a href="/<%= filename %>"><%= filename %></a></li>
   <% end %>
 </ul>

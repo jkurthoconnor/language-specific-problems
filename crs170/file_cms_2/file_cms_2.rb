@@ -12,9 +12,22 @@ helpers do
   end
 end
 
+# view index page
 get '/' do
   file_paths = File.join(data_path, '*')
   @files = Dir.glob(file_paths)
 
   erb :index
+end
+
+# view individual document page
+get '/:filename' do
+  file_path = File.join(data_path, params[:filename])
+  file = File.read(file_path)
+
+  if File.extname(file_path) == '.txt'
+    headers['Content-Type'] = 'text/plain'
+  end
+
+  file
 end
