@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
+require 'redcarpet'
 
 configure do
   enable :sessions
@@ -32,19 +33,32 @@ def valid_filename?(name)
   filenames.include?(name)
 end
 
+def render_markdown(text)
+  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+  markdown.render(text)
+end
+
+def load_content(path)
+  content = File.read(path)
+
+  case File.extname(path)
+  when '.txt'
+    headers['Content-Type'] = 'text/plain'
+    content
+  when '.md'
+    render_markdown(content)
+  end
+end
+
 # view individual document page
 get '/:filename' do
-  unless valid_filename?(params[:filename])
-    session[:message] = "#{params[:filename]} does not exist."
+  filename = params[:filename]
+  file_path = File.join(data_path, filename)
+
+  unless valid_filename?(filename)
+    session[:message] = "#{filename} does not exist."
     redirect '/'
   end
 
-  file_path = File.join(data_path, params[:filename])
-  file = File.read(file_path)
-
-  if File.extname(file_path) == '.txt'
-    headers['Content-Type'] = 'text/plain'
-  end
-
-  file
+  load_content(file_path)
 end
