@@ -2,6 +2,6 @@
 <ul>
   <% @files.each do |file| %>
     <% filename = shortname(file) %>
-    <li><a href="/<%= filename %>"><%= filename %></a></li>
+    <li><a href="/<%= filename %>"><%= filename %></a> <a href="/<%= filename %>/edit">Edit</a></li>
   <% end %>
 </ul>
