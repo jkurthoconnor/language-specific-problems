@@ -8,8 +8,14 @@ configure do
   set :session_secret, 'ha'
 end
 
-root = File.expand_path('..', __FILE__)
-data_path = File.join(root, 'data')
+def data_path
+  root = File.expand_path('..', __FILE__)
+  if ENV['RACK_ENV'] == 'test'
+    File.join(root, 'test', 'data')
+  else
+    File.join(root, 'data')
+  end
+end
 
 helpers do
   def shortname(full_filename)
@@ -28,6 +34,28 @@ get '/' do
   erb :index
 end
 
+# view new document page
+get '/new' do
+  erb :new
+end
+
+def valid_name?(name)
+  !(File.exist?(name) || name.empty?)
+end
+
+# create new document
+post '/new' do
+  file_path = File.join(data_path, params[:filename])
+
+  unless valid_name?(file_path)
+    session[:message] = "A unique name is required!"
+    redirect '/new'
+  end
+
+  File.new(file_path, 'w')
+  redirect '/'
+end
+
 def render_markdown(text)
   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   markdown.render(text)
@@ -41,7 +69,7 @@ def load_content(path)
     headers['Content-Type'] = 'text/plain'
     content
   when '.md'
-    render_markdown(content)
+    erb :document, :locals => { :text => render_markdown(content) }
   end
 end
 
