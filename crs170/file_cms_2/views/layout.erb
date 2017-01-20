@@ -1,15 +1,15 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name"viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/cms2.css">
-  <title>CMS</title>
-</head>
-
-<body>
-  <p class="message"><%= session.delete(:message) %></p>
-  <%= yield %>
-</body>
-
+  <head>
+    <meta charset="utf-8">
+    <meta name"viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/cms2.css" type="text/css">
+    <title>CMS</title>
+  </head>
+  <body>
+    <% if session[:message] %>
+      <p class="message"><%= session.delete(:message) %></p>
+    <% end %>
+    <%= yield %>
+  </body>
 </html>

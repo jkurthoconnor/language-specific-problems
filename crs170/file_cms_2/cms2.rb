@@ -40,7 +40,7 @@ get '/new' do
 end
 
 def valid_name?(name)
-  !(File.exist?(name) || name.empty?)
+  !(File.exist?(name) || name.empty? || File.extname(name).empty?)
 end
 
 # create new document
@@ -48,11 +48,20 @@ post '/new' do
   file_path = File.join(data_path, params[:filename])
 
   unless valid_name?(file_path)
-    session[:message] = "A unique name is required!"
+    session[:message] = "A unique name with extension is required!"
     redirect '/new'
   end
 
   File.new(file_path, 'w')
+  redirect '/'
+end
+
+# delete document
+post '/:filename/delete' do
+  file_path = File.join(data_path, params[:filename])
+
+  File.delete(file_path)
+  session[:message] = "#{params[:filename]} was deleted."
   redirect '/'
 end
 

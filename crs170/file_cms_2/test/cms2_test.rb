@@ -154,4 +154,18 @@ class CmsTest < Minitest::Test
     assert_equal(200, last_response.status)
     assert_includes(last_response.body, 'unique name with extension is required!')
   end
+
+  def test_delete_doc
+    create_document('iexisttodie.txt')
+
+    post '/iexisttodie.txt/delete'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, 'iexisttodie.txt was deleted.')
+    refute_includes(last_response.body, 'iexisttodie.txt</a>')
+  end
 end
