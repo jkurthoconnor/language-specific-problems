@@ -99,4 +99,59 @@ class CmsTest < Minitest::Test
     assert_equal(200, last_response.status)
     assert_includes(last_response.body, 'this is newly edited')
   end
+
+  def test_view_new_doc_form
+    get '/new'
+
+    assert_equal(200, last_response.status)
+    assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
+    assert_includes(last_response.body, 'Add a new document:</label>')
+  end
+
+  def test_add_new_doc
+    post '/new', :filename => 'newdoc.txt'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
+    assert_includes(last_response.body, 'newdoc.txt')
+  end
+
+  def test_add_new_doc_empty_filename
+    post '/new', :filename => ''
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, 'unique name with extension is required!')
+  end
+
+  def test_add_new_doc_without_extension
+    post '/new', :filename => 'hithere'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, 'unique name with extension is required!')
+  end
+
+  def test_add_new_doc_dupicate_filename
+    create_document('text.txt')
+
+    post '/new', :filename => 'text.txt'
+
+    assert_equal(302, last_response.status)
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, 'unique name with extension is required!')
+  end
 end
