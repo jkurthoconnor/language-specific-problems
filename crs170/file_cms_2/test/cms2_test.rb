@@ -142,7 +142,7 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'unique name with extension is required!')
   end
 
-  def test_add_new_doc_dupicate_filename
+  def test_add_new_doc_duplicate_filename
     create_document('text.txt')
 
     post '/new', :filename => 'text.txt'
