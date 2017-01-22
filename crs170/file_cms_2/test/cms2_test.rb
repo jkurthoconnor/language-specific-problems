@@ -168,4 +168,13 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'iexisttodie.txt was deleted.')
     refute_includes(last_response.body, 'iexisttodie.txt</a>')
   end
+
+  def test_view_signin_page
+    get '/users/signin'
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, "<form action=\"/users/signin\"")
+    assert_includes(last_response.body, "<label for=\"username\">Username:")
+    assert_includes(last_response.body, "<label for=\"password\">Password:")
+  end
 end
