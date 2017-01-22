@@ -2,6 +2,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'rack/test'
+
 require 'fileutils'
 
 require_relative '../cms2'
@@ -43,7 +44,7 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'changes.txt</a>')
   end
 
-  def test_plain_text
+  def test_view_plain_text
     create_document('about.txt', 'ABOUT')
 
     get '/about.txt'
@@ -53,7 +54,7 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'ABOUT')
   end
 
-  def test_markdown
+  def test_view_markdown
     create_document('markdown.md', '### Header')
 
     get '/markdown.md'
@@ -73,10 +74,6 @@ class CmsTest < Minitest::Test
 
     assert_equal(200, last_response.status)
     refute_includes(session.keys, 'message')
-
-    get '/'
-
-    assert_equal(200, last_response.status)
   end
 
   def test_edit_view
@@ -92,12 +89,8 @@ class CmsTest < Minitest::Test
     create_document('history.txt')
 
     post '/history.txt/edit', :edited_text => 'this is newly edited'
-    
+
     assert_includes(session[:message], 'has been edited!')
-
-    get last_response['Location']
-
-    assert_equal(200, last_response.status)
 
     get '/history.txt/edit'
 
@@ -130,10 +123,6 @@ class CmsTest < Minitest::Test
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
-
-    get last_response['Location']
-
-    assert_equal(200, last_response.status)
   end
 
   def test_add_new_doc_without_extension
@@ -141,10 +130,6 @@ class CmsTest < Minitest::Test
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
-
-    get last_response['Location']
-
-    assert_equal(200, last_response.status)
   end
 
   def test_add_new_doc_duplicate_filename
@@ -154,10 +139,6 @@ class CmsTest < Minitest::Test
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
-
-    get last_response['Location']
-
-    assert_equal(200, last_response.status)
   end
 
   def test_delete_doc
@@ -186,6 +167,7 @@ class CmsTest < Minitest::Test
   def test_valid_credentials_signin
     post '/users/signin', {:username => 'admin', :password => 'secret'}
 
+    assert_equal(302, last_response.status)
     assert_equal(session[:message], 'Welcome admin!')
     assert_equal(session[:user], 'admin')
 
@@ -200,5 +182,16 @@ class CmsTest < Minitest::Test
 
     refute_includes(session.keys, 'user')
     assert_includes(last_response.body, "<p class=\"flash_message\">Invalid credentials.")
+  end
+
+  def test_signout
+    get '/', {}, { 'rack.session' => {:user => 'admin'} }
+
+    assert_includes(session.keys, 'user')
+
+    post '/users/signout'
+    assert_equal(302, last_response.status)
+    assert_includes(session[:message], 'is now signed out.')
+    refute_includes(session.keys, 'user')
   end
 end
