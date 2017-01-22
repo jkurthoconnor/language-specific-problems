@@ -12,17 +12,19 @@
 </ul>
 <p><a href="/new">New Document</a></p>
 <% if session[:user] %>
-  <p class="signin_status">Signed in as <%= session[:user] %>
-    <form class="inline" action="/users/signout" method="post"> 
+  <form action="/users/signout" method="post"> 
+    <p class="signin_status">
+      Signed in as <%= session[:user] %>.
       <button type="submit">Sign Out</button>
-    </form>
-  </p>
-  <% else %>
-  <p class="signin_status">Not signed in.
-    <form class="inline" action="/users/signin" method="post">
+    </p>
+  </form>
+<% else %>
+  <form action="/users/signin" method="get">
+    <p class="signin_status"><p class="signin_status">
+      Not signed in.
       <button type="submit">Sign In</button>
-    </form>
-  </p>
+    </p>
+  </form>
 <% end %>
   
   
