@@ -27,6 +27,10 @@ class CmsTest < Minitest::Test
     end
   end
 
+  def session
+    last_request.env['rack.session']
+  end
+
   def test_index
     create_document('about.txt')
     create_document('changes.txt')
@@ -63,16 +67,16 @@ class CmsTest < Minitest::Test
     get '/idontexist.txt'
 
     assert_equal(302, last_response.status)
+    assert_equal("'idontexist.txt' does not exist.", session[:message])
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, "'idontexist.txt' does not exist.")
+    refute_includes(session.keys, 'message')
 
     get '/'
 
     assert_equal(200, last_response.status)
-    refute_includes(last_response.body, "'idontexist.txt' does not exist.")
   end
 
   def test_edit_view
@@ -88,11 +92,12 @@ class CmsTest < Minitest::Test
     create_document('history.txt')
 
     post '/history.txt/edit', :edited_text => 'this is newly edited'
+    
+    assert_includes(session[:message], 'has been edited!')
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, 'has been edited!')
 
     get '/history.txt/edit'
 
@@ -124,22 +129,22 @@ class CmsTest < Minitest::Test
     post '/new', :filename => ''
 
     assert_equal(302, last_response.status)
+    assert_includes(session[:message], 'unique name with extension is required!')
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, 'unique name with extension is required!')
   end
 
   def test_add_new_doc_without_extension
     post '/new', :filename => 'hithere'
 
     assert_equal(302, last_response.status)
+    assert_includes(session[:message], 'unique name with extension is required!')
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, 'unique name with extension is required!')
   end
 
   def test_add_new_doc_duplicate_filename
@@ -148,11 +153,11 @@ class CmsTest < Minitest::Test
     post '/new', :filename => 'text.txt'
 
     assert_equal(302, last_response.status)
+    assert_includes(session[:message], 'unique name with extension is required!')
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, 'unique name with extension is required!')
   end
 
   def test_delete_doc
@@ -161,11 +166,11 @@ class CmsTest < Minitest::Test
     post '/iexisttodie.txt/delete'
 
     assert_equal(302, last_response.status)
+    assert_includes(session[:message], 'iexisttodie.txt was deleted.')
 
     get last_response['Location']
 
     assert_equal(200, last_response.status)
-    assert_includes(last_response.body, 'iexisttodie.txt was deleted.')
     refute_includes(last_response.body, 'iexisttodie.txt</a>')
   end
 
@@ -176,5 +181,24 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, "<form action=\"/users/signin\"")
     assert_includes(last_response.body, "<label for=\"username\">Username:")
     assert_includes(last_response.body, "<label for=\"password\">Password:")
+  end
+
+  def test_valid_credentials_signin
+    post '/users/signin', {:username => 'admin', :password => 'secret'}
+
+    assert_equal(session[:message], 'Welcome admin!')
+    assert_equal(session[:user], 'admin')
+
+    get last_response['Location']
+
+    assert_equal(200, last_response.status)
+    assert_includes(last_response.body, "<p class=\"flash_message\">Welcome admin!")
+  end
+
+  def test_invalid_credentials_signin
+    post '/users/signin', {:username => 'butch', :password => 'what?'}
+
+    refute_includes(session.keys, 'user')
+    assert_includes(last_response.body, "<p class=\"flash_message\">Invalid credentials.")
   end
 end
