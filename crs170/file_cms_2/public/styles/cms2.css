@@ -4,7 +4,7 @@ body {
   font-size: 1.5em;
   }
 
-.message {
+.flash_message {
   background: yellow;
   padding: 1em;
   }
@@ -12,3 +12,9 @@ body {
 form.inline {
   display: inline;
   }
+  
+.signin_status {
+  font-style: italic;
+  font-size: .75em;
+  }
+  

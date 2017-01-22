@@ -34,12 +34,46 @@ get '/' do
   erb :index
 end
 
+# view signin page
+get '/users/signin' do
+  erb :signin
+end
+
+def valid_credentials?(user_input)
+  user_credentials = { 'admin' => 'secret', 'other' => 'not secret' }
+  if user_credentials.keys.include?(user_input[:username])
+    user_credentials[user_input[:username]] == user_input[:password]
+  else
+    false
+  end
+end
+
+# login
+post '/users/signin' do
+  if valid_credentials?(params)
+    session[:message] = "Welcome! #{params[:username]}"
+    session[:user] = params[:username]
+    redirect '/'
+  else
+    session[:message] = "Invalid credentials."
+    redirect '/users/signin'
+  end
+end
+
+# logout
+post '/users/signout' do
+  session[:message] = "#{session.delete(:user)} is now signed out."
+  redirect '/'
+end
+
+
+
 # view new document page
 get '/new' do
   erb :new
 end
 
-def valid_name?(name)
+def valid_filename?(name)
   !(File.exist?(name) || name.empty? || File.extname(name).empty?)
 end
 
@@ -47,7 +81,7 @@ end
 post '/new' do
   file_path = File.join(data_path, params[:filename])
 
-  unless valid_name?(file_path)
+  unless valid_filename?(file_path)
     session[:message] = "A unique name with extension is required!"
     redirect '/new'
   end
