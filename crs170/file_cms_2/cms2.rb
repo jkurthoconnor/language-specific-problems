@@ -51,7 +51,7 @@ end
 # login
 post '/users/signin' do
   if valid_credentials?(params)
-    session[:message] = "Welcome! #{params[:username]}"
+    session[:message] = "Welcome #{params[:username]}!"
     session[:user] = params[:username]
     redirect '/'
   else
