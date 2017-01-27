@@ -2,6 +2,11 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 require 'redcarpet'
+require 'yaml'
+require 'bcrypt'
+
+
+ROOT = File.expand_path('..', __FILE__)
 
 configure do
   enable :sessions
@@ -9,11 +14,18 @@ configure do
 end
 
 def data_path
-  root = File.expand_path('..', __FILE__)
   if ENV['RACK_ENV'] == 'test'
-    File.join(root, 'test', 'data')
+    File.join(ROOT, 'test', 'data')
   else
-    File.join(root, 'data')
+    File.join(ROOT, 'data')
+  end
+end
+
+def credentials
+  if ENV['RACK_ENV'] == 'test'
+    File.join(ROOT, 'test', 'users.yml')
+  else
+    File.join(ROOT, 'users.yml')
   end
 end
 
@@ -40,12 +52,24 @@ get '/users/signin' do
 end
 
 def valid_credentials?(user_input)
-  user_credentials = { 'admin' => 'secret', 'other' => 'not secret' }
-  if user_credentials.keys.include?(user_input[:username])
-    user_credentials[user_input[:username]] == user_input[:password]
+  user_data = YAML.load_file(credentials)
+  encrypted_password = user_data[user_input[:username]]
+  entered_password = user_input[:password]
+
+  if user_data.keys.include?(user_input[:username])
+     BCrypt::Password.new(encrypted_password) == entered_password
   else
     false
   end
+end
+
+def signed_in?
+  session[:user]
+end
+
+def redirect_users
+  session[:message] = "You must be signed in to do that."
+  redirect '/'
 end
 
 # login
@@ -66,10 +90,10 @@ post '/users/signout' do
   redirect '/'
 end
 
-
-
 # view new document page
 get '/new' do
+  redirect_users unless signed_in?
+
   erb :new
 end
 
@@ -79,6 +103,8 @@ end
 
 # create new document
 post '/new' do
+  redirect_users unless signed_in?
+
   file_path = File.join(data_path, params[:filename])
 
   unless valid_filename?(file_path)
@@ -92,6 +118,8 @@ end
 
 # delete document
 post '/:filename/delete' do
+  redirect_users unless signed_in?
+
   file_path = File.join(data_path, params[:filename])
 
   File.delete(file_path)
@@ -131,6 +159,8 @@ end
 
 # view document editing page
 get '/:filename/edit' do
+  redirect_users unless signed_in?
+
   filename = params[:filename] #extract 2 lines to a method?
   file_path = File.join(data_path, filename)
 
@@ -139,6 +169,8 @@ get '/:filename/edit' do
 end
 
 post '/:filename/edit' do
+  redirect_users unless signed_in?
+
   filename = params[:filename] #extract 2 lines to a method?
   file_path = File.join(data_path, filename)
 

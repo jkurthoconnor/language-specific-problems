@@ -76,19 +76,27 @@ class CmsTest < Minitest::Test
     refute_includes(session.keys, 'message')
   end
 
-  def test_edit_view
+  def test_edit_view_user_signed_in
     create_document('history.txt')
-    get '/history.txt/edit'
+    get '/history.txt/edit', {}, {'rack.session' => { :user => 'admin' } }
 
     assert_equal(200, last_response.status)
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
     assert_includes(last_response.body, "<p>Edit 'history.txt':</p>")
   end
+  
+  def test_edit_view_user_not_signed_in
+    create_document('history.txt')
+    get '/history.txt/edit'
 
-  def test_editing_doc
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+
+  def test_editing_doc_user_signed_in
     create_document('history.txt')
 
-    post '/history.txt/edit', :edited_text => 'this is newly edited'
+    post '/history.txt/edit', {:edited_text => 'this is newly edited'}, { 'rack.session' => { :user => 'admin' }}
 
     assert_includes(session[:message], 'has been edited!')
 
@@ -98,16 +106,32 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'this is newly edited')
   end
 
-  def test_view_new_doc_form
-    get '/new'
+  def test_editing_doc_user_not_signed_in
+    create_document('history.txt')
+
+    post '/history.txt/edit'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+  
+  def test_view_new_doc_form_user_signed_in
+    get '/new', {}, { 'rack.session' => { :user => 'admin' } }
 
     assert_equal(200, last_response.status)
     assert_equal('text/html;charset=utf-8', last_response['Content-Type'])
     assert_includes(last_response.body, 'Add a new document:</label>')
   end
 
-  def test_add_new_doc
-    post '/new', :filename => 'newdoc.txt'
+  def test_view_new_doc_form_user_not_signed_in
+    get '/new'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+  
+  def test_add_new_doc_user_signed_in
+    post '/new', {:filename => 'newdoc.txt'}, { 'rack.session' => { :user => 'admin' } }
 
     assert_equal(302, last_response.status)
 
@@ -118,15 +142,22 @@ class CmsTest < Minitest::Test
     assert_includes(last_response.body, 'newdoc.txt')
   end
 
+  def test_add_new_doc_user_not_signed_in
+    post '/new', :filename => 'newdoc.txt'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
+  end
+
   def test_add_new_doc_empty_filename
-    post '/new', :filename => ''
+    post '/new', {:filename => ''}, { 'rack.session' => { :user => 'admin' }}
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
   end
 
   def test_add_new_doc_without_extension
-    post '/new', :filename => 'hithere'
+    post '/new', {:filename => 'hithere'}, { 'rack.session' => { :user => 'admin' }}
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
@@ -135,16 +166,16 @@ class CmsTest < Minitest::Test
   def test_add_new_doc_duplicate_filename
     create_document('text.txt')
 
-    post '/new', :filename => 'text.txt'
+    post '/new', {:filename => 'text.txt'}, { 'rack.session' => { :user => 'admin' }}
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'unique name with extension is required!')
   end
 
-  def test_delete_doc
+  def test_delete_doc_user_signed_in
     create_document('iexisttodie.txt')
 
-    post '/iexisttodie.txt/delete'
+    post '/iexisttodie.txt/delete', {}, { 'rack.session' => { :user => 'admin' }}
 
     assert_equal(302, last_response.status)
     assert_includes(session[:message], 'iexisttodie.txt was deleted.')
@@ -153,6 +184,15 @@ class CmsTest < Minitest::Test
 
     assert_equal(200, last_response.status)
     refute_includes(last_response.body, 'iexisttodie.txt</a>')
+  end
+
+  def test_delete_doc_user_not_signed_in
+    create_document('iexisttodie.txt')
+
+    post '/iexisttodie.txt/delete'
+
+    assert_equal(302, last_response.status)
+    assert_equal('You must be signed in to do that.', session[:message])
   end
 
   def test_view_signin_page
@@ -185,7 +225,7 @@ class CmsTest < Minitest::Test
   end
 
   def test_signout
-    get '/', {}, { 'rack.session' => {:user => 'admin'} }
+    get '/', {}, { 'rack.session' => { :user => 'admin'} }
 
     assert_includes(session.keys, 'user')
 
