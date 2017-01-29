@@ -184,8 +184,8 @@ def staggered_case(string, cap = true)
   staggered = []
 
   string.chars.each do |char|
-    cap ? staggered.push(char.upcase) : staggered.push(char.downcase)
-    next if char =~(/[^a-z]/i)
+    staggered.push(cap ? char.upcase : char.downcase)
+    next if char =~ /[^a-z]/i
     cap = !cap
   end
 
