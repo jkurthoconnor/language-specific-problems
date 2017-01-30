@@ -220,7 +220,7 @@ end
 What happens if you omit the call to #to_f on the first line of our method?
 
 ### Solution:
-Without calling `to_f` the division involved in caluclating the average will not include decimals.  It will be integer division.
+Without calling `to_f` the division involved in calculating the average will not include decimals.  It will be integer division.
 
 ### 8. Multiply Lists
 
@@ -245,6 +245,12 @@ def multiply_list(array1, array2)
   end
 
   products
+end
+
+# or
+
+def multiply_list(arr1, arr2)
+  arr1.map.with_index { |n, ind| n * arr2[ind] }
 end
 ```
 
