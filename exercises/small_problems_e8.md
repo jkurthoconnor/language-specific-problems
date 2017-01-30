@@ -58,7 +58,7 @@ def madlibs
   words.each_key do |key|
     word = ''
     loop do
-      puts "Please enter a #{key.to_s}"
+      puts "Please enter a #{key}"
       word = gets.chomp
       if word =~ /[a-z]/i
         words[key] = word
