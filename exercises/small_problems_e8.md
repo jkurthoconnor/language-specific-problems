@@ -27,7 +27,10 @@ def sum_of_sums(array)
     break if size > array.length
   end
 
-  holder.flatten.reduce(&:+)
+
+# or
+def sum_of_sums(array)
+  array.map.with_index { |_, ind| array[0..ind] }.flatten.reduce(:+)
 end
 ```
 
