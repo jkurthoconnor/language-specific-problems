@@ -252,6 +252,12 @@ def repeater(string)
 
   doubled
 end
+
+# or 
+
+def repeater(string)
+  string.gsub(/./) { |char| char * 2 }
+end
 ```
 
 ### 8. Double Char (Part 2)
@@ -282,6 +288,12 @@ def double_consonants(string)
   end
 
   doubled
+end
+
+# or 
+
+def double_consonants(string)
+  string.gsub(/[b-z&&[^eiou]]/i) { |char| char * 2 }
 end
 ```
 
