@@ -238,6 +238,23 @@ def get_grade(grade1, grade2, grade3)
   else              "F"
   end
 end
+
+# or if the number of grades is undetermined:
+
+def get_grade(*grades)
+ 
+  case mean(grades)
+  when 90..100 then 'A'
+  when 80..89  then 'B'
+  when 70..79  then 'C'
+  when 60..69  then 'D'
+  else              'F'
+  end
+end
+
+def mean(grades)
+  grades.reduce(&:+) / grades.size
+end
 ```
 
 ### 10. Grocery List
