@@ -280,4 +280,9 @@ def buy_fruit(list)
 
   full_list
 end
+
+# or 
+def buy_fruit
+  list.map { |food, n| [food]*n }.flatten
+end
 ```
