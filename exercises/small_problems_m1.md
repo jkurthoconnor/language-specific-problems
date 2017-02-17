@@ -62,6 +62,16 @@ def rotate_rightmost_digits(integer, digit)
   last = str.slice!(-digit)
   (str << last).to_i
 end
+
+# or
+def rotate_rightmost_digits(digits, n)
+  return digits if n == 1
+  numerals = digits.to_s.chars
+  rotated = numerals[0...-n] + numerals[-(n - 1)..-1] << numerals[-n]
+  rotated.join.to_i
+end
+
+
 ```
 
 ### 3. Rotation (Part 3)
@@ -131,6 +141,18 @@ def max_rotation(integer)
 
   digits.join.to_i
 end
+
+# or
+
+def max_rotation(n)
+  digits = n.to_s.chars
+
+  (0...(digits.size - 1)).each do |ind|
+    digits.push(digits.delete_at(ind))
+  end
+
+  digits.join.to_i
+end
 ```
 
 ### 4. 1000 Lights
@@ -179,7 +201,6 @@ end
 def toggle_lights(lights_number)
   bulbs = {}
   (1..lights_number).each { |n| bulbs[n] = false }
-  bulbs
 
   (1..lights_number).each do |rep|
     bulbs.map do |bulb, state|
