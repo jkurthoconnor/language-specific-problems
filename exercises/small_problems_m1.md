@@ -290,6 +290,12 @@ def word_to_digit(string)
   words = string.split(/\b/)
   words.map { |word| DIGITS[word] || word }.join
 end
+
+#or
+def word_to_digit(string)
+  capture = /(zero|one|two|three|four|five|six|seven|eight|nine)/
+  string.gsub(capture, DIGITS)
+end
 ```
 
 ### Further Explorations
