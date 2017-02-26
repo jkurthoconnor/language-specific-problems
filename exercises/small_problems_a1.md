@@ -11,5 +11,17 @@ Make a madlibs program that reads in some text from a text file that you have cr
 ### Solution
 
 ```ruby
+text = File.read('scrap_madlibs.txt')
+SUBS = { 'noun' => ['dog', 'cat', 'turtle', 'punk band', 'asbestos crew',
+          'tree'],
+          'verb' => ['rub', 'walk', 'drink', 'eat', 'tune', 'shower'],
+          'adj'=> ['happy', 'sad', 'well-fed', 'sleep-deprived', 'eager', 'depressed'],
+          'adv'=> ['quickly', 'slowly', 'sadly', 'reluctantly', 'hungrily', 'voraciously']
+        }
+
+ 
+def madlibs(content)
+  content.split(/\b/).map { |word| SUBS[word] ? SUBS[word].sample : word }.join
+end
 
 ```
