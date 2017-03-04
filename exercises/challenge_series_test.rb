@@ -1,7 +1,7 @@
 # test suite for challenge_e1_series.rb
 
 require 'minitest/autorun'
-require_relative 'challenge_e1_series'
+require_relative 'challenge_series'
 
 class SeriesTest < Minitest::Test
   def test_simple_slices_of_one

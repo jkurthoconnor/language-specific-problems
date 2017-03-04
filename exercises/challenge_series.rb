@@ -16,32 +16,21 @@
 
 class Series
   def initialize(string)
-    @string = string
+    @digits = string.chars.map(&:to_i)
   end
   
 def slices(slice_size)
-  raise ArgumentError if slice_size > @string.length
+  raise ArgumentError if slice_size > @digits.size
+
   results = []
   index = 0
-  until index + slice_size > @string.length
-    set = []
-    (index...index + slice_size).each do |ind|
-      set.push(@string[ind].to_i)
-    end
-    results.push(set)
+
+  until index + slice_size > @digits.size
+    results << @digits[index, slice_size]
     index += 1
   end
+
   results
 end
 
 end
-
-to_four = Series.new("1234")
-to_eight = Series.new("12345678")
-to_four_too = Series.new("1234")
-to_zero = Series.new("1234567890")
-
-p to_four.slices(2)
-p to_four_too.slices(4)
-p to_eight.slices(3)
-p to_zero.slices(5)
