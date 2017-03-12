@@ -1,62 +1,69 @@
 #! /usr/bin/env ruby
-
+# require 'pry'
 require 'pg'
 
-DB = PG.connect(dbname: 'expenses')
+class CLI
+  def initialize(args)
+    @args = args
+    @app = ExpenseData.new
+  end
 
-def list_expense
-  result = DB.exec('SELECT id, created_on, amount, memo FROM expenses;')
+  def run
+    case @args[0]
+    when 'list' then @app.list_expenses
+    when 'add'
+      abort 'You must provide amount and memo.' unless valid_add_input?
+      @app.add_expense(@args[1, 2])
+    else @app.help
+    end
+  end
 
-  result.each do |tuple|
-    columns = [ tuple['id'].rjust(4),
-                tuple['created_on'],
-                tuple['amount'].rjust(15),
-                tuple['memo']
-              ]
-    puts columns.join(' | ')
+  def valid_add_input?
+    !(@args[1] =~ /[^0-9.]/ || @args[2] =~ /[^\w ]/)
   end
 end
 
-def add_expense(*args)
-  abort 'You must provide an amount and memo.' unless valid_addition_input?(args)
+class ExpenseData
+  def initialize
+    @db = PG.connect(dbname: 'expenses')
+  end
 
-  amount, memo = args[0], args[1]
+  def list_expenses
+    result = @db.exec('SELECT id, created_on, amount, memo FROM expenses;')
 
-  DB.exec_params('INSERT INTO expenses (amount, memo) VALUES ($1, $2);', [amount, memo])  
+    result.each do |tuple|
+      columns = [tuple['id'].rjust(4),
+                 tuple['created_on'],
+                 tuple['amount'].rjust(15),
+                 tuple['memo']]
+      puts columns.join(' | ')
+    end
+  end
 
+  def add_expense(args)
+    amount, memo = args[0], args[1]
+    sql = 'INSERT INTO expenses (amount, memo) VALUES ($1, $2);'
 
-  puts "I added #{amount} for #{memo}."
-end
+    @db.exec_params(sql, [amount, memo])
 
-def valid_addition_input?(args)
-  !(args[0] =~ /[^0-9.]/ || args[1] =~ /[^\w ]/)
-end
+    puts "Expense added: #{amount} for #{memo}."
+  end
 
+  def help
+    puts <<~HEREDOC
 
+              An expense recording system
 
-def help
-  puts <<~HEREDOC
-            
-            An expense recording system
-            
-            Commands:
-            
-            add AMOUNT MEMO [DATE] - record a new expense
-            clear - delete all expenses
-            list - list all expenses
-            delete NUMBER - remove expense with id NUMBER
-            search QUERY - list expenses with a matching memo field
-            
-      HEREDOC
-end
+              Commands:
 
-def execute_command(command)
-  case command
-  when 'list' then list_expense
-  when 'add' then add_expense(ARGV[1], ARGV[2], ARGV[3])
-  else help
+              add AMOUNT MEMO [DATE] - record a new expense
+              clear - delete all expenses
+              list - list all expenses
+              delete NUMBER - remove expense with id NUMBER
+              search QUERY - list expenses with a matching memo field
+
+        HEREDOC
   end
 end
 
-execute_command(ARGV[0])
-
+CLI.new(ARGV).run
