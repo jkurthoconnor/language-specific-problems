@@ -1,0 +1,61 @@
+#! /usr/bin/env ruby
+
+require 'pg'
+
+DB = PG.connect(dbname: 'expenses')
+
+def list
+  result = DB.exec('SELECT id, created_on, amount, memo FROM expenses;')
+
+  result.each do |tuple|
+    columns = [ tuple['id'].rjust(4),
+                tuple['created_on'],
+                tuple['amount'].rjust(15),
+                tuple['memo']
+              ]
+    puts columns.join(' | ')
+  end
+end
+
+def add_expense(*args)
+  abort 'You must provide an amount and memo.' unless valid_addition_input?(args)
+
+  amount, memo, date = args[0], args[1], args[2]
+
+  DB.exec("INSERT INTO expenses (amount, memo) VALUES (#{amount}, '#{memo}');")  # arguments for values are sent to db as strings. but they are converted before storage?
+
+  puts "I added #{amount} for #{memo}."
+end
+
+def valid_addition_input?(args)
+  !(args[0] =~ /[^0-9.]/ || args[1] =~ /\W/)
+end
+
+
+
+def help
+  puts <<~HEREDOC
+            
+            An expense recording system
+            
+            Commands:
+            
+            add AMOUNT MEMO [DATE] - record a new expense
+            clear - delete all expenses
+            list - list all expenses
+            delete NUMBER - remove expense with id NUMBER
+            search QUERY - list expenses with a matching memo field
+            
+      HEREDOC
+end
+
+def execute_command(command)
+  case command
+  when 'list' then list
+  when 'add' then add_expense(ARGV[1], ARGV[2], ARGV[3])
+  else help
+  end
+end
+
+execute_command(ARGV[0])
+
