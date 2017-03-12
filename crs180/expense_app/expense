@@ -4,7 +4,7 @@ require 'pg'
 
 DB = PG.connect(dbname: 'expenses')
 
-def list
+def list_expense
   result = DB.exec('SELECT id, created_on, amount, memo FROM expenses;')
 
   result.each do |tuple|
@@ -20,15 +20,16 @@ end
 def add_expense(*args)
   abort 'You must provide an amount and memo.' unless valid_addition_input?(args)
 
-  amount, memo, date = args[0], args[1], args[2]
+  amount, memo = args[0], args[1]
 
-  DB.exec("INSERT INTO expenses (amount, memo) VALUES (#{amount}, '#{memo}');")  # arguments for values are sent to db as strings. but they are converted before storage?
+  DB.exec_params('INSERT INTO expenses (amount, memo) VALUES ($1, $2);', [amount, memo])  
+
 
   puts "I added #{amount} for #{memo}."
 end
 
 def valid_addition_input?(args)
-  !(args[0] =~ /[^0-9.]/ || args[1] =~ /\W/)
+  !(args[0] =~ /[^0-9.]/ || args[1] =~ /[^\w ]/)
 end
 
 
@@ -51,7 +52,7 @@ end
 
 def execute_command(command)
   case command
-  when 'list' then list
+  when 'list' then list_expense
   when 'add' then add_expense(ARGV[1], ARGV[2], ARGV[3])
   else help
   end
