@@ -14,6 +14,8 @@ class CLI
     when 'add'
       abort 'You must provide amount and memo.' unless valid_add_input?
       @app.add_expense(@args[1, 2])
+    when 'search' then @app.search(@args[1])
+    when 'delete' then @app.delete(@args[1])
     else @app.help
     end
   end
@@ -31,13 +33,7 @@ class ExpenseData
   def list_expenses
     result = @db.exec('SELECT id, created_on, amount, memo FROM expenses;')
 
-    result.each do |tuple|
-      columns = [tuple['id'].rjust(4),
-                 tuple['created_on'],
-                 tuple['amount'].rjust(15),
-                 tuple['memo']]
-      puts columns.join(' | ')
-    end
+    display(result)
   end
 
   def add_expense(args)
@@ -47,6 +43,37 @@ class ExpenseData
     @db.exec_params(sql, [amount, memo])
 
     puts "Expense added: #{amount} for #{memo}."
+  end
+  
+  def search(term)
+    sql = 'SELECT * FROM expenses WHERE memo ~* $1;'
+    result = @db.exec_params(sql, [term])
+
+    display(result)
+  end
+  
+  def display(result_obj)
+    result_obj.each do |tuple|
+      columns = [tuple['id'].rjust(4),
+                 tuple['created_on'],
+                 tuple['amount'].rjust(15),
+                 tuple['memo']]
+      puts columns.join(' | ')
+    end
+  end
+
+  def delete(expense_id)
+    result = @db.exec_params("SELECT * FROM expenses WHERE id=#{expense_id};")
+
+    if result.ntuples.zero?
+      puts "There is no expense with id #{expense_id}"
+    else
+      sql = 'DELETE FROM expenses WHERE id=$1;'
+      @db.exec_params(sql, [expense_id])
+
+      puts "The following expense has been deleted:"
+      display(result)
+    end
   end
 
   def help
