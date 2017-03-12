@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # require 'pry'
 require 'pg'
+require 'io/console'
 
 class CLI
   def initialize(args)
@@ -16,6 +17,9 @@ class CLI
       @app.add_expense(@args[1, 2])
     when 'search' then @app.search(@args[1])
     when 'delete' then @app.delete(@args[1])
+    when 'clear'
+      abort unless clear_all_confirmed?
+      @app.clear_all
     else @app.help
     end
   end
@@ -23,7 +27,20 @@ class CLI
   def valid_add_input?
     !(@args[1] =~ /[^0-9.]/ || @args[2] =~ /[^\w ]/)
   end
+  
+  def clear_all_confirmed?
+    reply = ''
+
+    loop do
+      puts 'This will remove all expenses.  Are you sure? (y/n)'
+      reply = $stdin.getch
+      break if (reply =~ /[yn]/)
+    end
+
+    reply =~ /y/
+  end
 end
+
 
 class ExpenseData
   def initialize
@@ -33,7 +50,9 @@ class ExpenseData
   def list_expenses
     result = @db.exec('SELECT id, created_on, amount, memo FROM expenses;')
 
-    display(result)
+    sum = @db.exec('SELECT sum(amount) AS total FROM expenses;')
+
+    display(result, sum)
   end
 
   def add_expense(args)
@@ -48,11 +67,20 @@ class ExpenseData
   def search(term)
     sql = 'SELECT * FROM expenses WHERE memo ~* $1;'
     result = @db.exec_params(sql, [term])
-
-    display(result)
+    
+    sql_total = 'SELECT sum(amount) AS total FROM expenses WHERE memo ~* $1;'
+    sum = @db.exec_params(sql_total, [term])
+    
+    display(result, sum)
   end
   
-  def display(result_obj)
+  def display(result_obj, sum_obj)
+    n = result_obj.ntuples
+
+    abort "There are no expenses." if n.zero?
+
+    puts "There are #{n} expenses."
+
     result_obj.each do |tuple|
       columns = [tuple['id'].rjust(4),
                  tuple['created_on'],
@@ -60,6 +88,9 @@ class ExpenseData
                  tuple['memo']]
       puts columns.join(' | ')
     end
+
+    puts '-' * 60 # to programatically get number, flatten a row, count its chars
+    puts "Total #{sum_obj[0]['total'].rjust(30)}"
   end
 
   def delete(expense_id)
@@ -74,6 +105,11 @@ class ExpenseData
       puts "The following expense has been deleted:"
       display(result)
     end
+  end
+  
+  def clear_all
+    @db.exec('DELETE FROM expenses *;')
+    puts "All expenses have been deleted."
   end
 
   def help
