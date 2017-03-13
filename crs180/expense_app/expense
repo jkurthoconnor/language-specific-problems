@@ -45,6 +45,17 @@ end
 class ExpenseData
   def initialize
     @db = PG.connect(dbname: 'expenses')
+    setup_schema
+  end
+
+  def setup_schema
+    sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_name='expenses';"
+    result = @db.exec(sql)
+
+    if result[0]['count'] == '0'
+      sql = File.read('schema.sql')
+      @db.exec(sql)
+    end
   end
 
   def list_expenses
@@ -89,7 +100,7 @@ class ExpenseData
       puts columns.join(' | ')
     end
 
-    puts '-' * 60 # to programatically get number, flatten a row, count its chars
+    puts '-' * 60
     puts "Total #{sum_obj[0]['total'].rjust(30)}"
   end
 
@@ -106,7 +117,7 @@ class ExpenseData
       display(result)
     end
   end
-  
+
   def clear_all
     @db.exec('DELETE FROM expenses *;')
     puts "All expenses have been deleted."
