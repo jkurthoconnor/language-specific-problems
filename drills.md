@@ -1050,3 +1050,13 @@ hsh = { :apple=>'red', :banana=>'yellow', :grape=>'green' }
 keys = hsh.keys
 keys.each { |k| p hsh[k]}
 ```
+
+### return a key / value pair (if any) associated with a given key. Do so first as an array, then as a single pair hash.
+
+```ruby
+hsh = {:todos=>[1, 2, 4], :days=>["m", "t", "w"], :months=>["april", "may"]}
+
+hsh.assoc(:todos)
+
+hsh.select { |k, v| k == :todos }
+```
