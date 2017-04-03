@@ -202,3 +202,117 @@ insert_data_customers
 insert_data_services
 insert_data_cust_svcs
 ```
+
+### 2. Get Customers With Services
+
+Write a Ruby program that uses Sequel to retrieve and display the customer data in the billing2 database for every customer who currently subscribe to at least one service. The output should look something like this:
+
+(1,"Pat Johnson",XHGOAHEQ)
+(3,"Lynn Blake",KLZXWEEE)
+(4,"Chen Ke-Hua",KWETYCVX)
+(5,"Scott Lakso",UUEAPQPS)
+(6,"Jim Pornot",XKJEYAZA)
+
+The order and format of the output is not important. Our main concern is that we can verify that we retrieved the appropriate data.
+
+#### Solution
+
+```sql
+SELECT customers.* FROM customers
+INNER JOIN customers_services AS cs
+ON customers.id=cs.customer_id
+GROUP BY customers.id;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+ 
+DB[:customers].inner_join(:customers_services, :customer_id=>:id)
+              .select(:customers__id, :customers__name, :customers__payment_token)
+              .group(:customers__id)
+              .each do |row|
+                puts "id: #{row[:id]}, "\
+                     "name: #{row[:name]}, "\
+                     "token: #{row[:payment_token]}"
+              end
+
+DB.disconnect
+```
+
+### 3. Get Customers With No Services
+
+Write a Ruby program that uses Sequel to retrieve and display the customer data in the billing2 database for every customer who currently does not subscribe to any services. The output should look something like this:
+
+(2,"Nancy Monreal",JKWQPJKL)
+
+The format of the output is not important. Our main concern is that we can verify that we retrieved the appropriate data.
+
+#### Solution
+
+```sql
+SELECT * FROM customers
+LEFT OUTER JOIN customers_services AS cs
+ON customers.id=cs.customer_id
+WHERE cs.service_id IS NULL;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+DB[:customers].select(:customers__id, :customers__name, :customers__payment_token)
+              .left_outer_join(:customers_services, :customer_id => :id)
+              .where(:customers_services__id => nil)
+              .each { |row| puts row }
+
+DB.disconnect
+```
+
+### 4. Functions, Aliases, and Virtual Rows
+
+Write a Ruby program that uses Sequel to retrieve and display the last name and first name for every customer in the billing2 database that subscribes to at least one service with a price of at least $15. Sort the results by last name and then first name. We are only interested in the first 3 customers. The output should look like this:
+
+Blake, Lynn
+Ke-Hua, Chen
+Lakso, Scott
+
+For this exercise, you may assume that the name column in the customers table always contains the first name, a single space, and the last name.
+
+```sql
+SELECT split_part(name, ' ', 2) AS last_name, split_part(name, ' ', 1)
+AS first_name
+FROM customers
+INNER JOIN customers_services AS cs
+ON customers.id=cs.customer_id
+INNER JOIN services AS s
+ON cs.service_id=s.id
+WHERE price >= 15.00
+GROUP BY name
+ORDER BY last_name
+LIMIT 3;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+results = DB[:customers].select do
+                        [split_part(name, ' ', 2).as(:last_name), split_part(name, ' ', 1).as(:first_name) ]
+                      end
+                        .inner_join(:customers_services, :customer_id => :id)
+                        .inner_join(:services, :id => :service_id)
+                        .where { price >= 15.00 }
+                        .group(:customers__name)
+                        .order(:last_name)
+                        .limit(3)
+                        .all
+results.each do |row|
+  puts "#{row[:last_name]}, #{row[:first_name]}"
+end
+
+DB.disconnect
+```
