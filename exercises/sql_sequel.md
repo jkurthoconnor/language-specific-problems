@@ -316,3 +316,142 @@ end
 
 DB.disconnect
 ```
+
+### 5. Services With At Least 3 Customers
+
+Write a Ruby program that uses Sequel to display a list of services that are subscribed to by at least 3 customers. Include the customer count for each service. The report should look something like this:
+
+DNS, 3
+Unix Hosting, 5
+
+The format of the output is not important. Our main concern is that we can verify that we retrieved the appropriate data.
+
+Make sure the results are listed in order by the description.
+
+```sql
+SELECT services.description, count(customers_services.service_id)
+FROM services INNER JOIN customers_services
+ON services.id=customers_services.service_id
+GROUP BY services.id
+HAVING count(customers_services.service_id) >= 3;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+DB[:services].select(:description)
+             .select_append { count(customers_services__service_id) }
+             .inner_join(:customers_services, :service_id => :id)
+             .group(:services__id)
+             .order(:services__description)
+             .having { count(customers_services__service_id) >= 3 }
+             .each { |row| puts "#{row[:description]}, #{row[:count]}" }
+
+
+DB.disconnect
+```
+
+### 6. Total Gross Income
+
+Write a Ruby program that uses Sequel to compute and display the total gross income we can expect to receive from our customers, assuming that everybody in the database has a bill coming due and that all of them will pay on time. The output should look like this:
+
+$678.50
+
+#### Solution
+
+```sql
+SELECT SUM(services.price) FROM services
+INNER JOIN customers_services
+ON customers_services.service_id=services.id;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+result = DB[:services].select { sum(services__price).cast(:money) }
+             .inner_join(:customers_services, :service_id => :services__id)
+             .each { |row| puts row[:sum] }
+
+DB.disconnect
+```
+
+### 7. Add New Customer
+
+A new customer, 'John Doe', has signed up with our company. His payment token is 'EYODHLCN'. Initially, he has signed up for Unix Hosting, DNS, and Whois Registration. Write a Ruby program that uses Sequel to properly add this information to the database. For verification, print the entire content of any updated tables. Your output should look something like this:
+
+```ruby
+{:id=>1, :name=>"Pat Johnson", :payment_token=>"XHGOAHEQ"}
+{:id=>2, :name=>"Nancy Monreal", :payment_token=>"JKWQPJKL"}
+{:id=>3, :name=>"Lynn Blake", :payment_token=>"KLZXWEEE"}
+{:id=>4, :name=>"Chen Ke-Hua", :payment_token=>"KWETYCVX"}
+{:id=>5, :name=>"Scott Lakso", :payment_token=>"UUEAPQPS"}
+{:id=>6, :name=>"Jim Pornot", :payment_token=>"XKJEYAZA"}
+{:id=>10, :name=>"John Doe", :payment_token=>"EYODHLCN"}
+
+{:id=>1, :customer_id=>1, :service_id=>1}
+{:id=>2, :customer_id=>1, :service_id=>2}
+{:id=>3, :customer_id=>1, :service_id=>3}
+{:id=>4, :customer_id=>3, :service_id=>1}
+{:id=>5, :customer_id=>3, :service_id=>2}
+{:id=>6, :customer_id=>3, :service_id=>3}
+{:id=>7, :customer_id=>3, :service_id=>4}
+{:id=>8, :customer_id=>3, :service_id=>5}
+{:id=>9, :customer_id=>4, :service_id=>1}
+{:id=>10, :customer_id=>4, :service_id=>4}
+{:id=>11, :customer_id=>5, :service_id=>1}
+{:id=>12, :customer_id=>5, :service_id=>2}
+{:id=>13, :customer_id=>5, :service_id=>6}
+{:id=>14, :customer_id=>6, :service_id=>1}
+{:id=>15, :customer_id=>6, :service_id=>6}
+{:id=>16, :customer_id=>6, :service_id=>7}
+{:id=>17, :customer_id=>10, :service_id=>1}
+{:id=>18, :customer_id=>10, :service_id=>2}
+{:id=>19, :customer_id=>10, :service_id=>3}
+```
+
+The format of the output is not important. Our main concern is that we can verify that we inserted the appropriate data. In this case, the inserted customers record has id 10, while the customers_services records have ids of 17, 18, and 19.
+
+Rather than hard coding customer and service id numbers in your program, try looking up the numbers instead.
+
+#### Solution
+
+```sql
+INSERT INTO customers (name, payment_token) VALUES
+('John Doe', 'EYODHLCN');
+
+INSERT INTO customers_services (customer_id, service_id) VALUES
+  ((SELECT id FROM customers WHERE payment_token = 'EYODHLCN'),
+  (SELECT id FROM services WHERE description = 'Unix Hosting')),
+  
+  ((SELECT id FROM customers WHERE payment_token = 'EYODHLCN'),
+  (SELECT id FROM services WHERE description = 'DNS'))
+  
+  ((SELECT id FROM customers WHERE payment_token = 'EYODHLCN'),
+  (SELECT id FROM services WHERE description = 'Whois Registration'));
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+doe_id = DB[:customers].insert(:name=>'John Doe', :payment_token=>'EYODHLCN')
+# .insert typically returns the primary key of the inserted row
+
+unix_id = DB[:services].select(:id).where(:description=>'Unix Hosting')
+dns_id = DB[:services].select(:id).where(:description=>'DNS')
+whois_id = DB[:services].select(:id).where(:description=>'Whois Registration')
+
+[unix_id, dns_id, whois_id].each do |id|
+  DB[:customers_services].insert(:customer_id=>doe_id, :service_id=>id)
+end
+
+DB[:customers].each { |row| puts row }
+DB[:customers_services].each { |row| puts row }
+
+DB.disconnect
+```
