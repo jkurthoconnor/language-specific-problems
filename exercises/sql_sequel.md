@@ -455,3 +455,128 @@ DB[:customers_services].each { |row| puts row }
 
 DB.disconnect
 ```
+
+### 8. Services for each Customer
+
+Write a Ruby program that uses Sequel to display a list of all customer names together with a list of the services they use. Each service should also show the price of the service. The output should be ordered by name, and the services for each name should also be sorted by the service description. For simplicity, you can ignore any customers that don't have services. Your output should look like this:
+
+Chen Ke-Hua
+  High Bandwidth $15.00
+  Unix Hosting $5.95
+Jim Pornot
+  Bulk Email $250.00
+  Dedicated Hosting $50.00
+  Unix Hosting $5.95
+Lynn Blake
+  Business Support $250.00
+  DNS $4.95
+  High Bandwidth $15.00
+  Unix Hosting $5.95
+  Whois Registration $1.95
+Pat Johnson
+  DNS $4.95
+  Unix Hosting $5.95
+  Whois Registration $1.95
+Scott Lakso
+  Dedicated Hosting $50.00
+  DNS $4.95
+  Unix Hosting $5.95
+  
+Note that in the final cluster, Dedicated Hosting precedes DNS in the output order.
+
+#### Solution
+
+```sql
+SELECT name, array_agg(services.description), array_agg(services.price) FROM cu$
+INNER JOIN customers_services ON customers.id=customers_services.customer_id
+INNER JOIN services ON services.id=customers_services.service_id
+GROUP BY name
+ORDER BY name;
+```
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+DB[:customers].select { [name, string_agg(concat("\t", services__description, ' ', services__price.cast(:money)), "\n").order(services__description.upper)] }
+              .inner_join(:customers_services, :customer_id=>:id)
+              .inner_join(:services, :id=>:service_id)
+              .group(:name)
+              .order(:name)
+              .each do |row| 
+                puts row[:name]
+                puts row[:string_agg]
+              end
+
+DB.disconnect
+```
+
+### 9. Average Column Values
+
+Write a Ruby program that uses Sequel to compute the average value of every numeric column in an arbitrary table of an arbitrary local database. The columns should be processed in ascending order by name. For instance, here's an example of running the program and its output:
+
+```
+$ ruby average_values.rb
+What database do you want to use? billing2
+What table do you want to access? services
+id: 4.500000
+price: 197.106250
+
+$ ruby average_values.rb
+What database do you want to use? billing2
+What table do you want to access? customers_services
+customer_id: 3.687500
+id: 8.500000
+service_id: 3.062500
+```
+
+Note: don't get carried away trying to ensure you only get valid inputs; this exercise is about using Sequel, not validating inputs.
+
+```ruby
+# solution satisfies Further Exploration criteria
+require 'sequel'
+
+def get_database
+  loop do
+    puts "What database would you like to use?"
+    database = gets.chomp
+    return database unless database.empty?
+    puts "Please enter a non-empty database name."
+  end
+end
+
+def get_table_name
+  loop do
+    puts "What table do you want to access?"
+    table = gets.chomp
+    return table unless table.empty?
+    puts "Please enter a non-empty table name."
+  end
+end
+
+def identify_integer_columns(table_name)
+  integer_schemata = DB.schema(table_name.to_sym).select { |column| column[1][:type] == :integer}
+  integer_schemata.map { |schema| schema[0] }
+end
+
+def print_column_averages(column_names, table_name)
+  column_names.each do |name|
+    average = DB[table_name.to_sym].select { avg(name) }.first[:avg].to_f
+    puts "\n#{name}: #{average}\n\n"
+  end
+end
+
+def disconnect
+  DB.disconnect
+end
+
+
+DB = Sequel.connect(adapter: 'postgres', database: get_database)
+table = get_table_name
+columns = identify_integer_columns(table)
+
+print_column_averages(columns, table)
+
+disconnect
+```
