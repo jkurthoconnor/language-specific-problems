@@ -534,7 +534,7 @@ service_id: 3.062500
 Note: don't get carried away trying to ensure you only get valid inputs; this exercise is about using Sequel, not validating inputs.
 
 ```ruby
-# solution satisfies Further Exploration criteria
+# initial solution satisfies Further Exploration criteria
 require 'sequel'
 
 def get_database
@@ -579,4 +579,99 @@ columns = identify_integer_columns(table)
 print_column_averages(columns, table)
 
 disconnect
+```
+
+### 10. Deleting Rows
+
+The program in this exercise will delete data from your database. It would be wise to first make a backup of your database, and then restore the data from that backup prior to each run of the program.
+
+Write a Ruby program that uses Sequel to delete the "Bulk Email" service and customer "Chen Ke-Hua" from the database. Print the entire content of all tables to verify that all of the associated data from both records has been deleted. Your output should look something like this:
+
+```ruby
+(1,"Pat Johnson")
+(2,"Nancy Monreal")
+(3,"Lynn Blake")
+(5,"Scott Lakso")
+(6,"Jim Pornot")
+(10,"John Doe")
+
+{:id=>1, :customer_id=>1, :service_id=>1}
+{:id=>2, :customer_id=>1, :service_id=>2}
+{:id=>3, :customer_id=>1, :service_id=>3}
+{:id=>4, :customer_id=>3, :service_id=>1}
+{:id=>5, :customer_id=>3, :service_id=>2}
+{:id=>6, :customer_id=>3, :service_id=>3}
+{:id=>7, :customer_id=>3, :service_id=>4}
+{:id=>8, :customer_id=>3, :service_id=>5}
+{:id=>11, :customer_id=>5, :service_id=>1}
+{:id=>12, :customer_id=>5, :service_id=>2}
+{:id=>13, :customer_id=>5, :service_id=>6}
+{:id=>14, :customer_id=>6, :service_id=>1}
+{:id=>15, :customer_id=>6, :service_id=>6}
+{:id=>17, :customer_id=>10, :service_id=>1}
+{:id=>18, :customer_id=>10, :service_id=>2}
+{:id=>19, :customer_id=>10, :service_id=>3}
+
+(1,"Unix Hosting")
+(2,DNS)
+(3,"Whois Registration")
+(4,"High Bandwidth")
+(5,"Business Support")
+(6,"Dedicated Hosting")
+(8,"One-to-one Training")
+```
+
+The format of the output is not important. Our main concern is that we can verify that we deleted the appropriate data. In this case, the following records have all been deleted:
+
+The Bulk Email row in services (id: 7)
+
+All customers_services rows where service_id is 7
+
+The Chen Ke-Hua row in customers (id: 4)
+
+All customers_services rows where customer_id is 4
+
+Rather than hard coding the service id number in your program, try looking up the number instead.
+
+
+#### Solution
+
+```bash
+# to backup
+$ pg_dump --inserts --clean billing2 > billing2_dump.sql
+```
+
+```sql
+DELETE FROM customers WHERE name='Chen Ke-Hua';
+
+DELETE FROM customers_services AS cs
+WHERE cs.service_id=(
+SELECT id FROM services
+WHERE description='Bulk Email');
+
+DELETE FROM services WHERE description='Bulk Email';
+```
+
+```bash
+# to restore
+$ psql -d billing2 < billing2_dump.sql
+```
+
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'billing2')
+
+bulk_email_id = DB[:services].where(:description=>'Bulk Email').first[:id]
+
+DB[:customers].where(:name=>'Chen Ke-Hua').delete
+DB[:customers_services].where(:service_id=>bulk_email_id).delete
+DB[:services].where(:id=>bulk_email_id).delete
+
+DB[:services].each { |service| puts service }
+DB[:customers_services].each { |pair| puts pair}
+DB[:customers].each { |customer| puts customer }
+
+DB.disconnect
 ```
