@@ -1,5 +1,5 @@
 SQL Fundamentals [Easy 1](https://launchschool.com/exercise_sets/a2db9fe6)
-
+(Sequel solutions not part of original exercises/expectations)
 
 ### 1.  Create a Database
 
@@ -34,7 +34,23 @@ age int,
 species VARCHAR(15) NOT NULL,
 PRIMARY KEY(id)
 );
+```
 
+### Sequel Solution
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'animals')
+
+DB.create_table(:birds) do
+  primary_key :id
+  String :name, :size=>25, :null=>false
+  Integer :age
+  String :species, :size=>15, :null=>false
+end
+
+DB.disconnect
 ```
 
 ### 3. Insert Data
@@ -61,6 +77,21 @@ VALUES
 ('Jamie', 4, 'Owl'),
 ('Roy', 8, 'Crow');
 ```
+### Sequel Solution
+
+```ruby
+require 'sequel'
+
+DB = Sequel.connect(adapter: 'postgres', database: 'animals')
+
+DB[:birds].insert(:name=>'Charlie', :age=>3, :species=>'Finch')
+DB[:birds].insert(:name=>'Allie', :age=>5, :species=>'Owl')
+DB[:birds].insert(:name=>'Jennifer', :age=>3, :species=>'Magpie')
+DB[:birds].insert(:name=>'Jamie', :age=>4, :species=>'Owl')
+DB[:birds].insert(:name=>'Roy', :age=>8, :species=>'Crow')
+
+DB.disconnect
+```
 
 ### 4. SELECT
 
@@ -70,6 +101,12 @@ Write an SQL statement to query all data that is currently in our birds table.
 ### Solution
 ```sql
 SELECT * FROM birds;
+```
+
+### Sequel Solution
+
+```ruby
+DB[:birds].all
 ```
 
 ### 5. WHERE Clause
