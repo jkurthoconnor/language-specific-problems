@@ -118,6 +118,12 @@ In this exercise, let's practice filtering the data we want to query. Using a WH
 SELECT * FROM birds WHERE age < 5;
 ```
 
+### Sequel Solution
+
+```ruby
+DB[:birds].where { age < 5 }.all
+```
+
 ### 6.  Update Data
 
 It seems there was a mistake when we were inserting data in the birds table. One of the rows has a species of 'Crow', but that bird is actually a Raven. Update the birds table so that a row with a species of 'Crow' now reads 'Raven'.
@@ -126,6 +132,11 @@ It seems there was a mistake when we were inserting data in the birds table. One
 ### Solution
 ```sql
 UPDATE birds SET species = 'Raven' WHERE species = 'Crow';
+```
+
+### Sequel Solution
+```ruby
+DB[:birds].where(:species=>'Crow').update(:species=>'Raven')
 ```
 
 ### Further Exploration
@@ -138,6 +149,10 @@ Oops. Jamie isn't an Owl - he's a Hawk. Correct his information.
 UPDATE birds SET species = 'Hawk' WHERE name = 'Jamie';
 ```
 
+### Sequel Solution
+```ruby
+DB[:birds].where(:name=>'Jamie').update(:species=>'Hawk')
+```
 
 ### 7. Delete Data
 
@@ -146,6 +161,11 @@ Write an SQL statement that deletes the record that describes a 3 year-old finch
 ### Solution
 ```sql
 DELETE FROM birds WHERE species = 'Finch' AND age = 3;
+```
+
+### Sequel Solution
+```ruby
+DB[:birds].where(:species=>'Finch', :age=>3).delete
 ```
 
 ### 8. Add Constraint
@@ -157,6 +177,14 @@ For this exercise, write some code that ensures that only birds with a positive 
 ### Solution
 ```sql
 ALTER TABLE birds ADD CONSTRAINT check_age CHECK (age >= 0);
+-- or if providing a name isn't important:
+ALTER TABLE birds ADD CHECK (age >= 0);
+```
+
+```ruby
+DB.alter_table(:birds) do
+  add_constraint(:check_age) {age >=0 }
+end
 ```
 
 ### 9. Drop Table
@@ -168,6 +196,12 @@ It seems we are done with our birds table, and no longer have a need for it in o
 DROP TABLE birds;
 ```
 
+### Sequel Solution
+
+```ruby
+DB.drop_table(:birds)
+```
+
 ### 10. Drop Database
 
 Let's finish things up by dropping the database animals. With no tables in it, we don't have much use for it any more. Write an SQL statement or PostgreSQL command to drop the animals database.
@@ -176,4 +210,8 @@ Let's finish things up by dropping the database animals. With no tables in it, w
 ### Solution
 ```sql
 DROP DATABASE animals;
+```
+
+```bash
+dropdb animals
 ```
