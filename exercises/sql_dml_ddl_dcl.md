@@ -16,16 +16,16 @@ DML, data manipulation language, is used to create, read/select, update and dele
 DDL, data definition language, is used to create/define, modify and delete databases and tables; in other words, it handles the conditions (structures) under which the data is stored
 
 ```sql
---DML examples
+-- DML examples
 INSERT
 UPDATE
 DELETE
 SELECT
 
 --DDL examples
+CREATE
 ALTER
 DROP
-CREATE
 ```
 
 
