@@ -188,7 +188,7 @@ def insert_data_cust_svcs
   DB[:customers_services].insert(:customer_id=>6, :service_id=>7)
 end
 
-  
+
 
 create_database
 
