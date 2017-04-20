@@ -1,4 +1,5 @@
 SQL Fundamentals [DDL](https://launchschool.com/exercise_sets/7d622479)
+(with additional Sequel solutions)
 
 ### 1. Create an Extrasolar Planetary Database
 
@@ -20,8 +21,12 @@ mass: estimated mass in terms of Jupiter masses; use an integer for this value.
 
 #### Solution
 
-```
+```bash
 createdb extrasolar
+```
+or
+```sql 
+CREATE DATABASE extrasolar
 ```
 
 ```sql
@@ -46,6 +51,25 @@ CREATE TABLE planets (
 );
 ```
 
+```ruby
+DB.create_table :stars do
+  primary_key :id
+  String :name, :size=>25, :null=>false, :unique=>true
+  Integer :distance, :null=>false
+  constraint(:distance_positive) { distance > 0 }
+  Integer :companions, :null=>false
+  constraint(:companions_non_neg) { companions >= 0 }
+  String :spectral_type, :size=>1
+  constraint(:spectral_type_check) { spectral_type =~ /[OBAFGKM]/ }
+end
+
+DB.create_table :planets do
+  primary_key :id
+  String :designation, :fixed=>true, :size=>1, :unique=>true
+  Integer :mass
+end
+```
+
 ### 2. Relating Stars and Planets
 
 You may have noticed that, when we created the stars and planets tables, we did not do anything to establish a relationship between the two tables. They are simply standalone tables that are related only by the fact that they both belong to the extrasolar database. However, there is no relationship between the rows of each table.
@@ -58,6 +82,12 @@ To correct this problem, add a star_id column to the planets table; this column 
 ALTER TABLE planets ADD COLUMN star_id int NOT NULL REFERENCES stars (id);
 ```
 
+```ruby
+DB.alter_table :planets do
+  add_foreign_key :star_id, :stars, :null=>false
+end
+```
+
 ### 3. Increase Star Name Length
 
 Hmm... it turns out that 25 characters isn't enough room to store a star's complete name. For instance, the star "Epsilon Trianguli Australis A" requires 30 characters. Modify the column so that it allows star names as long as 50 characters
@@ -65,7 +95,13 @@ Hmm... it turns out that 25 characters isn't enough room to store a star's compl
 #### Solution
 
 ```sql
-ALTER TABLE stars ALTER COLUMN name TYPE VARCHAR(50);
+ALTER TABLE stars ALTER COLUMN name SET DATA TYPE VARCHAR(50);
+```
+
+```ruby
+DB.alter_table :stars do
+  set_column_type :name, 'varchar(50)'  # string or symbols passed in as type will be used verbatim as SQL type
+end
 ```
 Further Exploration
 
@@ -84,6 +120,12 @@ For many of the closest stars, we know the distance from Earth fairly accurately
 
 ```sql
 ALTER TABLE stars ALTER COLUMN distance TYPE numeric;
+```
+
+```ruby
+DB.alter_table :stars do
+  set_column_type :distance, :numeric # string or symbols passed in as type will be used verbatim as SQL type
+end
 ```
 
 #### Further Exploration
@@ -116,6 +158,14 @@ ALTER TABLE stars ADD CHECK (spectral_type in ('O', 'B', 'A', 'F', 'G', 'K', 'M'
 ALTER TABLE stars ALTER COLUMN spectral_type SET NOT NULL;
 ```
 
+```ruby
+# when creating the table, already used a regex to check type was one of required values
+
+DB.alter_table :stars do
+  set_column_not_null :spectral_type
+end
+```
+
 #### Further Exploration
 
 Assume the stars table contains one or more rows that are missing a spectral_type value, or that have an illegal value. What will happen when you try to alter the table schema? How would you go about adjusting the data to work around this problem. To test this, revert the modification and add some data:
@@ -139,7 +189,7 @@ Modify the stars table to remove the CHECK constraint on the spectral_type colum
 #### Solution:
 
 ```sql
-ALTER TABLE DROP CONSTRAINT stars_spectral_type_check;
+ALTER TABLE stars DROP CONSTRAINT stars_spectral_type_check;
 
 CREATE TYPE spectral_types AS ENUM ('O', 'B', 'A', 'F', 'G', 'K', 'M');
 
@@ -156,14 +206,23 @@ While we're at it, also make the designation column required.
 #### Solution:
 
 ```sql
-ALTER TABLE planets ALTER COLUMN mass TYPE numeric;
+ALTER TABLE planets ALTER COLUMN mass SET DATA TYPE numeric;
 
 ALTER TABLE planets ADD CHECK (mass > 0);
 
-ALTER TABLE planets
-ALTER COLUMN mass SET NOT NULL,
+ALTER TABLE planets;
+ALTER COLUMN mass SET NOT NULL;
 ALTER COLUMN designation SET NOT NULL;
 ```
+```ruby
+DB.alter_table :planets do
+  set_column_not_null :designation
+  set_column_not_null :mass
+  set_column_type :mass, :numeric
+  add_constraint(:positive_mass) { mass > 0 }
+end
+```
+
 
 ### 8. Add a Semi-Major Axis Column
 
@@ -173,6 +232,12 @@ Add a semi_major_axis column for the semi-major axis of each planet's orbit; the
 
 ```sql
 ALTER TABLE planets ADD COLUMN semi_major_axis numeric NOT NULL;
+```
+
+```ruby
+DB.alter_table :planets do
+  add_column :semi_major_axis, Numeric, :null=>false
+end
 ```
 
 #### Further Exploration
