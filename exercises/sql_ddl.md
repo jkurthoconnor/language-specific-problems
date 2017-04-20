@@ -210,9 +210,9 @@ ALTER TABLE planets ALTER COLUMN mass SET DATA TYPE numeric;
 
 ALTER TABLE planets ADD CHECK (mass > 0);
 
-ALTER TABLE planets;
-ALTER COLUMN mass SET NOT NULL;
-ALTER COLUMN designation SET NOT NULL;
+ALTER TABLE planets
+  ALTER COLUMN mass SET NOT NULL,
+  ALTER COLUMN designation SET NOT NULL;
 ```
 ```ruby
 DB.alter_table :planets do
