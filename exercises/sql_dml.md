@@ -53,12 +53,15 @@ INSERT INTO devices (name) VALUES
 INSERT INTO parts (device_id, part_number) VALUES
 (1, 1),
 (1, 2),
-(1, 5),
-(2, 4),
-(2, 3),
-(2, 6),
-(2, 7),
-(2, 8);
+(1, 5);
+
+-- or without hard-coding the device_id:
+INSERT INTO parts (part_number, device_id) VALUES
+(4, (SELECT id FROM devices WHERE name ~ '^Gyro')),
+(5, (SELECT id FROM devices WHERE name ~ '^Gyro')),
+(6, (SELECT id FROM devices WHERE name ~ '^Gyro')),
+(7, (SELECT id FROM devices WHERE name ~ '^Gyro')),
+(8, (SELECT id FROM devices WHERE name ~ '^Gyro'));
 
 INSERT INTO parts (part_number) VALUES
 (9),
