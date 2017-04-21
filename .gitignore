@@ -1,4 +1,5 @@
-.env
+# idiosyncracies #
+
 *coverage/
 ref*.*
 rf*.*
@@ -7,8 +8,14 @@ scrap*
 assessment*
 nts*.*
 temp*
-
-
-
 video_challenge*
 *goal*
+
+# logs and databases #
+
+*.sql
+*.log
+
+# enviroment variables #
+
+.env
