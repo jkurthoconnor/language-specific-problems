@@ -18,9 +18,10 @@ A foreign key column called device_id. This will be used to associate various pa
 
 #### Solution
 
-```sql
+```bash
 $ createdb workshop
-
+```
+```sql
 CREATE TABLE devices (
   id serial PRIMARY KEY,
   name VARCHAR(32),
@@ -30,7 +31,7 @@ CREATE TABLE devices (
 CREATE TABLE parts (
 id serial PRIMARY KEY,
 device_id int REFERENCES devices(id),
-part_number NUMERIC UNIQUE NOT NULL
+part_number NUMERIC UNIQUE
 );
 
 
