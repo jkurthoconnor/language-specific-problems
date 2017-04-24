@@ -31,7 +31,7 @@ CREATE TABLE devices (
 CREATE TABLE parts (
 id serial PRIMARY KEY,
 device_id int REFERENCES devices(id),
-part_number NUMERIC UNIQUE
+part_number NUMERIC UNIQUE NOT NULL
 );
 
 
@@ -110,10 +110,12 @@ We want to grab all parts that have a part_number that starts with 3. Write a SE
 #### Solution
 
 ```sql
-SELECT * FROM parts WHERE (CAST (part_number AS text)) LIKE '%3';
+SELECT * FROM parts WHERE (CAST (part_number AS text)) LIKE '3%';
+--or with regex
+SELECT * FROM parts WHERE CAST(part_number AS text) ~ '^3';
 
 --GIVEN SOLUTION:
-SELECT * FROM parts WHERE part_number::text LIKE '%3';
+SELECT * FROM parts WHERE part_number::text LIKE '3%';
 ```
 
 
