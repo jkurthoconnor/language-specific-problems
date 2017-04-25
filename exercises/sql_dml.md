@@ -239,6 +239,14 @@ What if we wanted to set the part with the smallest part_number to be associated
 
 ```sql
 UPDATE parts SET device_id=2 WHERE part_number=(SELECT MIN(part_number) FROM parts);
+
+-- or
+
+UPDATE parts
+SET device_id=(
+        SELECT devices.id FROM devices WHERE name ~ '^Gyro')
+WHERE  parts.part_number=(
+        SELECT MIN(parts.part_number) FROM parts);
 ```
 
 ### 10. Delete Accelerometer
@@ -267,6 +275,11 @@ Deletion would have been easier if we had added a cascade on delete clause when 
 ```sql
 --in creating the foreign key, the line should have been:
 device_id int REFERENCES devices(id) ON DELETE CASCADE;
+```
+
+if the foreign key had been created as above, then simply deleting the device would also delete the parts associated with it.
+```sql
+DELETE FROM devices WHERE name = 'some name';
 ```
 
 
