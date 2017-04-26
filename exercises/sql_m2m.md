@@ -250,6 +250,17 @@ INSERT INTO customers_services (customer_id, service_id) VALUES
 (7, 1),
 (7, 2),
 (7, 3);
+
+--or to avoid hard-coding the ids
+
+INSERT INTO customers_services (customer_id, service_id) VALUES
+((SELECT id FROM customers WHERE name = 'John Doe'),
+  (SELECT id FROM services WHERE description ~ '^UNI')),
+((SELECT id FROM customers WHERE name = 'John Doe'),
+  (SELECT id FROM services WHERE description ~ '^DN')),
+((SELECT id FROM customers WHERE name = 'John Doe'),
+  (SELECT id FROM services WHERE description ~ '^Who'));
+
 ```
 
 ### 9. Hypothetically
