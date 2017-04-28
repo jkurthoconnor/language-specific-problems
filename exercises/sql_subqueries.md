@@ -201,8 +201,9 @@ Your output should look like this:
 #### Solution
 
 ```sql
-SELECT MAX(bid_counts.count) FROM (SELECT COUNT(bidder_id)
-FROM bids GROUP BY bidder_id) AS bid_counts;
+SELECT MAX(count) FROM
+(SELECT COUNT(id), bidder_id FROM bids GROUP BY bidder_id)
+AS max;
 ```
 
 
