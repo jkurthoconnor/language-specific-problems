@@ -123,9 +123,7 @@ if input.include?('y')
 end
 ```
 
-### 5   
-
-Launch School Printer (Part 1)
+### 5  Launch School Printer (Part 1)
 
 Write a program that prints 'Launch School is the best!' repeatedly until a certain number of lines have been printed. The program should obtain the number of lines from the user, and should insist that at least 3 lines are printed.
 
@@ -343,14 +341,92 @@ denom = get_denominator
 puts "#{num} / #{denom} is #{num / denom}"
 ```
 
-### 9   
+### 9  Launch School Printer (Part 2)
+
+In an earlier exercise, you wrote a program that prints 'Launch School is the best!' repeatedly until a certain number of lines have been printed. Our solution looked like this:
+
+```ruby
+number_of_lines = nil
+loop do
+  puts '>> How many output lines do you want? Enter a number >= 3:'
+  number_of_lines = gets.to_i
+  break if number_of_lines >= 3
+  puts ">> That's not enough lines."
+end
+
+while number_of_lines > 0
+  puts 'Launch School is the best!'
+  number_of_lines -= 1
+end
+```
+
+Modify this program so it repeats itself after each input/print iteration, asking for a new number each time through. The program should keep running until the user enters q or Q.
+
+
 
 
 ### Solution:
+```ruby
+def get_request
+  input = ''
+  loop do
+    puts "How many output lines do you want?" \
+          " Enter a number >=3:" \
+          "(Q to quit)"
+    input = gets.chomp
+    return if input.downcase == 'q'
+
+    break if input.to_i >=3
+    puts "That's not enough lines."
+  end
+  input.to_i
+end
+
+def printer(n)
+  n.times { puts "LS is the best!"}
+end
 
 
-### 10   
+loop do
+  response = get_request
 
+  response.class == Fixnum ? printer(response) : break
+end
+```
+
+### 10 Opposites Attract
+
+Write a program that requests two integers from the user, adds them together, and then displays the result. Furthermore, insist that one of the integers be positive, and one negative; however, the order in which the two integers are entered does not matter.
+
+Do not check for positive/negative requirement until after both integers are entered, and start over if the requirement is not met.
+
+You may use the following method to validate input integers:
+
+```ruby
+def valid_number?(number_string)
+  number_string.to_i.to_s == number_string && number_string.to_i != 0
+end
+```
+
+```bash
+$ ruby opposites.rb
+>> Please enter a positive or negative integer:
+8
+>> Please enter a positive or negative integer:
+0
+>> Invalid input. Only non-zero integers are allowed.
+>> Please enter a positive or negative integer:
+-5
+>> 8 + -5 = 3
+
+$ ruby opposites.rb
+>> Please enter a positive or negative integer:
+8
+>> Please enter a positive or negative integer:
+5
+>> Sorry. One integer must be positive, one must be negative.
+>> Please start over.
+```
 
 ### Solution:
 
