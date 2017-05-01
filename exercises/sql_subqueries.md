@@ -197,12 +197,11 @@ Your output should look like this:
     9
 (1 row) 
 ```
-
 #### Solution
 
 ```sql
 SELECT MAX(count) FROM
-(SELECT COUNT(id), bidder_id FROM bids GROUP BY bidder_id)
+(SELECT COUNT(bidder_id) FROM bids GROUP BY bidder_id)
 AS max;
 ```
 
