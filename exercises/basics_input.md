@@ -430,4 +430,45 @@ $ ruby opposites.rb
 
 ### Solution:
 
+```ruby
+def valid_number?(number_string)
+  number_string.to_i.to_s == number_string && number_string.to_i != 0
+end
 
+def proper_pair?(pair)
+  pair.count { |n| n.positive? } == 1
+end
+
+def collect_integers
+  pair = []
+
+  until pair.size == 2  
+    n = ''
+    puts "Please enter a positive or negative integer"
+    n = gets.chomp
+    if n == '0'
+      puts "Zero is neither positive nor negative."
+      next
+    end
+    pair << n.to_i if valid_number?(n)
+  end
+
+  pair
+end
+
+def result(pair)
+  pair[0] + pair[1]
+end
+
+loop do
+  collected_pair = collect_integers  
+
+  if proper_pair?(collected_pair)
+    puts "#{collected_pair.first} + #{collected_pair.last}" \
+    " = #{result(collected_pair)}"
+    break
+  else
+    puts "One integer must be positive, the other negative."
+  end
+end
+```
