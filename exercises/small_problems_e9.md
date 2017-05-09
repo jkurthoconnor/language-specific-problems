@@ -128,7 +128,6 @@ uppercase?('') == true
 ```ruby
 def uppercase?(string)
   string.each_char do |char|
-    next unless char =~ /[a-z]/i
     return false if char =~ /[a-z]/
   end
 
@@ -180,10 +179,9 @@ swap_name('Joe Roberts') == 'Roberts, Joe'
 ### Solution
 
 ```ruby
-def swap_name(name)
-  names = name.split
-  first, last = names[0], names[1]
-  "#{last}, #{first}"
+def swap_name(fullname)
+  names = fullname.split
+  "#{names.last}, #{names.first}"
 end
 ```
 
