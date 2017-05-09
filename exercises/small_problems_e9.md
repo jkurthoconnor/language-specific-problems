@@ -128,7 +128,6 @@ uppercase?('') == true
 ```ruby
 def uppercase?(string)
   string.each_char do |char|
-    next unless char =~ /[a-z]/i
     return false if char =~ /[a-z]/
   end
 
