@@ -85,7 +85,17 @@ def rotate_rightmost_digits(digits, n)
   rotated.join.to_i
 end
 
+# or keeping with the suggestion to call a separate non-destructive rotate_array method
 
+def rotate_array(array, n=1)
+  return array if n == 1
+  array[0...-n] + array[(-n + 1)..-1] << array[-n]
+end
+
+def rotate_rightmost_digits(digits, n=1)
+  digit_chars = digits.to_s.chars
+  rotate_array(digit_chars, n).join.to_i
+end
 ```
 
 ### 3. Rotation (Part 3)
