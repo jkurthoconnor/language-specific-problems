@@ -25,6 +25,20 @@ def rotate_array(array)
 end
 ```
 
+### Further Exploration
+Write a method that rotates a string instead of an array. Do the same thing for integers. You may use rotate_array from inside your new method.
+
+### Solution
+```ruby
+def rotate_string(string)
+  rotate_array(string.chars).join
+end
+
+def rotate_integers(n)
+  rotate_array(n.to_s.chars).join.to_i
+end
+```
+
 ### 2. Rotation (Part 2)
 
 Write a method that can rotate the last n digits of a number. For example:
