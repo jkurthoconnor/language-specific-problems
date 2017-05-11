@@ -272,8 +272,8 @@ buy_fruit([["apples", 3], ["orange", 1], ["bananas", 2]]) ==
 def buy_fruit(list)
   full_list = []
 
-  list.each do |specs|
-    specs[-1].times { full_list.push(specs[0]) }
+  list.each do |item, number|
+    number.times { full_list << item }
   end
 
   full_list
