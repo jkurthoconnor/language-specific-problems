@@ -58,9 +58,6 @@ You may use the rotate_array method from the previous exercise if you want. (Rec
 
 You may assume that n is always a positive integer.
 
-
-```ruby
-```
 ### Solution:
 
 ```ruby
