@@ -312,10 +312,12 @@ diamond(9)
 ```ruby
 def diamond(n)
   top = (1..n).step(2).to_a
-  diamonds = top + top[0..-2].reverse
+  bottom = top[0...-1].reverse
+  diamonds = top + bottom
 
-  diamonds.each do |number|
-    puts " " * ((n - number)/ 2) + "*" * number
+  diamonds.each do |diamond_count|
+    space_count = (n - diamond_count) / 2
+    puts " " * space_count + "*" * diamond_count
   end
 end
 ```
