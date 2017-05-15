@@ -195,6 +195,63 @@ With 10 lights, 3 lights are left on: lights 1, 4, and 9.
 ### Solution:
 
 ```ruby
+def toggle_lights(lights_number)
+  bulbs = {}
+  (1..lights_number).each { |n| bulbs[n] = false }
+
+  (1..lights_number).each do |rep|
+    bulbs.map do |bulb, state|
+      bulbs[bulb] = !state if (bulb % rep).zero?
+    end
+  end
+
+  report_status(bulbs)
+end
+
+def report_status(lights)
+  "#{lights.values.count(true)} lights are now on.\n" \
+  "The following lights are off: #{ lights.select { |_, v| v == false }.keys }"
+end
+```
+
+### Further Exploration
+What are some alternatives for solving this exercise?
+
+```ruby
+# using a class
+class Lights
+  def initialize(light_count)
+    @count = light_count
+    @lights = prepare_lights
+  end
+
+  def prepare_lights
+    light_set = {}
+    1.upto(@count) { |key| light_set[key] = false }
+    light_set
+  end
+
+  def toggle_switches
+    n = 1
+    until n > @count
+      @lights.each do |k,v|
+        @lights[k] = !@lights[k] if (k % n).zero?
+      end
+      n += 1
+    end
+    report_light_status
+  end
+  
+  def report_light_status
+    off_lights = @lights.select { |k, v| v == false }.keys
+    on_lights = @lights.keys - off_lights
+    "#{@lights.values.count(true)} lights are on.\n"\
+    "The following lights are off: #{off_lights}.\n"\
+    "The following lights are on: #{on_lights}."
+  end
+end
+
+# using an array
 # using array:
 def toggle_lights(array_size)
   bulbs = Array.new(array_size, false)
@@ -216,25 +273,6 @@ def report_status(lights)
 
   "#{lights.count(true)} lights are now on."
   "The following lights are off: #{off_bulbs}"
-end
-
-# or a cleaner version using a hash:
-def toggle_lights(lights_number)
-  bulbs = {}
-  (1..lights_number).each { |n| bulbs[n] = false }
-
-  (1..lights_number).each do |rep|
-    bulbs.map do |bulb, state|
-      bulbs[bulb] = !state if (bulb % rep).zero?
-    end
-  end
-
-  report_status(bulbs)
-end
-
-def report_status(lights)
-  "#{lights.values.count(true)} lights are now on.\n" \
-  "The following lights are off: #{ lights.select { |_, v| v == false }.keys }"
 end
 ```
 
