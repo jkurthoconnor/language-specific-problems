@@ -1,4 +1,4 @@
-## User Input, from Ruby Basics LaunchSchool exercises (https://launchschool.com/exercise_sets/fa30c236)
+## Ruby Basics LaunchSchool exercises [User Input](https://launchschool.com/exercise_sets/fa30c236)
 
 ### 1 Repeat after me
 
