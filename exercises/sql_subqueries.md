@@ -422,15 +422,8 @@ HashAggregate  (cost=83.21..92.01 rows=880 width=40) (actual time=0.131..0.135 r
   Group Key: items.id
   ->  Hash Right Join  (cost=29.80..75.66 rows=1510 width=40) (actual time=0.065..0.100 rows=27 loops=1)
         Hash Cond: (bids.item_id = items.id)
-        ->  Seq Scan on bids  (cost=0.00..25.10 rows=1510 width=8) (actual time=0.004..0.010 rows=26 loops=1)
-        ->  Hash  (cost=18.80..18.80 rows=880 width=36) (actual time=0.025..0.025 rows=6 loops=1)
-              Buckets: 1024  Batches: 1  Memory Usage: 9kB
-              ->  Seq Scan on items  (cost=0.00..18.80 rows=880 width=36) (actual time=0.009..0.012 rows=6 loops=1)
-Planning time: 0.255 ms
-Execution time: 0.244 ms
-(10 rows)
-
-
+        -> 
+        
 
 
 -- with scalar subquery
