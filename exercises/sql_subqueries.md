@@ -66,6 +66,11 @@ Here is the expected output:
 ```sql
 SELECT items.name AS "Bid on Items" FROM items
 WHERE  items.id IN (SELECT DISTINCT bids.item_id FROM bids);
+
+--or
+SELECT DISTINCT(items.name) AS "Bid on Items" FROM items
+WHERE items.id IN (SELECT item_id FROM bids);
+
 ```
 
 
@@ -112,9 +117,8 @@ Write a SELECT query that returns a list of names of everyone who has bid in the
 
 ```sql
 SELECT name FROM bidders
-WHERE EXISTS (SELECT 1 FROM bids -- 1 used because output is irrelevant
-WHERE bidders.id=bids.bidder_id); -- as long as the sub returns any row
-                                  -- the EXISTS clause evaluates to --  true and the current `name` is included
+WHERE EXISTS (SELECT 1 FROM bids
+WHERE bidders.id=bids.bidder_id);
 ```
 ### Further Exploration
 
@@ -173,6 +177,11 @@ SELECT name AS "Highest Bid Less Than 100 Dollars"
 FROM items WHERE sales_price IN (SELECT items.sales_price FROM items
 WHERE sales_price < 100.00);  -- `IN` is equivalent to  `= ANY`
 
+--with ANY
+SELECT name AS "Highest Bid Less Than 100 Dollars"
+FROM items WHERE items.id = ANY (SELECT item_id FROM 
+bids GROUP BY item_id, amount HAVING MAX(amount) < 100.00 );
+
 -- but the preferred ANY solution is:
 SELECT name AS "Highest Bid Less Than 100 Dollars" FROM items
 WHERE 100.00 > ANY (SELECT amount FROM bids WHERE item_id=items.id);
@@ -187,7 +196,10 @@ There is a way to get the same result table back using ALL for this exercise. Ho
 #### Solution
 
 ```sql
-
+SELECT name AS "Highest Bid Less Than 100.00" FROM items
+WHERE 100.00 > ALL (SELECT amount FROM bids
+WHERE items.id=bids.item_id)
+AND items.id IN (SELECT item_id FROM bids);
 ```
 
 
