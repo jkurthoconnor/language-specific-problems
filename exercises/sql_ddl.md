@@ -26,10 +26,8 @@ createdb extrasolar
 ```
 or
 ```sql 
-CREATE DATABASE extrasolar
-```
+CREATE DATABASE extrasolar;
 
-```sql
 CREATE TABLE stars (
   id serial PRIMARY KEY,
   name VARCHAR(25) NOT NULL UNIQUE
@@ -47,6 +45,27 @@ ALTER TABLE stars ADD COLUMN spectral_type CHAR(1);
 CREATE TABLE planets (
   id serial PRIMARY KEY,
   designation CHAR(1) UNIQUE,
+  mass int
+);
+```
+or, even better, with a custom enum type to control data in `spectral_type`:
+
+```sql
+CREATE DATABASE extrasolar;
+
+CREATE TYPE spec_type AS ENUM ('O', 'B', 'A', 'F', 'G', 'K', 'M');
+
+CREATE TABLE stars (
+  id serial PRIMARY KEY,
+  name VARCHAR(25) UNIQUE NOT NULL,
+  distance int NOT NULL CHECK(distance > 0),
+  spectral_type spec_type,
+  companions int NOT NULL CHECK(companions >=0)
+);
+
+CREATE TABLE planets (
+  id serial PRIMARY KEY,
+  designation CHAR(1) UNIQUE CHECK(designation ~ '^[a-z]$'),
   mass int
 );
 ```
@@ -267,7 +286,7 @@ NOTE: The semi_major_axis for Alpha Centauri B planet b is 0.04 AU while that fo
 
 #### Solution:
 
-Adding the column with NOT NULL when there is extant planet data will raise an exception (`ERROR:  column "semi_major_axis" contains null values`) because each planet will not yet have a value for semi_major_axis.  The resolve this, first add the column without the NOT NULL constraint; then add values for the semi_major_axis for each planet row; then add the NOT NULL constraint.
+Adding the column with NOT NULL when there is extant planet data will raise an exception (`ERROR:  column "semi_major_axis" contains null values`) because each planet will not yet have a value for semi_major_axis.  To resolve this, first add the column without the NOT NULL constraint; then add values for the semi_major_axis for each planet row; then add the NOT NULL constraint.
 
 ```sql
 UPDATE planets SET semi_major_axis=0.04 WHERE id=1;
