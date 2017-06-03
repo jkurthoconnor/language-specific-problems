@@ -380,7 +380,7 @@ end
 
 def digits_to_phone(string)
   stripped_digits = string.gsub(/(\d)\s/, '\1')
-  stripped_digits.gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3')
+  stripped_digits.gsub(/\b(\d{3})(\d{3})(\d{4})\b/, '(\1) \2-\3')
 end
 ```
 
