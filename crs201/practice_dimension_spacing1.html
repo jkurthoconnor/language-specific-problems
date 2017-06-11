@@ -32,17 +32,19 @@
       min-height: 120px;
       line-height: 120px;
       text-align: center;
-      background: #ffffcc;
+      background: #ffc;
     }
     table {
       width: 100%;
       background: #a7ceff;
+      border-spacing: 0;
     }
 
     td {
       width: 25%;
       text-align: center;
-      background: #ffffcc;
+      background: #ffc;
+      margin: 10px; /* has no effect; margins aren't applicable to elements of `display: table-cell` */
     }
 
   </style>
@@ -58,13 +60,13 @@
   --><li>Item 2</li><!--
   --><li>Item 3</li><!--
   --><li>Item 4</li>
-  </ul>
+</ul>
   <table>
     <tr>
-      <td>data</td>
-      <td>data</td>
-      <td>data</td>
-      <td>data</td>
+    <td>data</td>
+    <td>data</td>
+    <td>data</td>
+    <td>data</td>
     </tr>
   </table>
 </body>
