@@ -50,6 +50,29 @@ def block_word?(string)
   end
   true
 end
+
+# or an OO version:
+class Blockset
+  attr_reader :blocks, :word_chars
+
+  def initialize(string)
+    @blocks = { avail: [ ['B', 'O'], ['X', 'K'], ['D', 'Q'], ['C', 'P'], ['N', 'A'], ['G', 'T'], ['R', 'E'], ['F', 'S'], ['J', 'W'], ['H', 'U'], ['V', 'I'], ['L', 'Y'], ['Z', 'M'] ], unavail: [] }
+    @word_chars = string.upcase.chars
+  end
+
+  def block_word?
+    word_chars.each do |char|
+      return false unless blocks[:avail].flatten.include?(char)
+      blocks[:avail].each do |block|
+        if block.include?(char)
+          blocks[:unavail] << blocks[:avail].delete(block)
+          break
+        end
+      end
+    end
+    true
+  end
+end
 ```
 
 ### 3)
