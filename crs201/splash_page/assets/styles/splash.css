@@ -1,4 +1,59 @@
 body {
   background-image: url("../images/bg_body.gif");
-  color: red;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #909090;
+}
+
+#logo {
+  padding-top: 89px;
+  padding-bottom: 55px;
+}
+
+h1,
+h2,
+h3 {
+  text-align: center;
+  
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+  color: cadetblue;
+}
+
+main {
+  width: 1000px;
+  padding: 75px 125px 50px;
+  margin: auto;
+  background-color: white;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+article {
+  padding-bottom: 100px;
+}
+
+p {
+  font-size: 20px;
+}
+
+footer {
+  width: 1000px;
+  margin: 0 auto 60px;
+  background-color: lightgrey;
+  text-align: center;
+}
+
+.social {
+  display: inline-block;
+  padding: 0;
+}
+
+li.social {
+  padding: 20px 65px;
 }
