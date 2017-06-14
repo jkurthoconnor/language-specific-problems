@@ -1,5 +1,6 @@
 body {
   background-image: url("../images/bg_body.gif");
+  background-color: #2f2840; /* same color as image's background; failsafe for image */
   font-family: Helvetica, Arial, sans-serif;
   color: #909090;
   text-align: center;
