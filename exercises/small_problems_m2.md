@@ -90,14 +90,16 @@ letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
 ### Solution:
 ```ruby
 def letter_percentages(string)
-  letters = string.chars.select { |char| char =~ /[a-z]/i }
-  up = letters.count { |ltr| ltr == ltr.upcase }
-  low = letters.size - up
-  neither = string.size - letters.size
+  denom = string.size.to_f
+  chars = string.chars
 
-  { lowercase: (low.to_f/string.size) * 100,
-    uppercase: (up.to_f/string.size) * 100,
-    neither: (neither.to_f/string.size) * 100 }
+  up = chars.count { |ltr| ltr =~ /[A-Z]/ }
+  low = chars.count { |ltr| ltr =~ /[a-z]/ }
+  neither = denom - (up + low)
+
+  { lowercase: (low/denom) * 100,
+    uppercase: (up/denom) * 100,
+    neither: (neither/denom) * 100 }
 end
 ```
 
