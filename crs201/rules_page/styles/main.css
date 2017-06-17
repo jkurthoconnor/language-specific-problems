@@ -1,5 +1,25 @@
-body {
-  background: #696969;
-  border: 2px solid #000;
-  color: white;
+main {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #45494d;
+  box-sizing: border-box;
+  width: 1050px;
+  margin: 0 auto;
+  border: 2px solid #a9a9a9;
+  padding: 15px;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 24px;
+  color: #cd5c5c; /* indianred */
+}
+
+h1 {
+  text-align: center;
+}
+
+h4,
+h5 {
+  font-size: 1em;
 }
