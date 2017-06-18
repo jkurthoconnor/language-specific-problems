@@ -7,31 +7,60 @@
 </head>
 <body>
   <main>
-    <h2>Inline Elements</h2>
-      <p>Inline elements occupy only the space of the content. It does not take width and height values.</p>
-      <h5>Example:</h5>
-      <h5>What happens if we set a margin property on an inline level element?</h5>
-      <h5>What about padding?</h5>
-      <h4>Floating Inline Elements</h4>
+    <article id="display">
+      <h2>Inline Elements</h2>
+        <p>Inline elements occupy only the space of the content. It does not take width and height values.</p>
+        <h5>Example:</h5>
+        <p>Anchor tags are normally inline elements, you see they only take up the width of their content and not the whole width of the page then the next anchor tags follow right after it.</p>
+        <div class="eg_box">
+          <a href="#">Home</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+        <h5>What happens if we set a margin property on an inline level element?</h5>
+        <p>Inline elements will only take left and right margin values.</p>
+        <div class="eg_box" id="margins">
+          <a href="#">Home</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+        <p>In the example I put a margin of 20px on all sides, as you can see if you check the anchor tag in the developer tools only the left and right side of the contents are affected by the margin.</p>
+        <h5>What about padding?</h5>
+        <div class="eg_box" id="padding">
+          <a href="#">Home</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+        <p>Inline elements accept padding values on all sides. [But vertical padding won't affect spacing of adjacent contect, so it may overlap.]</p>
+        <h4>Floating Inline Elements</h4>
+        <div class="eg_box" id="floating_inline">
+          <a href="#">Home</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+        <p>Floating inline elements will change its display value to a block level element and subject to all block level characteristics. Which means it can take margin and padding values, height and width values as well.</p>
 
-    <h2>Block Elements</h2>
-      <h5>Example: (Div elements are naturally block level elements)</h5>
-      <h4>Floating Block Elements</h4>
-      <h5>Floating block elements with now width and height set.</h5>
-      <h5>Floating block elementes with width and height set.</h5>
-      <h5>Can we change an inline element into a block element?</h5>
+      <h2>Block Elements</h2>
+        <h5>Example: (Div elements are naturally block level elements)</h5>
+        <h4>Floating Block Elements</h4>
+        <h5>Floating block elements with now width and height set.</h5>
+        <h5>Floating block elementes with width and height set.</h5>
+        <h5>Can we change an inline element into a block element?</h5>
 
-    <h2>Inline-Block Elements</h2>
+      <h2>Inline-Block Elements</h2>
       <h5>Example: Let's use inline-block to create a navigation</h5>
+    </article>
 
-    <h1>Floats and Positioning Elements</h1>
-    <h2>Floats</h2>
-      <h5>Example</h5>
-    <h2>Positioning</h2>
-    <h3>Static Position</h3>
-    <h3>Fixed Position</h3>
-    <h3>Position Relative</h3>
-    <h3>Position Absolute</h3>
+    <article id="positioning">
+      <h1>Floats and Positioning Elements</h1>
+      <h2>Floats</h2>
+        <h5>Example</h5>
+      <h2>Positioning</h2>
+      <h3>Static Position</h3>
+      <h3>Fixed Position</h3>
+      <h3>Position Relative</h3>
+      <h3>Position Absolute</h3>
+    </article>
   </main>
 </body>
 </html>
