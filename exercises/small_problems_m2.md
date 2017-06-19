@@ -157,18 +157,18 @@ triangle(3, 1, 1) == :invalid
 ### Solution:
 ```ruby
 def triangle(s1, s2, s3)
-  sides = [s1, s2, s3].sort
+  fig = [s1, s2, s3].sort
+  return :invalid unless valid_triangle?(fig)
 
-  return :invalid if (sides.any? { |n| n <= 0 }) ||
-                     (sides[0] + sides[1] <= sides[2])
-
-  if sides.uniq.size == 1
-    :equilateral
-  elsif sides.uniq.size == 2 && (sides[0] == sides[1] || sides[1] == sides[2])
-    :isosocles
-  elsif sides.uniq.size == 3
-    :scalene
+  case fig.uniq.size
+  when 1 then :equilateral
+  when 2 then :isosceles
+  else        :scalene
   end
+end
+
+def valid_triangle?(shape)
+  shape.all? { |side| side > 0 } && shape[-1] < (shape[0] + shape[1])
 end
 ```
 
