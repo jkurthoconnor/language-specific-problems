@@ -47,19 +47,51 @@
         <p>Block level elements take up the entire width of the page and always start in a new line. It can have margin/s and padding/s. If no width is set it will expand naturaly to fill its parent container. If no height is set, it will expand to fit its content.</p>
         <h5>Example: (Div elements are naturally block level elements)</h5>
         <div class="box-1">This is a div with no width and height set.</div>
-        <div class="box-3" id="height_padding_margin">This is a div with no width but with a height of 60px, with a padding and margin of 20px around it.</div>
-        <div class="box-2" id="width_no_height">This is a div with a width of 90px and no height set.</div>
+        <div class="box-3">This is a div with no width but with a height of 60px, with a padding and margin of 20px around it.</div>
+        <div class="box-2">This is a div with a width of 90px and no height set.</div>
         <p>In the first example, the div fills the entire width, and uses just enough height to fill its content. In the second box, we didn't set a width, but it still filled the entire width (counting the padding and margin); it also uses 60px of height plus the margin and padding. For the third box, we set the width to 90px, and as expected, it took just enough height to fill its content. The text was squished because of the reduced width, so the browser expanded the height to accommodate the content.</p>
 
         <h4>Floating Block Elements</h4>
         <h5>Floating block elements with no width and height set.</h5>
+        <div class="float-container no-h-w">
+          <div class="box-1 left">
+            Box - 1 - Floated Left
+          </div>
+          <div class="box-2 right">
+            Box - 2 - Floated Right
+          </div>
+        </div>
+        <p>It floated our elements to the left and right on the same block. It shrunk to the widest element within each div, in our case the texts inside, since we didn't set a specific width for each.</p>
         <h5>Floating block elementes with width and height set.</h5>
+        <div class="float-container with-h-w">
+          <div class="box-2 left">
+            Box - 1 - Floated Left
+          </div>
+          <div class="box-1 right">
+            Box - 2 - Floated Right
+          </div>
+        </div>
         <h5>Can we change an inline element into a block element?</h5>
+        <p>Let's use the anchor tag as an example.</p>
+          <a href="#" class="box-1">Home</a>
+          <a href="#" class="box-1">About</a>
+          <a href="#" class="box-1">Contact</a>
+        <p>Yes, we can change display values from a block element to inline element and vice versa. Display values can be overwritten by another display value.</p>
       </section>
 
       <section class="inline-block">
         <h2>Inline-Block Elements</h2>
+        <p>Inline-block elements are inline elements that can take block elements properties, such as width and height. It acts similarly to a float minus the clear property.</p>
         <h5>Example: Let's use inline-block to create a navigation</h5>
+        <nav>
+          <ul>
+            <li class="box-1"><a href="#">Home</a></li>
+            <li class="box-1"><a href="#">Portfolio</a></li>
+            <li class="box-1"><a href="#">About</a></li>
+            <li class="box-1"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <p>We achieved the same results as to when we float the anchor elements to give them the block element's properties. It's you get two elements in just one, you get to have the properties of inline elements and at the same time get the properties of block elements.</p>
       </section>
     </article>
 

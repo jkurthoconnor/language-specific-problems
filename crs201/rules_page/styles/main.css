@@ -80,7 +80,7 @@ a {
 }
 
 .box-2 {
-  background: salmon;
+  background: #fa8072; /*salmon*/
   color: white;
 }
 
@@ -97,4 +97,55 @@ a {
 
 .block h5 ~ .box-2 {
   width: 90px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right
+}
+
+.no-h-w div {
+  border: 1px solid #fa8072; /*salmon*/
+}
+
+.with-h-w div {
+  height: 75px;
+  line-height: 75px;
+  text-align: center;
+}
+
+.with-h-w .left {
+  width: 400px;
+}
+
+.with-h-w .right {
+  width: 500px;
+}
+  
+.float-container:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+a.box-1 {
+  display: block;
+  margin: 10px;
+  text-align: center;
+}
+
+nav li.box-1 {
+  display: inline-block;
+  height: 65px;
+  line-height: 65px;
+  width: 175px;
+  text-align: center;
+  margin: 10px;
+}
+
+nav li.box-1:first-of-type {
+  margin-left: 75px;
 }
