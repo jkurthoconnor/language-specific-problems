@@ -99,7 +99,31 @@
       <h1>Floats and Positioning Elements</h1>
       <section class="floats">
         <h2>Floats</h2>
+        <p>A floated element is taken out of the normal flow then shifted left or right. When you float a content it becomes a block-level element.</p>
         <h5>Example</h5>
+        <div class="floats">
+          <div class="box-2 left">
+            Box 1
+          </div>
+          <div class="box-1 left">
+            Box-2
+          </div>
+          <div class="box-3 clear">
+            Box-3
+          </div>
+        </div>
+        <p>Elements following a floated element will wrap around the floated element, we don not want this to hapen, so I applied the `clear: both` property to the third div, there re 2 other properties for clear, that's the left and the right. I chose to clear both, just to be sure.</p>
+        <p>There are other methods to clear floats, one of these methods is the clearfix method:</p>
+        <div class="code">
+          <code>elementName::after {</code>
+          <ul>
+            <li><code>content: " ";</code></li>
+            <li><code>display: block;</code></li>
+            <li><code>clear: both;</code></li>
+          </ul>
+          <code>}</code>
+        </div>
+        <p>Basically, you just put the ::after pseudo-element on the containing parent element of the floated contents.</p>
       </section>
 
       <section class="position">
