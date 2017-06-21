@@ -38,6 +38,31 @@ a {
   color: inherit;
 }
 
+
+/*
+Box styles for Examples of Block Elements, Inline-Block Elements and Floats
+*/
+
+.box-1 {
+  background: #1e90ff; /*dodgerblue*/
+  color: white;
+}
+
+.box-2 {
+  background: #fa8072; /*salmon*/
+  color: white;
+}
+
+.box-3 {
+  background: green;
+  color: white;
+}
+
+
+/*
+Inline Elements Examples
+*/
+
 .eg_box {
   width: 590px;
   padding:30px;
@@ -74,20 +99,7 @@ a {
   clear: both;
 }
 
-.box-1 {
-  background: #1e90ff; /*dodgerblue*/
-  color: white;
-}
 
-.box-2 {
-  background: #fa8072; /*salmon*/
-  color: white;
-}
-
-.box-3 {
-  background: green;
-  color: white;
-}
 
 .block h5 ~ .box-3 {
   height: 60px;
@@ -124,7 +136,7 @@ a {
 .with-h-w .right {
   width: 500px;
 }
-  
+
 .float-container:after {
   display: block;
   content: "";
@@ -171,7 +183,59 @@ nav li.box-1:first-of-type {
   line-height: 50px;
 }
 
+.code ul {
+  list-style: none;
+  margin: 0;
+}
+
+
 div.code {
+  width: 400px;
+  font-size: 1.15em;
   font-weight: normal;
   text-align: left;
+  margin: 50px 150px 50px;
+}
+
+.position ul {
+  margin-left: 20px;
+  font-style: italic; 
+}
+
+#fixed {
+  border-radius: 10px;
+  position: fixed;
+  bottom: 50px;
+  left: 35px;
+  height: 65px;
+  width: 225px;
+  line-height: 65px;
+  text-align: center;
+}
+
+#relative {
+  border-radius: 10px;
+  position: relative;
+  left: -100px;
+  bottom: -31px;
+  height: 65px;
+  width: 350px;
+  line-height: 65px;
+  text-align: center;
+}
+
+.pos-absolute {
+  position: relative;
+}
+
+#absolute {
+  box-sizing: border-box;
+  border-radius: 10px;
+  position: absolute;
+  top: -25px;
+  left: 225px;
+  height: 75px;
+  width: 225px;
+  padding-top: 20px;
+  text-align: center;
 }
