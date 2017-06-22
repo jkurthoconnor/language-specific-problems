@@ -196,15 +196,14 @@ triangle(50, 50, 50) == :invalid
 ###Solution:
 ```ruby
 def triangle(a1, a2, a3)
-  angles = [a1, a2, a3]
-  return :invalid unless (angles.reduce(:+) == 180) && angles.none? { |a| a < 1 }
+  angles = [a1, a2, a3].sort
 
-  if angles.any? { |a| a == 90 }
-    :right
-  elsif angles.any? { |a| a > 90 }
-    :obtuse
-  else
-    :acute
+  return :invalid unless (angles.reduce(:+) == 180) && (angles[0] > 0)
+
+  case angles[-1]
+  when 90 then :right
+  when (1..89) then :acute
+  when (91..178) then :obtuse
   end
 end
 ```
