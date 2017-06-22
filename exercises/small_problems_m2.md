@@ -256,20 +256,20 @@ featured(9_999_999_999) # -> There is no possible number that fulfills those req
 ### Solution:
 
 ```ruby
-def featured(integer)
-  n = integer + 1
-  
-  loop do
-    break if n % 7 == 0 && n.odd?
-    n += 1
-  end
+def featured(n)
+  int = n
 
   loop do
-    break if n.to_s.chars.uniq.size == n.to_s.size
-    n += 14
-    raise 'There is no such number' if n >= 9_876_543_210
+    int += 1
+    break if (int % 7 == 0) && int.odd?
   end
-  n
+
+  until int.digits.size > 10
+    return int if (int.digits.size == int.digits.uniq.size)
+    int += 14
+  end
+
+  raise("NoSuchNumber")
 end
 ```
 
