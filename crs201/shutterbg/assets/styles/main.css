@@ -17,8 +17,14 @@ nav {
 nav li {
   display: inline-block;
   padding: 15px 35px;
-  background: #91aa9d;
+  background: #fcfff5;
+  color: #193441;
   border-radius: 10px 10px 0 0;
+}
+
+ul .active {
+  background: #91aa9d;
+  color: #fcfff5;
 }
 
 h1 {
