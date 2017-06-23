@@ -25,6 +25,20 @@ def rotate_array(array)
 end
 ```
 
+### Further Exploration
+Write a method that rotates a string instead of an array. Do the same thing for integers. You may use rotate_array from inside your new method.
+
+### Solution
+```ruby
+def rotate_string(string)
+  rotate_array(string.chars).join
+end
+
+def rotate_integers(n)
+  rotate_array(n.to_s.chars).join.to_i
+end
+```
+
 ### 2. Rotation (Part 2)
 
 Write a method that can rotate the last n digits of a number. For example:
@@ -44,9 +58,6 @@ You may use the rotate_array method from the previous exercise if you want. (Rec
 
 You may assume that n is always a positive integer.
 
-
-```ruby
-```
 ### Solution:
 
 ```ruby
@@ -61,6 +72,26 @@ def rotate_rightmost_digits(integer, digit)
   str = integer.to_s
   last = str.slice!(-digit)
   (str << last).to_i
+end
+
+# or
+def rotate_rightmost_digits(digits, n)
+  return digits if n == 1
+  numerals = digits.to_s.chars
+  rotated = numerals[0...-n] + numerals[-(n - 1)..-1] << numerals[-n]
+  rotated.join.to_i
+end
+
+# or keeping with the suggestion to call a separate non-destructive rotate_array method
+
+def rotate_array(array, n=1)
+  return array if n == 1
+  array[0...-n] + array[(-n + 1)..-1] << array[-n]
+end
+
+def rotate_rightmost_digits(digits, n=1)
+  digit_chars = digits.to_s.chars
+  rotate_array(digit_chars, n).join.to_i
 end
 ```
 
@@ -131,6 +162,18 @@ def max_rotation(integer)
 
   digits.join.to_i
 end
+
+# or
+
+def max_rotation(n)
+  digits = n.to_s.chars
+
+  (0...(digits.size - 1)).each do |ind|
+    digits.push(digits.delete_at(ind))
+  end
+
+  digits.join.to_i
+end
 ```
 
 ### 4. 1000 Lights
@@ -152,6 +195,63 @@ With 10 lights, 3 lights are left on: lights 1, 4, and 9.
 ### Solution:
 
 ```ruby
+def toggle_lights(lights_number)
+  bulbs = {}
+  (1..lights_number).each { |n| bulbs[n] = false }
+
+  (1..lights_number).each do |rep|
+    bulbs.map do |bulb, state|
+      bulbs[bulb] = !state if (bulb % rep).zero?
+    end
+  end
+
+  report_status(bulbs)
+end
+
+def report_status(lights)
+  "#{lights.values.count(true)} lights are now on.\n" \
+  "The following lights are off: #{ lights.select { |_, v| v == false }.keys }"
+end
+```
+
+### Further Exploration
+What are some alternatives for solving this exercise?
+
+```ruby
+# using a class
+class Lights
+  def initialize(light_count)
+    @count = light_count
+    @lights = prepare_lights
+  end
+
+  def prepare_lights
+    light_set = {}
+    1.upto(@count) { |key| light_set[key] = false }
+    light_set
+  end
+
+  def toggle_switches
+    n = 1
+    until n > @count
+      @lights.each do |k,v|
+        @lights[k] = !@lights[k] if (k % n).zero?
+      end
+      n += 1
+    end
+    report_light_status
+  end
+  
+  def report_light_status
+    off_lights = @lights.select { |k, v| v == false }.keys
+    on_lights = @lights.keys - off_lights
+    "#{@lights.values.count(true)} lights are on.\n"\
+    "The following lights are off: #{off_lights}.\n"\
+    "The following lights are on: #{on_lights}."
+  end
+end
+
+# using an array
 # using array:
 def toggle_lights(array_size)
   bulbs = Array.new(array_size, false)
@@ -173,26 +273,6 @@ def report_status(lights)
 
   "#{lights.count(true)} lights are now on."
   "The following lights are off: #{off_bulbs}"
-end
-
-# or a cleaner version using a hash:
-def toggle_lights(lights_number)
-  bulbs = {}
-  (1..lights_number).each { |n| bulbs[n] = false }
-  bulbs
-
-  (1..lights_number).each do |rep|
-    bulbs.map do |bulb, state|
-      bulbs[bulb] = !state if (bulb % rep).zero?
-    end
-  end
-
-  report_status(bulbs)
-end
-
-def report_status(lights)
-  "#{lights.values.count(true)} lights are now on.\n" \
-  "The following lights are off: #{ lights.select { |_, v| v == false }.keys }"
 end
 ```
 
@@ -232,10 +312,12 @@ diamond(9)
 ```ruby
 def diamond(n)
   top = (1..n).step(2).to_a
-  diamonds = top + top[0..-2].reverse
+  bottom = top[0...-1].reverse
+  diamonds = top + bottom
 
-  diamonds.each do |number|
-    puts " " * ((n - number)/ 2) + "*" * number
+  diamonds.each do |diamond_count|
+    space_count = (n - diamond_count) / 2
+    puts " " * space_count + "*" * diamond_count
   end
 end
 ```
@@ -269,6 +351,12 @@ def word_to_digit(string)
   words = string.split(/\b/)
   words.map { |word| DIGITS[word] || word }.join
 end
+
+#or
+def word_to_digit(string)
+  capture = /(zero|one|two|three|four|five|six|seven|eight|nine)/
+  string.gsub(capture, DIGITS)
+end
 ```
 
 ### Further Explorations
@@ -292,7 +380,7 @@ end
 
 def digits_to_phone(string)
   stripped_digits = string.gsub(/(\d)\s/, '\1')
-  stripped_digits.gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3')
+  stripped_digits.gsub(/\b(\d{3})(\d{3})(\d{4})\b/, '(\1) \2-\3')
 end
 ```
 

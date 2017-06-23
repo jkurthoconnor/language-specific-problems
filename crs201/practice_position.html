@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>Practice Positioning</title>
+  <style>
+    body {
+      margin: 0; /* override user agent standard of 8px to remain consistent with sample solutions */
+    }
+    section {
+      background: #fffff0;
+      border: 10px solid #a9a9a9;
+      position: relative;
+      z-index: 1;
+    }
+    #positioned {
+      background: #fff0f5;
+      position: absolute;
+      z-index: 3;
+      top: 20px;
+      right: 50%;
+      width: 400px;
+      margin: 0 -200px 0 0;
+      padding: 35px 25px;
+    }
+    #box {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background: #fcfc90;
+    }
+    #midlayer {
+      background: rgba(0, 0, 0, .6);
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <section>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis vestibulum magna, quis porttitor neque. Phasellus at ex nec eros imperdiet sollicitudin. Phasellus rutrum facilisis aliquam. Proin nec facilisis magna. Fusce faucibus nunc neque. Proin dapibus consectetur est. Etiam scelerisque diam in diam malesuada sollicitudin. Nulla venenatis luctus tincidunt. Quisque imperdiet eu leo vel aliquam. Morbi vestibulum lorem quis condimentum suscipit. Nulla a libero a odio tempor mollis non sed nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+    <p>Fusce imperdiet vestibulum ultrices. Proin blandit est eget turpis eleifend condimentum. Maecenas ullamcorper auctor ante, a condimentum justo vestibulum in. Duis dictum congue felis. Ut porta magna gravida turpis varius suscipit. Duis lacinia lacinia pharetra. Vestibulum convallis, nunc id aliquam facilisis, nunc felis tristique nunc, a laoreet mauris ligula eget diam.</p>
+
+    <p>Nam accumsan sodales massa, posuere maximus dolor hendrerit a. In porta orci fringilla egestas dictum. Nam luctus id nunc sollicitudin convallis. Integer ipsum diam, efficitur ac justo in, ultricies porta orci. Integer nec molestie nisl. Aenean vel tortor vel metus suscipit semper et in tellus. Nam non pharetra ante.</p>
+
+    <p>Ut tempor erat et diam volutpat, et ornare quam cursus. Nunc porta dui nisi, eu dapibus augue euismod nec. Mauris pharetra a erat vel gravida. Nulla auctor, lorem a euismod commodo, est risus sagittis purus, id iaculis lorem ante nec elit. Vivamus vehicula libero a risus maximus, ut pulvinar sem hendrerit. Nunc gravida ante lectus. Suspendisse potenti. Fusce sagittis dui dapibus velit rutrum, eu maximus quam semper. Suspendisse a eros ut diam gravida ullamcorper.</p>
+
+    <p>Aliquam at convallis nisi. Aliquam erat volutpat. Curabitur ullamcorper nulla eu urna blandit, at dignissim dui condimentum. In viverra suscipit ultricies. In dignissim metus et justo faucibus, in malesuada felis sollicitudin. Etiam aliquet dui ullamcorper, dapibus purus sed, tincidunt ex. Sed elementum, tellus sit amet laoreet pulvinar, sem turpis volutpat ipsum, sit amet bibendum sapien urna at ante. Sed vehicula malesuada lectus ut ultricies. Aenean sem nunc, iaculis eget purus eget, vehicula iaculis ligula. Curabitur sodales ac enim vel fermentum. Donec tempor leo diam, et pretium tellus cursus a. Vivamus non diam ac lorem vehicula pulvinar. In in massa scelerisque, iaculis urna a, porta nibh. Fusce rutrum neque erat, id vehicula erat congue at. Sed rhoncus risus nibh, at vestibulum eros accumsan lacinia.</p>
+
+    <p>Fusce imperdiet vestibulum ultrices. Proin blandit est eget turpis eleifend condimentum. Maecenas ullamcorper auctor ante, a condimentum justo vestibulum in. Duis dictum congue felis. Ut porta magna gravida turpis varius suscipit. Duis lacinia lacinia pharetra. Vestibulum convallis, nunc id aliquam facilisis, nunc felis tristique nunc, a laoreet mauris ligula eget diam.</p>
+
+    <p>Nam accumsan sodales massa, posuere maximus dolor hendrerit a. In porta orci fringilla egestas dictum. Nam luctus id nunc sollicitudin convallis. Integer ipsum diam, efficitur ac justo in, ultricies porta orci. Integer nec molestie nisl. Aenean vel tortor vel metus suscipit semper et in tellus. Nam non pharetra ante.</p>
+    <p>Fusce imperdiet vestibulum ultrices. Proin blandit est eget turpis eleifend condimentum. Maecenas ullamcorper auctor ante, a condimentum justo vestibulum in. Duis dictum congue felis. Ut porta magna gravida turpis varius suscipit. Duis lacinia lacinia pharetra. Vestibulum convallis, nunc id aliquam facilisis, nunc felis tristique nunc, a laoreet mauris ligula eget diam.</p>
+
+    <p>Nam accumsan sodales massa, posuere maximus dolor hendrerit a. In porta orci fringilla egestas dictum. Nam luctus id nunc sollicitudin convallis. Integer ipsum diam, efficitur ac justo in, ultricies porta orci. Integer nec molestie nisl. Aenean vel tortor vel metus suscipit semper et in tellus. Nam non pharetra ante.</p>
+    <p>Fusce imperdiet vestibulum ultrices. Proin blandit est eget turpis eleifend condimentum. Maecenas ullamcorper auctor ante, a condimentum justo vestibulum in. Duis dictum congue felis. Ut porta magna gravida turpis varius suscipit. Duis lacinia lacinia pharetra. Vestibulum convallis, nunc id aliquam facilisis, nunc felis tristique nunc, a laoreet mauris ligula eget diam.</p>
+
+    <p>Nam accumsan sodales massa, posuere maximus dolor hendrerit a. In porta orci fringilla egestas dictum. Nam luctus id nunc sollicitudin convallis. Integer ipsum diam, efficitur ac justo in, ultricies porta orci. Integer nec molestie nisl. Aenean vel tortor vel metus suscipit semper et in tellus. Nam non pharetra ante.</p>
+  </section>
+
+  <div id="positioned">
+    I'm positioned!
+    <div id="box">
+    </div>
+  </div>
+
+  <div id="midlayer">
+  </div>
+</body>
+</html>

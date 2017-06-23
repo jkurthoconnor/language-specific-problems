@@ -1,0 +1,143 @@
+#! /usr/bin/env ruby
+
+require 'pg'
+require 'io/console'
+
+class CLI
+  def initialize(args)
+    @args = args
+    @app = ExpenseData.new
+  end
+
+  def run
+    case @args[0]
+    when 'list' then @app.list_expenses
+    when 'add'
+      abort 'You must provide amount and memo.' unless valid_add_input?
+      @app.add_expense(@args[1, 2])
+    when 'search' then @app.search(@args[1])
+    when 'delete' then @app.delete(@args[1])
+    when 'clear'
+      abort unless clear_all_confirmed?
+      @app.clear_all
+    else @app.help
+    end
+  end
+
+  def valid_add_input?
+    !(@args[1] =~ /[^0-9.]/ || @args[2] =~ /[^\w ]/)
+  end
+  
+  def clear_all_confirmed?
+    reply = ''
+
+    loop do
+      puts 'This will remove all expenses.  Are you sure? (y/n)'
+      reply = $stdin.getch
+      break if (reply =~ /[yn]/)
+    end
+
+    reply =~ /y/
+  end
+end
+
+
+class ExpenseData
+  def initialize
+    @db = PG.connect(dbname: 'expenses')
+    setup_schema
+  end
+
+  def setup_schema
+    sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_name='expenses';"
+    result = @db.exec(sql)
+
+    if result[0]['count'] == '0'
+      sql = File.read('schema.sql')
+      @db.exec(sql)
+    end
+  end
+
+  def list_expenses
+    result = @db.exec('SELECT id, created_on, amount, memo FROM expenses;')
+
+    sum = @db.exec('SELECT sum(amount) AS total FROM expenses;')
+
+    display(result, sum)
+  end
+
+  def add_expense(args)
+    amount, memo = args[0], args[1]
+    sql = 'INSERT INTO expenses (amount, memo) VALUES ($1, $2);'
+
+    @db.exec_params(sql, [amount, memo])
+
+    puts "Expense added: #{amount} for #{memo}."
+  end
+  
+  def search(term)
+    sql = 'SELECT * FROM expenses WHERE memo ~* $1;'
+    result = @db.exec_params(sql, [term])
+    
+    sql_total = 'SELECT sum(amount) AS total FROM expenses WHERE memo ~* $1;'
+    sum = @db.exec_params(sql_total, [term])
+    
+    display(result, sum)
+  end
+  
+  def display(result_obj, sum_obj)
+    n = result_obj.ntuples
+
+    abort "There are no expenses." if n.zero?
+
+    puts "There are #{n} expenses."
+
+    result_obj.each do |tuple|
+      columns = [tuple['id'].rjust(4),
+                 tuple['created_on'],
+                 tuple['amount'].rjust(15),
+                 tuple['memo']]
+      puts columns.join(' | ')
+    end
+
+    puts '-' * 60
+    puts "Total #{sum_obj[0]['total'].rjust(30)}"
+  end
+
+  def delete(expense_id)
+    result = @db.exec_params("SELECT * FROM expenses WHERE id=#{expense_id};")
+
+    if result.ntuples.zero?
+      puts "There is no expense with id #{expense_id}"
+    else
+      sql = 'DELETE FROM expenses WHERE id=$1;'
+      @db.exec_params(sql, [expense_id])
+
+      puts "The following expense has been deleted:"
+      display(result)
+    end
+  end
+
+  def clear_all
+    @db.exec('DELETE FROM expenses *;')
+    puts "All expenses have been deleted."
+  end
+
+  def help
+    puts <<~HEREDOC
+
+              An expense recording system
+
+              Commands:
+
+              add AMOUNT MEMO [DATE] - record a new expense
+              clear - delete all expenses
+              list - list all expenses
+              delete NUMBER - remove expense with id NUMBER
+              search QUERY - list expenses with a matching memo field
+
+        HEREDOC
+  end
+end
+
+CLI.new(ARGV).run

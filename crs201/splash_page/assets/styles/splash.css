@@ -1,0 +1,53 @@
+body {
+  background-image: url("../images/bg_body.gif");
+  background-color: #2f2840; /* same color as image's background; failsafe for image */
+  font: normal 20px Helvetica, Arial, sans-serif;
+  color: #45494d;
+  text-align: center;
+  margin: 60px 0;
+}
+
+#logo,
+main,
+footer {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+#logo {
+  padding-top: 50px;
+  padding-bottom: 75px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+  color: cadetblue;
+}
+
+main {
+  padding: 75px 125px 50px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+article {
+  padding-bottom: 100px;
+}
+
+footer {
+  background-color: lightgrey;
+  text-align: center;
+}
+
+.social {
+  display: inline-block;
+  padding: 0;
+}
+
+li.social {
+  padding: 20px 65px;
+}

@@ -27,7 +27,10 @@ def sum_of_sums(array)
     break if size > array.length
   end
 
-  holder.flatten.reduce(&:+)
+
+# or
+def sum_of_sums(array)
+  array.map.with_index { |_, ind| array[0..ind] }.flatten.reduce(:+)
 end
 ```
 
@@ -55,7 +58,7 @@ def madlibs
   words.each_key do |key|
     word = ''
     loop do
-      puts "Please enter a #{key.to_s}"
+      puts "Please enter a #{key}"
       word = gets.chomp
       if word =~ /[a-z]/i
         words[key] = word
@@ -249,6 +252,12 @@ def repeater(string)
 
   doubled
 end
+
+# or 
+
+def repeater(string)
+  string.gsub(/./) { |char| char * 2 }
+end
 ```
 
 ### 8. Double Char (Part 2)
@@ -279,6 +288,12 @@ def double_consonants(string)
   end
 
   doubled
+end
+
+# or 
+
+def double_consonants(string)
+  string.gsub(/[b-z&&[^eiou]]/i) { |char| char * 2 }
 end
 ```
 

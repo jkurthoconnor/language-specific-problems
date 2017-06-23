@@ -50,6 +50,29 @@ def block_word?(string)
   end
   true
 end
+
+# or an OO version:
+class Blockset
+  attr_reader :blocks, :word_chars
+
+  def initialize(string)
+    @blocks = { avail: [ ['B', 'O'], ['X', 'K'], ['D', 'Q'], ['C', 'P'], ['N', 'A'], ['G', 'T'], ['R', 'E'], ['F', 'S'], ['J', 'W'], ['H', 'U'], ['V', 'I'], ['L', 'Y'], ['Z', 'M'] ], unavail: [] }
+    @word_chars = string.upcase.chars
+  end
+
+  def block_word?
+    word_chars.each do |char|
+      return false unless blocks[:avail].flatten.include?(char)
+      blocks[:avail].each do |block|
+        if block.include?(char)
+          blocks[:unavail] << blocks[:avail].delete(block)
+          break
+        end
+      end
+    end
+    true
+  end
+end
 ```
 
 ### 3)
@@ -67,14 +90,16 @@ letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
 ### Solution:
 ```ruby
 def letter_percentages(string)
-  letters = string.chars.select { |char| char =~ /[a-z]/i }
-  up = letters.count { |ltr| ltr == ltr.upcase }
-  low = letters.size - up
-  neither = string.size - letters.size
+  denom = string.size.to_f
+  chars = string.chars
 
-  { lowercase: (low.to_f/string.size) * 100,
-    uppercase: (up.to_f/string.size) * 100,
-    neither: (neither.to_f/string.size) * 100 }
+  up = chars.count { |ltr| ltr =~ /[A-Z]/ }
+  low = chars.count { |ltr| ltr =~ /[a-z]/ }
+  neither = denom - (up + low)
+
+  { lowercase: (low/denom) * 100,
+    uppercase: (up/denom) * 100,
+    neither: (neither/denom) * 100 }
 end
 ```
 
@@ -132,18 +157,18 @@ triangle(3, 1, 1) == :invalid
 ### Solution:
 ```ruby
 def triangle(s1, s2, s3)
-  sides = [s1, s2, s3].sort
+  fig = [s1, s2, s3].sort
+  return :invalid unless valid_triangle?(fig)
 
-  return :invalid if (sides.any? { |n| n <= 0 }) ||
-                     (sides[0] + sides[1] <= sides[2])
-
-  if sides.uniq.size == 1
-    :equilateral
-  elsif sides.uniq.size == 2 && (sides[0] == sides[1] || sides[1] == sides[2])
-    :isosocles
-  elsif sides.uniq.size == 3
-    :scalene
+  case fig.uniq.size
+  when 1 then :equilateral
+  when 2 then :isosceles
+  else        :scalene
   end
+end
+
+def valid_triangle?(shape)
+  shape.all? { |side| side > 0 } && shape[-1] < (shape[0] + shape[1])
 end
 ```
 
@@ -171,15 +196,14 @@ triangle(50, 50, 50) == :invalid
 ###Solution:
 ```ruby
 def triangle(a1, a2, a3)
-  angles = [a1, a2, a3]
-  return :invalid unless (angles.reduce(:+) == 180) && angles.none? { |a| a < 1 }
+  angles = [a1, a2, a3].sort
 
-  if angles.any? { |a| a == 90 }
-    :right
-  elsif angles.any? { |a| a > 90 }
-    :obtuse
-  else
-    :acute
+  return :invalid unless (angles.reduce(:+) == 180) && (angles[0] > 0)
+
+  case angles[-1]
+  when 90 then :right
+  when (1..89) then :acute
+  when (91..178) then :obtuse
   end
 end
 ```
@@ -198,10 +222,14 @@ friday_13th?(2019) == 2
 ```ruby
 require 'date'
 
-def friday_13th?(year)
-  (1..12).each.with_object([0]) do |month, count|
-    count[0] += 1 if Date.new(year, month, 13).friday?
-  end.first
+def friday_13th(year)
+  count = 0
+
+  (1..12).each do |month|
+    count += 1 if Date.new(year,month,13).friday?
+  end
+
+  count
 end
 ```
 
@@ -228,20 +256,20 @@ featured(9_999_999_999) # -> There is no possible number that fulfills those req
 ### Solution:
 
 ```ruby
-def featured(integer)
-  n = integer + 1
-  
-  loop do
-    break if n % 7 == 0 && n.odd?
-    n += 1
-  end
+def featured(n)
+  int = n
 
   loop do
-    break if n.to_s.chars.uniq.size == n.to_s.size
-    n += 14
-    raise 'There is no such number' if n >= 9_876_543_210
+    int += 1
+    break if (int % 7 == 0) && int.odd?
   end
-  n
+
+  until int.digits.size > 10
+    return int if (int.digits.size == int.digits.uniq.size)
+    int += 14
+  end
+
+  raise("NoSuchNumber")
 end
 ```
 

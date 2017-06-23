@@ -128,7 +128,6 @@ uppercase?('') == true
 ```ruby
 def uppercase?(string)
   string.each_char do |char|
-    next unless char =~ /[a-z]/i
     return false if char =~ /[a-z]/
   end
 
@@ -180,10 +179,9 @@ swap_name('Joe Roberts') == 'Roberts, Joe'
 ### Solution
 
 ```ruby
-def swap_name(name)
-  names = name.split
-  first, last = names[0], names[1]
-  "#{last}, #{first}"
+def swap_name(fullname)
+  names = fullname.split
+  "#{names.last}, #{names.first}"
 end
 ```
 
@@ -238,6 +236,23 @@ def get_grade(grade1, grade2, grade3)
   else              "F"
   end
 end
+
+# or if the number of grades is undetermined:
+
+def get_grade(*grades)
+ 
+  case mean(grades)
+  when 90..100 then 'A'
+  when 80..89  then 'B'
+  when 70..79  then 'C'
+  when 60..69  then 'D'
+  else              'F'
+  end
+end
+
+def mean(grades)
+  grades.reduce(&:+) / grades.size
+end
 ```
 
 ### 10. Grocery List
@@ -257,10 +272,15 @@ buy_fruit([["apples", 3], ["orange", 1], ["bananas", 2]]) ==
 def buy_fruit(list)
   full_list = []
 
-  list.each do |specs|
-    specs[-1].times { full_list.push(specs[0]) }
+  list.each do |item, number|
+    number.times { full_list << item }
   end
 
   full_list
+end
+
+# or 
+def buy_fruit
+  list.map { |food, n| [food]*n }.flatten
 end
 ```

@@ -1,30 +1,25 @@
-
+# class to calculate the sum of multiples of given numbers
+# below specified limit.
 class SumOfMultiples
-  @@default = [3, 5]
-
-  def initialize(*numbers)
-    @numbers = numbers
+  def initialize(*n)
+    @factors = n
   end
 
   def self.to(limit)
-    multiples = (0...limit).select do |mult|
-      (mult % @@default[0]).zero? || (mult % @@default[1]).zero?
+    multiples = []
+    [3, 5].each do |mult|
+      multiples << (0...limit).select { |n| (n % mult).zero? }
     end
 
-    multiples.reduce(&:+)
+    multiples.flatten.uniq.reduce(&:+)
   end
 
   def to(limit)
     multiples = []
-    (0...limit).each do |mult|
-      @numbers.each { |n| multiples.push(mult) if (mult % n).zero? }
+    @factors.each do |mult|
+      multiples << (0...limit).select { |n| (n % mult).zero? }
     end
 
-    multiples.uniq.reduce(&:+)
+    multiples.flatten.uniq.reduce(&:+)
   end
 end
-
-eg = SumOfMultiples.new(3, 4, 5)
-p eg
-p SumOfMultiples.new(7, 13, 17).to(20)
-p SumOfMultiples.new(4, 6).to(15)

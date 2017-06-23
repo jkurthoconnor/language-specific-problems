@@ -46,26 +46,26 @@ class PhraseTest < Minitest::Test
     counts = { 'one' => 1, 'two' => 1, 'three' => 1 }
     assert_equal counts, phrase.word_count
   end
-
+  
   def test_handles_expanded_lists
     phrase = Phrase.new("one,\ntwo,\nthree")
     counts = { 'one' => 1, 'two' => 1, 'three' => 1 }
     assert_equal counts, phrase.word_count
   end
-
+  
   def test_include_numbers
     phrase = Phrase.new('testing, 1, 2 testing')
     counts = { 'testing' => 2, '1' => 1, '2' => 1 }
     assert_equal counts, phrase.word_count
   end
-
+  
   def test_normalize_case
     phrase = Phrase.new('go Go GO')
     counts = { 'go' => 3 }
     assert_equal counts, phrase.word_count
   end
-
-
+  
+  
   def test_with_apostrophes
     phrase = Phrase.new("First: don't laugh. Then: don't cry.")
     counts = {
@@ -74,7 +74,7 @@ class PhraseTest < Minitest::Test
     }
     assert_equal counts, phrase.word_count
   end
-
+  
   def test_with_quotations
     phrase = Phrase.new("Joe can't tell between 'large' and large.")
     counts = {
