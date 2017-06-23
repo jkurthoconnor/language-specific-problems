@@ -4,7 +4,25 @@ body {
   background-repeat: no-repeat;
 }
 
+header {
+  width: 960px;
+  margin: 20px auto;
+}
+
+nav {
+  float: right;
+  margin-top: 80px;
+}
+
+nav li {
+  display: inline-block;
+  padding: 15px 35px;
+  background: #91aa9d;
+  border-radius: 10px 10px 0 0;
+}
+
 h1 {
+  float: left;
   padding: 50px 0 20px 100px;
   font-size: 36px;
   color: #193441;
