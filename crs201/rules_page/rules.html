@@ -32,7 +32,7 @@
           <a href="#">Portfolio</a>
           <a href="#">Contact</a>
         </div>
-        <p>Inline elements accept padding values on all sides. [But vertical padding won't affect spacing of adjacent contect, so it may overlap.]</p>
+        <p>Inline elements accept padding values on all sides. [But vertical padding won't affect spacing of adjacent contect, so it may overlap, as above where the padding used to create a green background for the anchors overlaps the box div's vertical padding.]</p>
         <h4>Floating Inline Elements</h4>
         <div class="eg_box" id="floating_inline">
           <a href="#">Home</a>
@@ -112,7 +112,7 @@
             Box-3
           </div>
         </div>
-        <p>Elements following a floated element will wrap around the floated element, we don not want this to hapen, so I applied the `clear: both` property to the third div, there re 2 other properties for clear, that's the left and the right. I chose to clear both, just to be sure.</p>
+        <p>Elements following a floated element will wrap around the floated element, we do not want this to hapen, so I applied the `clear: both` property to the third div, there are 2 other properties for clear, that's the left and the right. I chose to clear both, just to be sure.</p>
         <p>There are other methods to clear floats, one of these methods is the clearfix method:</p>
         <div class="code">
           <code>elementName::after {</code>
@@ -154,7 +154,7 @@
         <section class="pos-absolute">
           <h3>Position Absolute</h3>
           <p>When the element is positioned absolute it is taken out of the normal flow and the original space of that element in the document will not be preserved.</p>
-          <p>Absolutely positioned elements are moved in relation to their closest relatively positioned parent element. Should a relatively positioned parent element not exist, the absolutely positioned will be positioned in relaton to the <code>&lt;body&gt;</code> element.</p>
+          <p>Absolutely positioned elements are moved in relation to their closest relatively [no: 'non-static'] positioned parent element. Should a relatively positioned parent element not exist, the absolutely positioned will be positioned in relaton to the <code>&lt;body&gt;</code> element.</p>
           <p>Let's get some examples:</p>
           <p>I will set the position of the section with the class of "pos-absolute" to position: relative so that the absolutely positioned element will be basing its offset values on the whole section element.</p>
           <div id="absolute" class="box-3">
