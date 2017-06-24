@@ -5,20 +5,31 @@ body {
 }
 
 header {
+  box-sizing: border-box;
   width: 960px;
   margin: 20px auto;
+  padding: 0 30px;
+}
+
+h1 {
+  float: left;
+  padding: 50px 0 20px 110px;
+  font-size: 36px;
+  color: #193441;
+  font-weight: normal;
+  background: transparent url("../images/logo.png") 0 0 no-repeat;
 }
 
 nav {
   float: right;
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 nav li {
   display: inline-block;
-  padding: 15px 35px;
+  padding: 10px 35px;
   background: #fcfff5;
-  color: #193441;
+  color: #91aa9d;
   border-radius: 10px 10px 0 0;
 }
 
@@ -27,11 +38,3 @@ ul .active {
   color: #fcfff5;
 }
 
-h1 {
-  float: left;
-  padding: 50px 0 20px 100px;
-  font-size: 36px;
-  color: #193441;
-  font-weight: normal;
-  background: transparent url("../images/logo.png") 0 0 no-repeat;
-}
