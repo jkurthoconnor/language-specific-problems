@@ -9,7 +9,7 @@ header {
   box-sizing: border-box;
   width: 960px;
   margin: 20px auto 0;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 header:after {
@@ -20,7 +20,7 @@ header:after {
 
 h1 {
   float: left;
-  padding: 50px 0 20px 110px;
+  padding: 40px 0 30px 110px;
   font-size: 36px;
   color: #193441;
   font-weight: normal;
