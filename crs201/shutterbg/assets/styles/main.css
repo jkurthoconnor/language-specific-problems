@@ -62,22 +62,18 @@ main {
   margin: 0 auto;
   padding: 30px;
   background: #fff;
+  box-shadow: 3px 8px 6px #ccc,
+              -3px 0 6px #ccc;
 }
 
 .article_img {
   float: right;
   margin-top: 10px;
   margin-left: 40px;
-h2 {
-  font-size: 32px;
-  font-weight: normal;
-  margin: 25px 0;
 }
 
-p {
-  margin: 12px 0;
-  line-height: 1.4em;
-}
+article:after {
+  display: block;
   content: "";
   clear: both;
 }
