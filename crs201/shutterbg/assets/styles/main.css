@@ -5,6 +5,11 @@ body {
   color: #3d606f;
 }
 
+/*
+Header
+=======
+*/
+
 header {
   box-sizing: border-box;
   width: 960px;
@@ -27,17 +32,6 @@ h1 {
   background: transparent url("../images/logo.png") 0 0 no-repeat;
 }
 
-h2 {
-  font-size: 32px;
-  font-weight: normal;
-  margin: 25px 0;
-}
-
-p {
-  margin: 12px 0;
-  line-height: 1.4em;
-}
-
 nav {
   float: right;
   margin-top: 70px;
@@ -56,6 +50,12 @@ ul .active {
   color: #fcfff5;
 }
 
+
+/*
+Main
+=====
+*/
+
 main {
   box-sizing: border-box;
   width: 960px;
@@ -68,13 +68,36 @@ main {
   float: right;
   margin-top: 10px;
   margin-left: 40px;
+h2 {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 25px 0;
 }
 
-article:after {
-  display: block;
+p {
+  margin: 12px 0;
+  line-height: 1.4em;
+}
   content: "";
   clear: both;
 }
+
+h2 {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 25px 0;
+}
+
+p {
+  margin: 12px 0;
+  line-height: 1.4em;
+}
+
+
+/*
+Footer
+=======
+*/
 
 footer {
   width: 960px;
