@@ -35,6 +35,7 @@ h2 {
 
 p {
   margin: 12px 0;
+  line-height: 1.4em;
 }
 
 nav {
@@ -64,7 +65,9 @@ main {
 }
 
 .article_img {
-  float: right
+  float: right;
+  margin-top: 10px;
+  margin-left: 40px;
 }
 
 article:after {
