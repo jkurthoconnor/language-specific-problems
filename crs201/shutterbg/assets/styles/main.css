@@ -70,6 +70,7 @@ main {
   float: right;
   margin-top: 10px;
   margin-left: 40px;
+  margin-bottom: 20px;
 }
 
 article:after {
@@ -97,6 +98,6 @@ Footer
 
 footer {
   width: 960px;
-  margin: 0 auto 40px;
+  margin: 15px auto 40px;
   font-size: 14px;
 }
