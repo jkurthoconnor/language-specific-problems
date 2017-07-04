@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+  <title>Sample Vertical Form Layout</title>
+  <meta charset="utf-8" >
+  <style>
+    body {
+      font: normal 14px Helvetica, Arial, sans-serif;
+    }
+    .styled_form dd,
+    .styled_form dt {
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+    }
+    .styled_form dt {
+      width: 25%;
+      padding-right: 20px;
+    }
+    .styled_form dd {
+      width: 75%;
+    }
+    input[type="text"] {
+      box-sizing: border-box;
+      height:  40px;
+      width: 100%;
+      padding: 0 8px;
+      margin-bottom: 10px;
+      border: 1px solid #cecece;
+      border-radius: 4px;
+      font: normal 14px Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="styled_form">
+    <form action="" method="post">
+      <dl> <!-- why a separate list for each pair? -->
+        <dt><label for="name">Your Name</label></dt><!--
+        --><dd><input type="text" name="name" id="name" ></dd>
+      </dl><!--
+      --><dl>
+        <dt><label for="title">Title</label></dt><!--
+        --><dd><input type="text" name="title" id="title"></dd>
+      </dl><!--
+      --><dl>
+        <dt><label for="address">Address</label></dt><!--
+        --><dd><input type="text" name="address" id="address" ></dd><!--
+        --><dd><input type="text" name="address2" id="address2"></dd>
+      </dl><!--
+      --><dl class="city partial">
+        <dt>
+          <label for="city">City</label>
+        </dt><!--
+        --><dd>
+          <input type="text" id="city">
+        </dd>
+      </dl><!--
+      --><dl class="state partial">
+        <dt>
+          <label for"state">State</label>
+        </dt><!--
+        --><dd>
+          <select id="state">
+            <option>AK</option>
+            <option>AL</option>
+          </select>
+        </dd>
+      </dl><!--
+      --><dl class="zipcode partial">
+        <dt>
+          <label for="zipcode">Zip</label>
+        </dt><!--
+        --><dd>
+          <input type="text" id="zipcode" >
+        </dd>
+      </dl>
+    </form>
+  </div>
+</body>
+</html>
+
