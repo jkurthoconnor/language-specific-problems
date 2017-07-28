@@ -1,3 +1,7 @@
-body {
-  color: red;
+#problems_1-2 ul {
+  list-style-type: none;
+}
+
+#problems_3-5 ol {
+  list-style-type: upper-roman;
 }
