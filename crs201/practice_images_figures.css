@@ -1,3 +1,9 @@
-body {
-  color: green;
+
+figure {
+  background-color: yellow;
+}
+
+img {
+  width: 400px;
+  height: 350px;
 }
