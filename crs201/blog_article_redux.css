@@ -1,3 +1,8 @@
+body {
+  width: 720px;
+  font: 18px/1.8 Georgia serif;
+}
+
 header {
   font: 18px Helvetica, Arial, sans-serif;
   text-align: center;
