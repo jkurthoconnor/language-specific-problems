@@ -1,6 +1,9 @@
 body {
-  width: 720px;
   font: 18px/1.8 Georgia, serif;
+}
+
+main {
+  width: 696px;
 }
 
 header {
