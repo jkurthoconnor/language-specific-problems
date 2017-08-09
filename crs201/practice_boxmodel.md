@@ -98,3 +98,56 @@ That said, we do know how the border, padding, and margins will be applied, so:
 
 Even so, the element's position won't be effected by the borders or the vertical padding included in the above calculations, so there may be some visible overlap.
 
+## 6. Given the CSS below and the knowledge that the browser's viewport is large enough to display an entire `textarea` that uses these measurements, how much horizontal and vertical area does that element require in the browser?
+
+```css
+textarea {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 500px;
+  height: 300px;
+  border: 4px solid red;
+  padding: 10 px 20px;
+  margin: 20px 20px 10px 10px;
+}
+```
+
+### Solution:
+
+The element will require 530px of horizontal space and 330px of vertical space.  Because the `box-sizing` value is `border-box`, the specified `width` and `height` describe the dimensions of the element box from the border inward, so `padding` and `border` dimensions are included. Thus only the 30px of vertical margins and 30px of horizontal margins need to be added to determine the ultimate box dimensions.
+
+## 7. Will the following HTML and CSS display the two article boxes side-by-side? If not, why not? How would you fix the code, so it does place the boxes side-by-side?
+
+```html
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Question 7</title>
+    <style>
+      section {
+        width: 400px;
+        height: 400px;
+        margin: 0;
+        padding: 20px;
+        border: 1px solid red;
+      }
+
+      article {
+        width: 50%;
+        height: 100%;
+        padding: 10px;
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <article>...</article><article>...</article>
+    </section>
+  </body>
+</html>
+```
+
+### Solution:
+
+No, the two articles will not display side-by-side. They are both block elements.  Also, supposing they were `inline-block`, although each has a width of 50%, this measure only describes the 'core' for the element's content; it does not include the dimensions for padding (10px x 2) and border (1px x 2). Adding each of these will push the requirements beyond the 50% of the container specified in the `width` value.
