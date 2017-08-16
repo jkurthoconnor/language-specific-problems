@@ -1,13 +1,55 @@
 body {
   background-image: url("../images/bg_body.gif");
+  font: 20px Helvetica, Arial, sans-serif;
 }
 
 main {
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  margin: 110px 0 77px;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  color: cadetblue;
+}
+
+
+.text-box {
   background: white;
-  width: 1020px;
+}
+
+section {
+  padding-top: 75px;
+}
+
+section:last-of-type {
+  margin-top: 44px;
+  padding-bottom: 120px;
+}
+
+
+p {
+  font-weight: 200;
+  margin: 0 115px;
+  color: grey;
 }
 
 footer {
-  background: lightgrey;
-  width: 1020px;
+  background: lightgray;
+  width: 1000px;
+  padding: 18px 0;
+  margin-bottom: 75px;
+}
+
+li {
+  display: inline-block;
+  padding: 0 70px;
 }
