@@ -1,0 +1,13 @@
+body {
+  background-image: url("../images/bg_body.gif");
+}
+
+main {
+  background: white;
+  width: 1020px;
+}
+
+footer {
+  background: lightgrey;
+  width: 1020px;
+}
