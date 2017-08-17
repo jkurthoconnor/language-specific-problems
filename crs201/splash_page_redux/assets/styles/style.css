@@ -55,6 +55,6 @@ ul {
 }
 
 li {
-  display: inline-block;
+  display: inline;
   padding: 0 70px;
 }
