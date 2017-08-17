@@ -1,8 +1,10 @@
 html {
-  font: 20px Helvetica, Arial, sans-serif;
+  font: 200 20px Helvetica, Arial, sans-serif;
+  color: #45494d;
 }
 
 body {
+  background-color: #2f2840;
   background-image: url("../images/bg_body.gif");
 }
 
@@ -43,11 +45,6 @@ section {
 
 section:first-of-type {
   padding-top: 74px;
-}
-
-p {
-  font-weight: 200;
-  color: grey;
 }
 
 ul {
