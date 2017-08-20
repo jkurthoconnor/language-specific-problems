@@ -1,0 +1,30 @@
+section {
+  display: inline-block;
+  margin: 0 1.5%;
+  width: 30.3%;
+  background-color: green;
+}
+
+section:nth-of-type(2) {
+  position: relative;
+  left: -20px;
+}
+
+section:last-of-type {
+  position: absolute;
+  top: 45px;
+}
+
+.group:before, .group:after {
+  content: "";
+  display: table;
+}
+
+.group:after {
+  clear: both;
+}
+
+.group {
+  clear: both;
+  *zoom: 1;
+}
