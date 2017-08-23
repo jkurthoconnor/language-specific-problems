@@ -1,3 +1,25 @@
-p {
-  color: grey;
+html {
+  font: 16px/34px Helvetica, Arial, sans-serif;
+  color: #545454;
+}
+
+main {
+  box-sizing: border-box;
+  border: 2px solid darkgrey;
+  width: 1045px;
+  margin: 0 auto;
+}
+
+section {
+  margin: 37px 20px;
+}
+
+h1, h2, h3 {
+  color: #cd5c5c;
+  font-size: 1.5rem;
+}
+
+h4, h5 {
+  color: #545454;
+  font-size: 1rem;
 }
