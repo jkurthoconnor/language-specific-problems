@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Positioning Practice: Redux</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        margin: 0;
+        border: 10px solid lightgrey;
+      }
+      #positioned {
+        margin-left: -200px;
+        width: 400px;
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        padding: 25px 20px;
+        background-color: ivory;
+        z-index: 2;
+      }
+      #box {
+        width: 20px;
+        height: 20px;
+        background: #fcfc99;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+      }
+      #screen {
+        background: rgba(0,0,0, .6);
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat urna vitae purus vulputate hendrerit. Maecenas mattis interdum nisl, ac sagittis sapien placerat non. Donec at vestibulum nunc. Maecenas eu enim porttitor, rutrum dui ut, consequat massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi odio enim, pellentesque semper tristique eu, sollicitudin ac justo. Mauris in sapien id diam consequat rhoncus. Morbi ac felis cursus, ornare nisl non, facilisis metus. Aliquam a lacinia velit. Vivamus tincidunt elit et nisi aliquet fermentum.
+    </p>
+    <p>
+     Phasellus nec lacinia elit. Nullam tortor neque, semper non eros fringilla, pulvinar sollicitudin est. Vestibulum pulvinar accumsan aliquet. Maecenas pellentesque augue mi, id ultrices massa ullamcorper et. Suspendisse auctor convallis sodales. Mauris eu iaculis sapien, at commodo lacus. In suscipit molestie neque sit amet dictum. Nunc accumsan mollis sem. Fusce quis leo nec leo tempor pharetra. Proin eget ullamcorper justo, sed rhoncus nisi. Proin sed enim imperdiet, hendrerit augue vitae, scelerisque neque. Praesent lorem tellus, dignissim in mi et, tincidunt auctor metus. Aenean faucibus facilisis malesuada. Nunc facilisis est eget est tincidunt, in elementum est facilisis.
+    </p>
+    <p>
+     Sed sollicitudin odio ac libero molestie dignissim. Sed ut laoreet lorem. Mauris faucibus arcu massa, eget convallis metus vestibulum in. Aenean sit amet ex porttitor, blandit tellus vel, ullamcorper augue. Phasellus vehicula sem et ex egestas, in varius odio vulputate. In viverra eros nulla, quis venenatis diam eleifend sed. Phasellus placerat fermentum interdum. Morbi ut accumsan diam. Morbi rutrum eleifend blandit. Phasellus eu libero in lectus sagittis pellentesque. Nam vulputate leo magna, eu ornare metus euismod id. 
+    </p>
+    <p>
+     Quisque sodaat porttitor scelerisque. Cras pharetra mauris ac gravida dapibus. Nullam congue metus ut euismod dictum. Curabitur et ipsum enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+    </p>
+    <div id="positioned">
+      <div id="box">
+      </div>
+      <p>I'm positioned!</p>
+    </div>
+    <div id="screen">
+    </div>
+  </body>
+</html>
