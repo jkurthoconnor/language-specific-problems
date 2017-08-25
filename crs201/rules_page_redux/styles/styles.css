@@ -23,3 +23,52 @@ h4, h5 {
   color: #545454;
   font-size: 1rem;
 }
+
+.inline_eg_box {
+  box-sizing: border-box;
+  border: 2px dashed #545454;
+  width: 650px;
+  min-height: 80px;
+  line-height: 80px;
+  padding-left: 30px;
+  margin-left: 45px;
+}
+
+#inline-margins a {
+  margin: 30px;
+}
+
+#inline_padding a {
+  padding: 30px;
+  color: white;
+  background-color: green;
+}
+
+
+#inline_floated a {
+  float: left;
+  box-sizing: border-box;
+  border: 2px solid darkgreen;
+  height: 75px;
+  line-height: 75px;
+  width: 120px;
+  margin: 45px 15px;
+  color: white;
+  background-color: green;
+  text-align: center;
+}
+
+#inline_floated {
+  height: 170px;
+
+}
+
+.float_container:after,
+.float_container:before {
+  content: "";
+  display: block;
+}
+.float_container:after {
+  clear: both;
+}
+

@@ -11,11 +11,42 @@
     <section>
       <h2>Inline Elements</h2>
       <p>Inline elements occupy only the space of the content. They do not take width and height values.</p>
+
       <h4>Example:</h4>
       <p>Anchor tags are normally inline elements, you see they only take up the width of their content and not the whole width of the page then the next anchor tags follow right after it.</p>
+      <div class="inline_eg_box">
+        <a>Home</a>
+        <a>Portfolio</a>
+        <a>Contact</a>
+      </div>
+
       <h4>What happens if we set a margin property on an inline level element?</h4>
+      <p>Inline elements will only take left and right margin values.</p>
+      <div class="inline_eg_box" id="inline-margins">
+        <a>Home</a>
+        <a>Portfolio</a>
+        <a>Contact</a>
+      </div>
+      <p>In the example I put a margin of 30px on all sides, as you can see if you check the anchor tag in the developer tools only the left and right side of the contents are affected by the margin.</p>
+
       <h4>What about padding?</h4>
+      <div class="inline_eg_box" id="inline_padding">
+        <a>Home</a>
+        <a>Portfolio</a>
+        <a>Contact</a>
+      </div>
+      <p>Inline elements accept padding values on all sides.</p>
+
       <h4>Floating Inline Elements</h4>
+      <div class="float_container">
+        <div class="inline_eg_box" id="inline_floated">
+          <a>Home</a>
+          <a>Portfolio</a>
+          <a>Contact</a>
+        </div>
+      </div>
+      <p>Floating inine elements will change its display value to a block level element and subject to all block level characteristics. Which means it can take margin and padding values, height and width values as well.</p>
+
       <h2>Block Elements</h2>
       <h4>Example: (Div elements are naturally block level elements)</h4>
       <h4>Floating Block Elements</h4>
@@ -24,7 +55,7 @@
       <h4>Can we change an inline element into a block element?</h4>
       <h2>Inline-Block Elements</h2>
       <h4>Example: Let's use inline-block to create a navigation.</h4>
-  </section>
+    </section>
 
   <section>
     <h1>Floats and Positioning Elements</h1>
