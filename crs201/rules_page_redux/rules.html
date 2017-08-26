@@ -48,11 +48,40 @@
       <p>Floating inine elements will change its display value to a block level element and subject to all block level characteristics. Which means it can take margin and padding values, height and width values as well.</p>
 
       <h2>Block Elements</h2>
+      <p>Block level elements take up the entire width of the page and always start in a new line. It can have margin/s and padding/s. If no width is set it will expand naturally to fill its parent container. If no height is set, it will expand to fit its content.</p>
       <h4>Example: (Div elements are naturally block level elements)</h4>
+      <div class="colored_box_eg" id="blue_block_eg">This is a div with no width and height set.</div>
+      <div class="colored_box_eg" id="green_block_eg">This is a div with no width but with a height of 60px, with a padding and margin of 20px around it.</div>
+      <div class="colored_box_eg" id="orange_block_eg">This is a div with a width of 90px and no height set.</div>
+      <p>In the first example, the div fills the entire width, and uses just enough height to fill its content. In the second box, we didn't set a width, but it still filled the entire width (counting the padding and margin); it also uses 60px of height plus the margin and padding. For the third box, we set the width to 90px, and as expected, it took just enough height to fill its content. The text was squished because of the reduced width, so the browser expanded the height to accommodate the content.</p>
+      
       <h4>Floating Block Elements</h4>
       <h5>Floating block elements with no width and height set.</h5>
+      <div class="float_container">
+        <div class="colored_box_eg" id="float_block_eg1">
+          Box - 1 - Floated Left
+        </div>
+        <div class="colored_box_eg" id="float_block_eg2">
+          Box - 2 - Floated Right
+        </div>
+      </div>
+      <p>It floated our elements to the left and right on the same block. It shrunk to the widest element within each div, in our case the texts inside, since we didn't set a specific width for each.</p>
+      
       <h5>Floating block elements with width and height set.</h5>
+      <div class="float_container">
+        <div class="colored_box_eg" id="float_block_eg3">
+          Box - 1 - Floated Left
+        </div>
+        <div class="colored_box_eg" id="float_block_eg4">
+          Box - 2 - Floated Right
+        </div>
+      </div>
       <h4>Can we change an inline element into a block element?</h4>
+      <p>Let's use the anchor tag as an example.</p>
+      <a class="colored_box_eg block_anchors">Home</a>
+      <a class="colored_box_eg block_anchors">About</a>
+      <a class="colored_box_eg block_anchors">Contact</a>
+      <p>Yes, we can change display values from a block element to inline element and vice versa. Display values can be overwritten by another display value.</p>
       <h2>Inline-Block Elements</h2>
       <h4>Example: Let's use inline-block to create a navigation.</h4>
     </section>

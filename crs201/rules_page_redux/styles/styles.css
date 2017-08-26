@@ -60,7 +60,6 @@ h4, h5 {
 
 #inline_floated {
   height: 170px;
-
 }
 
 .float_container:after,
@@ -72,3 +71,66 @@ h4, h5 {
   clear: both;
 }
 
+.colored_box_eg {
+  line-height: 1rem;
+  color: #fff;
+}
+
+#blue_block_eg {
+  background-color: #1e90ff;
+}
+
+#green_block_eg {
+  box-sizing: border-box;
+  height: 60px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #008000;
+  line-height: 20px;
+}
+
+#orange_block_eg {
+  width: 90px;
+  background-color: #ff6347;
+}
+
+#float_block_eg1 {
+  float: left;
+  border: 1px solid #ff6347;
+  background-color: #1e90ff;
+}
+
+#float_block_eg2 {
+  float: right;
+  border: 1px solid #ff6347;
+  background-color: #ff6347;
+}
+
+#float_block_eg3 {
+  box-sizing: border-box;
+  float: left;
+  height: 70px;
+  width: 400px;
+  background-color: #ff6347;
+  line-height: 70px;
+  text-align: center;
+}
+
+#float_block_eg4 {
+  box-sizing: border-box;
+  float: right;
+  height: 70px;
+  width: 500px;
+  background-color: #1e90ff;
+  line-height: 70px;
+  text-align: center;
+}
+
+.block_anchors {
+  display: block;
+  height: 40px;
+  margin: 10px;
+  background-color: #1e90ff;
+  text-align: center;
+  line-height: 40px;
+}
