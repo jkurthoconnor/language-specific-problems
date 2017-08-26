@@ -11,6 +11,8 @@ Practice until these patterns and their explanations are second nature
 'hello'.slice(0..2)
 # or
 'hello'.slice(0, 2)
+# or
+'hello'[0] # same argument formats accepted
 ```
 
 ### (string) return length/ number of characters in string.  Bonus: return length without spaces
