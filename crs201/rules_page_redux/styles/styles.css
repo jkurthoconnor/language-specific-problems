@@ -28,8 +28,17 @@ h1 {
 }
 
 h4, h5 {
+  margin: 1.5rem 0;
   color: #545454;
   font-size: 1rem;
+}
+
+p {
+  margin: 1.5rem 0;
+}
+
+div {
+  margin: 2.8rem 0;
 }
 
 .inline_eg_box {
@@ -70,6 +79,10 @@ h4, h5 {
   height: 170px;
 }
 
+.float_container {
+  margin: 0;
+}
+
 .float_container:after,
 .float_container:before {
   content: "";
@@ -80,6 +93,7 @@ h4, h5 {
 }
 
 .colored_box_eg {
+  margin: 0;
   line-height: 1rem;
   color: #fff;
 }
@@ -100,6 +114,7 @@ h4, h5 {
 #orange_block_eg {
   width: 90px;
   background-color: #ff6347;
+  line-height: 1.15rem;
 }
 
 #float_block_eg1 {
@@ -210,10 +225,10 @@ li {
 #fixed_box {
   position: fixed;
   left: 35px;
-  bottom: 45px;
-  height: 70px;
+  bottom: 50px;
+  height: 68px;
   width: 225px;
-  border-radius: 7px;
+  border-radius: 10px;
   background-color: #1e90ff;
   text-align: center;
   line-height: 70px;
@@ -222,8 +237,8 @@ li {
 #relative_box {
   position: relative;
   left: -90px;
-  top: 50px;
-  height: 70px;
+  top: 40px;
+  height: 68px;
   width: 325px;
   border-radius: 10px;
   background-color: #ff6347;
@@ -233,6 +248,7 @@ li {
 
 #pos_absolute {
   position: relative;
+  margin: 0;
 }
 
 #absolute_box {
