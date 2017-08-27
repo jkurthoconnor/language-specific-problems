@@ -104,13 +104,13 @@ h4, h5 {
 
 #float_block_eg1 {
   float: left;
-  border: 1px solid #ff6347;
+  border: 1px solid #ff0000;
   background-color: #1e90ff;
 }
 
 #float_block_eg2 {
   float: right;
-  border: 1px solid #ff6347;
+  border: 1px solid #ff0000;
   background-color: #ff6347;
 }
 
@@ -197,4 +197,54 @@ code {
 code:first-of-type,
 code:last-of-type {
   margin-left: 155px;
+}
+
+ul {
+  padding-left: 80px;
+}
+
+li {
+  font-style: italic;
+}
+
+#fixed_box {
+  position: fixed;
+  left: 35px;
+  bottom: 45px;
+  height: 70px;
+  width: 225px;
+  border-radius: 7px;
+  background-color: #1e90ff;
+  text-align: center;
+  line-height: 70px;
+}
+
+#relative_box {
+  position: relative;
+  left: -90px;
+  top: 50px;
+  height: 70px;
+  width: 325px;
+  border-radius: 10px;
+  background-color: #ff6347;
+  text-align: center;
+  line-height: 70px;
+}
+
+#pos_absolute {
+  position: relative;
+}
+
+#absolute_box {
+  box-sizing: border-box;
+  position: absolute;
+  left: 230px;
+  top: -30px;
+  height: 85px;
+  width: 200px;
+  padding: 25px 45px;
+  border-radius: 10px;
+  background-color: #008000;
+  text-align: center;
+  line-height: 1.1rem;
 }
