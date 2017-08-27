@@ -5,8 +5,8 @@ html {
 
 main {
   box-sizing: border-box;
-  border: 2px solid darkgrey;
   width: 1045px;
+  border: 2px solid darkgrey;
   margin: 0 auto;
 }
 
@@ -28,27 +28,27 @@ h1 {
 }
 
 h4, h5 {
-  margin: 1.5rem 0;
+  margin: 24px 0;
   color: #545454;
   font-size: 1rem;
 }
 
 p {
-  margin: 1.5rem 0;
+  margin: 24px 0;
 }
 
 div {
-  margin: 2.8rem 0;
+  margin: 45px 0;
 }
 
 .inline_eg_box {
   box-sizing: border-box;
-  border: 2px dashed #545454;
-  width: 650px;
   min-height: 80px;
-  line-height: 80px;
+  width: 650px;
   padding-left: 30px;
+  border: 2px dashed #545454;
   margin-left: 45px;
+  line-height: 80px;
 }
 
 #inline-margins a {
@@ -57,26 +57,25 @@ div {
 
 #inline_padding a {
   padding: 30px;
-  color: white;
   background-color: green;
-}
-
-
-#inline_floated a {
-  float: left;
-  box-sizing: border-box;
-  border: 2px solid darkgreen;
-  height: 75px;
-  line-height: 75px;
-  width: 120px;
-  margin: 45px 15px;
   color: white;
-  background-color: green;
-  text-align: center;
 }
 
 #inline_floated {
   height: 170px;
+}
+
+#inline_floated a {
+  box-sizing: border-box;
+  float: left;
+  height: 75px;
+  width: 120px;
+  border: 2px solid darkgreen;
+  margin: 45px 15px;
+  background-color: green;
+  color: white;
+  line-height: 75px;
+  text-align: center;
 }
 
 .float_container {
