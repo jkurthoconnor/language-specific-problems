@@ -37,13 +37,13 @@ h3 {
   color: #3e98b2;
 }
 
-section {
+article {
   padding-bottom: 100px;
   padding-left: 115px;
   padding-right: 115px;
 }
 
-section:first-of-type {
+article:first-of-type {
   padding-top: 74px;
 }
 
