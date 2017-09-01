@@ -28,12 +28,12 @@ h1 {
 .logo_group > img {
   float: left;
   width: 100px;
-  margin: 20px 10px 5px 20px;
+  margin: 20px 15px 5px 20px;
 }
 
 .logo_group > h1 {
   float: left;
-  margin-top: 70px;
+  margin-top: 68px;
 }
 
 nav {
@@ -88,7 +88,7 @@ h2 {
 
 p {
   margin-bottom: 15px;
-  line-height: 1.4rem;
+  line-height: 1.2rem;
 }
 
 main img:last-of-type {
