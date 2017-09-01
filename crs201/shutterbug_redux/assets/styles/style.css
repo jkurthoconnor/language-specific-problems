@@ -45,7 +45,7 @@ nav {
 nav li {
   display: inline-block;
   box-sizing: border-box;
-  height: 45px;
+  height: 44px;
   width: 128px;
   border-radius: 10px 10px 0 0;
   margin-left: 5px;
@@ -64,9 +64,9 @@ main {
   box-sizing: border-box;
   width: 960px;
   margin: 0 auto;
-  padding: 30px 30px 50px;
+  padding: 30px 30px 45px;
   background-color: #fff;
-  box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 4px .5px rgba(0, 0, 0, 0.3);
 }
 
 main:after,
@@ -82,29 +82,30 @@ main img:first-of-type {
 }
 
 h2 {
-  padding: 40px 0 25px;
+  padding: 43px 0 28px;
   font-size: 32px;
 }
 
 p {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   line-height: 1.2rem;
 }
 
 main img:last-of-type {
   float: right;
   width: 330px;
-  margin-top: 10px;
   margin-left: 40px;
+  margin-bottom: 10px;
 }
 
 footer {
-  height: 60px;
+  box-sizing: border-box;
+  height: 50px;
   width: 960px;
   margin: 0 auto;
 }
 
 footer p {
-  margin: 15px 0 0 5px;
+  margin-top: 15px;
   font-size: 14px;
 }
