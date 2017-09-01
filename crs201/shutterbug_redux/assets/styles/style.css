@@ -10,7 +10,7 @@ h2 {
 }
 
 body {
-  background: linear-gradient(#d1dbbd, #fcfff4);
+  background: linear-gradient(#d1dbbd, #fcfff5);
 }
 
 /* header */
@@ -70,6 +70,7 @@ main {
   margin: 0 auto;
   padding: 30px 30px 60px;
   background-color: #fff;
+  box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
 }
 
 main:after,
@@ -104,8 +105,15 @@ main img:last-of-type {
 
 
 footer {
+  height: 60px;
   width: 960px;
   margin: 0 auto;
+}
+
+footer p {
+  margin: 15px 0 0 5px;
   font-size: 14px;
 }
+
+
 
