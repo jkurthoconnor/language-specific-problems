@@ -13,6 +13,7 @@ body {
   background: linear-gradient(#d1dbbd, #fcfff4);
 }
 
+/* header */
 header {
   width: 960px;
   margin: 0 auto;
@@ -28,30 +29,33 @@ h1 {
   font-size: 36px;
 }
 
+.logo_group > img {
+  float: left;
+  width: 100px;
+  margin: 20px 10px 5px 20px;
+}
+
 .logo_group > h1 {
   float: left;
   margin-top: 70px;
 }
 
-.logo_group > img {
-  float: left;
-  width: 100px;
-  margin: 20px 20px 5px;
-}
-
 nav {
-  /*float: right;*/
   display: inline-block;
-  width: 530px;
-  margin-bottom: 13px;
-  margin-left: 15px;
+  width: 540px;
+  margin-left: 5px;
 }
 
 nav li {
-  display: inline;
-  padding: 12px 40px;
-  border-radius: 8px 8px 0 0;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 45px;
+  width: 128px;
+  border-radius: 10px 10px 0 0;
+  margin-left: 5px;
   background-color: #fcfff5;
+  line-height: 45px;
+  text-align: center;
   color: #91aa9d;
 }
 
