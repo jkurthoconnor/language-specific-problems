@@ -84,10 +84,19 @@ main img:first-of-type {
   width: 900px;
 }
 
+h2 {
+  padding: 40px 0 25px;
+}
+
+p {
+  margin-bottom: 15px;
+  line-height: 1.4rem;
+}
+
 main img:last-of-type {
   float: right;
   width: 330px;
-  margin-top: 25px;
+  margin-top: 10px;
   margin-left: 40px;
 }
 
@@ -100,7 +109,3 @@ footer {
   font-size: 14px;
 }
 
-p {
-  margin-top: 25px;
-  line-height: 1.4rem;
-}
