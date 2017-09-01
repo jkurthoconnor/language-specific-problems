@@ -1,12 +1,7 @@
 
 html {
-  font: 18px "Roboto Condensed", Arial, sans-serif;
+  font: 400 18px "Roboto Condensed", Arial, sans-serif;
   color: #3e606f;
-} 
-
-
-h2 {
-  font-size: 32px;
 }
 
 body {
@@ -26,6 +21,7 @@ header {
 }
 
 h1 {
+  color: #193441;
   font-size: 36px;
 }
 
@@ -87,6 +83,7 @@ main img:first-of-type {
 
 h2 {
   padding: 40px 0 25px;
+  font-size: 32px;
 }
 
 p {
@@ -101,9 +98,6 @@ main img:last-of-type {
   margin-left: 40px;
 }
 
-
-
-
 footer {
   height: 60px;
   width: 960px;
@@ -114,6 +108,3 @@ footer p {
   margin: 15px 0 0 5px;
   font-size: 14px;
 }
-
-
-
