@@ -10,6 +10,7 @@ body {
 
 /* header */
 header {
+  height: 140px;
   width: 960px;
   margin: 0 auto;
 }
@@ -39,23 +40,22 @@ h1 {
 nav {
   display: inline-block;
   width: 540px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
-nav li {
+nav a {
   display: inline-block;
   box-sizing: border-box;
-  height: 44px;
-  width: 128px;
+  height: 45px;
+  padding: 15px 40px 0;
   border-radius: 10px 10px 0 0;
   margin-left: 5px;
   background-color: #fcfff5;
-  line-height: 45px;
   text-align: center;
   color: #91aa9d;
 }
 
-nav li:hover {
+nav a:first-of-type {
   background-color: #91aa9d;
   color: #fcfff5;
 }
@@ -66,7 +66,7 @@ main {
   margin: 0 auto;
   padding: 30px 30px 45px;
   background-color: #fff;
-  box-shadow: 0 4px 4px .5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 5px  rgba(0, 0, 0, 0.3);
 }
 
 main:after,
@@ -100,12 +100,14 @@ main img:last-of-type {
 
 footer {
   box-sizing: border-box;
-  height: 50px;
+  height: 65px;
   width: 960px;
+  padding-top: 13px;
   margin: 0 auto;
 }
 
 footer p {
-  margin-top: 15px;
+  margin-bottom: 0;
   font-size: 14px;
+  line-height: 1rem;
 }
