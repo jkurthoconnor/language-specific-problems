@@ -62,11 +62,13 @@ nav a:nth-of-type(0n + 1) {
 
 nav a:nth-of-type(0n + 3) {
   margin-left: 1px;
+  padding-right: 39.8px;
+  padding-left: 39.7px;
 }
 
 nav a:last-of-type {
-  padding-right: 39px;
-  padding-left: 40px;
+  padding-right: 39.8px;
+  padding-left: 40.2px;
 }
 
 main {
