@@ -75,7 +75,7 @@ main {
   margin: 0 auto;
   padding: 30px 30px 45px;
   background-color: #fff;
-  box-shadow: 0 4px 5px  rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 6px  rgba(0, 0, 0, 0.3);
 }
 
 main:after,
