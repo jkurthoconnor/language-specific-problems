@@ -76,7 +76,7 @@ main {
   box-sizing: border-box;
   width: 960px;
   margin: 0 auto 13px;
-  padding: 30px 30px 45px;
+  padding: 30px 30px 44px;
   background-color: #fff;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
 }
@@ -117,7 +117,6 @@ footer {
 }
 
 footer p {
-  margin-bottom: 34px;
+  margin-bottom: 32px;
   font-size: 14px;
-  line-height: 1rem;
 }
