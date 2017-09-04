@@ -11,36 +11,23 @@ body {
 header {
   width: 960px;
   margin: 0 auto;
-}
-
-.logo_group {
-  display: inline-block;
-  width: 400px;
-  margin-bottom: 12px;
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+  background-position-x: 20px;
+  background-position-y: 20px;
 }
 
 h1 {
+  display: inline-block;
+  margin: 68px 114px 36px 135px;
   color: #193441;
   font-size: 36px;
-}
-
-.logo_group > img {
-  float: left;
-  width: 100px;
-  margin: 20px 15px 5px 20px;
-}
-
-.logo_group > h1 {
-  float: left;
-  margin-top: 68px;
 }
 
 nav {
   display: inline-block;
   position: relative;
-  bottom: -3px;
-  width: 540px;
-  margin-left: 15px;
+  bottom: -42px;
 }
 
 a {
@@ -65,24 +52,24 @@ nav li {
 }
 
 nav li:first-of-type {
-  padding-right: 40.5px;
-  padding-left: 39.5px;
+  padding-right: 40.3px;
+  padding-left: 39.7px;
   background-color: #91aa9d;
 }
 
 nav li:nth-of-type(0n + 2) {
-  padding-right: 40.5px;
-  padding-left: 39.5px;
+  padding-right: 40.3px;
+  padding-left: 39.8px;
 }
 
 nav li:nth-of-type(0n + 3) {
-  padding-right: 39.8px;
-  padding-left: 39.7px;
+  padding-right: 39.7px;
+  padding-left: 39.8px;
 }
 
 nav li:last-of-type {
-  padding-right: 39.8px;
-  padding-left: 40.2px;
+  padding-right: 40.7px;
+  padding-left: 40.5px;
 }
 
 main {
@@ -95,7 +82,6 @@ main {
 }
 
 main:after,
-.logo_group:after,
 nav:after {
   content: "";
   display: block;
