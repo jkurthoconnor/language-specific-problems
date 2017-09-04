@@ -81,8 +81,10 @@ str = 'So this is my string, is it?'
 
 str.split.count('is')
 
-# NB: to prevent potential problems with punctuation and to target only whole words (unlike with `.scan`)
+# NB: to prevent potential problems with punctuation and to target only whole words
 str.delete('^ A-Za-z').split.count('is')
+# or 
+str.scan(/\bis\b/).size
 
 # or with manual counting
 total = 0
