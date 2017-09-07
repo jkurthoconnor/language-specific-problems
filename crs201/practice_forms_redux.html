@@ -3,30 +3,89 @@
 <head>
   <meta charset="utf-8">
   <title>Forms Practice</title>
+  <style>
+  li {list-style-type: none;}
+  input[type="submit"] {display: block;}
+  </style>
 </head>
 
 <body>
-  <form action="/" method="get">
+  <form action="/some_path" method="get">
     <fieldset>
       <dl>
         <dt>
           <label for="first_name">First Name:</label>
         </dt>
-        <dd><input type="text" name="first_name" id="first_name"></dd>
+        <dd>
+          <input type="text" name="first_name" id="first_name">
+        </dd>
         <dt>
           <label for="last_name">Last Name:</label>
         </dt>
-        <dd><input type="text" name="last_name" id="last_name"></dd>
+        <dd>
+          <input type="text" name="last_name" id="last_name">
+        </dd>
         <dt>
-          <label for="email">Email Address</label>
+          <label for="email">Email Address:</label>
         </dt>
-        <dd><input type="email" name="email" id="email" autocapitalize="none" autocomplete="off" autocorrect="off"></dd>
+        <dd>
+          <input type="email" name="email" id="email" autocapitalize="none" autocomplete="off" autocorrect="off">
+        </dd>
         <dt>
-          <label for="phone">Phone Number</label>
+          <label for="phone">Phone Number:</label>
         </dt>
-        <dd><input type="tel" name="phone" id="phone"></dd>
+        <dd>
+          <input type="tel" name="phone" id="phone">
+        </dd>
+        <dt>
+          <label for="phone_type">Phone Type:</label>
+        </dt>
+        <dd>
+          <select name="phone_type" id="phone_type">
+            <option value="home" selected>Home</option>
+            <option value="business">Business</option>
+            <option value="mobile">Mobile</option>
+          </select>
+        </dd>
       </dl>
       <input type="submit">
+    </fieldset>
+  </form>
+
+  <form action="/some_path" method="get">
+    <fieldset>
+      <h2>News Filter</h2>
+      <dl>
+        <dt>
+          <label for="category">Category</label>
+        </dt>
+        <dd>
+          <select name="category" id="category">
+            <option value="core">Core</option>
+            <option value="plugins">Plugins and Libraries</option>
+            <option value="conventions">Conventions</option>
+            <option value="reviews">Reviews</option>
+            <option value="opinions">Opinion</option>
+            <option value="people">People</option>
+          </select>
+        </dd>
+        <dt>
+          <label for="tags">Tags</label>
+        </dt>
+        <dd>
+          <select name="tags" id="tags" multiple>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="js">Javascript</option>
+            <option value="ruby">Ruby</option>
+            <option value="rails">Rails</option>
+            <option value="python">Python</option>
+            <option value="django">Django</option>
+          </select>
+        </dd>
+      </dl>
+      <input type="submit" value="Apply Filter">
+      <input type="reset" value="Reset Filter">
     </fieldset>
   </form>
 </body>
