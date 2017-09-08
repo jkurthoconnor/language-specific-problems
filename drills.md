@@ -893,6 +893,11 @@ arr[-3, 3]
 
 ```ruby
 sample = Hash.new(0)
+
+# or
+
+sample = {}
+sample.default=('non-nil')
 ```
 
 
@@ -955,8 +960,6 @@ end
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
-hsh.each { |food, color| p food.to_s + ' ' + color }
-# or 
 hsh.each { |food, color| puts "a fresh #{food} is #{color}" }
 # or
 hsh.each { |pair| p pair }
@@ -965,6 +968,15 @@ hsh.each_pair { |pair| p pair }
 # or
 for pair in hsh
   p pair
+end
+# or
+keys = hsh.keys
+idx = 0
+
+while idx < keys.size
+  key = keys[idx]
+  p [ key, hsh[key] ]
+  idx += 1
 end
 
 ```
@@ -1043,7 +1055,18 @@ hsh.store(:grape, 'purple')
 
 ```ruby
 arr = ["van", "boat", "plane", "van", "car", "bike", "van"]
-arr.each_with_index { |word, ind| hsh4[ind] = word if word == 'van'}
+hsh = {}
+arr.each_with_index { |word, ind| hsh[ind] = word if word == 'van'}
+
+# or 
+result = {}
+idx = 0
+
+while idx < arr.size
+  element = arr[idx]
+  result[idx] = element if element =~ /^v/
+  idx += 1
+end
 ```
 
 ### manually iterate though a hash and print each value or key
@@ -1063,4 +1086,14 @@ hsh = {:todos=>[1, 2, 4], :days=>["m", "t", "w"], :months=>["april", "may"]}
 hsh.assoc(:todos)
 
 hsh.select { |k, v| k == :todos }
+```
+
+### Return a key / value pair (if any) that is associated with a given value.  Do so first by returning an array, then by returning a single-pair hash.
+
+```ruby
+hsh = {:todos=>[1, 2, 4], :days=>["m", "t", "w"], :months=>["april", "may"]}
+
+hsh.rassoc([1, 2, 4])
+
+hsh.select { |k, v| v == [1, 2, 4] }
 ```
