@@ -16,17 +16,18 @@
       height:  40px;
       width: 100%;
       padding: 0 8px;
-      margin-bottom: 10px;
-      border: 1px solid #cecece;
+      border: 1px solid #cecece; /* setting a border-radius results in browsers applying their own style to the border; add own to circumvent */
       border-radius: 4px;
+      margin-bottom: 10px;
       font: normal 14px Helvetica, Arial, sans-serif;
+      
     }
   </style>
 </head>
 <body>
   <form action="" method="post">
     <label for="name">Your Name</label>
-    <input type="text" name="name" id="name" >
+    <input type="text" name="name" id="name" autofocus>
     <label for="address">Address</label>
     <input type="text" name="address" id="address" >
   </form>
