@@ -9,7 +9,8 @@ h1 {
 
 main {
   box-sizing: border-box;
-  width: 960px;
+  min-width: 760px;
+  max-width: 1200px;
   padding: 20px;
 }
 
@@ -36,6 +37,7 @@ dl.short {
 input[type="text"],
 input[type="email"],
 input[type="number"] {
+  box-sizing: border-box;
   height: 40px;
   width: 100%;
   padding-left: 1rem;
@@ -48,7 +50,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  box-sizing: content-box;
+  box-sizing: border-box;
   height: 40px;
   width: 100%;
   padding-left: 1rem;
@@ -59,6 +61,8 @@ select {
 }
 
 textarea {
+  height: auto;
+  resize: vertical;
   padding: 1rem;
   border: 2px solid #cecece;
   border-radius: 4px;
