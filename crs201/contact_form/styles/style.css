@@ -3,9 +3,14 @@ html {
 }
 
 h1 {
-  margin: 10px 0;
-  text-align: center;
   font-size: 1.5rem;
+  margin-left: 20px;
+}
+
+main {
+  box-sizing: border-box;
+  width: 960px;
+  padding: 20px;
 }
 
 dl {
