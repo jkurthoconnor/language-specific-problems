@@ -7,30 +7,101 @@
     body {
       font: normal 14px Helvetica, Arial, sans-serif;
     }
-    label {
-      display: block;
-      padding-bottom: 10px;
+    dt {
+      margin-bottom: 10px;
+    }
+    dd {
+      margin-left: 0;
     }
     input[type="text"] {
       box-sizing: border-box;
       height:  40px;
       width: 100%;
       padding: 0 8px;
-      border: 1px solid #cecece; /* setting a border-radius results in browsers applying their own style to the border; add own to circumvent */
+      border: 1px solid #cecece;
       border-radius: 4px;
       margin-bottom: 10px;
       font: normal 14px Helvetica, Arial, sans-serif;
-      
+    }
+    select {
+      -webkit-appearance: none; /* removes default styles and allows css full-reign */
+      -moz-appearance: none;
+      appearance: none;
+      box-sizing: border-box;
+      height: 40px;
+      width: 100%;
+      padding: 0 8px;
+      border: 1px solid #cecece;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      font: normal 14px Helvetica, Arial, sans-serif;
+    }
+    dl.partial {
+      display: inline-block;
+      box-sizing: border-box;
+      padding-right: 20px;
+      vertical-align: top;
+    }
+    dl.city {
+      width: 50%;
+    }
+    dl.state {
+      width: 25%;
+    }
+    dl.zipcode {
+      width: 25%;
+      padding-right: 0;
     }
   </style>
 </head>
 <body>
-  <form action="" method="post">
-    <label for="name">Your Name</label>
-    <input type="text" name="name" id="name" autofocus>
-    <label for="address">Address</label>
-    <input type="text" name="address" id="address" >
-  </form>
+  <div class="styled_form">
+    <form action="" method="post">
+      <dl> <!-- why a separate list for each pair? -->
+        <dt><label for="name">Your Name</label></dt>
+        <dd><input type="text" name="name" id="name" ></dd>
+      </dl>
+      <dl>
+        <dt><label for="title">Title</label></dt>
+        <dd><input type="text" name="title" id="title"></dd>
+      </dl>
+      <dl>
+        <dt><label for="address">Address</label></dt>
+        <dd>
+          <input type="text" name="address" id="address" >
+          <input type="text" name="address2" id="address2">
+        </dd>
+      </dl>
+      <dl class="city partial">
+        <dt>
+          <label for="city">City</label>
+        </dt>
+        <dd>
+          <input type="text" id="city">
+        </dd>
+      </dl><!--
+      --><dl class="state partial">
+        <dt>
+          <label for="state">State</label>
+        </dt>
+        <dd>
+          <select id="state">
+            <option>AK</option>
+            <option>AL</option>
+          </select>
+        </dd>
+      </dl><!--
+      --><dl class="zipcode partial">
+        <dt>
+          <label for="zipcode">Zip</label>
+        </dt>
+        <dd>
+          <input type="text" id="zipcode" >
+        </dd>
+      </dl>
+    </form>
+  </div>
 </body>
 </html>
 
