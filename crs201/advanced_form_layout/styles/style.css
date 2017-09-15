@@ -1,3 +1,22 @@
 html {
   font: normal 16px Helvetica, Arial, sans-serif;
 }
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #282828;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #282828;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666766;
+  
+}
