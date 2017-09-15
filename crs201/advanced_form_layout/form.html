@@ -8,53 +8,71 @@
   </head>
 
   <body>
-    <h1>Create Your Profile</h1>
-    <h2>Personal Info</h2>
-    <dl>
-      <dt>
-        <label>Your Name</label>
-      </dt>
-      <dd><input type="text"> <input type="text"></dd>
-      <dt>
-        <label>Email</label>
-      </dt>
-      <dd><input type="email"></dd>
-    </dl>
-    <h2>Social Media Accounts</h2>
-    <dl>
-      <dt>
-        <label>Facebook</label>
-      </dt>
-      <dd><input type="text"></dd>
-      <dt>
-        <label>Twitter</label>
-      </dt>
-      <dd><input type="text"></dd>
-      <dt>
-        <label>Linkedin</label>
-      </dt>
-      <dd><input type="text"></dd>
-    </dl>
-    <h2>Account Info</h2>
-    <dl>
-      <dt>
-        <label>Profile Name</label>
-      </dt>
-      <dd><input type="text"></dd>
-      <dt>
-        <label>Password</label>
-      </dt>
-      <dd><input type="password"></dd>
-      <dt>
-        <label>Confirm Password</label>
-      </dt>
-      <dd><input type="password"></dd>
-    </dl>
-    <h2>Bio</h2>
-    <textarea></textarea>
-    <div>
-      <input type="checkbox" required> I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.
-      <input type="submit">
-    </div>
+    <main>
+      <h1>Create Your Profile</h1>
+      <form>
+        <fieldset>
+          <h2>Personal Info</h2>
+          <dl>
+            <dt>
+              <label for="first_name">Your Name</label>
+            </dt>
+            <dd>
+              <input type="text" name="first_name" id="first_name" placeholder="First">
+              <input type="text" name="last_name" placeholder="Last">
+            </dd>
+            <dt>
+              <label for="email">Email</label>
+            </dt>
+            <dd>
+              <input type="email" name="email" id="email">
+            </dd>
+          </dl>
+        </fieldset>
+        <fieldset>
+          <h2>Social Media Accounts</h2>
+          <dl>
+            <dt>
+              <label for="facebook">Facebook</label>
+            </dt>
+            <dd><input type="text" name="facebook" id="facebook"></dd>
+            <dt>
+              <label for="twitter">Twitter</label>
+            </dt>
+            <dd><input type="text" name="twitter" id="twitter" ></dd>
+            <dt>
+              <label for="linkedin">Linkedin</label>
+            </dt>
+            <dd><input type="text" name="linkedin" id="linkedin" ></dd>
+          </dl>
+        </fieldset>
+        <fieldset>
+          <h2>Account Info</h2>
+          <dl>
+            <dt>
+              <label for="profile_name">Profile Name</label>
+            </dt>
+            <dd><input type="text" name="profile_name" id="profile_name" ></dd>
+            <dt>
+              <label for="password">Password</label>
+            </dt>
+            <dd><input type="password" name="password" id="password" ></dd>
+            <dt>
+              <label for="password_confirm">Confirm Password</label>
+            </dt>
+            <dd><input type="password" name="password_confirm" id="password_confirm" ></dd>
+          </dl>
+        </fieldset>
+        <fieldset>
+          <h2>Bio</h2>
+          <textarea></textarea>
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" name="agree" id="agree" required>
+          <label for="agree">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.</label>
+          <input type="submit">
+        </fieldset>
+      </form>
+    </main>
   </body>
 </html>

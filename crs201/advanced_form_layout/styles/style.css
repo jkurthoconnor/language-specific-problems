@@ -2,6 +2,11 @@ html {
   font: normal 16px Helvetica, Arial, sans-serif;
 }
 
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 h1 {
   font-size: 1.75rem;
   font-weight: 400;
@@ -14,9 +19,41 @@ h2 {
   color: #282828;
 }
 
+dd {
+  margin-left: 0;
+}
+
 label {
   font-size: 1rem;
   font-weight: 600;
   color: #666766;
-  
+}
+
+input[type="checkbox"] + label {
+  font-weight: 200;
+}
+
+fieldset {
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-left: 4px solid #cbcbcb;
+  margin: 0;
+  background: #ebebec;
+}
+
+input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  height: 47px;
+  width: 175px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #2e67b2;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: #6095cb;
 }
