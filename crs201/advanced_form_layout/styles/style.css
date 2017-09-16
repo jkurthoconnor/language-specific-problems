@@ -75,7 +75,7 @@ dl.half {
   width: 50%;
 }
 
-dl.half:nth-of-type(0n + 1) {
+dl.half:nth-of-type(0n + 2) {
   padding-right: 22px;
 }
 
