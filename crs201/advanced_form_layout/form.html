@@ -10,40 +10,54 @@
   <body>
     <main>
       <h1>Create Your Profile</h1>
-      <form>
-        <fieldset class="personal">
+      <form action="" method="post">
+        <fieldset>
           <h2>Personal Info</h2>
           <dl>
-            <dt>
-              <label for="first_name">Your Name</label>
-            </dt>
-            <dd>
-              <input type="text" name="first_name" id="first_name" placeholder="First"><!--
-              --><input type="text" name="last_name" placeholder="Last">
+              <label for="first_name">
+                <dt>Your Name</dt>
+              </label>
+            <dd class="half">
+              <input type="text" name="first_name" id="first_name" placeholder="First">
+            </dd><!--
+            --><dd class="half">
+              <input type="text" name="last_name" placeholder="Last">
             </dd>
+          </dl>
+          <dl>
             <dt>
               <label for="email">Email</label>
             </dt>
             <dd>
-              <input type="email" name="email" id="email">
+              <input type="email" name="email" id="email" autocomplete="off" autocorrect="none" autocapitalize="off">
             </dd>
           </dl>
         </fieldset>
         <fieldset>
           <h2>Social Media Accounts</h2>
-          <dl>
-            <dt>
-              <label for="facebook">Facebook</label>
-            </dt>
-            <dd><input type="text" name="facebook" id="facebook"></dd>
-            <dt>
-              <label for="twitter">Twitter</label>
-            </dt>
-            <dd><input type="text" name="twitter" id="twitter" ></dd>
-            <dt>
-              <label for="linkedin">Linkedin</label>
-            </dt>
-            <dd><input type="text" name="linkedin" id="linkedin" ></dd>
+          <dl class="third">
+              <label for="facebook">
+                <dt>Facebook</dt>
+              </label>
+            <dd>
+              <input type="text" name="facebook" id="facebook">
+            </dd>
+          </dl><!--
+          --><dl class="third">
+              <label for="twitter">
+                <dt>Twitter</dt>
+              </label>
+            <dd>
+              <input type="text" name="twitter" id="twitter" >
+            </dd>
+          </dl><!--
+          --><dl class="third">
+              <label for="linkedin">
+                <dt>Linkedin</dt>
+              </label>
+            <dd>
+              <input type="text" name="linkedin" id="linkedin" >
+            </dd>
           </dl>
         </fieldset>
         <fieldset>
@@ -52,15 +66,25 @@
             <dt>
               <label for="profile_name">Profile Name</label>
             </dt>
-            <dd><input type="text" name="profile_name" id="profile_name" ></dd>
+            <dd>
+              <input type="text" name="profile_name" id="profile_name" >
+            </dd>
+          </dl>
+          <dl class="half">
             <dt>
               <label for="password">Password</label>
             </dt>
-            <dd><input type="password" name="password" id="password" ></dd>
+            <dd>
+              <input type="password" name="password" id="password" autocomplete="off" autocorrect="none" autocapitalize="off">
+            </dd>
+          </dl><!--
+          --><dl class="half">
             <dt>
               <label for="password_confirm">Confirm Password</label>
             </dt>
-            <dd><input type="password" name="password_confirm" id="password_confirm" ></dd>
+            <dd>
+              <input type="password" name="password_confirm" id="password_confirm" autocomplete="off" autocorrect="none" autocapitalize="off">
+            </dd>
           </dl>
         </fieldset>
         <fieldset>

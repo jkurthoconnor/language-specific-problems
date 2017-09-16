@@ -7,6 +7,15 @@ main {
   margin: 0 auto;
 }
 
+fieldset {
+  box-sizing: border-box;
+  padding: 24px 32px;
+  border: 1px solid #fff;
+  border-left: 4px solid #cbcbcb;
+  margin: 0;
+  background: #ebebec;
+}
+
 h1 {
   margin: 24px 0 23px;
   font-size: 1.75rem;
@@ -15,18 +24,18 @@ h1 {
 }
 
 h2 {
-  margin: 24px 0 0 32px;
+  margin: 0 0 19px 0;
   font-size: 1.25rem;
   font-weight: 600;
   color: #282828;
 }
 
 dl {
-  margin: 18px 32px 0 32px;
+  margin: 0 0;
 }
 
 dd {
-  margin: 10px 0 25px;
+  margin: 10px 0 24px;
 }
 
 
@@ -36,36 +45,58 @@ label {
   color: #666766;
 }
 
-input[type="checkbox"] + label {
-  font-weight: 200;
-}
-
-fieldset {
-  box-sizing: border-box;
-  padding: 0;
-  border: 1px solid #fff;
-  border-left: 4px solid #cbcbcb;
-  margin: 0;
-  background: #ebebec;
-}
-
 input,
 textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   box-sizing: border-box;
-  padding-left: 10px;
+  padding-left: 8px;
   border-radius: 5px;
   border: 1px solid #2e67b2;
+  width: 100%;
+  font-size: .875rem;
 }
 
-.personal input {
-  width: 49%;
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
 }
 
-.personal input + input {
-  margin-left: 10px;
+input[type="checkbox"] + label {
+  font-weight: 200;
+}
+
+dd.half,
+dl.half {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 50%;
+}
+
+dl.half:nth-of-type(0n + 1) {
+  padding-right: 22px;
+}
+
+
+dd.half:nth-of-type(0n + 1) {
+  padding-right: 5px;
+}
+
+dd.half:nth-of-type(0n + 2) {
+  padding-left: 5px;
+}
+
+dl.third {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 33.33%;
+}
+
+dl.third:nth-of-type(0n + 1),
+dl.third:nth-of-type(0n + 2) {
+  padding-right: 20px;
 }
 
 input[type="text"],
