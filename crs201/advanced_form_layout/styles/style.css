@@ -8,20 +8,27 @@ main {
 }
 
 h1 {
+  margin: 24px 0 23px;
   font-size: 1.75rem;
   font-weight: 400;
   color: #282828;
 }
 
 h2 {
+  margin: 24px 0 0 32px;
   font-size: 1.25rem;
   font-weight: 600;
   color: #282828;
 }
 
-dd {
-  margin-left: 0;
+dl {
+  margin: 18px 32px 0 32px;
 }
+
+dd {
+  margin: 10px 0 25px;
+}
+
 
 label {
   font-size: 1rem;
@@ -35,20 +42,44 @@ input[type="checkbox"] + label {
 
 fieldset {
   box-sizing: border-box;
+  padding: 0;
   border: 1px solid #fff;
   border-left: 4px solid #cbcbcb;
   margin: 0;
   background: #ebebec;
 }
 
-input[type="submit"] {
+input,
+textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  box-sizing: border-box;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #2e67b2;
+}
+
+.personal input {
+  width: 49%;
+}
+
+.personal input + input {
+  margin-left: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: inline-block;
+  height: 40px;
+
+}
+
+input[type="submit"] {
   display: block;
   height: 47px;
   width: 175px;
-  border-radius: 8px;
   color: #fff;
   background-color: #2e67b2;
 }
