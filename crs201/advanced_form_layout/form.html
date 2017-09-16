@@ -25,9 +25,9 @@
             </dd>
           </dl>
           <dl>
-            <dt>
-              <label for="email">Email</label>
-            </dt>
+            <label for="email">
+              <dt>Email</dt>
+            </label>
             <dd>
               <input type="email" name="email" id="email" autocomplete="off" autocorrect="none" autocapitalize="off">
             </dd>
@@ -63,38 +63,40 @@
         <fieldset>
           <h2>Account Info</h2>
           <dl>
-            <dt>
-              <label for="profile_name">Profile Name</label>
-            </dt>
+              <label for="profile_name">
+                <dt>Profile Name</dt>
+              </label>
             <dd>
               <input type="text" name="profile_name" id="profile_name" >
             </dd>
           </dl>
           <dl class="half">
-            <dt>
-              <label for="password">Password</label>
-            </dt>
+              <label for="password">
+                <dt>Password</dt>
+              </label>
             <dd>
               <input type="password" name="password" id="password" autocomplete="off" autocorrect="none" autocapitalize="off">
             </dd>
           </dl><!--
           --><dl class="half">
-            <dt>
-              <label for="password_confirm">Confirm Password</label>
-            </dt>
+              <label for="password_confirm">
+                <dt>Confirm Password</dt>
+              </label>
             <dd>
               <input type="password" name="password_confirm" id="password_confirm" autocomplete="off" autocorrect="none" autocapitalize="off">
             </dd>
           </dl>
         </fieldset>
         <fieldset>
-          <h2>Bio</h2>
-          <textarea></textarea>
+          <label for="bio">
+            <h2>Bio</h2>
+          </label>
+          <textarea name="bio" id="bio"></textarea>
         </fieldset>
         <fieldset>
-          <input type="checkbox" name="agree" id="agree" required>
-          <label for="agree">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.</label>
-          <input type="submit">
+          <input type="checkbox" name="agree" id="agree" required><!--
+          --><label for="agree">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.</label>
+          <input type="submit" value="Create Account">
         </fieldset>
       </form>
     </main>

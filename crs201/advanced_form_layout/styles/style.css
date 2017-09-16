@@ -2,14 +2,18 @@ html {
   font: normal 16px Helvetica, Arial, sans-serif;
 }
 
+body {
+  margin: 0 23.5px;
+}
+
 main {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 601px;
+  margin: 0 auto 26px;
 }
 
 fieldset {
   box-sizing: border-box;
-  padding: 24px 32px;
+  padding: 24px 32px 24px 32.5px;
   border: 1px solid #fff;
   border-left: 4px solid #cbcbcb;
   margin: 0;
@@ -17,7 +21,7 @@ fieldset {
 }
 
 h1 {
-  margin: 24px 0 23px;
+  margin: 24px 0 23px .5px;
   font-size: 1.75rem;
   font-weight: 400;
   color: #282828;
@@ -31,11 +35,11 @@ h2 {
 }
 
 dl {
-  margin: 0 0;
+  margin: 0 0 24px;
 }
 
 dd {
-  margin: 10px 0 24px;
+  margin: 10px 0 0;
 }
 
 
@@ -62,10 +66,23 @@ input[type="checkbox"] {
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
   appearance: checkbox;
+  width: 5%;
+  margin: 2px 0 0 -7px;
+  vertical-align: top;
 }
 
 input[type="checkbox"] + label {
+  display: inline-block;
+  width: 95%;
+  vertical-align: top;
+  font-size: .875rem;
   font-weight: 200;
+}
+
+textarea {
+  height: 110px;
+  margin-bottom: 24px;
+
 }
 
 dd.half,
@@ -109,10 +126,14 @@ input[type="password"] {
 
 input[type="submit"] {
   display: block;
-  height: 47px;
-  width: 175px;
+  height: 46px;
+  width: 174px;
+  border: none;
+  border-radius: 4px;
+  margin: 24px 0 0;
+  font-size: 1rem;
   color: #fff;
-  background-color: #2e67b2;
+  background-color: #0066cc;
 }
 
 input[type="submit"]:hover,
