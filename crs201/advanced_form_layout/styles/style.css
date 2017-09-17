@@ -20,69 +20,12 @@ fieldset {
   background: #ebebec;
 }
 
-h1 {
-  margin: 24px 0 23px .5px;
-  font-size: 1.75rem;
-  font-weight: 400;
-  color: #282828;
-}
-
-h2 {
-  margin: 0 0 19px 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #282828;
-}
-
 dl {
   margin: 0 0 24px;
 }
 
 dd {
   margin: 10px 0 0;
-}
-
-
-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #666766;
-}
-
-input,
-textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  box-sizing: border-box;
-  padding-left: 8px;
-  border-radius: 5px;
-  border: 1px solid #2e67b2;
-  width: 100%;
-  font-size: .875rem;
-}
-
-input[type="checkbox"] {
-  -webkit-appearance: checkbox;
-  -moz-appearance: checkbox;
-  appearance: checkbox;
-  width: 5%;
-  margin: 2px 0 0 -7px;
-  vertical-align: top;
-}
-
-input[type="checkbox"] + label {
-  display: inline-block;
-  width: 95%;
-  vertical-align: top;
-  font-size: .875rem;
-  font-weight: 200;
-}
-
-textarea {
-  height: 110px;
-  margin-bottom: 24px;
-
 }
 
 dd.half,
@@ -95,7 +38,6 @@ dl.half {
 dl.half:nth-of-type(0n + 2) {
   padding-right: 22px;
 }
-
 
 dd.half:nth-of-type(0n + 1) {
   padding-right: 5px;
@@ -116,12 +58,69 @@ dl.third:nth-of-type(0n + 2) {
   padding-right: 20px;
 }
 
+h1 {
+  margin: 24px 0 23px .5px;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #282828;
+}
+
+h2 {
+  margin: 0 0 19px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #282828;
+}
+
+label {
+  display: inline-block;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666766;
+}
+
+label[for="bio"] {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #282828;
+}
+
+input,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  padding-left: 8px;
+  border-radius: 5px;
+  border: 1px solid #2e67b2;
+  width: 100%;
+  font-size: .875rem;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
   display: inline-block;
   height: 40px;
+}
 
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
+  width: 5%;
+  margin: 2px 0 0 -7px;
+  vertical-align: top;
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  width: 95%;
+  vertical-align: top;
+  font-size: .875rem;
+  font-weight: 200;
 }
 
 input[type="submit"] {
@@ -139,4 +138,9 @@ input[type="submit"] {
 input[type="submit"]:hover,
 input[type="submit"]:focus {
   background-color: #6095cb;
+}
+
+textarea {
+  height: 110px;
+  margin-bottom: 24px;
 }
