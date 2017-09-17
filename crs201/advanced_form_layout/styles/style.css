@@ -108,17 +108,17 @@ input[type="checkbox"] {
   -moz-appearance: checkbox;
   appearance: checkbox;
   width: 5%;
-  margin: 2px 0 0 -6px;
+  margin: 2px 0 0 -3px;
   vertical-align: top;
 }
 
 input[type="checkbox"] + label {
   display: inline-block;
   width: 95%;
-  margin-left: -.5px;
+  margin-left: -3.5px;
   vertical-align: top;
   font-size: .875rem;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 input[type="submit"] {
@@ -131,6 +131,7 @@ input[type="submit"] {
   padding-left: 6px;
   margin: 24px 0 0;
   font-size: 1rem;
+  letter-spacing: -.5px;
   color: #fff;
   background-color: #0066cc;
 }
