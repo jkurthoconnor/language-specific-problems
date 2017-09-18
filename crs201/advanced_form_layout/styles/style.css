@@ -145,7 +145,7 @@ input[type="submit"] {
   width: 174px;
   border: none;
   border-radius: 4px;
-  padding-top: 0;
+  padding-top: 3px;
   padding-left: 6px;
   margin: 24px 0 0;
   font: 400 1rem Helvetica, Arial, sans-serif; /*600 in psd*/
