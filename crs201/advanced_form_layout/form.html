@@ -92,9 +92,16 @@
           </h2>
           <textarea name="bio" id="bio"></textarea>
         </fieldset>
-        <fieldset>
-          <input type="checkbox" name="agree" id="agree" required><!--
-          --><label for="agree">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.</label>
+        <fieldset class="agree">
+          <dl>
+            <dt>
+              <input type="checkbox" name="agree" id="agree" required>
+            </dt><!--
+            --><dd><!--
+            --><label for="agree">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.
+              </label>
+            </dd>
+          </dl>
           <input type="submit" value="Create Account">
         </fieldset>
       </form>

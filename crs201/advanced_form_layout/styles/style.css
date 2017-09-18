@@ -55,6 +55,23 @@ dl.third:nth-of-type(0n + 2) {
   padding-right: 20px;
 }
 
+.agree dt {
+  display: inline-block;
+  width: 3%;
+  margin-top: 1px;
+  margin-left: -5px;
+  vertical-align: top;
+}
+
+.agree dd {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 97%;
+  padding-left: 9px;
+  margin-top: 0;
+  vertical-align: top;
+}
+
 h1 {
   margin: 24px 0 23px;
   font-size: 1.75rem;
@@ -93,7 +110,13 @@ textarea {
   border-radius: 5px;
   border: 1px solid #2e67b2;
   width: 100%;
-  font-size: .875rem;
+  font: normal .875rem Helvetica, Arial, sans-serif;
+  color: #282828;
+}
+
+textarea {
+  height: 108px;
+  margin-bottom: 24px;
 }
 
 input[type="text"],
@@ -107,15 +130,10 @@ input[type="checkbox"] {
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
   appearance: checkbox;
-  width: 5%;
-  margin: 2px 0 0 -3px;
-  vertical-align: top;
+  margin-top: 0;
 }
 
-input[type="checkbox"] + label {
-  display: inline-block;
-  width: 95%;
-  margin-left: -3.5px;
+label[for="agree"] {
   vertical-align: top;
   font-size: .875rem;
   font-weight: 400;
@@ -130,8 +148,7 @@ input[type="submit"] {
   padding-top: 0;
   padding-left: 6px;
   margin: 24px 0 0;
-  font-size: 1rem;
-  letter-spacing: -.5px;
+  font: 400 1rem Helvetica, Arial, sans-serif; /*600 in psd*/
   color: #fff;
   background-color: #0066cc;
 }
@@ -139,9 +156,4 @@ input[type="submit"] {
 input[type="submit"]:hover,
 input[type="submit"]:focus {
   background-color: #6095cb;
-}
-
-textarea {
-  height: 108px;
-  margin-bottom: 24px;
 }
