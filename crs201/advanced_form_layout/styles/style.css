@@ -58,7 +58,7 @@ dl.third:nth-of-type(0n + 2) {
 .agree dt {
   display: inline-block;
   width: 3%;
-  margin-top: -2px;
+  margin-top: -2px; /* for mac */
   margin-left: -3px;
   vertical-align: top;
 }
@@ -145,7 +145,7 @@ input[type="submit"] {
   width: 174px;
   border: none;
   border-radius: 4px;
-  padding-top: 3px;
+  padding-top: 3px; /* for mac */
   padding-left: 6px;
   margin: 24px 0 0;
   font: 400 1rem Helvetica, Arial, sans-serif; /*600 in psd*/
