@@ -901,7 +901,7 @@ sample.default=('non-nil')
 ```
 
 
-### (hash) get value of specified key(s)
+### (hash) return value(s) of specified key(s)
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
@@ -910,9 +910,11 @@ hsh[:pear] # returns the value(s)
 hsh.values_at(:pear, :grape) # returns array containing the values
 # or
 hsh.fetch(:pear)
+# or 
+hsh.fetch_values(:pear, :grape) # returns array containing the values
 ```
 
-### get the key for a given value
+### return the key for a given value
 ```ruby
 hsh = {:grape => 'red', :pear => 'green', :carrot => 'orange' }
 
@@ -978,7 +980,6 @@ while idx < keys.size
   p [ key, hsh[key] ]
   idx += 1
 end
-
 ```
 
 
