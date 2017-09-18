@@ -58,8 +58,8 @@ dl.third:nth-of-type(0n + 2) {
 .agree dt {
   display: inline-block;
   width: 3%;
-  margin-top: 1px;
-  margin-left: -5px;
+  margin-top: -2px;
+  margin-left: -3px;
   vertical-align: top;
 }
 
@@ -67,7 +67,7 @@ dl.third:nth-of-type(0n + 2) {
   display: inline-block;
   box-sizing: border-box;
   width: 97%;
-  padding-left: 9px;
+  padding-left: 7px;
   margin-top: 0;
   vertical-align: top;
 }
