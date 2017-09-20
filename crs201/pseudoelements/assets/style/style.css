@@ -18,7 +18,7 @@ ul {
 }
 
 #column {
-  margin: 0 120px 0 160px;
+  margin: 0 140px 0 160px;
 }
 
 header {
@@ -39,45 +39,39 @@ header li {
   padding-bottom: 15px;
 }
 
-a.home::before {
+nav a::before {
   display: inline-block;
   content: "";
-  height: 26px;
   width: 27px;
   margin-right: 5px;
-    background: transparent url("../images/icons_nav.png") 0 0 no-repeat;
+  background: transparent url("../images/icons_nav.png") 0 0 no-repeat;
+}
+
+a.home::before {
+  height: 26px;
 }
 
 a.home:hover::before {
-    background-position: 100% 0;
+    background-position: -27px 0;
   }
 
 a.photos::before {
-  display: inline-block;
-  content: "";
   height: 20px;
-  width: 27px;
-  margin-right: 5px;
-    background: transparent url("../images/icons_nav.png") 0 -27px no-repeat;
+  background-position: 0 -26px;
 }
 
 a.photos:hover::before {
-  background-position: 100% -27px;
+  background-position: -27px -26px;
 }
 
 a.contact::before {
-  display: inline-block;
-  content: "";
   height: 17px;
-  width: 27px;
-  margin-right: 5px;
-    background: transparent url("../images/icons_nav.png") 0 -46px no-repeat;
+  background-position: 0 -46px;
 }
 
 a.contact:hover::before {
-  background-position: 100% -46px;
+  background-position: -27px -46px;
 }
-
 
 main {
   float: left;
@@ -88,17 +82,19 @@ main {
 
 footer {
   float: right;
-  width: 120px;
+  width: 140px;
   height: 100vh;
   padding: 15px;
-  margin-right: -120px;
+  margin-right: -140px;
   font-size: 12px;
   background: #e74c3c;
   box-sizing: border-box;
 }
+
 footer li {
   padding-bottom: 10px;
 }
+
 footer a {
   display: block;
   padding: 5px;
@@ -107,7 +103,11 @@ footer a {
   background: #ffffff;
 }
 
-a.twitter::before {
+footer a:hover::before {
+  background-color: #00bf8f;
+}
+
+footer a::before {
   display: inline-block;
   content: "";
   height: 24px;
@@ -118,21 +118,9 @@ a.twitter::before {
 }
 
 a.facebook::before {
-  display: inline-block;
-  content: "";
-  height: 24px;
-  width: 24px;
-  margin-right: 2px;
-  background: transparent url("../images/icons_social.png") 0 -24px no-repeat;
-  background-size: 24px;
+  background-position: 0 -24px;
 }
 
 a.instagram::before {
-  display: inline-block;
-  content: "";
-  height: 24px;
-  width: 24px;
-  margin-right: 2px;
-  background: transparent url("../images/icons_social.png") 0 -48px no-repeat;
-  background-size: 24px;
+  background-position: 0 -48px;
 }
