@@ -44,6 +44,7 @@ nav a::before {
   content: "";
   width: 27px;
   margin-right: 5px;
+  vertical-align: middle;
   background: transparent url("../images/icons_nav.png") 0 0 no-repeat;
 }
 
@@ -112,7 +113,8 @@ footer a::before {
   content: "";
   height: 24px;
   width: 24px;
-  margin-right: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
   background: transparent url("../images/icons_social.png") 0 0 no-repeat;
   background-size: 24px;
 }
