@@ -405,6 +405,18 @@ end
 p squeezed
 ```
 
+
+### Return the integer that represents a given character; return the binary representation of that integer; return the integer equivalent of the binary and then return the original character
+
+```ruby
+'a'.ord
+'a'.ord.to_s(2)
+'a'.ord.to_s(2).to_i(2)
+'a'.ord.to_s(2).to_i(2).chr
+
+```
+
+
 ### Identify and return the first element that matches a block.
 
 ```ruby
