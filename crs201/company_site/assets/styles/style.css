@@ -1,0 +1,59 @@
+html {
+  font: 18px Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  padding-top: 75px;
+  background-color: #332B42;
+  background: url("../images/bg_body.gif") 89px 0;
+  color: #e6e6e6;
+}
+
+
+h1 {
+  margin-top: 0px;
+  text-align: center;
+}
+
+h1 img {
+  height: 243px;
+  width: 298px;
+}
+
+main {
+  background: #fff;
+  color: #4c4b4e;
+}
+
+footer {
+  background: #e6e6e6;
+  color: #b7b1b1;
+}
+
+footer a::before {
+  display: inline-block;
+  content: "";
+  height: 46px;
+  width: 46px;
+  background: url("../images/icons_social-media.png") 0 0 no-repeat;
+}
+
+a#twitter::before {
+  background-position: 0 0;
+}
+
+a#facebook::before {
+  background-position: 0 -46px;
+}
+
+a#email::before {
+  background-position: 0 -92px;
+}
+
+a#instagram::before {
+  background-position: 0 -138px;
+}
