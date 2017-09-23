@@ -55,9 +55,17 @@ main {
 }
 
 article {
-  width: 790px;
+  box-sizing: border-box;
+  padding: 0 110px;
+  width: 1000px;
   margin: 100px auto;
 }
+
+.project_image {
+  width: 940px;
+  margin: 0 auto;
+}
+
 
 h2 {
   margin-bottom: 40px;
@@ -95,7 +103,7 @@ footer {
 }
 
 .social {
-  width: 790px;
+  width: 1000px;
   padding: 55px 0 35px;
   margin: 0 auto;
   text-align: center;
