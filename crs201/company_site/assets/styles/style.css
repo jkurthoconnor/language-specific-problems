@@ -24,14 +24,15 @@ ul {
 
 nav li {
   display: inline-block;
-  margin: 70px 44px 60px;
+  margin: 70px 42.5px 60px;
 }
 
 nav a {
-  font-size: 1.175rem;
+  font-size: 1.185rem;
+  letter-spacing: .012rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: #e6e6e6;
+  color: #c9c9af;
 }
 
 nav a.current {
@@ -111,7 +112,7 @@ figure {
 
 figure.portrait {
   display: inline-block;
-  width: 20.5%;
+  width: 20.55%;
   margin: 100px 0 115px;
 }
 
@@ -120,11 +121,12 @@ article:nth-of-type(0n + 3) {
 }
 
 .portrait figcaption {
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .portrait a {
-  font-size: 1.175rem;
+  font-size: 1.185rem;
+  letter-spacing: .01rem;
   text-decoration: none;
   color: #4a54b0;
 }
@@ -146,7 +148,7 @@ footer {
 }
 
 .social p {
-  padding: 0 75px;
+  margin: 20px 75px;
 }
 
 footer li {
