@@ -13,9 +13,9 @@ header
 header {
   padding-top: 75px;
   background-color: #332B42;
-  /* offset worked in linux; not on mac
-  background: url("../images/bg_body.gif") 396px 0;
-  */
+  /* vv fullscreen offset linux */
+  /* background: url("../images/bg_body.gif") 396px 0; */
+  /* vv fullscreen offset mac */
   background: url("../images/bg_body.gif") 316px 0;
   color: #e6e6e6;
   text-align: center;
@@ -27,7 +27,8 @@ ul {
 
 nav li {
   display: inline-block;
-  margin: 70px 42.5px 60px;
+  /*margin: 70px 42.5px 60px;*/ /* linux */
+  margin: 65px 42.5px 60px; /* mac */
 }
 
 nav a {
