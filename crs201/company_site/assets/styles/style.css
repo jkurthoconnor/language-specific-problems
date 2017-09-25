@@ -13,8 +13,6 @@ header
 header {
   padding-top: 75px;
   background-color: #332B42;
-  /* vv fullscreen offset linux */
-  /* background: url("../images/bg_body.gif") 396px 0; */
   background: url("../images/bg_body.gif") 50% 0;
   color: #e6e6e6;
   text-align: center;
@@ -85,7 +83,7 @@ h2::before,
 h2::after {
   display: inline-block;
   content: " \2022\ ";
-  margin-top: -1px; /* mac */
+  margin-top: -1px;
   margin-bottom: 5px;
   vertical-align: middle;
   font-size: 1.1rem;
@@ -106,7 +104,7 @@ h3 {
 }
 
 figcaption > h3 {
-  /*margin-top: 15px;*/
+  /*margin-top: 15px;*/ /* linux */
   margin-top: 13px; /* mac */
 }
 
@@ -126,7 +124,7 @@ article:nth-of-type(0n + 3) {
 }
 
 .portrait figcaption {
-  /*margin-top: 16px;*/
+  /*margin-top: 16px;*/ /* linux */
   margin-top: 13px; /* mac */
 }
 
