@@ -15,8 +15,7 @@ header {
   background-color: #332B42;
   /* vv fullscreen offset linux */
   /* background: url("../images/bg_body.gif") 396px 0; */
-  /* vv fullscreen offset mac */
-  background: url("../images/bg_body.gif") 316px 0;
+  background: url("../images/bg_body.gif") 50% 0;
   color: #e6e6e6;
   text-align: center;
 }
@@ -125,7 +124,8 @@ article:nth-of-type(0n + 3) {
 }
 
 .portrait figcaption {
-  margin-top: 16px;
+  /*margin-top: 16px;*/
+  margin-top: 13px;
 }
 
 .portrait a {
