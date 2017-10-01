@@ -49,6 +49,30 @@ nav a.current {
   color: #7ab4fe;
 }
 
+@media all and (max-width: 768px) and (min-width: 481px) {
+  header {
+    padding-top: 72px;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h1 img {
+    height: auto;
+    width: 223px;
+  }
+
+  nav li {
+    display: inline-block;
+    margin: 2px 42.5px 24px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  
+}
+
 /*
 main: applies to all
 */
