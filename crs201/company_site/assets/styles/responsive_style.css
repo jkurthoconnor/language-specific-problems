@@ -49,29 +49,6 @@ nav a.current {
   color: #7ab4fe;
 }
 
-@media all and (max-width: 768px) and (min-width: 481px) {
-  header {
-    padding-top: 72px;
-  }
-
-  h1 {
-    margin-bottom: 0;
-  }
-
-  h1 img {
-    height: auto;
-    width: 223px;
-  }
-
-  nav li {
-    display: inline-block;
-    margin: 2px 42.5px 24px;
-  }
-}
-
-@media all and (max-width: 480px) {
-  
-}
 
 /*
 main: applies to all
@@ -238,4 +215,44 @@ a#email::before {
 
 a#instagram::before {
   background-position: 0 -138px;
+}
+
+/* breakpoints */
+
+@media all and (max-width: 768px) and (min-width: 481px) {
+  header {
+    padding-top: 72px;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h1 img {
+    height: auto;
+    width: 223px;
+  }
+
+  nav li {
+    display: inline-block;
+    margin: 2px 42.5px 24px;
+  }
+  
+  .social {
+    padding: 15px 0;
+  }
+  
+  .social p {
+    margin-left: 68px;
+    margin-right: 68px;
+  }
+  
+  footer li {
+    display: inline-block;
+    margin: 40px 32px 0;
+  }
+}
+
+@media all and (max-width: 480px) {
+  
 }
