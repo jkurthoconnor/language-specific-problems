@@ -49,9 +49,8 @@ nav a.current {
   color: #7ab4fe;
 }
 
-
 /*
-main
+main: applies to all
 */
 main {
   background: #fff;
@@ -61,25 +60,11 @@ main {
 
 article {
   max-width: 1000px;
-  margin: 105px auto 150px;
-}
-
-article:nth-of-type(0n + 2) {
-  margin-bottom: 120px;
-}
-
-article.projects:nth-of-type(0n + 3) {
-  margin-bottom: 40px;
 }
 
 article p {
   margin: 0 110px;
   text-align: justify;
-}
-
-.projects img {
-  width: 940px;
-  margin: 0 auto;
 }
 
 h2 {
@@ -112,10 +97,6 @@ h3 {
   color: #4a54b0;
 }
 
-.projects h3 {
-  margin: 39px 0 24px;
-}
-
 figcaption > h3 {
   margin-top: 15px; /* linux */
 /*  margin-top: 13px; mac */
@@ -124,6 +105,44 @@ figcaption > h3 {
 figure {
   padding: 0 0 10px;
   margin: 0;
+}
+
+/* main: page-specific styles */
+
+article.home {
+  margin: 105px auto 150px;
+}
+
+article.home:nth-of-type(0n + 2) {
+  margin-bottom: 120px;
+}
+
+article.projects {
+  margin: 105px auto 0;
+}
+
+article.projects:nth-of-type(0n + 2),
+article.projects:nth-of-type(0n + 3) {
+  margin-top: 60px;
+}
+
+article.projects:nth-of-type(0n + 3) {
+  margin-bottom: 40px;
+}
+
+.projects img {
+  width: 940px;
+  margin: 0 auto;
+}
+
+.projects:nth-of-type(0n + 1) figure,
+.projects:nth-of-type(0n + 2) figure {
+  padding-bottom: 50px;
+  border-bottom: .5px solid lightgrey;
+}
+
+.projects h3 {
+  margin: 39px 0 24px;
 }
 
 article.team {
