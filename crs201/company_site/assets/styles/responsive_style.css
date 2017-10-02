@@ -252,12 +252,19 @@ article.home:nth-of-type(0n + 2) {
   margin-bottom: 70px;
 }
 
-h2 {
-  margin-top: 0;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
+article.projects {
+  margin: 70px auto 0;
 }
 
+.projects p {
+  margin: 0 30px;
+}
+
+.projects img {
+  height: auto;
+  width: 562px;
+  margin: 0 auto;
+}
 
 /* footer: 768 break  */
 
