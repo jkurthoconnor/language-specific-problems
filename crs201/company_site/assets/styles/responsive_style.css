@@ -220,6 +220,7 @@ a#instagram::before {
 /* breakpoints */
 
 @media all and (max-width: 768px) and (min-width: 481px) {
+  /* header: 768 break  */
   header {
     padding-top: 72px;
   }
@@ -237,7 +238,29 @@ a#instagram::before {
     display: inline-block;
     margin: 2px 42.5px 24px;
   }
-  
+
+/* main: 768 break */
+article p {
+  margin: 0 40px;
+}
+
+article.home {
+  margin: 70px auto 99px;
+}
+
+article.home:nth-of-type(0n + 2) {
+  margin-bottom: 70px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+
+
+/* footer: 768 break  */
+
   .social {
     padding: 15px 0;
   }
