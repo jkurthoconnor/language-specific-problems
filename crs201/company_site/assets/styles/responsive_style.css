@@ -299,8 +299,8 @@ article.projects {
   }
   
   .social p {
-    margin-left: 68px;
-    margin-right: 68px;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   footer li {
