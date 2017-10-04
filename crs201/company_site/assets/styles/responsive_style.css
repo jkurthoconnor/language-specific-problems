@@ -157,15 +157,19 @@ article.team {
   margin: 105px auto 100px;
 }
 
+.team > section {
+  margin: 0 89px;
+}
+
 .team figure {
   display: inline-block;
-  width: 20.55%;
+  width: 25%;
   margin: 120px 0 10px;
+  padding: 0 0 10px;
 }
 
 .team figcaption {
-  margin-top: 16px; /* linux */
-  /*margin-top: 13px; /* mac */*/
+  margin-top: 16px;
 }
 
 .team a {
@@ -307,6 +311,32 @@ article.projects {
     margin: 40px 32px 0;
   }
 }
+
+@media all and (max-width: 874px) and (min-width: 481px) {
+
+  .team > section {
+    margin: 0 0px;
+  }
+
+  .team figure {
+    width: 48.5%;
+    padding: 0;
+    margin: 0 0 30px;
+  }
+  
+  .team figcaption {
+    margin-top: -4px;
+  }
+
+  .team figure:nth-of-type(0n + 1),
+  .team figure:nth-of-type(0n + 2) {
+    margin-top: 120px;
+}
+
+  .team figure:nth-of-type(0n + 3),
+  .team figure:nth-of-type(0n + 4) {
+    margin-bottom: 50px;
+  }
 
 @media all and (max-width: 480px) {
   
