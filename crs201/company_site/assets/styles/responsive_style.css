@@ -104,9 +104,14 @@ figcaption > h3 {
 }
 
 figure {
-  max-width: 1000px;
-  padding: 0 0 10px;
-  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 30px 10px;
+  margin: 0 auto;
+}
+
+figcaption p {
+  margin: 0 80px;
 }
 
 /* main: page-specific styles */
@@ -267,14 +272,8 @@ article.projects {
   margin: 0;
 }
 
-.projects figure {
-  max-width: 692px;
-  margin: 0 auto;
-}
-
 .projects img {
   display: block;
-  width: 100%;
 }
 
 .projects h3 {
