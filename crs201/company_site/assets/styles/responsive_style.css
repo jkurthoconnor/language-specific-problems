@@ -77,7 +77,7 @@ h2 {
 h2::before,
 h2::after {
   display: inline-block;
-  content: " \2022\ ";
+  content: "\2022";
   margin-top: -1px;
   margin-bottom: 5px;
   vertical-align: middle;
@@ -312,7 +312,7 @@ article.projects {
   }
 }
 
-@media all and (max-width: 874px) and (min-width: 481px) {
+@media all and (max-width: 874px) {
 
   .team > section {
     margin: 0 0px;
@@ -338,6 +338,108 @@ article.projects {
     margin-bottom: 50px;
   }
 
+
 @media all and (max-width: 480px) {
+  header {
+    padding: 10px 0 0;
+  }
   
+  h1 {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 15px;
+  }
+
+  h1 img {
+    height: auto;
+    width: 90px;
+  }
+
+  nav {
+    display: inline-block;
+    width: 50%;
+  }
+
+  nav ul {
+    margin: 6px 0 0;
+  }
+
+  nav a {
+    font-size: .785rem;
+  }
+  
+  nav li {
+    display: block;
+    margin: 0 20px 5px 0;
+    text-align: right;
+  }
+  
+  article p {
+    margin: 0 39.5px;
+    font-size: .795rem;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 17px;
+    font-size: 1.3rem;
+  }
+
+  article.home {
+    margin: 61px auto 87px;
+  }
+
+  article.home:nth-of-type(0n + 2) {
+    margin-bottom: 65px;
+  }
+  
+  article.home:nth-of-type(0n + 2) h2 {
+    margin-bottom: 18px;
+  }
+    
+  h2::before,
+  h2::after {
+    margin-top: 5px;
+  }
+  
+  
+  h3 {
+    margin: 0 0 22px;
+    font-size: 1.1rem;
+  }
+
+  .social {
+    padding: 35px 0 1px;
+  }
+
+  .social p {
+    margin: 0;
+    font-size: .8rem;
+  }
+  
+  footer ul {
+    margin: 57px 0 18px;
+  }
+  footer li {
+    display: inline-block;
+    margin: 0 17px 0;
+  }
+
+
 }
+
+/* upstream
+
+footer li {
+  display: inline-block;
+  margin: 40px 62px 20px;
+}
+
+footer a::before {
+  display: inline-block;
+  content: "";
+  height: 46px;
+  width: 46px;
+  background: url("../images/icons_social-media.png") 0 0 no-repeat;
+}
+*/
