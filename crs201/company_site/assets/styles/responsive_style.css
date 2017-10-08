@@ -424,22 +424,4 @@ article.projects {
     display: inline-block;
     margin: 0 17px 0;
   }
-
-
 }
-
-/* upstream
-
-footer li {
-  display: inline-block;
-  margin: 40px 62px 20px;
-}
-
-footer a::before {
-  display: inline-block;
-  content: "";
-  height: 46px;
-  width: 46px;
-  background: url("../images/icons_social-media.png") 0 0 no-repeat;
-}
-*/
