@@ -1,0 +1,34 @@
+html {
+  font: 28px Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #000;
+}
+
+body {
+  margin: 8px;
+}
+
+main {
+  box-sizing: border-box;
+  width: 680px;
+  padding: 15px 15px 10px;
+  border: 2px solid #000;
+}
+
+header {
+  border-bottom: 30px solid #000;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+p {
+  margin: 0 0 4px;
+}
+
+h1 ~ p:last-of-type {
+  margin-bottom: 7px;
+}
