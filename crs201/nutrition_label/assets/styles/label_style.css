@@ -1,7 +1,6 @@
 html {
   font: 28px Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  color: #000;
 }
 
 body {
@@ -11,7 +10,7 @@ body {
 main {
   box-sizing: border-box;
   width: 680px;
-  padding: 15px 15px 10px;
+  padding: 15px;
   border: 2px solid #000;
 }
 
@@ -45,21 +44,56 @@ table {
   width: 100%;
 }
 
+/* BOLD */
+
+table:first-of-type td:first-of-type dt,
+table:nth-of-type(0n + 2) th,
+table:nth-of-type(0n + 2) dt,
+table:nth-of-type(0n + 2) td ~ td
+{
+  font-weight: 600;
+}
+/* UNBOLD */
+
+table:nth-of-type(0n + 2) tr:nth-of-type(0n + 10) td,
+table:nth-of-type(0n + 2) tr:nth-of-type(0n + 11) td,
+table:nth-of-type(0n + 2) tr:nth-of-type(0n + 12) td,
+table:nth-of-type(0n + 2) tr:nth-of-type(0n + 13) td {
+  font-weight: 400;
+}
+
+tbody tr {
+  border-top: 1px solid #000;
+}
+
 table:first-of-type {
   border-bottom: 15px solid #000;
 }
-  
-th {
-  font-weight: 600;
+
+table:first-of-type th {
+  padding: 12px 0;
   text-align: left;
 }
 
+table:first-of-type td {
+  padding: 7px 0;
+}
+
 table:nth-of-type(0n + 2) th {
+  padding: 13px 0 3px;
   text-align: right;
 }
 
-table:last-of-type th {
-  font-weight: 400;
+table:nth-of-type(0n + 2) th:after {
+  content: "\002A";
+  padding-right: 1px;
+  vertical-align: top;
+  font-size: .85rem;
+}
+
+table:nth-of-type(0n + 2) td,
+table:last-of-type td {
+  padding: 4px 0;
 }
 
 table:nth-of-type(0n + 1) td:last-of-type,
@@ -70,7 +104,35 @@ table:nth-of-type(0n + 2) td:last-of-type {
 tr:nth-of-type(0n + 9) {
   border-bottom: 20px solid #000;
 }
+table:nth-of-type(0n + 2) tr:last-of-type {
+  border-bottom: 1px solid #000;
+}
 
 table:last-of-type {
   font-size: .8rem;
+}
+
+table:last-of-type th {
+  /*font-weight: 400;*/
+  text-align: left;
+}
+
+table:last-of-type tbody tr + tr {
+  border: none;
+}
+
+.indent {
+  margin-left: 50px;
+  text-align: left;
+}
+
+aside p {
+  margin: 15px 0 20px 15px;
+  line-height: 1.1;
+}
+
+aside p:before {
+  content: "\002A";
+  margin-right: 6px;
+  margin-left: -15px;
 }
