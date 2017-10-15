@@ -10,7 +10,7 @@ body {
 main {
   box-sizing: border-box;
   width: 680px;
-  padding: 14px 15px 15px;
+  padding: 14px 15px 15px; /* 15px for chrome on ubuntu */
   border: 2px solid #000;
 }
 
@@ -111,7 +111,8 @@ table:nth-of-type(0n + 1) td:last-of-type,
 table:nth-of-type(0n + 2) td:last-of-type {
   text-align: right;
 }
-/* prevent % placement from extending to nutrients */
+/* prevent % alignment on non-% nutrients */
+table:nth-of-type(0n + 2) tr:nth-of-type(0n + 3) td,
 table:nth-of-type(0n + 2) tr:nth-of-type(0n + 8) td,
 table:nth-of-type(0n + 2) tr:nth-of-type(0n + 9) td {
   text-align: left;
@@ -126,7 +127,7 @@ table:nth-of-type(0n + 2) tr:last-of-type {
 
 table:last-of-type {
   font-size: .8rem;
-  line-height: .95;
+  line-height: .95; /* adjust for ubuntu chrome */
 }
 
 table:last-of-type th {
@@ -182,7 +183,7 @@ table:last-of-type td[colspan="2"] ~ td:nth-of-type(0n + 3) {
 
 aside p {
   margin: 14px 0 17px 19px;
-  line-height: 1.171;
+  line-height: 1.171; /* adjust for ubuntu chrome */
 }
 
 aside p:before {
