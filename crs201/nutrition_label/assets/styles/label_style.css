@@ -10,7 +10,7 @@ body {
 main {
   box-sizing: border-box;
   width: 680px;
-  padding: 15px;
+  padding: 14px 15px 15px;
   border: 2px solid #000;
 }
 
@@ -92,6 +92,8 @@ table:nth-of-type(0n + 2) th {
 }
 
 table:nth-of-type(0n + 2) th:after {
+  position: relative;
+  top: 2px;
   content: "\002A";
   padding-right: 1px;
   vertical-align: top;
@@ -102,6 +104,7 @@ table:nth-of-type(0n + 2) td,
 table:last-of-type td {
   padding: 4px 0;
 }
+
 
 /*  % value placement */
 table:nth-of-type(0n + 1) td:last-of-type,
@@ -123,6 +126,7 @@ table:nth-of-type(0n + 2) tr:last-of-type {
 
 table:last-of-type {
   font-size: .8rem;
+  line-height: .95;
 }
 
 table:last-of-type th {
