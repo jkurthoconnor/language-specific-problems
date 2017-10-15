@@ -126,7 +126,21 @@ table:last-of-type {
 }
 
 table:last-of-type th {
+  position: relative;
+  padding: 0 0 3px 0;
   text-align: left;
+}
+
+table:last-of-type th:nth-of-type(0n + 2) {
+  left: 1px;
+}
+
+table:last-of-type th:nth-of-type(0n + 3) {
+  left: -8px;
+}
+
+table:last-of-type th:nth-of-type(0n + 4) {
+  left: -3px;
 }
 
 table:last-of-type tbody tr + tr {
@@ -142,18 +156,30 @@ table:last-of-type tr:last-of-type td:first-of-type {
   padding-left: 33px;
 }
 
+table:last-of-type td:nth-of-type(0n + 3),
+table:last-of-type td[colspan="2"] ~ td:nth-of-type(0n + 2) {
+  position: relative;
+  left: -9px;
+}
+
+table:last-of-type td:nth-of-type(0n + 4),
+table:last-of-type td[colspan="2"] ~ td:nth-of-type(0n + 3) {
+  position: relative;
+  left: -4px;
+}
+
 .indent {
   padding-left: 28px;
   text-align: left;
 }
 
 aside p {
-  margin: 15px 0 20px 15px;
-  line-height: 1.1;
+  margin: 14px 0 17px 19px;
+  line-height: 1.171;
 }
 
 aside p:before {
   content: "\002A";
   margin-right: 6px;
-  margin-left: -15px;
+  margin-left: -19px;
 }
