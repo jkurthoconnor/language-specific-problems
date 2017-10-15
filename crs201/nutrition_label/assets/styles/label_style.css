@@ -168,9 +168,12 @@ table:last-of-type td[colspan="2"] ~ td:nth-of-type(0n + 3) {
   left: -4px;
 }
 
-.indent {
-  padding-left: 28px;
-  text-align: left;
+.indent dl {
+  margin-left: 28px;
+}
+
+.indent td {
+  border-top: 1px solid #000;
 }
 
 aside p {
