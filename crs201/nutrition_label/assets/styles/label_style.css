@@ -157,7 +157,7 @@ table:last-of-type td:first-of-type {
 
 table:last-of-type tr:nth-of-type(0n + 2) td:first-of-type,
 table:last-of-type tr:last-of-type td:first-of-type {
-  padding-left: 33px;
+  padding-left: 34px;
 }
 
 table:last-of-type td:nth-of-type(0n + 3),
@@ -187,6 +187,6 @@ aside p {
 
 aside p:before {
   content: "\002A";
-  margin-right: 6px;
-  margin-left: -19px;
+  margin-right: 7px;
+  margin-left: -20px;
 }
