@@ -199,10 +199,12 @@ def toggle_lights(lights_number)
   bulbs = {}
   (1..lights_number).each { |n| bulbs[n] = false }
 
-  (1..lights_number).each do |rep|
-    bulbs.map do |bulb, state|
+  rep = 1
+  while rep <= lights_number
+    bulbs.each do |bulb, state|
       bulbs[bulb] = !state if (bulb % rep).zero?
     end
+    rep += 1
   end
 
   report_status(bulbs)
