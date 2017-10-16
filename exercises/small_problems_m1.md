@@ -322,6 +322,20 @@ def diamond(n)
     puts " " * space_count + "*" * diamond_count
   end
 end
+
+# or, to build a figure then output at end:
+def diamond(n)
+  top = (1..n).step(2).to_a
+  bottom = top[0...-1].reverse
+  star_count = top + bottom
+
+  figure = star_count.map do |num_stars|
+    " " * ((n - num_stars) / 2) + "*" * num_stars
+  end
+
+  puts figure
+end
+
 ```
 
 ### 6.
