@@ -1,7 +1,49 @@
 html {
   font: 20px Helvetica, Arial, sans-serif;
-  color: #4c4c4c;
 }
 
 body {
+  background-color: #ffd505;
+}
+header, main {
+  box-sizing: border-box;
+  padding: 0 25px;
+  width: 900px;
+}
+
+header {
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto 30px;
+  background-color: #047ec1;
+  color: #fff;
+}
+
+main {
+  margin: 0 auto;
+  background-color: #ececec;
+}
+
+h1 {
+  padding: 33px 0;
+  font-size: 1.92rem;
+  font-weight: 900;
+}
+
+h2 {
+  padding: 27px 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+figure {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 235px;
+  width: 200px;
+  margin: 9px;
+  background: #fff;
+}
+
+img {
+  height: 140px;
 }
