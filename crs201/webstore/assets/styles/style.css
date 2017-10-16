@@ -7,30 +7,30 @@ body {
 }
 header, main {
   box-sizing: border-box;
-  padding: 0 25px;
   width: 900px;
+  margin: 0 auto;
 }
 
 header {
+  padding: 33px 25px;
   border-radius: 0 0 16px 16px;
-  margin: 0 auto 30px;
   background-color: #047ec1;
   color: #fff;
 }
 
 main {
-  margin: 0 auto;
+  padding: 27px 0 25px 25px;
+  margin-top: 30px;
   background-color: #ececec;
 }
 
 h1 {
-  padding: 33px 0;
   font-size: 1.92rem;
   font-weight: 900;
 }
 
 h2 {
-  padding: 27px 0;
+  margin: 0 0 28px;
   font-size: 1.6rem;
   font-weight: 900;
 }
@@ -38,12 +38,29 @@ h2 {
 figure {
   display: inline-block;
   box-sizing: border-box;
-  height: 235px;
   width: 200px;
-  margin: 9px;
+  padding: 15px 15px 16px;
+  margin: 0 17px 17px 0;
   background: #fff;
 }
 
+figure:nth-of-type(0n + 4) {
+  margin: 0 0 17px 0;
+}
+
 img {
+  display: block;
   height: 140px;
+  margin: 0 auto;
+}
+
+figcaption p:first-of-type {
+  margin: 21px 0 0;
+  font-size: .96rem;
+  font-weight: 600;
+}
+
+figcaption p + p {
+  margin: 8px 0 0;
+  font-size: .8rem;
 }
