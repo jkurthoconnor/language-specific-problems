@@ -5,6 +5,7 @@ html {
 body {
   background-color: #ffd505;
 }
+
 header, main {
   box-sizing: border-box;
   width: 900px;
@@ -12,8 +13,8 @@ header, main {
 }
 
 header {
-  padding: 33px 25px;
   border-radius: 0 0 16px 16px;
+  padding: 33px 25px;
   background-color: #047ec1;
   color: #fff;
 }
@@ -26,13 +27,13 @@ main {
 
 h1 {
   font-size: 1.92rem;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 h2 {
   margin: 0 0 28px;
   font-size: 1.6rem;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 figure {
@@ -42,10 +43,6 @@ figure {
   padding: 15px 15px 16px;
   margin: 0 17px 17px 0;
   background: #fff;
-}
-
-figure:nth-of-type(0n + 4) {
-  margin: 0 0 17px 0;
 }
 
 img {
