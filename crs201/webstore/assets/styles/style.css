@@ -72,11 +72,23 @@ input[type="checkbox"] {
   display: none;
 }
 
-input:checked ~ figure img {
+input:checked + figure img {
   position: absolute;
   top: 100px;
   left: 50%;
   height: auto;
   width: 400px;
   margin: 0 0 0 -200px;
+  z-index: 2;
+}
+
+input:checked + figure:before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  content: "";
+  background: rgba(0, 0, 0, .4);
 }
