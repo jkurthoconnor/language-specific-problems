@@ -1,5 +1,5 @@
 html {
-  font: 20px Helvetica, Arial, sans-serif;
+  font: 16px Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -26,13 +26,13 @@ main {
 }
 
 h1 {
-  font-size: 1.92rem;
+  font-size: 2.4rem;
   font-weight: 600;
 }
 
 h2 {
   margin: 0 0 28px;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -53,11 +53,10 @@ img {
 
 figcaption p:first-of-type {
   margin: 21px 0 0;
-  font-size: .96rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
 figcaption p + p {
   margin: 8px 0 0;
-  font-size: .8rem;
 }
