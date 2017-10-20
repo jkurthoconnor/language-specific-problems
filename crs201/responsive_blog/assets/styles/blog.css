@@ -16,7 +16,7 @@ a[rel="author"] {
 }
 
 body > header {
-  padding: 135px 0 50px;
+  padding: 135px 0 47px;
   background: #3f3f3f;
   text-align: center;
   color: #fff;
@@ -24,7 +24,7 @@ body > header {
 
 body > header > h1 {
   padding: 0 0 130px;
-  margin: 0 0 138px;
+  margin: 0 0 136px;
   background: transparent no-repeat center bottom url("../images/logo.png");
   font-size: 3.4rem;
   letter-spacing: 1rem;
@@ -35,7 +35,8 @@ body > header a {
   color: #fff;
 }
 
-li {
+nav li {
   display: inline-block;
+  margin: 0 25px 5px;
   text-transform: uppercase;
 }
