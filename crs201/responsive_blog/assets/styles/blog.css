@@ -1,7 +1,41 @@
 html {
-  font: 16px Helvetica, Arial, sans-serif;
+  font: 20px Helvetica, Arial, sans-serif;
   color: #4c4c4c;
 }
 
 body {
+}
+
+a {
+  text-decoration: none;
+}
+
+a.current,
+a[rel="author"] {
+  color: #62c9c1;
+}
+
+body > header {
+  padding: 135px 0 50px;
+  background: #3f3f3f;
+  text-align: center;
+  color: #fff;
+}
+
+body > header > h1 {
+  padding: 0 0 130px;
+  margin: 0 0 138px;
+  background: transparent no-repeat center bottom url("../images/logo.png");
+  font-size: 3.4rem;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+}
+
+body > header a {
+  color: #fff;
+}
+
+li {
+  display: inline-block;
+  text-transform: uppercase;
 }
