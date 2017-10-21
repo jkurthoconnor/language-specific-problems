@@ -3,7 +3,40 @@ html {
   color: #4c4c4c;
 }
 
-body {
+main,
+footer {
+  max-width: 1000px;
+}
+
+main {
+  border-bottom: 1px solid grey;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#content {
+  float: left;
+  width: 65%;
+  margin: 0 11.5% 0 0;
+}
+
+aside {
+  overflow: hidden;
+  padding: 35px;
+  margin: 0 0 0 10%;
+  background: #f6f7f8;
+}
+
+article {
+  margin: 0 0 65px 0;
+}
+
+p {
+  line-height: 150%;
+}
+
+article p {
+  margin: 0 0 15px 0;
 }
 
 a {
@@ -17,6 +50,7 @@ a[rel="author"] {
 
 body > header {
   padding: 135px 0 47px;
+  margin: 0 0 82px;
   background: #3f3f3f;
   text-align: center;
   color: #fff;
@@ -40,3 +74,64 @@ nav li {
   margin: 0 25px 5px;
   text-transform: uppercase;
 }
+
+h2 {
+  margin: 0 0 20px 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+  }
+
+h2 > a {
+  color: inherit;
+}
+
+h3 {
+  margin: 0 0 25px 0;
+  font-weight: 600;
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+
+aside ul {
+  margin: 0 0 105px 20px;
+  list-style: url("../images/arrow.png");
+  font-size: .7rem;
+}
+
+aside li {
+  margin: 0 0 5px 0;
+}
+
+aside a {
+  color: #787b80;
+}
+
+aside p {
+  font-size: .7rem;
+  color: #787b80;
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 25px;
+  border-radius: 20px;
+  background-color: #50c3af;
+  font-size: .75rem;
+  color: #f5f5f5;
+  
+}
+
+.pagination a.disabled {
+  background: #d2d5da;
+  cursor: default;
+}
+
+.pagination a.next {
+  margin: 0 0 0 25px;
+}
+
+footer {
+  margin: 15px auto 30px;
+  font-size: .6rem;
+}
+  
