@@ -36,19 +36,51 @@
           </p>
         </article>
 
-        <article>
-          <header>
-            <h2>Comments</h2>
-            <p><a href="" rel="author">Kevin</a> on <time datetime="2014-02-15">Feb. 15, 2014</time></p>
-          </header>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-          </p>
-        </article>
-        <div class="pagination">
-          <a href="#" class="button disabled">Prev</a>
-          <a href="#" class="button next">Next</a>
-        </div>
+        <section class="comments">
+          <h2>Comments</h2>
+          <article>
+            <header>
+              <img src="http://www.placehold.it/40x40" alt="thumbnail portrait">
+              <h3><a href="#" rel="author">Kevin</a> on <time datetime="2014-02-15">Feb. 15, 2014</time></h3>
+            </header>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </p>
+          </article>
+
+          <article>
+            <header>
+              <img src="http://www.placehold.it/40x40" alt="thumbnail portrait">
+              <h3><a href="#" rel="author">Chris</a> on <time datetime="2014-02-15">Feb. 15, 2014</time></h3>
+            </header>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </p>
+          </article>
+
+        <form action="#" method="post">
+          <h2>Post Comment</h2>
+          <fieldset>
+            <dl>
+              <dt><label for="name">Your Name</label></dt>
+              <dd>
+                <input type="text" name="name" id="name" >
+              </dd>
+              <dt><label for="email">Email</label></dt>
+              <dd>
+                <input type="text" name="email" id="email" >
+              </dd>
+              <dt><label for="comment">Comment</label></dt>
+              <dd>
+                <textarea rows="6" cols="80" name="comment" id="comment"></textarea>
+              </dd>
+            </dl>
+            <input type="submit" value="Submit" class="button">
+          </fieldset>
+        </form>
+      </section>
+
+
       </section>
 
       <aside>
