@@ -74,6 +74,10 @@ body > header a {
   color: #fff;
 }
 
+body > header a:hover {
+  color: #f5dc39;
+}
+
 nav li {
   display: inline-block;
   margin: 0 25px 5px;
@@ -120,6 +124,10 @@ footer p {
 
 aside p {
   font-size: .7rem;
+}
+
+aside a:hover {
+  color: #50c3af;
 }
 
 .button {
