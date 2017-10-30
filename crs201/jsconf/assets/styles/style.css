@@ -1,9 +1,15 @@
 html {
-  font: 16px "Open Sans", Arial, sans-serif;
+  font: 300 16px "Open Sans", Arial, sans-serif;
   color: #444;
 }
 
-body {
+main {
+  margin: 0 30px;
+
+}
+
+p {
+  margin: 0 0 13px;
 }
 
 header nav {
@@ -25,6 +31,7 @@ header nav li {
 
 header nav a {
   font-size: .81rem;
+  font-weight: 400;
   color: inherit;
   text-transform: uppercase;
   text-decoration: none;
@@ -36,11 +43,11 @@ header nav a:hover {
 
 #banner {
   margin: 55px 0 0;
-  height: 430px;
+  height: 428px;
   text-align: center;
   color: #fff;
   background-image: url("../images/front.jpg");
-  background-position: -2px 0;
+  background-position: -2px 0; 
 }
 
 
@@ -53,21 +60,46 @@ header nav a:hover {
 
 h1 {
   font-size: 4.5rem;
+  font-weight: 400;
   margin: 15px 0 0;
 }
 
 h2 {
+  margin: 68px 0 42px;
+  font-size: 3rem;
 }
 
 h3 {
-font-size: 1.938rem;
-margin: 19px 0 0;
-text-transform: uppercase;
+  font-size: 1.938rem;
+  font-weight: 400;
+  margin: 19px 0 0;
+  text-transform: uppercase;
 }
+
+section {
+  width: 100%;
+  padding: 0 0 56px;
+  border-top: solid 1px #efefef;
+  text-align: center;
+}
+
 
 footer {
   height: 340px;
   background-image: url("../images/people.jpg");
   background-size: cover;
   background-position: 0 -118px;
+}
+
+.button a {
+  display: inline-block;
+  font-weight: 700;
+  padding: 13px 30px;
+  color: #fff;
+  background-color: #008000;
+  text-decoration: none;
+}
+
+.button a:hover {
+  background-color: #146206;
 }
