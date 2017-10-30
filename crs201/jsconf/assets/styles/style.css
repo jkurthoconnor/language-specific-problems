@@ -76,6 +76,12 @@ h3 {
   text-transform: uppercase;
 }
 
+h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 37px 0 0;
+  color: #008000;
+}
 section {
   width: 100%;
   padding: 0 0 56px;
@@ -103,3 +109,32 @@ footer {
 .button a:hover {
   background-color: #146206;
 }
+
+#speakers ul {
+  max-width: 900px;
+  margin: 0 auto;
+
+}
+
+#speakers ul li {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 380px;
+  width: 282px;
+  border: 1px solid #efefef;
+  margin: 1px 7px 10px;  
+  vertical-align: top;
+}
+
+
+#speakers p {
+  margin: 12px 0;
+}
+/* .screen {
+  display: none;
+}
+
+.screen:hover {
+  display: inline-block;
+  background-color: #000;
+  }*/
