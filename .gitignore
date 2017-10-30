@@ -17,6 +17,10 @@ whats_next.md
 *.sql
 *.log
 
+# vim #
+
+*.swp
+
 # enviroment variables #
 
 .env
