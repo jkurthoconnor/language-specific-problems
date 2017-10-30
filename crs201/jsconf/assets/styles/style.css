@@ -1,0 +1,73 @@
+html {
+  font: 16px "Open Sans", Arial, sans-serif;
+  color: #444;
+}
+
+body {
+}
+
+header nav {
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  height: 55px;
+  width: 100%;
+  border-top: 10px solid #f5f5f5; 
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  text-align: center;
+}
+
+header nav li {
+  display: inline-block;
+  margin: 13px 24.75px 0;
+}
+
+header nav a {
+  font-size: .81rem;
+  color: inherit;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+#banner {
+  margin: 55px 0 0;
+  height: 430px;
+  text-align: center;
+  color: #fff;
+  background-image: url("../images/front.jpg");
+  background-position: -2px 0;
+}
+
+
+#banner img {
+  display: inline-block;
+  height: 80px;
+  margin: 150px 0 0;
+}
+
+
+h1 {
+  font-size: 4.5rem;
+  margin: 15px 0 0;
+}
+
+h2 {
+}
+
+h3 {
+font-size: 1.938rem;
+margin: 19px 0 0;
+text-transform: uppercase;
+}
+
+footer {
+  height: 340px;
+  background-image: url("../images/people.jpg");
+  background-size: cover;
+  background-position: 0 -118px;
+}
