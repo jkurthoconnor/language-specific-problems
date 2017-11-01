@@ -82,6 +82,7 @@ h4 {
   margin: 37px 0 0;
   color: #008000;
 }
+
 section {
   width: 100%;
   padding: 0 0 56px;
@@ -89,6 +90,10 @@ section {
   text-align: center;
 }
 
+figcaption p {
+  margin: 8px 10px 0;
+  line-height: 1.6;
+}
 
 footer {
   height: 340px;
@@ -122,14 +127,11 @@ footer {
   height: 380px;
   width: 282px;
   border: 1px solid #efefef;
-  margin: 1px 7px 10px;  
+  margin: 1px 6.5px 9px;  
   vertical-align: top;
 }
 
 
-#speakers p {
-  margin: 12px 0;
-}
 /* .screen {
   display: none;
 }
