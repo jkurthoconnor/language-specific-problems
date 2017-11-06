@@ -69,14 +69,14 @@ h2 {
   font-size: 3rem;
 }
 
-h3 {
+#banner h2 {
   font-size: 1.938rem;
   font-weight: 400;
   margin: 19px 0 0;
   text-transform: uppercase;
 }
 
-h4 {
+h3 {
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -136,7 +136,7 @@ footer {
   vertical-align: top;
 }
 
-#speakers h4 {
+#speakers h3 {
   font-weight: 700;
   margin: 37px 0 0;
   color: #008000;
@@ -178,7 +178,7 @@ td {
   width: 130px;
   }
 
-#schedule h4 {
+#schedule h3 {
   line-height: 1.4;
   }
 
@@ -189,4 +189,15 @@ td {
   margin: 0 auto;
   text-align: left;
   }
+.tag {
+  font-size: .45rem;
+  padding: 1px 4px;
+  border: 1px solid #aaa;
+  background-color: #eee;
+  
+  }
 
+#sponsors h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
