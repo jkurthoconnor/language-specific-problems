@@ -86,7 +86,7 @@ h5 {
   font-size: 1.13rem;
   font-weight: 700;
   color: #008000;
-  }
+}
 
 section {
   width: 100%;
@@ -152,35 +152,35 @@ table {
 
 tr {
   vertical-align: middle;
-  }
+}
 
 th, td {
   border-top: 1px solid #efefef;
-  }
+}
 
 th {
   padding:  11px 12px 12px;
   font-size: 1.5rem;
   font-weight: 400;
   vertical-align: inherit;
-  }
+}
 
 td {
   padding: 11px 10px;
   vertical-align: inherit;
-  }
+}
 
 #schedule h2 {
   margin-bottom: 40px;
-  }
+}
 
 #schedule img {
   width: 130px;
-  }
+}
 
 #schedule h3 {
   line-height: 1.4;
-  }
+}
 
 #location div,
 #call div,
@@ -188,14 +188,15 @@ td {
   width: 960px;
   margin: 0 auto;
   text-align: left;
-  }
+}
+
 .tag {
   font-size: .45rem;
   padding: 1px 4px;
   border: 1px solid #aaa;
   background-color: #eee;
   
-  }
+}
 
 #sponsors h3 {
   font-size: 1.125rem;
