@@ -5,7 +5,6 @@ html {
 
 main {
   margin: 0 30px;
-
 }
 
 p {
@@ -19,7 +18,7 @@ header nav {
   height: 55px;
   width: 100%;
   border-top: 10px solid #f5f5f5;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #eee;
   background-color: #fff;
   text-align: center;
 }
@@ -91,20 +90,13 @@ h5 {
 section {
   width: 100%;
   padding: 0 0 56px;
-  border-top: solid 1px #efefef;
+  border-top: solid 1px #eee;
   text-align: center;
 }
 
 figcaption p {
   margin: 8px 10px 0;
   line-height: 1.6;
-}
-
-footer {
-  height: 340px;
-  background-image: url("../images/people.jpg");
-  background-size: cover;
-  background-position: 0 -118px;
 }
 
 .button a {
@@ -131,7 +123,7 @@ footer {
   box-sizing: border-box;
   height: 380px;
   width: 282px;
-  border: 1px solid #efefef;
+  border: 1px solid #eee;
   margin: 1px 6.5px 9px;
   vertical-align: top;
 }
@@ -146,7 +138,7 @@ table {
   box-sizing: border-box;
   max-width: 960px;
   margin: 0 auto;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #eee;
   text-align: left;
 }
 
@@ -155,7 +147,7 @@ tr {
 }
 
 th, td {
-  border-top: 1px solid #efefef;
+  border-top: 1px solid #eee;
 }
 
 th {
@@ -190,6 +182,18 @@ td {
   text-align: left;
 }
 
+#location h2,
+#call h2,
+#sponsors h2 {
+  text-align: center;
+}
+
+
+#sponsors h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 .tag {
   font-size: .45rem;
   padding: 1px 4px;
@@ -198,7 +202,63 @@ td {
   
 }
 
-#sponsors h3 {
-  font-size: 1.125rem;
+footer {
+  box-sizing: border-box;
+  height: 340px;
+  padding: 39px 0;
+  text-align: center;
+  color: #fff;
+  background-image: url("../images/people.jpg");
+  background-size: cover;
+  background-position: 0 -117px;
+}
+
+footer h2 {
+  margin: 0 0 37px;
+}
+
+
+#footer_bar {
+  height: 188px;
+  background: rgba(0, 0, 0, .7)
+}
+  
+#bar_text {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#bar_text h3 {
+  padding: 16px 0 0;
+  margin: 0 0 10px;
+  font-size: 1.93125rem;
   font-weight: 600;
+  text-transform: uppercase;
+}
+
+#bar_text p:nth-of-type(0n + 2) {
+  margin: 26px 0 0;
+}
+
+#bar_text a {
+  font-weight: 700;
+  text-decoration: none;
+  color: #008000;
+}
+
+#bar_text a:hover {
+  text-decoration: underline;
+}
+
+#bar_text .button {
+  margin: 13px 0;
+}
+
+#bar_text .button a {
+  color: #fff;
+}
+
+#bar_text .button a:hover {
+  text-decoration: none;
 }
