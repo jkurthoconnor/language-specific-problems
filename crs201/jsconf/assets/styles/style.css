@@ -188,6 +188,27 @@ td {
   text-align: center;
 }
 
+#hotel_name {
+  font-weight: 700;
+}
+
+#location p,
+#call p {
+  margin: 0 0 18px;
+  line-height: 1.6;
+}
+
+#call p:nth-of-type(0n + 5) {
+  margin: 0 0 8px;
+}
+
+#call .button {
+  margin: 0 0 10px;
+}
+
+#call .button a {
+  padding: 10px 30px;
+}
 
 #sponsors h3 {
   font-size: 1.125rem;
@@ -241,13 +262,15 @@ footer h2 {
   margin: 26px 0 0;
 }
 
-#bar_text a {
+#bar_text a,
+#call span a {
   font-weight: 700;
   text-decoration: none;
   color: #008000;
 }
 
-#bar_text a:hover {
+#bar_text a:hover,
+#call span a:hover {
   text-decoration: underline;
 }
 
