@@ -174,9 +174,9 @@ td {
   line-height: 1.4;
 }
 
-#location div,
-#call div,
-#sponsors div {
+#location > div,
+#call > div,
+#sponsors > div {
   width: 960px;
   margin: 0 auto;
   text-align: left;
@@ -211,8 +211,37 @@ td {
 }
 
 #sponsors h3 {
+  margin: 0 0 8px 0;
   font-size: 1.125rem;
   font-weight: 600;
+}
+
+.platinum {
+  margin: 0 0 38px 0;
+}
+
+.gold,
+.silver {
+  margin: 0 0 33px 0;
+}
+
+.support {
+  margin: 0 0 22px 0;
+}
+
+.gold img,
+.silver img,
+.support img {
+  width: 300px;
+  margin: 0 40px 5px 0;
+}
+
+.silver img {
+  width: 240px;
+}
+
+.support img {
+  width: 180px;
 }
 
 .tag {
@@ -220,7 +249,6 @@ td {
   padding: 1px 4px;
   border: 1px solid #aaa;
   background-color: #eee;
-  
 }
 
 footer {
