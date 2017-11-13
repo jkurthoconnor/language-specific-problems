@@ -46,7 +46,8 @@ header nav a:hover {
   text-align: center;
   color: #fff;
   background-image: url("../images/front.jpg");
-  background-position: -2px 0;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 
@@ -259,7 +260,8 @@ footer {
   color: #fff;
   background-image: url("../images/people.jpg");
   background-size: cover;
-  background-position: 0 -117px;
+  background-position: center 23%;
+  background-repeat: no-repeat;
 }
 
 footer h2 {
