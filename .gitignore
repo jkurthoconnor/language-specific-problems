@@ -19,8 +19,8 @@ whats_next.md
 
 # vim #
 
-*swp
-
+*.swp
+*.swo
 # enviroment variables #
 
 .env
