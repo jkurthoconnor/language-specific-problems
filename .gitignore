@@ -21,6 +21,9 @@ whats_next.md
 
 *.swp
 *.swo
+*.swn
+*.swm
+
 # enviroment variables #
 
 .env
