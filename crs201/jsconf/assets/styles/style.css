@@ -15,9 +15,9 @@ header nav {
   position: fixed;
   top: 0;
   box-sizing: border-box;
-  height: 55px;
+  height: 54px;
   width: 100%;
-  border-top: 10px solid #f5f5f5;
+  border-top: 9px solid #f5f5f5;
   border-bottom: 1px solid #eee;
   background-color: #fff;
   text-align: center;
@@ -42,7 +42,7 @@ header nav a:hover {
 }
 
 #banner {
-  margin: 55px 0 0;
+  margin: 54px 0 0;
   height: 428px;
   text-align: center;
   color: #fff;
@@ -55,6 +55,8 @@ header nav a:hover {
   display: inline-block;
   height: 80px;
   margin: 150px 0 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4),
+              0 0 30px rgba(0,0,0,.075);
 }
 
 h1 {
@@ -115,7 +117,6 @@ figcaption p {
 #speakers ul {
   max-width: 900px;
   margin: 0 auto;
-
 }
 
 #speakers ul li {
@@ -168,7 +169,6 @@ figcaption p {
 #speakers .overlay h3 {
   margin: 0 0 8px;
   color: #008000;
-
 }
 
 .overlay h3 > a,
@@ -320,12 +320,11 @@ footer h2 {
   margin: 0 0 37px;
 }
 
-
 #footer_bar {
   height: 188px;
   background: rgba(0, 0, 0, .7)
 }
-  
+
 #bar_text {
   max-width: 960px;
   margin: 0 auto;
