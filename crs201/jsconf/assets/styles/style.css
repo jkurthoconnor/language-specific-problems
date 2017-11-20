@@ -131,28 +131,57 @@ figcaption p {
   vertical-align: top;
 }
 
-.speaker_box {
-  position: absolute;
-  display: none;
-  top: 0;
-  left: 0;
-  color: #fff;
+#speakers h3 {
+  font-weight: 700;
+  margin: 37px 0 0;
+  color: #008000;
 }
 
-#speakers li:hover > .speaker_box {
-  display: inline-block;
+#speakers .overlay h3 {
+  margin: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
   box-sizing: border-box;
-  height: 380px;
-  width: 282px;
+  height: 378px;
+  width: 280px;
+  padding: 19px 22px;
+  color: #fff;
   background: rgba(0, 0, 0, .95);
   z-index: 2;
   vertical-align: top;
 }
 
-#speakers h3 {
-  font-weight: 700;
-  margin: 37px 0 0;
+#speakers .overlay p {
+  margin: 0 0 17px;
+  font-size: .8125rem;
+  line-height: .9375rem;
+}
+
+#speakers li:hover > .overlay {
+  display: inline-block;
+}
+
+#speakers .overlay h3 {
+  margin: 0 0 8px;
   color: #008000;
+
+}
+
+.overlay h3 > a,
+.overlay p > a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #008000;
+}
+
+.overlay h3 > a:hover,
+.overlay p > a:hover {
+  text-decoration: underline;
 }
 
 table {
