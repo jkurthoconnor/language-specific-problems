@@ -15,9 +15,9 @@ header nav {
   position: fixed;
   top: 0;
   box-sizing: border-box;
-  height: 54px;
+  height: 55px;
   width: 100%;
-  border-top: 9px solid #f5f5f5;
+  border-top: 10px solid #f5f5f5;
   border-bottom: 1px solid #eee;
   background-color: #fff;
   text-align: center;
@@ -42,7 +42,7 @@ header nav a:hover {
 }
 
 #banner {
-  margin: 54px 0 0;
+  margin: 55px 0 0;
   height: 428px;
   text-align: center;
   color: #fff;
