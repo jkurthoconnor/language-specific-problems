@@ -322,7 +322,9 @@ footer h2 {
 }
 
 #footer_bar {
+  box-sizing: border-box;
   height: 188px;
+  padding: 10px;
   background: rgba(0, 0, 0, .7)
 }
 
@@ -333,7 +335,7 @@ footer h2 {
 }
 
 #bar_text h3 {
-  padding: 16px 0 0;
+  padding: 6px 0 0;
   margin: 0 0 10px;
   font-size: 1.93125rem;
   font-weight: 600;
@@ -369,6 +371,7 @@ footer h2 {
 }
 
 /* breakpoints */
+
 
 @media all and (max-width: 920px) and (min-width: 656px) {
   header nav {
