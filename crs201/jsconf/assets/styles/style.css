@@ -26,7 +26,8 @@ header nav {
 
 header nav li {
   display: inline-block;
-  margin: 13px 24.75px 0;
+  margin:  0 24.75px 1px;
+  line-height: 2.7;
 }
 
 header nav a {
@@ -365,4 +366,12 @@ footer h2 {
 
 #bar_text .button a:hover {
   text-decoration: none;
+}
+
+/* breakpoints */
+
+@media all and (max-width: 920px) {
+  header nav {
+    height: 99px;
+  }
 }
