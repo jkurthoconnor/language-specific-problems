@@ -370,8 +370,35 @@ footer h2 {
 
 /* breakpoints */
 
-@media all and (max-width: 920px) {
+@media all and (max-width: 920px) and (min-width: 656px) {
   header nav {
     height: 99px;
   }
+}
+
+@media all and (max-width: 655px) {
+  header nav {
+    display: none;
+  }
+
+  #banner {
+    margin: 0;
+    height: 300px;
+  }
+
+  #banner img {
+    margin: 90px 0 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 10px 0 0;
+  }
+
+  #banner h2 {
+    font-size: 1.25rem;
+    margin: 11px 0 0;
+  }
+
+
 }
