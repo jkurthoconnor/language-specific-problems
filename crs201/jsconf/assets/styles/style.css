@@ -289,9 +289,17 @@ td:nth-of-type(0n + 2) {
 .gold img,
 .silver img,
 .support img {
-  width: 300px;
   margin: 0 40px 5px 0;
 }
+
+.silver a:last-of-type > img,
+.support a:last-of-type > img {
+  margin: 0 0 5px 0;
+}
+
+.gold img {
+  width: 300px;
+  }
 
 .silver img {
   width: 240px;
@@ -388,6 +396,12 @@ footer h2 {
   }
 }
 
+@media all and (max-width: 759px) {
+  .gold a:nth-of-type(even) > img {
+    margin-right: 0;
+  }
+}
+
 @media all and (max-width: 655px) {
   header nav {
     display: none;
@@ -436,6 +450,10 @@ footer h2 {
  #call > div {
   margin-left: 30px;
   margin-right: 30px;
+  }
+
+ #sponsors > div {
+  margin-left: 10px;
   }
 }
 
