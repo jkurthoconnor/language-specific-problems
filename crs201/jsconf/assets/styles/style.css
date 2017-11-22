@@ -434,6 +434,18 @@ footer h2 {
   }
 }
 
+@media all and (max-width: 410px) {
+  footer {
+    margin-bottom: 15px;
+    box-shadow: 0 15px rgba(0,0,0,.75);
+  }
 
+  #footer_bar {
+    height: 250px;
+  }
 
+  #bar_text .button {
+    margin: 8px 0 0;
+  }
+}
 
