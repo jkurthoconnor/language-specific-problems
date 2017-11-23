@@ -206,6 +206,7 @@ tr {
 th, td {
   padding: 10px;
   border-top: 1px solid #eee;
+  line-height: normal;
   vertical-align: inherit;
 }
 
@@ -214,6 +215,9 @@ th {
   font-weight: 400;
 }
 
+td {
+  padding-right: 30px;
+}
 
 td:nth-of-type(0n + 2) {
   padding: 10px 10px 12px 0px;
@@ -445,15 +449,43 @@ footer h2 {
   main {
     margin: 0;}
 
- #schedule,
- #location > div,
- #call > div {
-  margin-left: 30px;
-  margin-right: 30px;
+ tr {
+  position: relative;
+  display: block;
+  border-top: 1px solid #efefef;
   }
 
- #sponsors > div {
-  margin-left: 10px;
+  td {
+    display: block;
+    border: none;
+  }
+
+  th {
+    display: block;
+    padding: 20px;
+    border: none;
+    text-align: right;
+  }
+
+  .speaker_photo {
+    position: absolute;
+    top: 0;
+    left: 10px;
+  }
+
+  #schedule img {
+    width: 80px;
+  }
+
+  #schedule > table,
+  #location > div,
+  #call > div {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  #sponsors > div {
+    margin-left: 10px;
   }
 }
 
