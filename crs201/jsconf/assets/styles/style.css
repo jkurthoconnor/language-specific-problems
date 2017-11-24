@@ -155,7 +155,7 @@ figcaption p {
   box-sizing: border-box;
   height: 378px;
   width: 280px;
-  padding: 19px 22px;
+  padding: 19px 20px;
   color: #fff;
   background: rgba(0, 0, 0, .95);
   z-index: 2;
@@ -215,10 +215,6 @@ th {
   font-weight: 400;
 }
 
-td {
-  padding-right: 30px;
-}
-
 td:nth-of-type(0n + 2) {
   padding: 10px 10px 12px 0px;
 }
@@ -232,6 +228,7 @@ td:nth-of-type(0n + 2) {
 }
 
 #schedule h3 {
+  margin-top: 8px;
   line-height: 1.4;
 }
 
@@ -317,6 +314,7 @@ td:nth-of-type(0n + 2) {
   font-size: .45rem;
   padding: 1px 4px;
   border: 1px solid #aaa;
+  vertical-align: middle;
   background-color: #eee;
 }
 
@@ -406,7 +404,7 @@ footer h2 {
   }
 }
 
-@media all and (max-width: 655px) {
+@media all and (max-width: 654px) {
   header nav {
     display: none;
   }
@@ -430,26 +428,11 @@ footer h2 {
     margin: 11px 0 0;
   }
 
-  footer {
-    padding: 28px 0;
-  }
-
-  footer h2 {
-    font-size: 2.1875rem;
-    margin: 0 0 28px -2px;
-  }
-
-  #bar_text p:nth-of-type(0n + 2) {
-    margin: 0;
-    line-height: 25px;
-  }
-}
-
-@media all and (max-width: 654px) {
   main {
-    margin: 0;}
+    margin: 0;
+  }
 
- tr {
+  tr {
   position: relative;
   display: block;
   border-top: 1px solid #efefef;
@@ -486,6 +469,20 @@ footer h2 {
 
   #sponsors > div {
     margin-left: 10px;
+  }
+  
+  footer {
+    padding: 28px 0;
+  }
+
+  footer h2 {
+    font-size: 2.1875rem;
+    margin: 0 0 28px -2px;
+  }
+
+  #bar_text p:nth-of-type(0n + 2) {
+    margin: 0;
+    line-height: 25px;
   }
 }
 
