@@ -84,7 +84,7 @@ h3 {
 }
 
 h5 {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-size: 1.13rem;
   font-weight: 700;
   color: #008000;
@@ -204,19 +204,28 @@ tr {
 }
 
 th, td {
-  padding: 10px;
   border-top: 1px solid #eee;
   line-height: normal;
   vertical-align: inherit;
 }
 
+td {
+  padding: 10px 20px 9px 10px;
+}
+
+tr:nth-of-type(0n + 1) > th,
+tr:nth-of-type(0n + 2) > th {
+  padding: 10px;
+}
+
 th {
+  padding: 10px 10px 9px 10px;
   font-size: 1.5rem;
   font-weight: 400;
 }
 
 td:nth-of-type(0n + 2) {
-  padding: 10px 10px 12px 0px;
+  padding: 10px 10px 9px 0px;
 }
 
 #schedule h2 {
@@ -228,8 +237,19 @@ td:nth-of-type(0n + 2) {
 }
 
 #schedule h3 {
-  margin-top: 8px;
   line-height: 1.4;
+}
+
+.tag {
+  font-size: .45rem;
+  padding: 1px 2px;
+  border: 1px solid #aaa;
+  vertical-align: middle;
+  background-color: #eee;
+}
+
+.tag:nth-of-type(0n + 1) {
+  margin-left: 8px;
 }
 
 #location > div,
@@ -308,14 +328,6 @@ td:nth-of-type(0n + 2) {
 
 .support img {
   width: 180px;
-}
-
-.tag {
-  font-size: .45rem;
-  padding: 1px 4px;
-  border: 1px solid #aaa;
-  vertical-align: middle;
-  background-color: #eee;
 }
 
 footer {
