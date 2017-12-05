@@ -107,3 +107,84 @@ console.log(name, saveName);
 
 Solution: 
 The code logs `Bob Bob`. This is because strings are primitive types in JS, thus they are immutable.  While `name.toUpperCase()` returns a new, uppercased string, the original value to which `name` points remains unchanged.
+
+
+5. Arithmetic Integer
+
+Here is the code for the program:
+
+```javascript
+var number1 = prompt('Enter the first number:');
+var number2 = prompt('Enter the second number:');
+
+console.log(number1 + ' + ' + number2 + ' = ' + (number1 + number2));
+console.log(number1 + ' - ' + number2 + ' = ' + (number1 - number2));
+console.log(number1 + ' * ' + number2 + ' = ' + (number1 * number2));
+console.log(number1 + ' / ' + number2 + ' = ' + Math.floor(number1 / number2));
+console.log(number1 + ' % ' + number2 + ' = ' + (number1 % number2));
+console.log(number1 + ' ** ' + number2 + ' = ' + Math.pow(number1, number2));
+```
+
+Here are the expected results:
+
+```bash
+Enter the first number: 23
+Enter the second number: 17
+
+23 + 17 = 40
+23 - 17 = 6
+23 * 17 = 391
+23 / 17 = 1
+23 % 17 = 6
+23 ** 17 = 1.4105003956066297e+23
+```Enter the first number: 23
+Enter the second number: 17
+
+23 + 17 = 40
+23 - 17 = 6
+23 * 17 = 391
+23 / 17 = 1
+23 % 17 = 6
+23 ** 17 = 1.4105003956066297e+23
+```
+
+Solution:
+
+The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original.
+
+```javascript
+      var number1 = Number(prompt('Enter the first number:'));
+      var number2 =  Number(prompt('Enter the second number:'));
+
+      console.log(number1 + ' + ' + number2 + ' = ' + (number1 + number2));
+      console.log(number1 + ' - ' + number2 + ' = ' + (number1 - number2));
+      console.log(number1 + ' * ' + number2 + ' = ' + (number1 * number2));
+      console.log(number1 + ' / ' + number2 + ' = ' + Math.floor(number1 / number2));
+      console.log(number1 + ' % ' + number2 + ' = ' + (number1 % number2));
+      console.log(number1 + ' ** ' + number2 + ' = ' + Math.pow(number1, number2));
+```
+
+
+6. Counting the Number of Characters
+
+In this exercise, you will write a program that asks the user for a phrase, then outputs the number of characters in that phrase. Go over the documentation for String to find an appropriate method to use.
+
+```javascript
+Please enter a phrase: walk
+// console output
+There are 4 characters in "walk".
+
+Please enter a phrase: walk, don't run
+// console output
+There are 15 characters in "walk, don't run".
+```
+
+
+Solution:
+
+```javascript
+var phrase = prompt('Please enter a phrase:');
+var charCount = phrase.length;
+
+console.log('There are ' + charCount + ' characters in "' + phrase + '".');
+```
