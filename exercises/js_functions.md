@@ -115,66 +115,135 @@ Explanation:
   `myVar` is never explicity declared in this program. The function code simply assigns a value to `myVar`. Variable reference and variable assignment work differently when the variable is not declared in an available scope.  Referencing an undeclared / unavailable variable results in a ReferenceError, but assigning a value to an undeclared variable simply forces the variable to become a property of the global object, which is almost the same as declaring it in global scope.  Thus, because the logging occurs after the function call that assigns a value to `myVar`, the program outputs `This is global`.
 
 
-## Problem
+## Problem 6
+
+What will the following code log to the console and why?
 
 ```javascript
+var a = 7;
 
+function myValue(b) {
+  b += 10;
+}
+
+myValue(a);
+console.log(a);
 ```
 
 ### Solution
 
-```javascript
+Output:
+  7
 
-```
+Explanation:
+  `myValue` does nothing to reassign the globally-scoped `a`.  Yes, the value to wich `a` points is passed in and incremented by 10, but it is only stored as the function-scoped `b`, with no relation to `a`. Thus, when `a` is logged it remains with its originally assigned value of 7.
 
+## Problem 7
 
-## Problem
-
-```javascript
-
-```
-
-### Solution
+What will the following code log to the console and why?
 
 ```javascript
+var a = 7;
 
-```
+function myValue(a) {
+  a += 10;
+}
 
-
-## Problem
-
-```javascript
-
+myValue(a);
+console.log(a);
 ```
 
 ### Solution
 
-```javascript
+Output:
+  7
 
-```
+Explanation:
+  Just as in the previous problem, the `myValue` function does nothing to change the value to which global-scoped `a` points. While the function variable is also named `a`, this is not the global `a`, and so the function variable shadows the global variable; incrementing `a` in the function only increments the value passed in, not the actual value to which global-scope `a` points.
 
-
-## Problem
-
-```javascript
-
-```
-
-### Solution
+## Problem 8
 
 ```javascript
+var a = [1, 2, 3];
 
-```
+function myValue(b) {
+  b[2] += 7;
+}
 
-
-## Problem
-
-```javascript
-
+myValue(a);
+console.log(a);
 ```
 
 ### Solution
 
-```javascript
+Output:
+  [1, 2, 10]
 
+Explanation:
+  The value of `a` is passed in, and because `a`'s value is an object, the value passed is reference to the object itself. Thus the incrementation is actually mutating the array object to which both `a` and `b` point. Therefore, logging `a` in global scope thus outputs the value of `a` with the element at index 2 incremented by 7.
+
+
+## Problem 9
+
+```javascript
+console.log(a);
+
+var a = 1;
 ```
+
+### Solution
+
+Output:
+  undefined
+Explanation:
+  `undefined` is the value of a declared variable that has not been explicitly assigned a value.  In this code, the variable declaration is hoisted to the top but the assignment remains after the logging. So `undefined` is logged to the console.
+
+## Problem 10
+
+```javascript
+logValue();
+
+function logValue() {
+  console.log('Hello, world!');
+}
+```
+
+### Solution
+
+Output:
+  Hello, world!
+
+Explanation:
+  Because of hoisting, the entire function declaration, block included, is hoistedto the top of the code. Thus the Javascript interpreter already has available to it the `logValue` function at the point in the program when `logValue` is called.
+
+Further Exploration:
+
+What does this code log? What is its hoisted equivalent?
+
+```javascript
+var logValue = 'foo';
+
+function logValue() {
+  console.log('Hello, world!');
+}
+
+console.log(typeof logValue);
+```
+
+### Solution
+
+The hoisted equivalent:
+
+```javascript
+function logValue() {
+  console.log('Hello, world!');
+  }
+
+logValue = 'foo';
+
+console.log(typeof logValue);
+```
+
+Output:
+  Hello, world!
+  string
