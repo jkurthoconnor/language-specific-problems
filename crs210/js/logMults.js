@@ -2,14 +2,18 @@ var value;
 
 function logMultiples(number) {
   var i;
-  var total;
+  var maxOdd;
 
-  for (i = 1; ; i += 2) {
-    total = i * number;
-    if (total > 100) {
+  for (i = 100; i >= number ; i--) {
+    if (i % number === 0 && i % 2 === 1) {
+      maxOdd = i;
       break;
-    } else if (total % 2 == 1) {
-    console.log(String(total));
+    }
+  }
+
+  for (i = maxOdd; i >= number; i -= number) {
+    if (i % 2 === 1) {
+      console.log(String(i));
     }
   }
 }
