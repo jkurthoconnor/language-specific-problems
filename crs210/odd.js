@@ -3,7 +3,7 @@ function isOdd(num) {
 }
 
 function logOddNumbers(limit) {
-  for (i = 1; i <= limit; i++) {
+  for (var i = 1; i <= limit; i++) {
     if (isOdd(i)) {
       console.log(i);
     }
