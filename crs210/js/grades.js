@@ -30,4 +30,4 @@ function letterGrade() {
 }
 
 getGrades();
-console.log(letterGrade());
+console.log(String(letterGrade()));
