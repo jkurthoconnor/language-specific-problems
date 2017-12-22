@@ -1,6 +1,8 @@
 var grade1;
 var grade2;
 var grade3;
+var finalGrade;
+var message = 'Based on the average of your three scores, your grade is ';
 
 function getGrades() {
   grade1 = Number(prompt('Enter score 1:'));
@@ -18,9 +20,9 @@ function letterGrade() {
 
   if (avg >= 90) {
     letter = 'A';
-    } else if (avg < 90 && avg >= 70) {
+    } else if (avg >= 70) {
     letter = 'B';
-    } else if (avg < 70 && avg >= 50) {
+    } else if (avg >= 50) {
     letter = 'C';
     } else {
     letter = 'F';
@@ -30,4 +32,5 @@ function letterGrade() {
 }
 
 getGrades();
-console.log(String(letterGrade()));
+finalGrade = String(letterGrade());
+console.log(message + finalGrade);
