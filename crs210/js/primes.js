@@ -3,8 +3,6 @@ function isPrime(number) {
 
   if (number < 2) {
     return false;
-  } else if (number === 2) {
-    return true;
   }
 
   for (i = 2; i <= number / 2; i++) {
