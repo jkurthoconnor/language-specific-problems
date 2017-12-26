@@ -14,20 +14,19 @@ function isPrime(number) {
 }
 
 function checkGoldbach(n) {
-  var result = [];
   var x;
 
   if (n % 2 !== 0 || n < 4) {
-    result = null;
+    console.log(null);
+    return;
   }
 
   for (i = 2; i <= n / 2; i++) {
     x = n - i;
     if (isPrime(x) && isPrime(i)) {
-      result.push([i, x]);
+      console.log(i + ', ' + x);
     }
   }
-  console.log(result);
 }
 
 checkGoldbach(1);
