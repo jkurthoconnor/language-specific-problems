@@ -33,7 +33,7 @@ If the code formatting is desired, then the declaraton and assignment could use 
 ```
 
 
-2. Go over the code.  What does ie log to the console?
+2. Go over the code.  What does it log to the console?
 
 ```javascript
 var myBoolean = true;
