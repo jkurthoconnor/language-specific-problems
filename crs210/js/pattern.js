@@ -12,7 +12,7 @@ function generatePattern(n) {
     }
 
     for (k = 1; ; k++) {
-      if (j + k > n + 1) {
+      if (k > n - i) {
         break;
       }
       line += '*';
@@ -25,4 +25,3 @@ function generatePattern(n) {
 generatePattern(1);
 generatePattern(4);
 generatePattern(8);
-generatePattern(10);
