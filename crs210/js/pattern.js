@@ -5,7 +5,7 @@ function generatePattern(n) {
   var k;
 
   for (i = 1; i <= n; i++) {
-    line = ''
+    line = '';
 
     for (j = 1; j <= i; j++) {
       line += String(j);
