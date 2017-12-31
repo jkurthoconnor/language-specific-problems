@@ -5,20 +5,20 @@ function generatePattern(n) {
   var k;
 
   for (i = 1; i <= n; i++) {
-    line = [];
+    line = ''
 
     for (j = 1; j <= i; j++) {
-      line.push(String(j));
+      line += String(j);
     }
 
     for (k = 1; ; k++) {
       if (j + k > n + 1) {
         break;
       }
-      line.push('*');
+      line += '*';
     }
 
-    console.log(String(line));
+    console.log(line);
   }
 
  // log n rows of n chars
