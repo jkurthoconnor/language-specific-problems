@@ -14,6 +14,7 @@ function isPrime(number) {
 }
 
 function checkGoldbach(n) {
+  var i;
   var x;
 
   if (n % 2 !== 0 || n < 4) {
@@ -29,9 +30,9 @@ function checkGoldbach(n) {
   }
 }
 
-checkGoldbach(1);
-checkGoldbach(2);
-checkGoldbach(3);
+// checkGoldbach(1);
+// checkGoldbach(2);
+// checkGoldbach(3);
 checkGoldbach(4);
 checkGoldbach(12);
 checkGoldbach(100);
