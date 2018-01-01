@@ -50,4 +50,4 @@ function doubleStars(limit) {
 generatePattern(10);
 generatePattern(20);
 generatePattern(6);
-generatePattern(8); 
+generatePattern(8);
