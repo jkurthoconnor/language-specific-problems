@@ -1,25 +1,27 @@
 function indexOf(firstString, secondString) {
   var i;
   var j;
-  var initialMatch;
+  var sourceIdx;
 
-  //  find initial match
-  for (i = 0; i < secondString.length; i++) {
-    for (j = 0; j < firstString.length ; j++) {
+  for (i = 0; i < firstString.length; i++) {
+    sourceIdx = 0;
 
-      if (firstString[j] === secondString[i]) {
-        initialMatch = j;
-      }
+    if (firstString[i] === secondString[sourceIdx]) {
+
+      for (j = i + 1; ; j++) {
+        if (sourceIdx >= secondString.length - 1) {
+          return i;
+        }
+
+        sourceIdx++;
+
+        if (firstString[j] !== secondString[sourceIdx]) {
+          break;
+        }
+      } 
     }
   }
-  //  search for subsequent matches
-
-  // loop chars of first
-  // until find initial match of char in first and second[0]
-  // compare first[match + 1] with second[1]
-  // if ===, then compare first[match + 2 with second[2]
-  // else continue with search for initial match
-  return initialMatch || -1;
+  return -1;
 }
 
 function lastIndexOf(firstString, secondString) {
