@@ -8,20 +8,19 @@ function indexOf(firstString, secondString) {
     sourceIdx = 0;
 
     if (firstString[i] === secondString[sourceIdx]) {
-
       for (j = i + 1; ; j++) {
         if (sourceIdx >= secondString.length - 1) {
           return i;
         }
 
         sourceIdx++;
-
         if (firstString[j] !== secondString[sourceIdx]) {
           break;
         }
       } 
     }
   }
+
   return -1;
 }
 
@@ -35,20 +34,19 @@ function lastIndexOf(firstString, secondString) {
     sourceIdx = 0;
 
     if (firstString[i] === secondString[sourceIdx]) {
-
       for (j = i + 1; ; j++) {
         if (sourceIdx >= secondString.length - 1) {
           return i;
         }
 
         sourceIdx++;
-
         if (firstString[j] !== secondString[sourceIdx]) {
           break;
         }
       } 
     }
   }
+
   return -1;
 }
 
