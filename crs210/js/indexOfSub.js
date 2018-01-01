@@ -2,8 +2,9 @@ function indexOf(firstString, secondString) {
   var i;
   var j;
   var sourceIdx;
+  var viableLength = firstString.length - secondString.length;
 
-  for (i = 0; i < firstString.length; i++) {
+  for (i = 0; i <= viableLength; i++) {
     sourceIdx = 0;
 
     if (firstString[i] === secondString[sourceIdx]) {
