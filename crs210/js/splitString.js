@@ -3,22 +3,22 @@ function splitString(string, delimiter) {
   var toLog = '';
   var errorMsg = 'ERROR: No delimiter';
 
-  if (delimiter === undefined) {
-    return console.log(errorMsg);
+  switch (delimiter) {
+    case undefined:
+      return console.log(errorMsg);
+    case '':
+      for (i = 0; i < string.length; i++) {
+        console.log(string[i]);
+      }
+      return;
   }
 
-  if (delimiter === '') {
-    for (i = 0; i < string.length; i++) {
-      console.log(string[i]);
-    }
-  } else {
-    for (i = 0; i < string.length; i++) {
-      if (string[i] === delimiter) {
-        console.log(toLog);
-        toLog = '';
-      } else {
-        toLog += string[i];
-      }
+  for (i = 0; i < string.length; i++) {
+    if (string[i] === delimiter) {
+      console.log(toLog);
+      toLog = '';
+    } else {
+      toLog += string[i];
     }
   }
 
