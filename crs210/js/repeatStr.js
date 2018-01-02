@@ -2,7 +2,7 @@ function repeat(string, number) {
   var count = 1;
   var toLog = '';
 
-  if (typeof(number) !== 'number' || number < 0) {
+  if (typeof number !== 'number' || number < 0) {
     return undefined;
   }
 
