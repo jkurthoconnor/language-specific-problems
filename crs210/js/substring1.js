@@ -8,9 +8,10 @@ function substr(string, start, length) {
   stopIdx = (length + startIdx) - 1;
 
   for (i = startIdx; i <= stopIdx; i++) {
-    if (i >= string.length) {
+    if (string[i] === undefined) {
       break;
     }
+
     subString += string[i];
   }
 
