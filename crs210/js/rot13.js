@@ -6,7 +6,7 @@ function rot13(string) {
 
   if (typeof string !== 'string') {
     return 'ERROR: This program only encrypts strings.';
-    }
+  }
 
   for (i = 0; i < string.length; i++) {
     code = string.charCodeAt(i);
