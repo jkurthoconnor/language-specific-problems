@@ -10,7 +10,7 @@ function toLowerCase(string) {
     } else { 
       converted += string[i];
     }
-  }
+  :
 
   return converted;
 }
