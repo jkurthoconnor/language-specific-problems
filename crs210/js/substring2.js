@@ -10,19 +10,15 @@ var i;
     end = holder;
   }
 
-  if (start > end) {
-    swapValues();
-  } else if (start === end) {
-    return '';
-  } else if (end === undefined) {
+  if (end === undefined) {
     end = string.length;
   }
 
-  if (start < 0 || Number(start) !== start) {
+  if (start < 0 || isNaN(start)) {
     start = 0;
   }
 
-  if (end < 0 || Number(end) !== end) {
+  if (end < 0 || isNaN(end)) {
     end = 0;
   }
 
@@ -33,6 +29,10 @@ var i;
   if (end > string.length) { 
     end = string.length;
   }
+
+  if (start > end) {
+    swapValues();
+  } 
 
   for (i = start; i < end; i++) {
     subString += string[i];
