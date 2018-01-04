@@ -1,25 +1,33 @@
 function rot13(string) {
   var i;
-  var code;
-  var rotCode;
+  var charCode;
+  var rotCharCode;
   var translation = '';
+
+  function inFirstHalfAlpha(code) {
+    return (code >= 97 && code <= 109) || (code >= 65 && code <= 77);
+  }
+
+  function inLastHalfAlpha(code) {
+    return  (code >= 110 && code <= 122) || (code >= 78 && code <= 90);
+  }
 
   if (typeof string !== 'string') {
     return 'ERROR: This program only encrypts strings.';
   }
 
   for (i = 0; i < string.length; i++) {
-    code = string.charCodeAt(i);
+    charCode = string.charCodeAt(i);
 
-    if ((code >= 97 && code <= 109) || (code >= 65 && code <= 77)) {
-      rotCode = code + 13;
-    } else if ((code >= 110 && code <= 122) || (code >= 78 && code <= 90)) {
-      rotCode = code - 13;
+    if (inFirstHalfAlpha(charCode)) {
+      rotCharCode = charCode + 13;
+    } else if (inLastHalfAlpha(charCode)) {
+      rotCharCode = charCode - 13;
     } else {
-      rotCode = code;
+      rotCharCode = charCode;
     }
 
-    translation += String.fromCharCode(rotCode);
+    translation += String.fromCharCode(rotCharCode);
   }
 
   return translation;
