@@ -67,6 +67,7 @@ Line 57: logs '!'; `(myOtherString || myArray)` returns `myArray`, which is tran
 
 3. Go over the code below and specify how many possible flows/paths there are.
 
+```javascript
 if (condition1) {
   // ...
   if (condition2) {
@@ -137,7 +138,8 @@ Enter the second number: 17
 23 / 17 = 1
 23 % 17 = 6
 23 ** 17 = 1.4105003956066297e+23
-```Enter the first number: 23
+
+Enter the first number: 23
 Enter the second number: 17
 
 23 + 17 = 40
@@ -150,7 +152,7 @@ Enter the second number: 17
 
 Solution:
 
-The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original.
+The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original, but only partially; note that it still relies on the implicit now to make the string concatenation work. Ideally, we'd not rely on any implicit conversion.
 
 ```javascript
       var number1 = Number(prompt('Enter the first number:'));
