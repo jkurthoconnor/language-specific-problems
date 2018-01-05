@@ -39,27 +39,63 @@ logOdds(2, 292);
 ```
 
 ## 2. Even Numbers
-
-```javascript
-
-```
-
+Log all even numbers from `1` to `99`. inclusive, to the console. Log all numbers on separate lines.
 
 ### Solution
 
 ```javascript
+function logEvens(start, stop) {
+  var i;
+  var firstEven;
 
+  firstEven = (start % 2 === 0) ? start : start + 1;
+
+  for (i = firstEven; i <= stop; i += 2) {
+    console.log(i);
+  }
+}
+
+logEvens(1, 99);
+logEvens(2, 292);
 ```
+
+
 ## 3.How Big is the Room
 
-```javascript
 
-```
+Build a program that asks a user for the length and width of a room in meters, and then logs to the console the area of the room in both square meters and square feet.
+
+Note: 1 square meter == 10.7639 square feet
+
+Do not worry about validating the input at this time. Use the prompt() function to collect user input.
+
+Example:
+
+Enter the length of the room in meters:
+10
+Enter the width of the room in meters:
+7
+The area of the room is 70.00 square meters (753.47 square feet).
+
 
 
 ### Solution
 
 ```javascript
+var FEET_PER_METER = 10.7639;
+var meterLength;
+var meterWidth;
+
+function roomDimensions(length, width) {
+  var meterArea = (length * width).toFixed(2);
+  var feetArea =(meterArea * FEET_PER_METER).toFixed(2);
+  return 'The area of the room is ' + meterArea + ' square meters (' + feetArea + ' square feet).'
+}
+
+meterLength = parseInt(prompt('Enter the length of the room in meters:'), 10);
+meterWidth = parseInt(prompt('Enter the width of the room in meters:'), 10);
+
+console.log(roomDimensions(meterLength, meterWidth));
 
 ```
 ## 4.Tip Calculator
