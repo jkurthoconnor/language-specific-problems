@@ -97,6 +97,44 @@ meterWidth = parseInt(prompt('Enter the width of the room in meters:'), 10);
 
 console.log(roomDimensions(meterLength, meterWidth));
 
+// further exploration: add unit selection
+var SQMETER_TO_FEET = 10.7639;
+var SQFEET_TO_METERS = 0.0929;
+var conversionFormula;
+var length;
+var width;
+var entryUnit;
+var displayUnit;
+var convertedDisplayUnit;
+
+function setUnits(units) {
+  if (units === 'm') {
+    conversionFormula = SQMETER_TO_FEET;
+    displayUnit = 'meters';
+    convertedDisplayUnit = 'feet';
+  } else if (units === 'f') {
+    conversionFormula = SQFEET_TO_METERS;
+    displayUnit = 'feet';
+    convertedDisplayUnit = 'meters';
+  }
+}
+
+function roomDimensions(l, w) {
+  var area = (l * w).toFixed(2);
+  var convertedArea =(area * conversionFormula).toFixed(2);
+  return 'The area of the room is ' + area + ' square ' + displayUnit + ' (' + convertedArea + ' square ' + convertedDisplayUnit + ' ).';
+}
+
+entryUnit = prompt('Enter "m" for meters, "f" for feet.');
+
+setUnits(entryUnit);
+
+length = parseInt(prompt('Enter the length of the room in ' + displayUnit + ':'), 10);
+width = parseInt(prompt('Enter the width of the room in ' + displayUnit + ':'), 10);
+
+console.log(roomDimensions(length, width));
+    
+
 ```
 ## 4.Tip Calculator
 
