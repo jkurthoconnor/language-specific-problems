@@ -192,62 +192,68 @@ The product of the integers between 1 and 6 is 720.
 ### Solution
 
 ```javascript
-      var end;
-      var operation;
-      var i;
-      var result = 1;
-      var MESSAGE;
+var end;
+var operation;
+var result;
+var MESSAGE;
 
-      function retrieveInt() {
-        var digit;
+function retrieveInt() {
+  var digit;
 
-        while (true) {
-          digit = prompt('Please enter an integer greater than 0:');
+  while (true) {
+    digit = prompt('Please enter an integer greater than 0:');
 
-          if (!!digit.match(/^\d+$/) && !digit.match(/0/)) {
-            break;
-          }
-
-          alert('Invalid entry. Please try again.');
-        }
-
-        return parseInt(digit, 10);
-      }
-
-      function retrieveOp() {
-        var letter;
-
-        while (true) {
-          letter = prompt('Enter "s" to compute the sum, or "p" to compute the product.');
-
-          if (!!letter.match(/^[sSpP]$/)) {
-            break;
-          }
-
-          alert('Invalid entry. Please try again.');
-        }
-
-      if (letter.toLowerCase() === 's') {
-        return 'sum';
-      } else if (letter.toLowerCase() === 'p') {
-        return 'product';
-      }
+    if (!!digit.match(/^\d+$/) && !digit.match(/0/)) {
+      break;
     }
 
-      end = retrieveInt();
-      operation = retrieveOp();
+    alert('Invalid entry. Please try again.');
+  }
 
-      for (i = 2; i <= end; i++) {
-        if (operation === 'sum') {
-          result += i;
-        } else if (operation === 'product') {
-          result *= i;
-        }
-      }
+  return parseInt(digit, 10);
+}
 
-      MESSAGE = 'The ' + operation + ' of the integers between 1 and ' + end.toFixed() + ' is ' + result.toFixed() + '.';
+function retrieveOp() {
+  var letter;
 
-      console.log(MESSAGE);
+  while (true) {
+    letter = prompt('Enter "s" to compute the sum, or "p" to compute the product.');
+
+    if (!!letter.match(/^[sSpP]$/)) {
+      break;
+    }
+
+    alert('Invalid entry. Please try again.');
+  }
+
+  if (letter.toLowerCase() === 's') {
+    return 'sum';
+  } else {
+    return 'product';
+  }
+}
+
+function calculate(endPoint, process) {
+  var i;
+  var total = 1;
+
+  for (i = 2; i <= endPoint; i++) {
+    if (process === 'sum') {
+      total += i;
+    } else if (process === 'product') {
+      total *= i;
+    }
+  }
+
+  return total;
+}
+
+end = retrieveInt();
+operation = retrieveOp();
+result = calculate(end, operation);
+MESSAGE = 'The ' + operation + ' of the integers between 1 and ' + end.toFixed() + ' is ' + result.toFixed() + '.';
+
+console.log(MESSAGE);
 ```
 
 ## 6.Short Long Short
