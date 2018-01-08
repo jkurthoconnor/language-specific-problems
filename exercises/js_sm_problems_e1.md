@@ -138,7 +138,14 @@ console.log(roomDimensions(length, width));
 ```
 ## 4.Tip Calculator
 
-```javascript
+Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip, and then log both the tip and the total amount of the bill to the console. Your can ignore input validation and assume that the user will put in numbers.
+
+```bash
+What is the bill? 200
+What is the tip percentage? 15
+
+The tip is $30.00
+The total is $230.00
 
 ```
 
@@ -146,6 +153,23 @@ console.log(roomDimensions(length, width));
 ### Solution
 
 ```javascript
+function tipCalculator() {
+  var billAmount;
+  var tipPercent;
+  var TIP;
+  var BILL_TOTAL; 
+
+  billAmount = parseFloat(prompt('What is the bill?'));
+  tipPercent = parseFloat(prompt('What is the tip percentage?'));
+  TIP = billAmount * (tipPercent / 100);
+  BILL_TOTAL = TIP + billAmount; 
+
+  console.log('The tip is $' + TIP.toFixed(2));
+  console.log('The total is $' + BILL_TOTAL.toFixed(2));
+}
+
+tipCalculator();
+    
 
 ```
 ## 5.Sum or Product of Consecutive Integers
