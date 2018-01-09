@@ -195,9 +195,9 @@ The product of the integers between 1 and 6 is 720.
 var end;
 var operation;
 var result;
-var MESSAGE;
+var message;
 
-function retrieveInt() {
+function retrieveInteger() {
   var digit;
 
   while (true) {
@@ -213,7 +213,7 @@ function retrieveInt() {
   return parseInt(digit, 10);
 }
 
-function retrieveOp() {
+function retrieveOperation() {
   var letter;
 
   while (true) {
@@ -248,24 +248,34 @@ function calculate(endPoint, process) {
   return total;
 }
 
-end = retrieveInt();
-operation = retrieveOp();
+end = retrieveInteger();
+operation = retrieveOperation();
 result = calculate(end, operation);
-MESSAGE = 'The ' + operation + ' of the integers between 1 and ' + end.toFixed() + ' is ' + result.toFixed() + '.';
+message = 'The ' + operation + ' of the integers between 1 and ' + end.toFixed() + ' is ' + result.toFixed() + '.';
 
-console.log(MESSAGE);
+console.log(message);
 ```
 
 ## 6.Short Long Short
+Write a function that takes two strings as arguments, determines the longer of the two strings, and then returns the result of concatenating the shorter string, the longer string, and the shorter string once again. You may assume that the strings are of different lengths.
 
 ```javascript
-
+shortLongShort('abc', 'defgh');    // "abcdefghabc"
+shortLongShort('abcde', 'fgh');    // "fghabcdefgh"
+shortLongShort('', 'xyz');         // "xyz"
 ```
 
 
 ### Solution
 
 ```javascript
+function shortLongShort(str1, str2) {
+  if (str1.length > str2.length) {
+    return str2 + str1 + str2;
+  } else {
+    return str1 + str2 + str1;
+  }
+}
 
 ```
 ## 7.Leap Years Part 1
