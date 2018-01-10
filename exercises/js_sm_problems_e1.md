@@ -279,8 +279,24 @@ function shortLongShort(str1, str2) {
 
 ```
 ## 7.Leap Years Part 1
+Leap years occur in every year that is evenly divisible by 4, unless the year is also divisible by 100. If the year is evenly divisible by 100, then it is not a leap year, unless the year is also evenly divisible by 400.
 
-```javascript
+Assume this rule is valid for any year greater than year 0. Write a function that takes any year greater than 0 as input and returns `true` if the year is a leap year, or `false` if it is not a leap year.
+
+```bash
+isLeapYear(2016);      // true
+isLeapYear(2015);      // false
+isLeapYear(2100);      // false
+isLeapYear(2400);      // true
+isLeapYear(240000);    // true
+isLeapYear(240001);    // false
+isLeapYear(2000);      // true
+isLeapYear(1900);      // false
+isLeapYear(1752);      // true
+isLeapYear(1700);      // false
+isLeapYear(1);         // false
+isLeapYear(100);       // false
+isLeapYear(400);       // true
 
 ```
 
@@ -288,11 +304,31 @@ function shortLongShort(str1, str2) {
 ### Solution
 
 ```javascript
-
+function isLeapYear(year) {
+  return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+}
 ```
 ## 8.Leap Years Part 2
+Adapt the above solution to account for the following new data:
 
-```javascript
+  - Under the Julian Calendar, leap years occurred in any year evenly divisible by 4;
+  - Under the Gregorian Calendar, adopted in 1752, leap years occur as described in the previous exercise.
+
+
+```bash
+isLeapYear(2016);      // true
+isLeapYear(2015);      // false
+isLeapYear(2100);      // false
+isLeapYear(2400);      // true
+isLeapYear(240000);    // true
+isLeapYear(240001);    // false
+isLeapYear(2000);      // true
+isLeapYear(1900);      // false
+isLeapYear(1752);      // true
+isLeapYear(1700);      // true
+isLeapYear(1);         // false
+isLeapYear(100);       // true
+isLeapYear(400);       // true
 
 ```
 
@@ -300,19 +336,44 @@ function shortLongShort(str1, str2) {
 ### Solution
 
 ```javascript
+function isLeapYear(year) {
+  if (year >= 1752) {
+  return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+  }
 
+  return year % 4 === 0;
+}
 ```
 ## 9.Multiples of 3 and 5
+Write a function that computes the sum of all numbers between `1` and some other number, inclusive, that are multiples of `3` or `5`. For instance, if the supplied number is `20`, the result should be `98`
 
-```javascript
-
+```bash
+multisum(3);       // 3
+multisum(5);       // 8
+multisum(10);      // 33
+multisum(1000);    // 234168
 ```
 
 
 ### Solution
 
 ```javascript
+function multisum(int) {
+  var multiples = [];
+  var i;
 
+  for (i = 1; i <= int; i++) {
+    if (i % 3 === 0 || i % 5 === 0) {
+      multiples.push(i);
+    }
+  }
+
+  function sum(a, b) {
+    return a + b;
+  }
+
+  return multiples.reduce(sum);
+}
 ```
 ## 10.ASCII String Value
 
