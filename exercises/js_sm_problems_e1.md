@@ -376,14 +376,28 @@ function multisum(int) {
 }
 ```
 ## 10.ASCII String Value
+Write a function that determines and returns the ASCII string value of a string passed in as an argument. The ASCII string value is the sum of th ASCII values of every character in the string. (You may use `String.prototype.charCodeAt()` to determine the ASCII value of a character.)
 
-```javascript
-
+```bash
+asciiValue('Four score');         // 984
+asciiValue('Launch School');      // 1251
+asciiValue('a');                  // 97
+asciiValue('');                   // 0
 ```
 
 
 ### Solution
 
 ```javascript
+function asciiValue(str) {
+  var i;
+  var value = 0;
+
+  for (i = 0; i < str.length; i++) {
+    value += str.charCodeAt(i);
+  }
+
+  return value;
+}
 
 ```
