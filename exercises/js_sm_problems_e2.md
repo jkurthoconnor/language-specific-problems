@@ -38,12 +38,84 @@ function crunch(str) {
 ```
 
 ## 2. Bannerizer
+Write a function that will take a short line of text, and write it to the console log within a box.
+
+
+Examples:
+```bash
+logInBox('To boldly go where no one has gone before.');
+
+
++--------------------------------------------+
+|                                            |
+| To boldly go where no one has gone before. |
+|                                            |
++--------------------------------------------+
+
+logInBox('');
++--+
+|  |
+|  |
+|  |
++--+
+```
 
 ### Solution
 
 ```javascript
-```
+function logInBox(text) {
+  var horizontalFrame = '+-';
+  var paddedRow = '| ';
+  var textRow = paddedRow + text + ' |';
+  var i;
 
+  for (i = 1; i <= text.length; i++) {
+    horizontalFrame += '-';
+  }
+
+  for (i = 1; i <= text.length; i++) {
+    paddedRow += ' ';
+  }
+
+  paddedRow += ' |';
+  horizontalFrame += '-+';
+
+  console.log(horizontalFrame);
+  console.log(paddedRow);
+  console.log(textRow);
+  console.log(paddedRow);
+  console.log(horizontalFrame);
+}
+
+// further exploration: with optional maxWidth argument to enforce truncation
+
+function logInBox(text, maxWidth) {
+  var sliceUpTo;
+  var textRow;
+  var horizontalFrame;
+  var paddedRow;
+
+  if (text.length + 4 > maxWidth) {
+    sliceUpTo = maxWidth - 4;
+    text = text.slice(0, sliceUpTo);
+  }
+
+  textRow = '| ' + text + ' |';
+  horizontalFrame = '+-' + '-'.repeat(text.length) + '-+';
+  paddedRow = '| ' + ' '.repeat(text.length) + ' |';
+
+  console.log(horizontalFrame);
+  console.log(paddedRow);
+  console.log(textRow);
+  console.log(paddedRow);
+  console.log(horizontalFrame);
+}
+
+logInBox('To boldly go where no one has gone before.', 40);
+logInBox('To boldly go where no one has gone before.');
+logInBox('To boldly go where no one has gone before.', 47);
+logInBox('');
+```
 
 ## 3. Stringy Strings
 
