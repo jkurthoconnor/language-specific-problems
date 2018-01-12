@@ -118,19 +118,46 @@ logInBox('');
 ```
 
 ## 3. Stringy Strings
+Write a funciton that takes one argument, a positive integer, and returns a string of alternating '1's and '0's, alway starting with a '1'. The length of thestring should match the given integer.
 
+stringy(6);    // "101010"
+stringy(9);    // "101010101"
+stringy(4);    // "1010"
+stringy(7);    // "1010101"
 
 
 
 ### Solution
 
 ```javascript
+function stringy(reps) {
+  var i;
+  var str = '';
+
+  for (i = 1; i <= reps; i++) {
+    if (i % 2 === 0) {
+      str += '0';
+    } else {
+      str += '1';
+    }
+  }
+  
+  return str;
+}
 ```
 ## 4. Fibonacci Number Location by length
+The Fibonacci series is a series of numbers (1, 1, 2, 3, 5, 8, 13, 21, ...) such that the first two numbers are 1 by definition, and each subsequent number is the sum of the two previous numbers. This series appears throughout the natural world.
 
+Computationally, the Fibonacci series is a simple series, but the results grow at an incredibly rapid rate. For example, the 100th Fibonacci number is 354,224,848,179,261,915,075—that's enormous, especially considering that it takes six iterations just to find the first 2-digit Fibonacci number.
+
+Write a function that calculates and returns the index of the first Fibonacci number that has the number of digits specified by the argument. (The first Fibonacci number has an index of 1.)
+
+You may assume that the argument is always an integer greater than or equal to 2.
 
 ```bash
-
+findFibonacciIndexByLength(2);       // 7
+findFibonacciIndexByLength(10);      // 45
+findFibonacciIndexByLength(16);      // 74
 ```
 
 
