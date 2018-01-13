@@ -164,6 +164,28 @@ findFibonacciIndexByLength(16);      // 74
 ### Solution
 
 ```javascript
+// assuming `length` >= 2
+
+function findFibonacciIndexByLength(length) {
+  var newFib;
+  var fibIdx = 7;
+  var fibLength = 2;
+  var a = 8;
+  var b = 13;
+
+  if (length === 2) {
+    return fibIdx;
+  }
+
+  do {
+    newFib = a + b;
+    fibIdx += 1;
+    a = b;
+    b = newFib;
+  } while (String(newFib).length);
+
+  return fibIdx;
+}
 ```
 ## 5.Right Triangles
 
