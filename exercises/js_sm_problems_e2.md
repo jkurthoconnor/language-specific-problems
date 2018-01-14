@@ -330,12 +330,10 @@ function twice(num) {
 function doubleNum(num) {
   var digits = String(num);
   var slicePoint = digits.length / 2;
+  var firstHalf = digits.slice(0, slicePoint);
+  var secondHalf = digits.slice(slicePoint);
 
-  if (digits.slice(0, slicePoint) === digits.slice(slicePoint)) {
-    return true;
-  }
-
-  return false;
+  return firstHalf === secondHalf;
 }
 ```
 ## 8. Grade Book
