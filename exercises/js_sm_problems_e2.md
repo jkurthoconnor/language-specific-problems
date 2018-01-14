@@ -188,8 +188,32 @@ function findFibonacciIndexByLength(length) {
 }
 ```
 ## 5.Right Triangles
+Write a function that takes a positive integer, `n`, as an argument, and logs a right triangle whose sides each have `n` stars. The hypotenuse of the triangle should have one end at the lower-left of the triangle, and the other end at the upper-right.
+
+
 
 ```bash
+// examples:
+triangle(5);
+
+    *
+   **
+  ***
+ ****
+*****
+
+triangle(9);
+
+        *
+       **
+      ***
+     ****
+    *****
+   ******
+  *******
+ ********
+*********
+
 
 ```
 
@@ -197,6 +221,20 @@ function findFibonacciIndexByLength(length) {
 ### Solution
 
 ```javascript
+// using ES6 `.repeat()`
+function triangle(size) {
+  var i;
+  var row;
+
+  for (i = 1; i <= size; i++) {
+   row = '';
+   row += ' '.repeat(size - i) + '*'.repeat(i);
+   console.log(row);
+  }
+}
+
+triangle(5);
+triangle(9);
 ```
 
 ## 6. Madlibs
