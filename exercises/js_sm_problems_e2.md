@@ -233,19 +233,68 @@ function triangle(size) {
   }
 }
 
+// using only resources available in ES5
+function triangle(size) {
+  var i;
+  var row;
+
+  for (i = 1; i <= size; i++) {
+   row = '';
+   row += repeat(' ', size - i) + repeat('*', i);
+   console.log(row);
+  }
+}
+
+function repeat(str, times) {
+  var i;
+  var result = '';
+
+  for (i = 1; i <= times; i++) {
+    result += str;
+   }
+
+   return result;
+}
+
+triangle(5);
+triangle(9);
+triangle(20);
+    
+
 triangle(5);
 triangle(9);
 ```
 
 ## 6. Madlibs
+Create a simple madlib program that prompts for a noun, a verb, an adverb, and an adjective, and injects them into a story that you create.
 
-```javascript
+```bash
+Enter a noun: dog
+Enter a verb: walk
+Enter an adjective: blue
+Enter an adverb: quickly
+
+// console output
+Do you walk your blue dog quickly? That's hilarious!
 ```
 
 
 ### Solution
 
 ```javascript
+function madLib() {
+  var noun = '';
+  var verb = '';
+  var adjective = '';
+  var adverb = '';
+
+  noun = prompt('Enter a noun:');
+  verb = prompt('Enter a verb:');
+  adjective = prompt('Enter an adjective:');
+  adverb = prompt('Enter an adverb:');
+
+  console.log('So you ' + verb + ' your ' + adjective + ' ' +  noun + ' ' + adverb + ' ? Awesome!!')
+}
 ```
 ## 7. Double Doubles
 
