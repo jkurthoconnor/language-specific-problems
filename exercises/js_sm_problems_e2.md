@@ -329,9 +329,9 @@ function twice(num) {
 
 function doubleNum(num) {
   var digits = String(num);
-  var halfIdx = digits.length / 2;
+  var slicePoint = digits.length / 2;
 
-  if (digits.length % 2 === 0 && (digits.slice(0, halfIdx) === digits.slice(halfIdx))) {
+  if (digits.slice(0, slicePoint) === digits.slice(slicePoint)) {
     return true;
   }
 
