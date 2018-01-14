@@ -182,7 +182,7 @@ function findFibonacciIndexByLength(length) {
     fibIdx += 1;
     a = b;
     b = newFib;
-  } while (String(newFib).length);
+  } while (String(newFib).length < length);
 
   return fibIdx;
 }
