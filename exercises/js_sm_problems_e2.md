@@ -297,9 +297,21 @@ function madLib() {
 }
 ```
 ## 7. Double Doubles
+A double number is an even-length number whose left-side digits are exactly the same as its right-side digits.
+
+Write a function that returns the number provided as an argument multiplied by two, unless the argument is a double number; return double numbers as-is.
 
 
-```bash
+```javascript
+// Examples
+twice(37);          // 74
+twice(44);          // 44
+twice(334433);      // 668866
+twice(444);         // 888
+twice(107);         // 214
+twice(103103);      // 103103
+twice(3333);        // 3333
+twice(7676);        // 7676
 
 ```
 
@@ -307,6 +319,24 @@ function madLib() {
 ### Solution
 
 ```javascript
+function twice(num) {
+  if (doubleNum(num)) {
+    return num;
+  }
+
+  return num * 2
+}
+
+function doubleNum(num) {
+  var digits = String(num);
+  var halfIdx = digits.length / 2;
+
+  if (digits.length % 2 === 0 && (digits.slice(0, halfIdx) === digits.slice(halfIdx))) {
+    return true;
+  }
+
+  return false;
+}
 ```
 ## 8. Grade Book
 
