@@ -378,14 +378,43 @@ function getGrade(g1, g2, g3) {
 }
 ```
 ## 9. Clean UP the Words
-
-```bash
+Given a string that consists of some words and an assortment of non-alphabetic characters, write a function that returns the string with all of the non-alphabetic characters replaced by spaces. If one or more non-alphabetic characters occur in a row, you should only have one space in the result (i.e., the result string should never have consecutive spaces).
+```javascript
+// example
+cleanUp("---what's my +*& line?");    // " what s my line "
 ```
 
 
 ### Solution
 
 ```javascript
+// with regex and `replace`:
+function cleanUp(str) {
+  return str.replace(/[^a-zA-Z]+/g, ' ');
+  }
+  
+// looping
+function cleanUp(str) {
+  var i;
+  var j;
+  var cleanStr = '';
+
+  for (i = 0; i < str.length; i++) {
+    if (str[i].match(/[a-zA-Z]/)) {
+      cleanStr += str[i];
+    } else {
+      cleanStr += ' ';
+      for (j = i + 1; j < str.length; j++) {
+        if (str[j].match(/[a-zA-Z]/)) {
+          i = j - 1;
+          break;
+        }
+      }
+    }
+  }
+
+  return cleanStr;
+}
 ```
 ## 10. What Century is That
 
