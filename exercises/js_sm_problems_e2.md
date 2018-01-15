@@ -434,4 +434,47 @@ century(11201);       // "113th"
 ### Solution
 
 ```javascript
+function century(year) {
+  var cent;
+
+  if (year % 100 === 0) {
+    cent = year / 100;
+  } else {
+    cent = Math.floor(year / 100) + 1;
+  }
+
+  return ordinalString(cent);
+}
+
+function ordinalString(integer) {
+  var digits = String(integer);
+  var onesDigit = digits[digits.length - 1];
+  var tensDigit = digits[digits.length - 2];
+  var ordinalSuffix;
+
+  if (tensDigit === '1') {
+    ordinalSuffix = 'th';
+  } else if (onesDigit === '1') {
+    ordinalSuffix = 'st';
+  } else if (onesDigit === '2') {
+    ordinalSuffix = 'nd';
+  } else if (onesDigit === '3') {
+    ordinalSuffix = 'rd';
+  } else {
+    ordinalSuffix = 'th';
+  }
+
+  return digits + ordinalSuffix;
+}
+
+console.log(century(2000));        // "20th"
+console.log(century(2001));        // "21st"
+console.log(century(1965));        // "20th"
+console.log(century(256));         // "3rd"
+console.log(century(5));           // "1st"
+console.log(century(10103));       // "102nd"
+console.log(century(1052));        // "11th"
+console.log(century(1127));        // "12th"
+console.log(century(11201));       // "113th"
+    
 ```
