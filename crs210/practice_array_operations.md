@@ -240,3 +240,40 @@ function join(arr, separator) {
   return joined;
 }
 ```
+# [Practice Problem: Comparing Arrays](https://launchschool.com/lessons/e2c71a47/assignments/91e2c5cf)
+
+Since the JS equality operators don't examine the values in the arrays, if your want to know whether two arrays contain the same values you will need to write your own function
+
+Write a function named `arraysEqual` that takes two arrays as arguments. The function should return `true` if the arrays contain the same values, or `false` if they do not.
+
+Test the function with arrays that contain numver, string, and boolean values.
+
+```javascript
+arraysEqual([1], [1]);                               // true
+arraysEqual([1], [2]);                               // false
+arraysEqual([1, 2], [1, 2, 3]);                      // false
+arraysEqual([1, 'hi', true], [1, 'hi', true]);       // true
+arraysEqual([1, 'hi', true], [1, 'hi', false]);      // false
+arraysEqual([1, 'hi', true], [1, 'hello', true]);    // false
+arraysEqual([1, 'hi', true], [2, 'hi', true]);       // false
+```
+
+### Solution
+
+```javascript
+function arraysEqual(arr1, arr2) {
+  var i;
+  
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
