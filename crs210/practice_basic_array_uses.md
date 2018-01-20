@@ -76,14 +76,31 @@ Yes, it can be done.  It has to do with the fact that an array is an object. But
 
 
 
-## 1.
+## 5.
+Write a function that accepts an array as the first argument and an integer value, `count`, as the second. It should return a new array that contains the first `count` elments of the array.
 
 ```javascript
+function firstNOf(arr, count) {
+  // ...
+}
+
+var digits = [4, 8, 15, 16, 23, 42];
+firstNOf(digits, 3);    // returns [4, 8, 15]
 ```
 
 ### Solution
 
 ```javascript
+function firstNOf(arr, count) {
+  var selection = [];
+  var i;
+
+  for (i = 0; i < count; i++) {
+    selection[selection.length] = arr[i];
+  }
+
+  return selection;
+}
 ```
 
 
