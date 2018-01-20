@@ -153,15 +153,22 @@ function lastNOf(arr, count) {
 ```
 
 
-
-## 1.
-
+## 8.
+Write a function that accepts two arrays as arguments and returns an array with the first element from the first array and the last element from the second array.
 ```javascript
+function endsOf(beginningArr, endingArr) {
+  // ...
+}
+
+endsOf([4, 8, 15], [16, 23, 42]);  // returns [4, 42]
 ```
 
 ### Solution
 
 ```javascript
+function endsOf(beginningArr, endingArr) {
+  return [beginningArr[0], endingArr[endingArr.length - 1]];
+}
 ```
 
 
