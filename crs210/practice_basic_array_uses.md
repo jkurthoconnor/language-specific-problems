@@ -105,26 +105,51 @@ function firstNOf(arr, count) {
 
 
 
-## 1.
+## 6.
+Write a function like the previous one, except this time return the last `count` elements as a new array.
 
 ```javascript
+function lastNOf(arr, count) {
+  // ...
+}
+
+var digits = [4, 8, 15, 16, 23, 42];
+lastNOf(digits, 3);    // returns [16, 23, 42]
 ```
 
 ### Solution
 
 ```javascript
+function lastNOf(arr, count) {
+  var selection = [];
+  var i;
+
+  for (i = arr.length - count; i < arr.length; i++) {
+    selection.push(arr[i]);
+  }
+
+  return selection;
+}
+
+// or more succinctly with `slice`:
+function lastNOf(arr, count) {
+  return arr.slice(arr.length - count);
+}
 ```
 
 
-
-## 1.
-
-```javascript
-```
+## 7.
+Using the function from the previous problem, what happens if you pass a `count` greater than the length of the array? How can you fix the function so it returns  a new instance of the entire array when `count` is greater than the array length?
 
 ### Solution
+If `count` is greater than the array's length, then the `slice` method will be passed a negative value for the `begin` parameter. This will be interpreted as a negative index for the start, so, for example `-3` will be taken to mean 'start at the third element from the end of the array'.
+
+To prevent this from occurring, and to return a new instance of the array under such conditions, a guard clause could be introduced as below:
 
 ```javascript
+function lastNOf(arr, count) {
+  return (count > arr.length ? arr.slice() : arr.slice(arr.length - count));
+}
 ```
 
 
