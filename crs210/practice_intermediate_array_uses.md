@@ -81,109 +81,136 @@ function forwardBackward(arr) {
 
 
 ## 4.
-Can we insert data into an array at a negative index? If so, why is this possible?
+User the array sort method to create a function that takes an array of numbers and returns a new array of the mumbers sorted in descending order. Don not alter the original array.
 
-### Solution
-Yes, it can be done.  It has to do with the fact that an array is an object. But note that the data can be added at a negative index, but it won't appear as an element; rather it appears as part of the array object.
+
 ```javascript
+function sortDescending(arr) {
+  // ...
+}
+
+var array = [23, 4, 16, 42, 8, 15];
+var result = sortDescending(array);  // returns [42, 23, 16, 15, 8, 4]
+console.log(result);                 // logs    [42, 23, 16, 15, 8, 4]
+console.log(array);                  // logs    [23, 4, 16, 42, 8, 1
+```
+### Solution
+
+```javascript
+function sortDescending(arr) {
+  var arrCopy = arr.slice();
+
+  arrCopy.sort(function (a, b) {
+    return b - a;
+  });
+
+  return arrCopy;
+}
 ```
 
 
 
 ## 5.
-Write a function that accepts an array as the first argument and an integer value, `count`, as the second. It should return a new array that contains the first `count` elments of the array.
+Write a function that takes an array of arrays as an argument, and returns a new array that contains the sums of each of the sub-arrays.
 
 ```javascript
-function firstNOf(arr, count) {
+function matrixSums(arr) {
   // ...
 }
 
-var digits = [4, 8, 15, 16, 23, 42];
-firstNOf(digits, 3);    // returns [4, 8, 15]
+matrixSums([[2, 8, 5], [12, 48, 0], [12]]);  // returns [15, 60, 12]
 ```
 
 ### Solution
 
 ```javascript
-function firstNOf(arr, count) {
-  var selection = [];
+// using nested loops
+function matrixSums(arr) {
+  var sums = [];
   var i;
+  var j;
 
-  for (i = 0; i < count; i++) {
-    selection[selection.length] = arr[i];
+  for (i = 0; i < arr.length; i++) {
+    var memo = 0;
+    var subArr = arr[i];
+
+      for (j = 0; j < subArr.length; j++) {
+        memo += subArr[j];
+      }
+
+    sums.push(memo);
   }
 
-  return selection;
+  return sums;
+}
+// using `reduce`:
+
+function matrixSums(arr) {
+  var sums = [];
+  var i;
+
+  for (i = 0; i < arr.length; i++) {
+    var subArrSum = arr[i].reduce(function (a, b) {return a + b;});
+
+    sums.push(subArrSum);
+  }
+
+  return sums;
 }
 ```
 
 
 
 ## 6.
-Write a function like the previous one, except this time return the last `count` elements as a new array.
+Write a function that takes ana array, and returns a new array with duplicate elements removed.
 
 ```javascript
-function lastNOf(arr, count) {
+function uniqueElements(arr) {
   // ...
 }
 
-var digits = [4, 8, 15, 16, 23, 42];
-lastNOf(digits, 3);    // returns [16, 23, 42]
+uniqueElements([1, 2, 4, 3, 4, 1, 5, 4]);  // returns [1, 2, 4, 3, 5]
 ```
 
 ### Solution
 
 ```javascript
-function lastNOf(arr, count) {
-  var selection = [];
+// with nested loops:
   var i;
+  var j;
+  var unique = [];
 
-  for (i = arr.length - count; i < arr.length; i++) {
-    selection.push(arr[i]);
+  for (i = 0; i < arr.length; i++) {
+    var push = true;
+
+    for (j = 0; j < unique.length; j++) {
+      if (unique[j] === arr[i]) {
+        push = !push;
+        break;
+      }
+    }
+
+    if (push) {
+      unique.push(arr[i]);
+    }
+  }
+  
+  return unique;
+}
+
+// with `include`:
+function uniqueElements(arr) {
+  var i;
+  var unique = [];
+
+  for (i = 0; i < arr.length; i++) {
+    if (unique.includes(arr[i])) {
+      continue;
+    }
+
+    unique.push(arr[i]);
   }
 
-  return selection;
-}
-
-// or more succinctly with `slice`:
-function lastNOf(arr, count) {
-  return arr.slice(arr.length - count);
+  return unique;
 }
 ```
-
-
-## 7.
-Using the function from the previous problem, what happens if you pass a `count` greater than the length of the array? How can you fix the function so it returns  a new instance of the entire array when `count` is greater than the array length?
-
-### Solution
-If `count` is greater than the array's length, then the `slice` method will be passed a negative value for the `begin` parameter. This will be interpreted as a negative index for the start, so, for example `-3` will be taken to mean 'start at the third element from the end of the array'.
-
-To prevent this from occurring, and to return a new instance of the array under such conditions, a guard clause could be introduced as below:
-
-```javascript
-function lastNOf(arr, count) {
-  return (count > arr.length ? arr.slice() : arr.slice(arr.length - count));
-}
-```
-
-
-## 8.
-Write a function that accepts two arrays as arguments and returns an array with the first element from the first array and the last element from the second array.
-```javascript
-function endsOf(beginningArr, endingArr) {
-  // ...
-}
-
-endsOf([4, 8, 15], [16, 23, 42]);  // returns [4, 42]
-```
-
-### Solution
-
-```javascript
-function endsOf(beginningArr, endingArr) {
-  return [beginningArr[0], endingArr[endingArr.length - 1]];
-}
-```
-
-
-
