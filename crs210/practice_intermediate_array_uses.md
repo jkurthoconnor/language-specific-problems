@@ -60,31 +60,22 @@ function combinedArray(even, odd) {
 ```
 
 
-
 ## 3.
-Write a function that accepts two arguments, an array and an integer index, and returns the elements at the given index. What happens if the index is greater than the length of the array? What happens if it is a negative integer?
+Write a function that takes an array argument and returns a new array that contains all the argument's elements in their original order followed by all the argument's elements in reverse order.
+
 
 ```javascript
-function nthElementOf(arr, index) {
-  // ...
+function forwardBackward(arr) {
+  var result = arr.slice();
+  var i;
+
+  for (i = arr.length - 1; i >= 0; i--) {
+    result.push(arr[i]);
+  }
+
+  return result;
 }
 
-var digits = [4, 8, 15, 16, 23, 42];
-
-nthElementOf(digits, 3);   // returns 16
-nthElementOf(digits, 8);   // what does this return?
-nthElementOf(digits, -1);  // what does this return?
-```
-
-### Solution
-
-```javascript
-// accessing a non-existent index will return `undefined`
-function nthElementOf(arr, idx) {
-  return arr[idx];
-}
-
-var digits = [4, 8, 15, 16, 23, 42];
 ```
 
 
