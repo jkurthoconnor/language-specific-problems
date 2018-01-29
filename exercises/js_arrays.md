@@ -167,11 +167,62 @@ console.log(concat([1, 2], ['three'], 4));
 ```
 
 ## Problem 5
-
+In this exercise, you will implement your own version of two Array methods: Array.prototype.pop and Array.prototype.push. The pop method removes the last element from an array and returns that element. If pop is called on an empty array, it returns undefined. The push method, on the other hand, adds one or more elements to the end of an array and returns the new length of the array.
 ```javascript
+// pop
+var array = [1, 2, 3];
+pop(array);                        // 3
+console.log(array);                // [1, 2]
+pop([]);                           // undefined
+pop([1, 2, ['a', 'b', 'c']]);      // ["a", "b", "c"]
+
+// push
+var array = [1, 2, 3];
+push(array, 4, 5, 6);              // 6
+console.log(array);                // [1, 2, 3, 4, 5, 6]
+push([1, 2], ['a', 'b']);          // 3
+push([], 1);                       // 1
+push([]);                          // 0
+
 ```
 
 ### Solution
+```javascript
+function pop(arr) {
+  var arrLength = arr.length;
+  var popped = arr[arrLength - 1];
+
+  if (arrLength > 0) {
+    arr.length = arrLength - 1;
+  }
+
+  return popped;
+}
+    // pop
+var array = [1, 2, 3];
+console.log(pop(array));                        // 3
+console.log(array);                // [1, 2]
+console.log(pop([]));                           // undefined
+console.log(pop([1, 2, ['a', 'b', 'c']]));      // ["a", "b", "c"]
+
+function push(arr) {
+  var i;
+
+  for (i = 1; i < arguments.length; i++) {
+    arr[arr.length] = arguments[i];
+  }
+
+  return arr.length;
+}
+
+var array = [1, 2, 3];
+console.log(push(array, 4, 5, 6));              // 6
+console.log(array);               // [1, 2, 3, 4, 5, 6]
+console.log(push([1, 2], ['a', 'b']));          // 3
+console.log(push([], 1));                       // 1
+console.log(push([]));                          // 0
+```
+
 ## Problem 6
 
 
