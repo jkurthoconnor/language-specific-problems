@@ -251,6 +251,37 @@ array;                      // [1, 2, 3]
 ```
 
 ### Solution
+```javascript
+// initial solution
+function reverse(input) {
+  var i;
+  var arrayInput = Array.isArray(input);
+  var output = arrayInput ? [] : '';
+
+  for (i = input.length - 1; i >= 0; i--) {
+    if (arrayInput) {
+      output[output.length] = input[i];
+    } else {
+      output += input[i];
+    }
+  }
+
+  return output;
+}
+
+// refactored to allow building arrays only
+function reverse(input) {
+  var i;
+  var arrayOutput = Array.isArray(input);
+  var reversed = [];
+
+  for (i = input.length - 1; i >= 0; i--) {
+    reversed[reversed.length] = input[i];
+  }
+
+    return (arrayOutput ? reversed : reversed.join(''));
+}
+```
 ## Problem 8
 
 ```javascript
