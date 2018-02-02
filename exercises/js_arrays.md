@@ -339,6 +339,40 @@ function unshift(arr, addition) {
 
   return arr.length;
 }
+
+// refactored for variable name clarity and to avoid need for separate additions array
+function shift(arr) {
+  var i;
+  var firstElement = arr[0];
+  var origLength = arr.length;
+
+  for (i = 0; i < origLength - 1; i++) {
+    arr[i] = arr[i + 1];
+  }
+
+  if (origLength > 0) {
+    arr.length = origLength - 1;
+  }
+
+  return firstElement;
+}
+
+
+function unshift(arr) {
+  var i;
+  var additionsCount = arguments.length - 1;
+
+  for (i = arr.length - 1; i >= 0; i--) {
+    arr[i + additionsCount] = arr[i];
+  }
+
+  for (i = 0; i < additionsCount; i++) {
+    arr[i] = arguments[i + 1];
+  }
+
+  return arr.length;
+}
+
 ```
 ## Problem 9
 
