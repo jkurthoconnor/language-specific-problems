@@ -376,10 +376,120 @@ function unshift(arr) {
 ```
 ## Problem 9
 
+In this exercise, you will implement your own versions of the Array.prototype.slice and Array.prototype.splice methods according to the following specifications.
+
+The slice function takes three arguments: an array, and two integers representing a begin and an end index. The function returns a new array containing the extracted elements starting from begin up to but not including end. slice does not mutate the original array.
+
+The splice function changes the contents of an array by deleting existing elements and/or adding new elements. The function takes the following arguments: an array, a start index, a deleteCount, and zero or more items to be added. The function removes deleteCount number of elements from the array, beginning at the start index. If any optional item arguments are provided, splice inserts them into the array beginning at the start index. The function returns a new array containing the deleted elements, or an empty array ([]) if no elements are deleted. splice mutates the original array.
+
+Additional specifications:
+
+slice:
+
+    The values of begin and end will always be integers greater than or equal to 0.
+    If the value of begin or end is greater than the length of the array, set it to equal the length.
+
+splice:
+
+    The values of start and deleteCount will always be integers greater than or equal to 0.
+    If the value of start is greater than the length of the array, set it to equal the length.
+    If the value of deleteCount is greater than the number of elements from start up to the end of the array, set deleteCount to the difference between the array's length and start.
+
+Examples:
 ```javascript
+function slice(array, begin, end) {
+  // ...
+}
+
+slice([1, 2, 3], 1, 2);               // [2]
+slice([1, 2, 3], 2, 0);               // []
+slice([1, 2, 3], 5, 1);               // []
+slice([1, 2, 3], 0, 5);               // [1, 2, 3]
+
+var arr = [1, 2, 3];
+slice(arr, 1, 3);                     // [2, 3]
+arr;                                  // [1, 2, 3]
+
+function splice(array, start, deleteCount[, item1[, itemN]]) {
+  // ...
+}
+
+splice([1, 2, 3], 1, 2);              // [2, 3]
+splice([1, 2, 3], 1, 3);              // [2, 3]
+splice([1, 2, 3], 1, 0);              // []
+splice([1, 2, 3], 0, 1);              // [1]
+splice([1, 2, 3], 1, 0, 'a');         // []
+
+var arr = [1, 2, 3];
+splice(arr, 1, 1, 'two');             // [2]
+arr;                                  // [1, "two", 3]
+
+var arr = [1, 2, 3];
+splice(arr, 1, 2, 'two', 'three');    // [2, 3]
+arr;                                  // [1, "two", "three"]
+
+var arr = [1, 2, 3];
+splice(arr, 1, 0);                    // []
+splice(arr, 1, 0, 'a');               // []
+arr;                                  // [1, "a", 2, 3]
+
+var arr = [1, 2, 3];
+splice(arr, 0, 0, 'a');               // []
+arr;                                  // ["a", 1, 2, 3]
 ```
 
 ### Solution
+```javascript
+function slice(array, begin, end) {
+  var i;
+  var sliced = [];
+  var length = array.length;
+
+  begin = (begin > length ? length : begin);
+
+  end = (end > length ? length : end);
+
+  for (i = begin; i < end; i++) {
+    sliced.push(array[i]);
+  }
+
+  return sliced;
+}
+
+function splice(array, start, deleteCount, ...addItems) {
+  var maxDelete;
+  var i;
+  var deleted = [];
+  var length = array.length;
+  var addItemsCount = addItems.length;
+
+  start = (start > length ? length : start);
+  maxDelete = length - start;
+  deleteCount = (deleteCount > maxDelete ? maxDelete : deleteCount);
+
+  // delete items and compress array
+  for (i = start; i < deleteCount + start; i++) {
+    deleted.push(array[i]);
+    array[i] = array[i + deleteCount];
+  }
+
+  array.length = length - deleteCount;
+
+  if (addItemsCount) {
+  //make space for new items if necessary
+    for (i = array.length - 1; i >= start; i--) {
+      arr[i + addItemsCount] = arr[i];
+    }
+    // insert new items
+    for (i = 0; i < addItemsCount; i++) {
+      arr[start + i] = addItems[i];
+    }
+  }
+
+  return deleted;
+}
+
+```
 ## Problem 10
 
 ```javascript
