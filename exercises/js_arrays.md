@@ -2,6 +2,7 @@ LS Exercises: [Arrays](https://launchschool.com/exercise_sets/75d23811)
 
 
 ## Problem 1: Array copy 1
+
 Read through the code shown below. What does it log to the console at lines 5 and 8?
 ```javascript
 var myArray = [1, 2, 3, 4];
@@ -24,6 +25,7 @@ Thus when the last element is popped off of the object to which both `myArray` a
 However, in line 7 `myArray` is reassigned to point to the array `[1, 2]`. As a result of the reassignment, the two variables no longer point to the same object; `myOtherArray` remains pointing to `[1, 2, 3]`. Thus in line 8 the logging does not reflect the new value of `myArray`, as this is entirely distinct from that of `myOtherArray`
 
 ## Problem 2: Array copy 2
+
 In the previous exercise, the value of the reference gets copied. For this exercise, only the values of the array should be copied, but not the reference. Implement two alternative ways of doing this.
 
 ### Solution
@@ -66,7 +68,8 @@ console.log(myOtherArray);
 ```
 
 ## Problem 3
-n this exercise, you will learn more about Arrays by implementing your own version of the Array.prototype.concat method. Write a function that returns a new array composed of all values from the first array argument and the second array or value argument. Take note of the following specifications when writing your concat function.
+
+In this exercise, you will learn more about Arrays by implementing your own version of the Array.prototype.concat method. Write a function that returns a new array composed of all values from the first array argument and the second array or value argument. Take note of the following specifications when writing your concat function.
 
     The first argument will always be an array.
     The second argument can be either an array or another value.
@@ -133,6 +136,7 @@ obj;                                   // { a: "two", b: 3 }
 ```
 
 ## Problem 4
+
 The `concat` function from the previous exercise could only concatenate a maximum of two arrays. For this exercise, you are going to extend that functionality. Refactor the `concat` function to allow for the concatenation of two or more arrays or values.
 
 ```javascript
@@ -167,6 +171,7 @@ console.log(concat([1, 2], ['three'], 4));
 ```
 
 ## Problem 5
+
 In this exercise, you will implement your own version of two Array methods: Array.prototype.pop and Array.prototype.push. The pop method removes the last element from an array and returns that element. If pop is called on an empty array, it returns undefined. The push method, on the other hand, adds one or more elements to the end of an array and returns the new length of the array.
 ```javascript
 // pop
@@ -223,14 +228,9 @@ console.log(push([], 1));                       // 1
 console.log(push([]));                          // 0
 ```
 
+
 ## Problem 6
 
-
-```javascript
-```
-
-### Solution
-## Problem 7
 Implement your own version of the `Array.prototype.reverse` method. Your implementation should differ from the built-in method in the following two ways:
   - It should accept either string or an array as an argument.
   - It should return a new string or array.
@@ -282,7 +282,8 @@ function reverse(input) {
     return (arrayOutput ? reversed : reversed.join(''));
 }
 ```
-## Problem 8
+## Problem 7
+
 In this exercise, you will implement your own versions of the Array.prototype.shift and Array.prototype.unshift methods. These methods manipulate the contents of an array starting from the first index.
 
 The shift method removes the first element from an array and returns that element; if the array is empty, shift returns undefined. The unshift method adds one or more elements to the start of an array and returns the new length of the array. Both methods mutate the original array.
@@ -374,7 +375,7 @@ function unshift(arr) {
 }
 
 ```
-## Problem 9
+## Problem 8
 
 In this exercise, you will implement your own versions of the Array.prototype.slice and Array.prototype.splice methods according to the following specifications.
 
@@ -490,6 +491,7 @@ function splice(array, start, deleteCount, ...addItems) {
 
 ```
 ## Problem 9
+
 The oddities function takes an array as an argument and returns a new array containing every other element from the input array. The values in the returned array are the first (index 0), third, fifth, and so on, elements of the input array. The program below uses the array returned by oddities as part of a comparison. Can you explain the results of these comparisons?
 
 ```javascript
@@ -516,7 +518,6 @@ The values in the objects on each side of the comparison are the same, but the o
 
 
 ## Problem 10
-
 
 The array comparison function that we implemented in the Arrays lesson implicitly assumed that when comparing two arrays, any matching values must also have matching index positions. The objective of this exercise is to reimplement the function so that two arrays containing the same values—but in a different order—are considered equal. For example, [1, 2, 3] === [3, 2, 1] should return true.
 
