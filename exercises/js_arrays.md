@@ -446,7 +446,6 @@ function slice(array, begin, end) {
   var length = array.length;
 
   begin = (begin > length ? length : begin);
-
   end = (end > length ? length : end);
 
   for (i = begin; i < end; i++) {
@@ -490,14 +489,97 @@ function splice(array, start, deleteCount, ...addItems) {
 }
 
 ```
-## Problem 10
+## Problem 9
+The oddities function takes an array as an argument and returns a new array containing every other element from the input array. The values in the returned array are the first (index 0), third, fifth, and so on, elements of the input array. The program below uses the array returned by oddities as part of a comparison. Can you explain the results of these comparisons?
 
 ```javascript
+
+function oddities(array) {
+  var oddElements = [];
+  var i;
+
+  for (i = 0; i < array.length; i += 2) {
+    oddElements.push(array[i]);
+  }
+
+  return oddElements;
+}
+
+oddities([2, 3, 4, 5, 6]) === [2, 4, 6];      // false
+oddities(['abc', 'def']) === ['abc'];         // false
+
+
 ```
 
 ### Solution
+The values in the objects on each side of the comparison are the same, but the objects (i.e. arrays) containing them are distinct. Thus, according to the following rule of comparison, the two objects will not be considered equal: "An expression camparing Objects is only true if the operands reference the same Object."
 
 
+## Problem 10
+
+
+The array comparison function that we implemented in the Arrays lesson implicitly assumed that when comparing two arrays, any matching values must also have matching index positions. The objective of this exercise is to reimplement the function so that two arrays containing the same values—but in a different order—are considered equal. For example, [1, 2, 3] === [3, 2, 1] should return true.
+
+Examples:
 ```javascript
+function areArraysEqual(array1, array2) {
+  // ...
+}
+
+areArraysEqual([1, 2, 3], [1, 2, 3]);                  // true
+areArraysEqual([1, 2, 3], [3, 2, 1]);                  // true
+areArraysEqual(['a', 'b', 'c'], ['b', 'c', 'a']);      // true
+areArraysEqual(['1', 2, 3], [1, 2, 3]);                // false
+areArraysEqual([1, 1, 2, 3], [3, 1, 2, 1]);            // true
+areArraysEqual([1, 2, 3, 4], [1, 1, 2, 3]);            // false
+areArraysEqual([1, 1, 2, 2], [4, 2, 3, 1]);            // false
+areArraysEqual([1, 1, 2], [1, 2, 2]);                  // false
+areArraysEqual([1, 1, 1], [1, 1]);                     // false
+areArraysEqual([1, 1], [1, 1]);                        // true
+
 ```
 
+### Solution
+```javascript
+function areArraysEqual(array1, array2) {
+  var i;
+  var shallowCopyArr1 = [];
+  var shallowCopyArr2 = [];
+
+  if (array1.length !== array2.length) {
+    return false;
+  }
+
+  for (i = 0; i < array1.length; i++) {
+    shallowCopyArr1[i] = array1[i];
+    shallowCopyArr2[i] = array2[i];
+  }
+  
+  shallowCopyArr1.sort();
+  shallowCopyArr2.sort();
+
+  for (i = 0; i < shallowCopyArr1.length; i++) {
+    if (shallowCopyArr1[i] !== shallowCopyArr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(areArraysEqual([1, 2, 3], [1, 2, 3]));                  // true
+var a1 = [1, 2, 3];
+var a2 = [3, 2, 1];
+console.log(areArraysEqual(a1, a2));                  // true
+console.log(a1);
+console.log(a2);
+console.log(areArraysEqual(['a', 'b', 'c'], ['b', 'c', 'a']));      // true
+console.log(areArraysEqual(['1', 2, 3], [1, 2, 3]));                // false
+console.log(areArraysEqual([1, 1, 2, 3], [3, 1, 2, 1]));            // true
+console.log(areArraysEqual([1, 2, 3, 4], [1, 1, 2, 3]));            // false
+console.log(areArraysEqual([1, 1, 2, 2], [4, 2, 3, 1]));            // false
+console.log(areArraysEqual([1, 1, 2], [1, 2, 2]));                  // false
+console.log(areArraysEqual([1, 1, 1], [1, 1]));                     // false
+console.log(areArraysEqual([1, 1], [1, 1]));                        // true
+
+
+```
