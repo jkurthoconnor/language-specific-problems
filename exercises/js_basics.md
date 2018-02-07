@@ -189,6 +189,13 @@ var phrase = prompt('Please enter a phrase:');
 var charCount = phrase.length;
 
 console.log('There are ' + charCount + ' characters in "' + phrase + '".');
+
+// Further Exploration
+
+var phrase = prompt('Please enter a phrase:');
+var charCount = phrase.replace(/[^a-zA-Z]/ig, '').length;
+
+console.log('There are ' + charCount + ' characters in "' + phrase + '".');
 ```
 
 
