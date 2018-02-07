@@ -101,6 +101,11 @@ function firstNOf(arr, count) {
 
   return selection;
 }
+
+// or as a simple wrapper for `.slice()`
+function firstNOf(arr, count) {
+  return arr.slice(0, count);
+}
 ```
 
 
@@ -135,6 +140,10 @@ function lastNOf(arr, count) {
 function lastNOf(arr, count) {
   return arr.slice(arr.length - count);
 }
+
+// or even more succinctly with `slice`:
+function lastNOf(arr, count) {
+  return arr.slice(-count);
 ```
 
 
