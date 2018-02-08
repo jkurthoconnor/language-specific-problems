@@ -160,6 +160,25 @@ function concat() {
 console.log(concat([1, 2, 3], [4, 5, 6], [7, 8, 9]));    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 console.log(concat([1, 2], 'a', ['one', 'two']));        // [1, 2, "a", "one", "two"]
 console.log(concat([1, 2], ['three'], 4)); 
+
+// or with the `...rest` parameter from ES6:
+function concat(array1, ...values) {
+  var i;
+  var j;
+  var result = array1.slice();
+
+  for (i = 0; i < values.length; i++) {
+    if (Array.isArray(values[i])) {
+      for (j = 0; j < values[i].length; j++) {
+        result.push(values[i][j]);
+      }
+    } else {
+      result.push(values[i]);
+    }
+  }
+
+  return result;
+}
 ```
 
 ## Problem 5
@@ -195,7 +214,25 @@ function pop(arr) {
 
   return popped;
 }
-    // pop
+
+// or with ternary operator:
+function pop(arr) {
+  var lastIdx = arr.length - 1;
+  var lastEle = arr[lastIdx];
+
+  arr.length = (lastIdx >= 0 ? lastIdx : 0);
+
+  return lastEle;
+}
+
+// or with `slice`:
+function pop(arr) {
+  var lastEle = arr[lastIdx];
+
+  arr = arr.slice(0, -1);
+  return lastEle;
+}
+
 var array = [1, 2, 3];
 console.log(pop(array));                        // 3
 console.log(array);                // [1, 2]
