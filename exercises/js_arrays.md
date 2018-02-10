@@ -310,6 +310,18 @@ function reverse(input) {
 
     return (arrayOutput ? reversed : reversed.join(''));
 }
+
+// refactored to remove unhelpful `arrayOutput` variable and to rely on a built-in for copying to array
+function reverse(input) {
+  var i;
+  var reversed = [];
+
+  for (i = 0; i < input.length; i++) {
+    reversed.unshift(input[i]);
+  }
+
+  return (Array.isArray(input) ? reversed : reversed.join(''));
+}
 ```
 ## Problem 7
 
@@ -518,7 +530,32 @@ function splice(array, start, deleteCount, ...addItems) {
   return deleted;
 }
 
+// a bit more concise implementation of `splice`
+function splice(array, start, delCount, ...values) {
+  var i;
+  var holder = array.slice(start, start + delCount);
+  var aLength = array.length;
+  var vLength = values.length;
+  var offSet = vLength - delCount;
+
+  start = (start > aLength ? aLength : start);
+  delCount = (delCount > aLength - start ? aLength - start : delCount);
+
+  if (vLength > delCount) {
+    for (i = aLength - 1; i >= start; i--) {
+      array[i + offSet] = array[i];
+    }
+  }
+
+  for (i = 0; i < vLength; i++) {
+    array[start + i] = values[i];
+  }
+
+  array.length = (aLength - delCount) + vLength;
+  return holder;
+}
 ```
+
 ## Problem 9
 
 The oddities function takes an array as an argument and returns a new array containing every other element from the input array. The values in the returned array are the first (index 0), third, fifth, and so on, elements of the input array. The program below uses the array returned by oddities as part of a comparison. Can you explain the results of these comparisons?
