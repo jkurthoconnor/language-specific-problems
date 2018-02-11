@@ -25,7 +25,7 @@ objectHasProperty(pets, 'mice');      // true
 
 ## Problem 2.
 
-Write a function named `incrementProperty` that takes two arguments: an Object and a String. If the Object contains a property with the specified name, the function should increment the value of tha property. If the property does not exist, the function should add a new property with a value of `1`. The function should return the new value of the property.
+Write a function named `incrementProperty` that takes two arguments: an Object and a String. If the Object contains a property with the specified name, the function should increment the value of the property. If the property does not exist, the function should add a new property with a value of `1`. The function should return the new value of the property.
 
 ### Solution
 
@@ -60,7 +60,7 @@ var hal = {
 var sal = {};
 
 function copyProperties(obj1, obj2) {
-  for (key in obj1) {
+  for (var key in obj1) {
     obj2[key] = obj1[key];
   }
 
@@ -75,12 +75,13 @@ sal;                       // { model: 9000, enabled: true }
 function copyProperties(obj1, obj2) {
   var counter = 0;
 
-  for (key in obj1) {
+  for (var key in obj1) {
     obj2[key] = obj1[key];
     counter += 1;
   }
 
   return counter;
+}
 ```
 
 ## Problem 4.
