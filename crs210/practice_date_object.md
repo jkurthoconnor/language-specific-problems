@@ -31,7 +31,7 @@ The `getDay` method, like many of the get methods on the date object, returns a 
 var today = new Date();
 var day = today.getDay();
 var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var dayName = String(daysOfWeek[day]);
+var dayName = daysOfWeek[day];
 
 console.log("Today's day is " + dayName);
 ```
@@ -44,7 +44,7 @@ Let's add the calendar date (the day of month) to our log message: "Today's day 
 var today = new Date();
 var day = today.getDay();
 var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var dayName = String(daysOfWeek[day]);
+var dayName = daysOfWeek[day];
 var dayOfMonth = String(today.getDate());
 
 console.log("Today's day is " + dayName + ' the ' + dayOfMonth + 'th.');
@@ -59,7 +59,7 @@ Ideally, the suffix on the day number needs to adjust to the proper suffix for d
 var today = new Date();
 var day = today.getDay();
 var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var dayName = String(daysOfWeek[day]);
+var dayName = daysOfWeek[day];
 var dayOfMonth = today.getDate();
 
 function dateSuffix(dayNumber) {
