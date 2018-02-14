@@ -60,7 +60,7 @@ var today = new Date();
 var day = today.getDay();
 var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 var dayName = String(daysOfWeek[day]);
-var dayOfMonth = String(today.getDate());
+var dayOfMonth = today.getDate();
 
 function dateSuffix(dayNumber) {
   var suffix;
