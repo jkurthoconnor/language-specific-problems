@@ -88,15 +88,92 @@ console.log("Today's day is " + dayName + ' the ' + dateSuffix(dayOfMonth));
 
 ```
 ## Problem 6.
-`Math.random` return a random floating-point number between `0` and `1`, excluding the exact value of `1`.This isn't helpful on its own, since you usually want a random integer between two other integer values. Create a function that takes two arguments, a minimum and a maximum value, and returns a random integer between those numbers (including both of the numbers). Your solution should handle the scenario that the user inadvertently swaps the positions of the min and max values or the scenario that the min and max values are equal. You may assume that the user always provides the min and max values.
+Change your output to include the value from the `getMonth` method. Thus, the logged string will read "Today's date is Mon, 11 6th", where `11` is  the month number returned by `getMonth`.
 ### Solution
 ```javascript
-function randomBtwn(min, max) {
-  var trueMin = (max > min ? min : max);
-  var diff = Math.abs(max - min);
-  var factor = Math.random() * diff;
+var today = new Date();
+var day = today.getDay();
+var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var dayName = daysOfWeek[day];
+var dayOfMonth = today.getDate();
+var monthNum = String(today.getMonth());
 
-  return Math.round(factor + trueMin);
+
+function dateSuffix(dayNumber) {
+  var suffix = 'th';
+
+  switch (dayNumber % 10) {
+    case 1:
+      suffix = 'st';
+      break;
+    case 2:
+      suffix = 'nd';
+      break;
+    case 3:
+      suffix = 'rd';
+      break;
+    }
+
+  suffix = (dayNumber >= 11 && dayNumber <= 13) ? 'th' : suffix;
+
+
+  return String(dayNumber) + suffix;
 }
+  
+console.log("Today's date is " + dayName + ', ' + monthNum + ' ' + dateSuffix(dayOfMonth));
 ```
 
+## Problem 7.
+Let's make the month readable. Using the same technique we used in problem 3, convert the month number in the output string to a 3-letter month name abbreviation. Use the following array:
+
+### Solution
+```javascript
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+```
+## Problem 8.
+Our call to console.log is getting cluttered. Let's clean things up a bit and refactor the code into a few formatting functions that we can call from anywhere in our code. Create formattedMonth and formattedDay functions to format the month and day, then write a formattedDate function that pulls everything together and logs the fully formatted date.
+
+### Solution
+```javascript
+function formattedDate(dateObject) {
+
+  console.log("Today's date is " + formattedDay(dateObject) + ', ' + formattedMonth(dateObject) + ' ' + dateSuffix(dateObject.getDate()));
+}
+
+function formattedMonth(dateObject) {
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return months[dateObject.getMonth()];
+}
+
+function formattedDay(dateObject) {
+  var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  return daysOfWeek[dateObject.getDay()];
+}
+
+function dateSuffix(dayNumber) {
+  var suffix = 'th';
+
+  switch (dayNumber % 10) {
+    case 1:
+      suffix = 'st';
+      break;
+    case 2:
+      suffix = 'nd';
+      break;
+    case 3:
+      suffix = 'rd';
+      break;
+    }
+
+  suffix = (dayNumber >= 11 && dayNumber <= 13) ? 'th' : suffix;
+  return String(dayNumber) + suffix;
+}
+
+var today = new Date();
+
+formattedDate(today);
+```
