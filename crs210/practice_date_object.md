@@ -177,3 +177,123 @@ var today = new Date();
 
 formattedDate(today);
 ```
+
+## Problem 9.
+Log the values returned from the `getFullYear` and `getYear` methods. Note how these values differ. Note especially that `getYear` is deprecated: yu should avoid using deprecated methods as they may oneday disappear.
+
+### Solution
+
+```javascript
+var day = new Date();
+
+console.log(day.getFullYear()); // 2018
+console.log(day.getYear()); // 118
+```
+
+## Problem 10.
+Use the `getTime` method and log the current date and time in total milliseconds since Jan. 1st 1970.
+
+### Solution
+
+```javascript
+var day = new Date();
+
+console.log(day.getTime()); //1518660309064
+```
+
+## Problem 11.
+Create a new date object variable named tomorrow that contains a Date object. Initialize the variable by setting it to the value of today. You can get the value of today using the getTime method. Next, change the date on the tomorrow object to the day after today: you should use setDate to change the date. Finally, log the tomorrow object with your formattedDate function.
+
+### Solution
+```javascript
+function formattedDate(dateObject) {
+
+  console.log("Today's date is " + formattedDay(dateObject) + ', ' + formattedMonth(dateObject) + ' ' + dateSuffix(dateObject.getDate()));
+}
+
+function formattedMonth(dateObject) {
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return months[dateObject.getMonth()];
+}
+
+function formattedDay(dateObject) {
+  var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  return daysOfWeek[dateObject.getDay()];
+}
+
+function dateSuffix(dayNumber) {
+  var suffix = 'th';
+
+  switch (dayNumber % 10) {
+    case 1:
+      suffix = 'st';
+      break;
+    case 2:
+      suffix = 'nd';
+      break;
+    case 3:
+      suffix = 'rd';
+      break;
+    }
+
+  suffix = (dayNumber >= 11 && dayNumber <= 13) ? 'th' : suffix;
+  return String(dayNumber) + suffix;
+}
+
+
+var day = new Date();
+var tomorrow = new Date(day.getTime()); // parameter allows setting based on time value
+
+tomorrow.setDate(day.getDate() + 1); // parameter represents date of currently set month
+
+formattedDate(tomorrow);
+  ```
+
+
+## Problem 12.
+Create a new variable named `nextWeek` that is a new Date copied from the `today` object. Compare `nextWeek` and `today`, and log the results. Are they equal? Why or why not?
+
+### Solution
+```javascript
+var today = new Date();
+var nextWeek = today;
+var nextWeekValue = new Date(today.getTime()); // parameter using value of `today`
+
+console.log(today === nextWeek); // true
+console.log(today === nextWeekValue); // false -- as with all Objects, identity of object, not merely value, is required for comparison
+```
+
+## Problem 13.
+Compare the values returned by toDateString to determine whether the two objects are equal. Finally, add 7 days to the nextWeek date and compare the two objects again.
+
+### Solution
+```javascript
+var today = new Date();
+var nextWeekValue = new Date(today.getTime());
+
+console.log(today === nextWeekValue); // false
+console.log(today.toDateString() === nextWeekValue.toDateString()); // true
+
+nextWeekValue.setDate(nextWeekValue.getDate() + 7);
+```
+
+## Problem 14.
+
+
+Finally, write a function named formatTime that takes a date object as an argument and returns a string formatted with the hours and minutes as "15:30". Make sure you handle the case where the hours or minutes has only one digit: you need to pad the value with a leading zero in such cases, e.g., "03:04". You can use the getHours and getMinutes methods to obtain the hours and minutes.
+
+### Solution
+```javascript
+var today = new Date();
+
+function formatTime(date) {
+  var minutes = String(date.getMinutes()).padStart(2, '0');
+  var hours = String(date.getHours()).padStart(2, '0');
+
+  return hours + ':' + minutes;
+}
+
+console.log(formatTime(today));
+```
