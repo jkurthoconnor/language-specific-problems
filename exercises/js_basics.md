@@ -307,38 +307,70 @@ integerToString(5000);      // "5000"
 Solution:
 
 ```javascript
-INT_TO_STRING = {
-  0: '0',
-  1: '1',
-  2: '2',
-  3: '3',
-  4: '4',
-  5: '5',
-  6: '6',
-  7: '7',
-  8: '8',
-  9: '9',
-}
+var INT_TO_STRING = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 function integerToString(int) {
-  var numerals = [];
   var i;
   var modulo;
-  var digits = '';
+  var digits = [];
 
-  while (int >= 10) {
+  do {
     modulo = int % 10;
     int = Math.floor(int / 10);
-    numerals.unshift(modulo);
-  }
+    digits.unshift(INT_TO_STRING[modulo]);
+  } while (int > 0) 
 
-  numerals.unshift(int);
-
-  for (i = 0; i < numerals.length; i++) {
-    digits += INT_TO_STRING[numerals[i]];
-  }
-    
-  return digits;
+  return digits.join('');
 }
+
+console.log(integerToString(4321));      // "4321"
+console.log(integerToString(0));         // "0"
+console.log(integerToString(5000));      // "5000"
 ```
 
+10.  In the previous exercise, you reimplemented a function that converts non-negative numbers to strings. In this exercise, you're going to extend that function by adding the ability to represent negative numbers.
+
+You may not use any of the standard conversion functions available in JavaScript, such as String(), Number.prototype.toString, or an expression such as '' + number. You may, however, use the integerToString function from the previous exercise.
+
+Examples:
+```javascript
+signedIntegerToString(4321);      // "+4321"
+signedIntegerToString(-123);      // "-123"
+signedIntegerToString(0);         // "0"
+```
+ 
+
+
+Solution.
+```javascript
+var INT_TO_STRING = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+function integerToString(int) {
+  var i;
+  var modulo;
+  var digits = [];
+
+  do {
+    modulo = int % 10;
+    int = Math.floor(int / 10);
+    digits.unshift(INT_TO_STRING[modulo]);
+  } while (int > 0) 
+
+  return digits.join('');
+}
+
+function signedIntegerToString(int) {
+  var signedNum;
+  var numerals = integerToString(Math.abs(int));
+
+  if (int > 0) {
+    signedNum = '+' + numerals;
+  } else if (int < 0) {
+    signedNum = '-' + numerals;
+  } else {
+    signedNum = numerals;
+  }
+
+  return signedNum;
+}
+```
