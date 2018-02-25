@@ -136,76 +136,209 @@ function findDup(arr) {
     }
   }
 }
+
+// using `indexOf()`
+function findDup(arr) {
+  var i;
+
+  for (i = 0; i < arr.length; i++) {
+    if (arr.indexOf(arr[i], i + 1) !== -1) {
+      return arr[i];
+    }
+  }
+}
 ```
 
 
 ## Problem 5:
+Write a function that combines two arrays passed as arguments, and returns a new array that contains all elements from both array arguments, with each element taken in alternation.
 
+You may assume that both input arrays are non-empty, and that they have the same number of elements.
 ```javascript
+interleave([1, 2, 3], ['a', 'b', 'c']);    // [1, "a", 2, "b", 3, "c"]
 ```
 
 ### Solution
 
 ```javascript
+function interleave(arr1, arr2) {
+  var i;
+  var interleaved = [];
 
+  for (i = 0; i < arr1.length; i++) {
+    interleaved.push(arr1[i], arr2[i]);
+  }
+
+  return interleaved;
+}
 ```
 
 
 ## Problem 6:
 
+Write a function that takes an array of integers as input, multiplies all of the integers together, divides the result by the number of entries in the array, and returns the result as a string with the value rounded to three decimal places.
+
 ```javascript
+showMultiplicativeAverage([3, 5]);                   // "7.500"
+showMultiplicativeAverage([2, 5, 7, 11, 13, 17]);    // "28361.667"
 ```
 
 ### Solution
 
 ```javascript
+function showMultiplicativeAverage(numbers) {
+  var i;
+  var numbersProduct = numbers[0];
+  var length = numbers.length;
 
+  for (i = 1; i < length; i++) {
+    numbersProduct *= numbers[i];
+
+  }
+
+  return (numbersProduct / length).toFixed(3);
+}
+
+// with `reduce`
+function showMultiplicativeAverage(numbers) {
+  var numbersProduct;
+  var length = numbers.length;
+
+  numbersProduct = numbers.reduce(function (accum, currVal) {
+    return accum * currVal;
+  });
+
+  return (numbersProduct / length).toFixed(3);
+}
 ```
 
 
 ## Problem 7:
+Write a function that takes two array arguments, each containing a list of numbers, and returns a new array that contains the product of each pair of numbers from the qarguments that have the same index.
+You may assume that the arguments contain the same number of elements.
 
 ```javascript
+multiplyList([3, 5, 7], [9, 10, 11]);    // [27, 50, 77]
 ```
 
 ### Solution
 
 ```javascript
+function multiplyList(arr1, arr2) {
+var i;
+var products = [];
+
+  for (i = 0; i < arr1.length; i++) {
+    products[i] = arr1[i] * arr2[i];
+  }
+
+  return products;
+}
 
 ```
 
 
 ## Problem 8:
+Write a function that takes one argument, a positive integer, and returns a list of the digits in the number.
 
 ```javascript
+digitList(12345);       // [1, 2, 3, 4, 5]
+digitList(7);           // [7]
+digitList(375290);      // [3, 7, 5, 2, 9, 0]
+digitList(444);         // [4, 4, 4]
 ```
 
 ### Solution
 
 ```javascript
+// using type conversion:
+function digitList(number) {
+  var i;
+  var digits = [];
+  var numerals = String(number);
 
+  for (i = 0; i < numerals.length; i++) {
+    digits.push(parseInt(numerals[i], 10));
+  }
+
+  return digits;
+}
+
+// using `.map`
+function digitList(number) {
+  var numerals = String(number).split('');
+  var digits;
+
+  digits = numerals.map(function (numStr) {
+    return parseInt(numStr, 10);
+  });
+
+  return digits;
+}
 ```
 
 
 ## Problem 9:
-
+Write a function that counts the number of occurrences of each element in a given array. Once counted, log each element alongside the number of occurrences.
 ```javascript
+var vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
+                'motorcycle', 'motorcycle', 'car', 'truck'];
+
+countOccurrences(vehicles);
+
+// console output
+car => 4
+truck => 3
+SUV => 1
+motorcycle => 2
 ```
 
 ### Solution
 
 ```javascript
+function countOccurrences(collection) {
+  var i;
+  var vehicle;
+  var count = {};
 
+  for (i = 0; i < collection.length; i++) {
+    if (count[collection[i]]) {
+      count[collection[i]] += 1;
+    } else {
+      count[collection[i]] = 1;
+    }
+  }
+
+  for (vehicle in count) {
+    console.log(vehicle + ' => ' + String(count[vehicle]));
+  }
+}
+
+var vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
+                'motorcycle', 'motorcycle', 'car', 'truck'];
+
+countOccurrences(vehicles);
 ```
 
 
 ## Problem 10:
-
+Write a functin that takes one argument, an array containing integers, and returns the average of all the integers in the array, rounded down to the integer component of the average. The array will never be empty, and the numbers will always be positive integers.
 ```javascript
+average([1, 5, 87, 45, 8, 8]);       // 25
+average([9, 47, 23, 95, 16, 52]);    // 40
 ```
 
 ### Solution
 
 ```javascript
+function average(numbers) {
+  var length = numbers.length;
+  var sum;
 
+  sum = numbers.reduce(function (currTotal, currValue) {
+    return currTotal + currValue;
+  });
+
+  return Math.floor(sum / length);
+}
 ```
