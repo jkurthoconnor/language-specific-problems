@@ -1,22 +1,11 @@
-LS Exercises: [JS Fundamentals: Objects](https://launchschool.com/exercise_sets/7912d84c)
+LS Exercises: []()
 
 
 ## Problem 1:
 
 
-Identify the bug in the following code. Don't run the code until after you've tried to answer.
 
 ```javascript
-var myObject = {
-  a: 'name',
-  'b': 'test',
-  123: 'c',
-  1: 'd',
-};
-
-myObject[1];
-myObject[a];
-myObject.a;
 ```
 
 ### Solution
