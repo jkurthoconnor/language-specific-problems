@@ -57,25 +57,48 @@ function doubleConsonants(str) {
 
 ## Problem 3:
 
+Write a function that takes a postitve integer as an argument, and returns that number with its digits reversed.
+
 ```javascript
+reverseNumber(12345);    // 54321
+reverseNumber(12213);    // 31221
+reverseNumber(456);      // 654
+reverseNumber(12000);    // 21 -- Note that zeros get dropped!
+reverseNumber(1);        // 1
 ```
 
 ### Solution
 
 ```javascript
+function reverseNumber(num) {
+var digits = String(num).split('');
 
+return parseInt(digits.reverse().join(''), 10);
+}
 ```
 
 
 ## Problem 4:
 
+Write a function that takes a non-empty string argument, and returns the middle character(s) of the string. If the string has an odd `length`, you should return exactly one character. If the string has an even `length`, you should return exactly two charaters.
+
 ```javascript
+centerOf('I Love Ruby');      // "e"
+centerOf('Launch School');    // " "
+centerOf('Launch');           // "un"
+centerOf('Launchschool');     // "hs"
+centerOf('x');                // "x"
 ```
 
 ### Solution
 
 ```javascript
+function centerOf(str) {
+  var center = Math.floor(str.length / 2);
+  var odd = (str.length % 2) === 1;
 
+  return odd ? str[center] : str.slice(center - 1, center + 1);
+}
 ```
 
 
