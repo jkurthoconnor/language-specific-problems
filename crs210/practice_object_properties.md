@@ -21,6 +21,11 @@ function objectHasProperty(obj, property) {
 objectHasProperty(pets, 'dog');       // true
 objectHasProperty(pets, 'lizard');    // false
 objectHasProperty(pets, 'mice');      // true
+
+// with `in` operator
+function objectHasProperty(obj, property) {
+  return property in obj;
+}
 ```
 
 ## Problem 2.
