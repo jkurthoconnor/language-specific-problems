@@ -50,6 +50,13 @@ function incrementProperty(obj, prop) {
 
   return obj[prop];
 }
+
+// using `in`:
+function incrementProperty(obj, property) {
+  obj[property] = (property in obj) ? obj[property] + 1 : 1;
+
+  return obj[property];
+}
 ```
 ## Problem 3.
 Write a function named `copyProperties` that takes two Objects as arguments. The function should copy all properties from the first object to the second. The function should return the number of properties copied.
@@ -109,3 +116,24 @@ function wordCount(string) {
 
   return count;
 }
+
+// or adding a variable to clean up the bracket expressions
+function wordCount(inputString) {
+  var i;
+  var word;
+  var wordList = inputString.split(' ');
+  var count = {};
+
+  for (i = 0; i < wordList.length; i++) {
+    word = wordList[i];
+    if (count[word]) {
+      count[word] += 1;
+    } else {
+      count[word] = 1;
+    }
+  }
+  
+  return count;
+}
+```
+
