@@ -30,6 +30,10 @@ If the code formatting is desired, then the declaraton and assignment could use 
                       ' diam. Maecenas blandit aliquet ipsum. Integer vitae sapien sed nulla rutrum' +
                       ' hendrerit ac a urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.';
 
+// but the AirBnB style guide cautions against both concatenation and escaped returns. The preference is one long line. If it turns out the line breaks in the source are desired in the string itself, then inserting `\n` at each required break would be the solution. If the breaks are merely for legibility in the source code, then a single line without escaped new line chars would be preferred, as follows:
+
+var paragraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ligula at risus vulputate faucibus. Aliquam venenatis nibh ut justo dignissim dignissim. Proin dictum purus mollis diam auctor sollicitudin. Ut in bibendum ligula. Suspendisse quam ante, dictum aliquam tristique id, porttitor pulvinar diam. Maecenas blandit aliquet ipsum. Integer vitae sapien sed nulla rutrum hendrerit ac a urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.';
+
 ```
 
 
@@ -60,9 +64,9 @@ if (myOtherString || myArray) {
 
 Solution:
 Line 45: 'Hello'
-Line 49: logs nothing; `!myString` is translated to `false`
-Line 53: logs 'World'; `!!myArray` is translated to `true` 
-Line 57: logs '!'; `(myOtherString || myArray)` returns `myArray`, which is translated to `true`
+Line 49: logs nothing; `!myString` evaluates to `false`
+Line 53: logs 'World'; `!!myArray` evaluates to `true` 
+Line 57: logs '!'; `(myOtherString || myArray)` returns `myArray`, which evaluates to `true`
 
 
 3. Go over the code below and specify how many possible flows/paths there are.
@@ -109,7 +113,11 @@ console.log(name, saveName);
 Solution: 
 The code logs `Bob Bob`. This is because strings are primitive types in JS, thus they are immutable.  While `name.toUpperCase()` returns a new, uppercased string, the original value to which `name` points remains unchanged.
 
+Further Exploration:
+How is it possible that even though this string is a primitive, it is able to call a method?
 
+Solution:
+When a method is called on a primitive, JS briefly creates an object of the appropriate type (assuming there is a corresponding constructor) from the primitive's value and uses that object to call the method. Once the method returns, it is discarded.  
 5. Arithmetic Integer
 
 Here is the code for the program:
@@ -138,21 +146,11 @@ Enter the second number: 17
 23 / 17 = 1
 23 % 17 = 6
 23 ** 17 = 1.4105003956066297e+23
-
-Enter the first number: 23
-Enter the second number: 17
-
-23 + 17 = 40
-23 - 17 = 6
-23 * 17 = 391
-23 / 17 = 1
-23 % 17 = 6
-23 ** 17 = 1.4105003956066297e+23
 ```
 
 Solution:
 
-The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original, but only partially; note that it still relies on the implicit now to make the string concatenation work. Ideally, we'd not rely on any implicit conversion.
+The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original, but only partially; note that it still relies on the implicit conversion now to make the string concatenation work. Ideally, we'd not rely on any implicit conversion.
 
 ```javascript
       var number1 = Number(prompt('Enter the first number:'));
@@ -164,6 +162,19 @@ The results did not match expectations for the first operation, the addition. Th
       console.log(number1 + ' / ' + number2 + ' = ' + Math.floor(number1 / number2));
       console.log(number1 + ' % ' + number2 + ' = ' + (number1 % number2));
       console.log(number1 + ' ** ' + number2 + ' = ' + Math.pow(number1, number2));
+
+// solution that does not rely on implicit coercion:
+var num1 = prompt('Enter the first number:');
+var num2 = prompt('Enter the second number:');
+var num1Int = parseInt(num1, 10);
+var num2Int = parseInt(num2, 10);
+
+console.log(num1 + ' + ' + num2 + ' = ' + (num1Int + num2Int));
+console.log(num1 + ' - ' + num2 + ' = ' + (num1Int - num2Int));
+console.log(num1 + ' * ' + num2 + ' = ' + (num1Int * num2Int));
+console.log(num1 + ' / ' + num2 + ' = ' + Math.floor(num1Int / num2Int));
+console.log(num1 + ' % ' + num2 + ' = ' + (num1Int % num2Int));
+console.log(num1 + ' ** ' + num2 + ' = ' + Math.pow(num1Int, num2Int));
 ```
 
 
@@ -190,12 +201,25 @@ var charCount = phrase.length;
 
 console.log('There are ' + charCount + ' characters in "' + phrase + '".');
 
+// using ES6 template literals:
+var request = 'Please enter a phrase: ';
+var phrase = prompt(`${request}`);
+
+console.log(`There are ${phrase.length} characters in "${phrase}".`);
+
 // Further Exploration
 
 var phrase = prompt('Please enter a phrase:');
-var charCount = phrase.replace(/[^a-zA-Z]/ig, '').length;
+var charCount = phrase.replace(/[^a-z]/ig, '').length;
 
 console.log('There are ' + charCount + ' characters in "' + phrase + '".');
+
+// using template literals:
+var request = 'Please enter a phrase: ';
+var phrase = prompt(`${request}`);
+var count = phrase.replace(/[^a-z]/ig, '').length;
+
+console.log(`There are ${count} characters in "${phrase}".`);
 ```
 
 
@@ -242,6 +266,40 @@ function stringToInteger(str) {
 }
 console.log(stringToInteger('4321'));
 console.log(stringToInteger('570'));
+
+// extracted look-up table to helper method to avoid reliance on global variables
+function stringToInteger(numStr) {
+  var reversedNums = numStr.split('').reverse();
+  var result = 0; 
+
+  for (i = 0; i < reversedNums.length; i += 1) {
+    result += convertDigit(reversedNums[i]) * Math.pow(10, i);
+  }
+
+  return result;
+}
+
+function convertDigit(str) {
+  var translation = {
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+  };
+
+  return translation[str];
+}
+
+console.log(stringToInteger('401592'));
+console.log(stringToInteger('5001'));
+console.log(stringToInteger('5000'));
+    
 ```
 
 8.  Write a function that takes a string of digits, and returns the appropriate number as an integer.  The string may have a leading + or - sign; if the first character is a +, your function should return a positive number; if it is a -, your function should return a negative number. If there is no sign, return a positive number.
@@ -291,6 +349,37 @@ function stringToSignedInteger(str) {
 
   return (sign === '-') ? -value : value;
 }
+
+// or, simply refactoring stringToInteger:
+function stringToSignedInteger(numStr) {
+  var negative = (numStr[0] === '-');
+  var digits = (numStr[0].match(/\d/) ? numStr : numStr.slice(1));
+  var reversedNums = digits.split('').reverse();
+  var result = 0; 
+
+  for (i = 0; i < reversedNums.length; i += 1) {
+    result += convertDigit(reversedNums[i]) * Math.pow(10, i);
+  }
+
+  return (negative ? result * -1 : result);
+}
+
+function convertDigit(str) {
+  var translation = {
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+  };
+
+  return translation[str];
+}
 ```
 
 9.  You will learn more about converting strings to numbers by writing a function that takes a positive integer or zero, and converts it to a string representation.
@@ -326,6 +415,21 @@ function integerToString(int) {
 console.log(integerToString(4321));      // "4321"
 console.log(integerToString(0));         // "0"
 console.log(integerToString(5000));      // "5000"
+
+// refactored to avoid reliance on global vars and to use map:
+function integerToString(int) {
+  var numbers = [];
+  var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+  do {
+    numbers.unshift(int % 10);
+    int = Math.floor(int / 10);
+  } while (int > 0);
+    
+  return numbers.map(function (n) {
+    return digits[n];
+  }).join('');
+}
 ```
 
 10.  In the previous exercise, you reimplemented a function that converts non-negative numbers to strings. In this exercise, you're going to extend that function by adding the ability to represent negative numbers.
