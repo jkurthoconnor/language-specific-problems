@@ -20,8 +20,8 @@ Output:
   This is global
 
 Explanation:
-  Because `someFunction()` declares its own `myVar`, this function-scoped variableshadows the global `myVar`.  As a result, when the function assigns `This is local` the value is attached only to the local variable.  `console.log(myVar)` has no access to the local / function scoped variable, so it logs `This is global`
-  
+  Because `someFunction()` declares its own `myVar`, this function-scoped variableshadows the global `myVar` declared at the top of the program.  As a result, when the function assigns `This is local` to `myVar`, `myVar` resolves to the local function-scoped variable.  `console.log(myVar)` has no access to the local / function scoped variable, so there `myVar` resolves to the global variable, and the line logs `This is global`
+
 
 
 ## Problem 2
@@ -45,7 +45,7 @@ Output:
   This is local
 
 Explanation:
-  This function declares and assigns its own `myVar` to point to `This is local`. So, because the logging occurs withing the function but after the value assignment, the program logs `This is local`.
+  This function declares and assigns its own `myVar` to point to `This is local`. When resolving `myVar` in order to log its value, the interpreter never 'sees' the global-scoped `myVar`, stopping instead at the first identifier that matches. So, because the logging occurs withing the function but after the value assignment, the program logs `This is local`.
 
 
 
@@ -109,7 +109,6 @@ console.log(myVar);
 
 Output:
   This is global
-
 
 Explanation:
   `myVar` is never explicity declared in this program. The function code simply assigns a value to `myVar`. Variable reference and variable assignment work differently when the variable is not declared in an available scope.  Referencing an undeclared / unavailable variable results in a ReferenceError, but assigning a value to an undeclared variable simply forces the variable to become a property of the global object, which is almost the same as declaring it in global scope.  Thus, because the logging occurs after the function call that assigns a value to `myVar`, the program outputs `This is global`.
@@ -245,5 +244,4 @@ console.log(typeof logValue);
 ```
 
 Output:
-  Hello, world!
   string
