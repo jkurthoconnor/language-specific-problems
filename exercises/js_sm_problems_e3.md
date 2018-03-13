@@ -12,10 +12,18 @@ function randomInRange(min, max) {
   var range = max - min;
   var additive = Math.random() * range;
 
-  return Math.ceil(additive + min);
+  return String(Math.ceil(additive + min));
 }
 
 console.log('Teddy is ' + randomInRange(20, 200) + ' years old!');
+
+// with template literal and a different formula:
+function howOldIsTeddy(min, max) {
+  var range = max - min;
+  var age = Math.floor(1 + min + (Math.random() * range));
+
+  return `Teddy is ${String(age)} years old!`;
+}
 ```
 ### Further Exploration
 Would it make a difference if `Math.round()` were used in the sample solution?
