@@ -109,6 +109,43 @@ function isTheLastRepeated() {
 }
 
 isTheLastRepeated();
+
+
+// using ES6 template literals and `includes`
+function collectNumbers() {
+  var inputNums = [];
+  var order = ['1st', '2nd', '3rd', '4th', '5th', 'last'];
+  var i;
+
+  for (i = 0; i < order.length; i += 1) {
+    inputNums.push(prompt(`Enter the ${order[i]} number: `));
+  }
+
+  return inputNums;
+}
+
+function search(collection) {
+  var source = collection.slice(0, 5);
+  var searchTerm = collection[5];
+  var found = source.includes(searchTerm);
+  var result = (found ? 'appears' : 'does not appear');
+
+  return `The number ${searchTerm} ${result} in [${source.join(', ')}].`;
+}
+
+console.log(search(collectNumbers()));
+
+// Further Exploration: modify to search for number greater than
+function search(collection) {
+  var source = collection.slice(0, 5);
+  var searchTerm = collection[5];
+  var found = source.some(function (element) {
+    return parseInt(element, 10) > parseInt(searchTerm, 10);
+  });
+  var result = (found ? 'occurs' : 'does not occur');
+
+  return `A number greater than ${searchTerm} ${result} in [${source.join(', ')}].`;
+}
 ```
 
 
