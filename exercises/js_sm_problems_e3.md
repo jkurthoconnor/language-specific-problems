@@ -186,6 +186,25 @@ function retirementAdvisor() {
   console.log('It\'s ' + currentYear + '. You will retire in ' + retireYear + '.'); 
   console.log('You have only ' + yearsTillRetire + ' years of work to go!');
 }
+
+// using distinct functions, destructuring, and template literals:
+function collectAges() {
+  var currentAge = parseInt(prompt('What is your age?:'), 10);
+  var retireAge = parseInt(prompt('At what age would you like to retire?'), 10);
+
+  return [currentAge, retireAge];
+}
+
+function retirementReport(ageRequirements) {
+  var [age, retire] = ageRequirements;
+  var yearsUntilRetire = retire - age;
+  var currentYear= new Date().getFullYear();
+  var retireYear = String(currentYear + yearsUntilRetire);
+
+  return `It's ${String(currentYear)}. You will retire in ${retireYear}.\nYou have only ${String(yearsUntilRetire)} years of work to go!`;
+}
+
+console.log(retirementReport(collectAges()));
 ```
 
 Further Exploration:
