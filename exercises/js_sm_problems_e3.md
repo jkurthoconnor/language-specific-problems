@@ -351,7 +351,21 @@ function runningTotal(numbers) {
 
   return runningTotals;
 }
+
+// rewritten to make intent more obvious:
+function runningTotal(arr) {
+  var i;
+  var holder = [];
+  var sum = 0;
+
+  for (i = 0; i < arr.length; i += 1) {
+    holder.push(sum += arr[i]);
+  }
+
+  return holder;
+}
 ```
+
 ### Further Exploration:
 Would `map` be helpful?
 
@@ -368,9 +382,20 @@ var out1 = arr1.map(function (value, idx, array) {
     return array[idx] = value + array[idx - 1];
   }
 });
+
 ```
 
-If one needed a funciton that left the original array untouched and using `array.map` were a requirement, then a callback function that calculated a running total for each new value by summing all previous values along with the current value would provide a solution.
+If one needed a function that left the original array untouched and using `array.map` were a requirement, then a callback function that calculated a running total for each new value by summing all previous values along with the current value would provide a solution.
+
+```javascript
+function runningTotal(arr) {
+  var sum = 0;
+
+  return arr.map(function (ele) {
+    return sum += ele;
+  });
+}
+```
 
 
 ## Problem 8:
@@ -420,20 +445,16 @@ function swap(string) {
   var words = string.split(' ');
   var swapped;
 
-  swapped =  words.map(function(word) {
+  swapped = words.map(function(word) {
     if (word.length === 1) {
       return word;
     } else {
-    return word[word.length - 1] + word.slice(1, -1) + word[0];
+      return word.slice(-1) + word.slice(1, -1) + word[0];
     }
   });
 
   return swapped.join(' ');
 }
-console.log(swap('Oh what a wonderful day it is'));  // "hO thaw a londerfuw yad ti si"
-console.log(swap('Abcde'));                          // "ebcdA"
-console.log(swap('a'));                              // "a"
-
 ```
 
 
@@ -503,4 +524,7 @@ function wordSizes(string) {
 
   return lengthCount;
 }
+// another option is to determine `size` based on a 'cleaned' string:
+
+size = words[i].replace(/[^a-z]/ig, '').length;
 ```
