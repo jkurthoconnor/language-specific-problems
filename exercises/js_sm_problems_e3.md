@@ -236,6 +236,13 @@ function isPalindrome(string) {
 
   return string === reversed;
 }
+
+// or more idiomatically with convenience methods:
+function isPalindrome(str) {
+var reversed = str.split('').reverse().join('');
+
+return reversed === str;
+}
 ```
 
 
@@ -292,6 +299,30 @@ isPalindromicNumber(5);            // true
 function isPalindromicNumber(number) {
   return isPalindrome(String(number));
 }
+
+// or self-contained:
+function isPalindromicNumber(n) {
+  return String(n) === String(n).split('').reverse().join('');
+}
+```
+Further Exploration: Would it make a difference if the numbers had leading zeros?
+
+Solution:
+Yes. The key is to note that the methods identify palindromes in the decimal string equivalents of the arguments.  Thus, as leading 0 would indicate octal or hex numbers, so the method would end up declaring palindromes only if the decimal equivalents were palindromic. 
+
+A leading 0 would be indicative of octal numbering, so the conversion to a string would be representing the decimal equivalent of the octal argument.
+
+A leading `0x` would indicate hexadecimal numbering, so the conversion would be representing the decimal equivalent of the hexidecimal argument.
+
+If the decimal equivalent turns out to be palindromic, then the methods would still work, in the sense of identifing the number as a palindrome.
+
+See examples below:
+
+```javascript
+console.log(isPalindromicNumber(00400));            // false: leading 0 indicative of octal number, so decimal conversion returns '2304'
+console.log(isPalindromicNumber(0044));            // false: leading 0 indicative of octal number, so decimal conversion returns 36
+console.log(isPalindromicNumber(0x44));            // false: leading 0x indicative of hexdecimal number, so decimal conversion returns 68
+console.log(isPalindromicNumber(0xb));            // true: leading 0x indicative of hexdecimal number, so decimal conversion returns 11
 ```
 
 
