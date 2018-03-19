@@ -38,6 +38,31 @@ function dms(angle) {
 
   return String(degrees) + DEG_MARK + minutes + '\'' + seconds + '"';
 }
+
+// using template literals:
+function dms(angle) {
+  var degrees = String(Math.floor(angle));
+  var percentDegRemainder = angle % 1;
+  var minutes = String(Math.floor(percentDegRemainder * 60));
+  var seconds = String(Math.floor(((percentDegRemainder * 60) % 1) * 60));
+
+  return `${degrees}\u00B0${minutes.padStart(2, '0')}'${seconds.padStart(2, '0')}"`;
+}
+
+// avoiding ES6 (template literals and `padStart`:
+function dms(angle) {
+  var degrees = String(Math.floor(angle));
+  var percentDegRemainder = angle % 1;
+  var minutes = String(Math.floor(percentDegRemainder * 60));
+  var seconds = String(Math.floor(((percentDegRemainder * 60) % 1) * 60));
+
+  return degrees + '\u00B0' + format(minutes) + '\'' + format(seconds) + '"';
+}
+
+
+function format(str) {
+  return (str.length === 2 ? str : '0' + str);
+}
 ```
 
 
@@ -51,16 +76,16 @@ union([1, 3, 5], [3, 6, 9]);    // [1, 3, 5, 6, 9]
 
 ```javascript
 function union(arr1, arr2) {
-  var joinedEle = arr1.slice();
+  var result = arr1.slice();
   var i;
 
-  for (i = 0; i < arr2.length; i++) {
-    if (joinedEle.indexOf(arr2[i]) === -1) {
-      joinedEle.push(arr2[i]);
+  for (i = 0; i < arr2.length; i += 1) {
+    if (result.indexOf(arr2[i]) === -1) {
+      result.push(arr2[i]);
     }
   }
 
-  return joinedEle;
+  return result;
 }
 ```
 
