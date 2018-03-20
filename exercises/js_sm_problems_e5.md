@@ -31,6 +31,23 @@ function repeater(str) {
 function repeater(str) {
   return str.replace(/(.)/g, '$1$1');
 }
+
+// with `forEach`
+function repeater(str) {
+  var chars = str.split('');
+  var repeated = '';
+
+  chars.forEach(function (char) {
+    repeated += char + char;
+  });
+
+  return repeated;
+}
+
+// or full ES6: 
+function repeater(str) {
+  return Array.from(str, char => char + char).join('');
+}
 ```
 
 
@@ -51,6 +68,20 @@ doubleConsonants('');                // ""
 // with an ugly regex
 function doubleConsonants(str) {
   return str.replace(/([b-df-hj-np-tv-z])/gi, '$1$1');
+}
+
+// with map and an ugly regex:
+function doubleConsonants(str) {
+  var chars = Array.from(str);
+  var pattern = /[b-df-hj-np-tv-z]/i;
+
+  return chars.map(function (char) {
+    if (pattern.test(char)) {
+      return char + char;
+    } else {
+      return char;
+    }
+  }).join('');
 }
 ```
 
