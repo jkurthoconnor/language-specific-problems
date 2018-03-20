@@ -87,6 +87,19 @@ function union(arr1, arr2) {
 
   return result;
 }
+
+// using forEach:
+function union(arr1, arr2) {
+  var result = arr1.slice();
+
+  arr2.forEach(function (element) {
+    if (result.indexOf(element) === -1) {
+      result.push(element);
+    }
+  });
+
+  return result;
+}
 ```
 
 
@@ -260,6 +273,16 @@ var products = [];
   return products;
 }
 
+// or, Rubyesque:
+function multiplyList(arr1, arr2) {
+  var products = [];
+
+  arr1.forEach(function (n, idx) {
+    products.push(n * arr2[idx]);
+  });
+
+  return products;
+}
 ```
 
 
@@ -299,6 +322,13 @@ function digitList(number) {
   });
 
   return digits;
+}
+
+// or even:
+function digitList(num) {
+  return String(num).split('').map(function (numeral) {
+    return parseInt(numeral, 10);
+  });
 }
 ```
 
@@ -343,11 +373,34 @@ var vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
                 'motorcycle', 'motorcycle', 'car', 'truck'];
 
 countOccurrences(vehicles);
+
+// a bit more readable:
+function countOccurrences(arr) {
+  var count = {};
+
+  arr.forEach(function (ele) {
+    if (count[ele]) {
+      count[ele] += 1;
+    } else {
+      count[ele] = 1;
+    }
+  });
+  
+  printOccurrenceCount(count);
+}
+
+function printOccurrenceCount(countObj) {
+  var key;
+
+  for (key in countObj) {
+    console.log(`${key} => ${String(countObj[key])}`);
+  }
+}
 ```
 
 
 ## Problem 10:
-Write a functin that takes one argument, an array containing integers, and returns the average of all the integers in the array, rounded down to the integer component of the average. The array will never be empty, and the numbers will always be positive integers.
+Write a function that takes one argument, an array containing integers, and returns the average of all the integers in the array, rounded down to the integer component of the average. The array will never be empty, and the numbers will always be positive integers.
 ```javascript
 average([1, 5, 87, 45, 8, 8]);       // 25
 average([9, 47, 23, 95, 16, 52]);    // 40
