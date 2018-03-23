@@ -128,7 +128,7 @@ function centerOf(str) {
   var center = Math.floor(str.length / 2);
   var odd = (str.length % 2) === 1;
 
-  return odd ? str[center] : str.slice(center - 1, center + 1);
+  return odd ? str[center] : str.substr(center -1, 2);
 }
 ```
 
@@ -147,8 +147,24 @@ negative(0);     // -0
 
 ```javascript
 function negative(num) {
-  return num < 0 ? num : -num;
+  return num < 0 ? num : -num; // won't handle -0 as argument
 }
+
+// using ternary and handling -0 properly as argument
+function negative(n) {
+  return n < 0 ? n : -Math.abs(n);
+}
+
+// or:
+function negative(n) {
+  return Math.abs(n) * -1;
+  // return - Math.abs(n);
+}
+
+console.log(negative(5));     // -5
+console.log(negative(-3));    // -3
+console.log(negative(0));     // -0
+console.log(negative(-0));    // -0
 ```
 
 
@@ -202,6 +218,13 @@ function swapName(name) {
 
   return lastName + ', ' + firstName;
 }
+
+// using destructuring and template literals
+function swapName(name) {
+  var [first, last] = name.split(' ');
+
+  return  `${last}, ${first}`;
+}
 ```
 
 Further Exploration:
@@ -211,11 +234,13 @@ What if a person had more than one first name? Refactor the current solution to 
 ```javascript
 function swapName(name) {
   var names = name.split(' ');
-  var lastName = names.slice(-1);
-  var firstNames = names.slice(0, -1);
+  var last = names.slice(-1);
+  var first = names.slice(0, -1).join(' ');
 
-  return lastName + ', ' + firstNames.join(' ');
+  return  `${last}, ${first}`;
 }
+
+console.log(swapName('Joe Michael Patrick O\'Reilly'));     // -5
 ```
 
 ## Problem 8:
@@ -267,6 +292,24 @@ function reverseSentence(sent) {
 
   return reversed.join(' ');
 }
+
+// without relying on `split`:
+function reverseSentence(sentence) {
+  var i;
+  var currentWord = '';
+  var reversedSent = '';
+
+  for (i = 0; i < sentence.length; i += 1) {
+    if (/[^\s]/.test(sentence[i])) {
+      currentWord += sentence[i];
+    } else {
+      reversedSent = `${currentWord} ${reversedSent}`;
+      currentWord = '';
+    }
+  }
+
+  return `${currentWord} ${reversedSent}`;
+}
 ```
 
 
@@ -303,5 +346,12 @@ function reverseWords(str) {
   }
 
   return result.join(' ');
+}
+
+// succinct:
+function reverseWords(words) {
+  return words.split(' ').map(function (word) {
+    return word.length > 4 ? (word.split('').reverse().join('')) : word;
+  }).join(' ');
 }
 ```
