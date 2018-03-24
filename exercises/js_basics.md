@@ -111,7 +111,7 @@ console.log(name, saveName);
 ```
 
 Solution: 
-The code logs `Bob Bob`. This is because strings are primitive types in JS, thus they are immutable.  While `name.toUpperCase()` returns a new, uppercased string, the original value to which `name` points remains unchanged.
+The code logs `Bob Bob`. This is because strings are primitive types in JS, thus they are immutable.  While `name.toUpperCase()` returns a new, uppercased string, the program does nothing with that value, and the original value to which `name` points remains unchanged.
 
 Further Exploration:
 How is it possible that even though this string is a primitive, it is able to call a method?
@@ -150,7 +150,7 @@ Enter the second number: 17
 
 Solution:
 
-The results did not match expectations for the first operation, the addition. This is because the `+` operator, when wrapped with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original, but only partially; note that it still relies on the implicit conversion now to make the string concatenation work. Ideally, we'd not rely on any implicit conversion.
+The results did not match expectations for the first operation, the addition. This is because the `+` operator, when working with string operands, performs string concatenation.  The rest of the logs match expectations, but they rely on JS's implicit type coercion to work. The underlying issue is that `number1` and `number2` are strings, and they are never reassigned to the number equivalents, nor are their number equivalents explicitly used in the mathematical formulae. Better code would not rely upon the implicit conversions.  The following is an improvement on the original, but only partially; note that it still relies on the implicit conversion now to make the string concatenation work. Ideally, we'd not rely on any implicit conversion.
 
 ```javascript
       var number1 = Number(prompt('Enter the first number:'));
@@ -197,7 +197,7 @@ Solution:
 
 ```javascript
 var phrase = prompt('Please enter a phrase:');
-var charCount = phrase.length;
+var charCount = String(phrase.length);
 
 console.log('There are ' + charCount + ' characters in "' + phrase + '".');
 
@@ -205,19 +205,19 @@ console.log('There are ' + charCount + ' characters in "' + phrase + '".');
 var request = 'Please enter a phrase: ';
 var phrase = prompt(`${request}`);
 
-console.log(`There are ${phrase.length} characters in "${phrase}".`);
+console.log(`There are ${String(phrase.length)} characters in "${phrase}".`);
 
 // Further Exploration
 
 var phrase = prompt('Please enter a phrase:');
-var charCount = phrase.replace(/[^a-z]/ig, '').length;
+var charCount = String(phrase.replace(/[^a-z]/ig, '').length);
 
 console.log('There are ' + charCount + ' characters in "' + phrase + '".');
 
 // using template literals:
 var request = 'Please enter a phrase: ';
 var phrase = prompt(`${request}`);
-var count = phrase.replace(/[^a-z]/ig, '').length;
+var count = String(phrase.replace(/[^a-z]/ig, '').length);
 
 console.log(`There are ${count} characters in "${phrase}".`);
 ```
