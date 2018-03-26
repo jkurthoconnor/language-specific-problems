@@ -20,7 +20,7 @@ Output:
   This is global
 
 Explanation:
-  Because `someFunction()` declares its own `myVar`, this function-scoped variableshadows the global `myVar` declared at the top of the program.  As a result, when the function assigns `This is local` to `myVar`, `myVar` resolves to the local function-scoped variable.  `console.log(myVar)` has no access to the local / function scoped variable, so there `myVar` resolves to the global variable, and the line logs `This is global`
+  Functions in JS create their own scope. Because `someFunction()` declares its own `myVar`, this function-scoped variable shadows the global `myVar` declared at the top of the program.  As a result, when the function assigns `This is local` to `myVar`, `myVar` resolves to the local function-scoped variable.  `console.log(myVar)` has no access to the local / function scoped variable, so there `myVar` resolves to the global variable, and the line logs `This is global`
 
 
 
@@ -135,7 +135,7 @@ Output:
   7
 
 Explanation:
-  `myValue` does nothing to reassign the globally-scoped `a`.  Yes, the value to wich `a` points is passed in and incremented by 10, but it is only stored as the function-scoped `b`, with no relation to `a`. Thus, when `a` is logged it remains with its originally assigned value of 7.
+  `myValue` does nothing to reassign the globally-scoped `a`.  Yes, the value to which `a` points is passed in and incremented by 10, but it is only stored as the function-scoped `b`, with no relation to `a`. Thus, when `a` is logged it remains with its originally assigned value of 7.
 
 ## Problem 7
 
@@ -194,8 +194,9 @@ var a = 1;
 
 Output:
   undefined
+
 Explanation:
-  `undefined` is the value of a declared variable that has not been explicitly assigned a value.  In this code, the variable declaration is hoisted to the top but the assignment remains after the logging. So `undefined` is logged to the console.
+  `undefined` is the value of a declared variable that has not been explicitly assigned a value.  In this code, the variable declaration is hoisted to the top but the assignment remains and is executed in its original location, i.e. after the logging. So `undefined` is logged to the console.
 
 ## Problem 10
 
@@ -213,7 +214,7 @@ Output:
   Hello, world!
 
 Explanation:
-  Because of hoisting, the entire function declaration, block included, is hoistedto the top of the code. Thus the Javascript interpreter already has available to it the `logValue` function at the point in the program when `logValue` is called.
+  Because of hoisting, the entire function declaration, block included, is hoisted to the top of the code. Thus the Javascript interpreter already has available to it the `logValue` function at the point in the program when `logValue` is called.
 
 Further Exploration:
 
@@ -244,4 +245,4 @@ console.log(typeof logValue);
 ```
 
 Output:
-  string
+  String

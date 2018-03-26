@@ -20,7 +20,7 @@ myObject.a;
 ### Solution
 `myObject[a]` raises an `Uncaught ReferenceError` because when bracket notation does not immediately find a string, or a value that can be converted to a string, bracket notation attempts to evaluate `a` as variable , but there is no associated value or function for which `a` is an identifier.
 
-`myObject.a` works because dot notation requires identifiers, so there is no attempt on the interpreter to evaluate an expression.
+`myObject.a` would work (if the program ran to that point) because dot notation requires identifiers, so there is no attempt on the interpreter to evaluate an expression.
 
 
 ## Problem 2:

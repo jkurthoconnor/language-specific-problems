@@ -160,7 +160,7 @@ function counter(count) {
 /* hoisted, snippet 1 would be:
 function counter(count) {
 }
-var counter;
+// var counter; would go here, but as a duplicate declaration is ignored
 var rate;
 
 counter = 5; // `counter` now points to `5`, and not the function
