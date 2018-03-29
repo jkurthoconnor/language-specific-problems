@@ -20,6 +20,7 @@ var getMinMax = function (value) {
   }
 };
 
-[4, 5, 12, 23, 3].forEach(getMinMax);
 
-console.log(min, max);           // 3 23
+console.log(min, max);
+myForEach([1,2,3,4], getMinMax);
+console.log(min, max);
