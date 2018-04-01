@@ -38,47 +38,49 @@ var studentScores = {
 
 function generateClassRecordSummary(records) {
   var exams;
-  var studentGrades = [];
-  var examGrades = [ [], [], [], [] ]
+  var studentGrades;
+  var finalGrades = [];
+  var examGrades = [ [], [], [], [] ];
 
   Object.keys(records).forEach(function (student) {
-    var studentRecord = records[student].scores;
+    var studentScores = records[student].scores;
 
-    studentGrades.push(calcNumberGrade(studentRecord));
-    studentRecord.exams.forEach(function(grade, idx) {
+    finalGrades.push(calculateGradeNumber(studentScores));
+
+    studentScores.exams.forEach(function(grade, idx) {
       examGrades[idx].push(grade);
     });
   });
 
-  studentGrades = formatGrades(studentGrades);
-  exams = generateExamStats(examGrades);
-    return { studentGrades, exams };
+  exams = calculateStats(examGrades);
+  studentGrades = formatGrades(finalGrades);
+
+  return { studentGrades, exams };
 }
 
-function generateExamStats(examGrades) {
-
-  return examGrades.map(function (grades) {
-    var range = examRange(grades);
+function calculateStats(numberGroups) {
+  return numberGroups.map(function (group) {
+    var range = calculateRange(group);
     return {
-      average: examAvg(grades),
+      average: calculateAvg(group),
       minimum: range[0],
       maximum: range[1],
     };
   });
 }
 
-function examAvg(grades) {
-  var total = grades.reduce(function (sum, value) {
+function calculateAvg(numbers) {
+  var total = numbers.reduce(function (sum, value) {
     return sum + value;
   });
 
-  return total / grades.length;
+  return total / numbers.length;
 }
 
-function examRange(grades) {
-  grades.sort(function (n1, n2) { return n1 - n2; });
+function calculateRange(numbers) {
+  numbers.sort(function (n1, n2) { return n1 - n2; });
   
-  return [ grades[0], grades[grades.length -1] ];
+  return [ numbers[0], numbers[numbers.length -1] ];
 }
 
 function formatGrades(grades) {
@@ -99,12 +101,10 @@ function formatGrades(grades) {
   });
 }
 
-function calcNumberGrade(grades) {
-  var examAvg;
+function calculateGradeNumber(grades) {
+  var examAvg = calculateAvg(grades.exams);
   var exerciseTotal;
 
-  // refactor to call examAve()
-  examAvg = grades.exams.reduce(function (sum, value) { return sum + value; }) / 4;
   exerciseTotal = grades.exercises.reduce(function (sum, value) { return sum + value; });
 
   return Math.round((examAvg * .65) + (exerciseTotal * .35));
