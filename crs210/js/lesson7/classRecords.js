@@ -37,6 +37,7 @@ var studentScores = {
 };
 
 function generateClassRecordSummary(records) {
+  var exams;
   var studentGrades = [];
   var examGrades = [ [], [], [], [] ]
 
