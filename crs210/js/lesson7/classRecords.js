@@ -37,12 +37,12 @@ var studentScores = {
 };
 
 function generateClassRecordSummary(records) {
-  var exams;
-  var studentGrades;
   var finalGrades = [];
-  var examGrades = [ [], [], [], [] ];
+  var students = Object.keys(records);
+  var sample = students[0];
+  var examGrades = buildNestedArray(records[sample].scores.exams.length);
 
-  Object.keys(records).forEach(function (student) {
+  students.forEach(function (student) {
     var studentScores = records[student].scores;
 
     finalGrades.push(calculateGradeNumber(studentScores));
@@ -52,10 +52,21 @@ function generateClassRecordSummary(records) {
     });
   });
 
-  exams = calculateStats(examGrades);
-  studentGrades = formatGrades(finalGrades);
+  return {
+    studentGrades: formatGrades(finalGrades),
+    exams: calculateStats(examGrades),
+  };
+}
 
-  return { studentGrades, exams };
+function buildNestedArray(size) {
+  var array = [];
+
+  while (size > 0) {
+    array.push([]);
+    size -= 1;
+  }
+
+  return array;
 }
 
 function calculateStats(numberGroups) {
@@ -79,7 +90,7 @@ function calculateAvg(numbers) {
 
 function calculateRange(numbers) {
   numbers.sort(function (n1, n2) { return n1 - n2; });
-  
+
   return [ numbers[0], numbers[numbers.length -1] ];
 }
 
@@ -103,16 +114,16 @@ function formatGrades(grades) {
 
 function calculateGradeNumber(grades) {
   var examAvg = calculateAvg(grades.exams);
-  var exerciseTotal;
-
-  exerciseTotal = grades.exercises.reduce(function (sum, value) { return sum + value; });
+  var exerciseTotal = grades.exercises.reduce(function (sum, value) {
+    return sum + value;
+  });
 
   return Math.round((examAvg * .65) + (exerciseTotal * .35));
 }
 
 console.log(generateClassRecordSummary(studentScores));
 
-// returns:
+// logs:
 /*
  * {
   studentGrades: [ '87 (B)', '73 (D)', '84 (C)', '86 (B)', '56 (F)' ],
