@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <script src="http://dbdwvr6p7sskw.cloudfront.net/210/files/email_data_v2.js">
+    </script>
+    <script>
+function mailCount(data) {
+  var messages = data.split(/##\|\|##/);
+  var messageCount = messages.length;
+  var dateStrings = messages.map(function (message) {
+    return message.split(/#\/#/)[2]
+      .replace(/^\D+(\d{2})-(\d{2})-(\d{4})/g, '$3-$1-$2');
+  });
+
+  var sortedDates = dateStrings.sort(function (a, b) {
+    return parseInt(a.replace(/-/g, ''), 10) - parseInt(b.replace(/-/g, ''), 10);
+  });
+
+  var earliest = sortedDates[0].split('-');
+  var firstDate = new Date(earliest[0], earliest[1] - 1, earliest[2]);
+  var latest = sortedDates[sortedDates.length - 1].split('-');
+  var lastDate = new Date(latest[0], latest[1] - 1, latest[2]);
+
+  console.log(`Count of Email: ${messageCount}`);
+  console.log(`Date Range: ${firstDate.toDateString()} - ${lastDate.toDateString()}`);
+}
+
+mailCount(emailData);
+
+/* console output
+
+Count of Email: 5
+Date Range: Sat Jun 25 2016 - Thu Aug 11 2016
+
+*/
+    </script>
+  </body>
+</html>
