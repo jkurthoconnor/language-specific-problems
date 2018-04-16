@@ -1,9 +1,17 @@
+/*
 function isValidEmail(email) {
   var local = '^[0-9a-z]+';
   var domain = '[a-z]+(\\.[a-z]+)+$'; // NB: need to escape the `\` so it appears
+                                      // after running through the string parser
   var validEmail = new RegExp(local + '@' + domain, 'i');
 
   return validEmail.test(email);
+}
+*/
+
+function isValidEmail(email) {
+  var emailPattern = new RegExp('^[a-z\\d]+@([a-z]+\\.)+[a-z]+$', 'i');
+  return emailPattern.test(email);
 }
 
 console.log(isValidEmail('Foo@baz.com.ph'));          // returns true
