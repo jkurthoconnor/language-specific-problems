@@ -29,12 +29,12 @@ var longText = 'Four score and seven years ago our fathers brought forth' +
   ' earth.';
 
 function longestSentence(text) {
-  var splitSentences = text.split(/[.?!]\s/).map(function (sent) {
+  var splitSentences = text.match(/\b.+?[.!?]/g).map(function (sent) {
     return sent.split(' ');
   });
 
   var longest = splitSentences.reduce(function (max, sent) {
-    return sent.length >= max.length ? sent : max;
+    return sent.length > max.length ? sent : max;
   });
 
   console.log(longest.join(' '));
