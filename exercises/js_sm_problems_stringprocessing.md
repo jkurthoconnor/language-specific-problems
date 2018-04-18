@@ -40,6 +40,13 @@ function isUppercase(str) {
 
   return !lowerCase.test(str);
 }
+
+// most obviously:
+
+
+function isUppercase(str) {
+  return str === str.toUpperCase();
+}
 ```
 
 
@@ -113,6 +120,21 @@ function letterCaseCount(str) {
   };
 
   return count;
+}
+
+// using reduce with object as initial value:
+function letterCaseCount(str) {
+  return str.split('').reduce(function (counter, char) {
+    if (/[A-Z]/.test(char)) {
+      counter.uppercase += 1;
+    } else if (/[a-z]/.test(char)) {
+      counter.lowercase += 1;
+    } else {
+      counter.neither += 1;
+    }
+
+    return counter;
+  }, {lowercase: 0, uppercase: 0, neither: 0});
 }
 ```
 
