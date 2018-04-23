@@ -16,6 +16,10 @@ console.log(phoneParser('(234) 567-8901')); // '234568901'
 console.log(phoneParser('(234) 567.8901')); // '234568901'
 // too short: 9 digits
 console.log(phoneParser('34 567-8901')); // '0000000000'
+// empty string: too short
+console.log(phoneParser('')); // '0000000000'
+// noisey string: too short after cleaning
+console.log(phoneParser('fLefdjka12*')); // '0000000000'
 // too long: 12 digits
 console.log(phoneParser('97234 567-8901')); // '0000000000'
 // 11 digits, wrong initial digit
