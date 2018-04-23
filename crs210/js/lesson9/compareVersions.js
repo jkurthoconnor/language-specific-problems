@@ -6,46 +6,28 @@ function compareVersions(ver1, ver2) {
   var values1 = ver1.split('.').map(function (str) {
     return parseInt(str, 10);
   });
+
   var values2 = ver2.split('.').map(function (str) {
     return parseInt(str, 10);
   });
 
-  removeTrailing0s(values1);
-  removeTrailing0s(values2);
+  var length = Math.max(values1.length, values2.length);
 
-  for (var i = 0; i < values1.length; i += 1) {
-    if (!values2[i]) {
-       break;
-    }
+  for (var i = 0; i < length; i += 1) {
+    var val1 = values1[i] || 0;
+    var val2 = values2[i] || 0;
 
-    if (values1[i] < values2[i]) {
+    if (val1 < val2) {
       return -1;
-    } else if (values1[i] > values2[i]) {
+    } else if (val1 > val2) {
       return 1;
     }
   }
 
-  if (values1.length > values2.length) {
-    return 1;
-  } else if (values1.length < values2.length) {
-    return -1;
-  } else {
-    return 0;
-  }
+  return 0;
 }
 
 
-function removeTrailing0s(arr) {
-  var i;
-
-  for (i = arr.length - 1; i >= 0; i -= 1) {
-    if (arr[i] === 0) {
-      arr.pop();
-    } else {
-      break;
-    }
-  }
-}
 
 console.log(compareVersions('1.2', '1.2.0.0')); // 0
 console.log(compareVersions('1.0.0.0.0', '1')); // 0
