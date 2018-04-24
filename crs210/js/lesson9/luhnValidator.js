@@ -21,14 +21,14 @@ function validLuhn(num) {
 }
 
 
-function makeValidLuhn(num) { // assumes non-Luhn input
+function makeValidLuhn(num) {
   var prepDoubled;
   var base;
   var preppedDigits = num.replace(/\D/g, '').split('').reverse();
   var differential;
 
-  if (preppedDigits.length === 0) {
-    return false;
+  if (validLuhn(num)) {
+    return num;
   }
 
   prepDoubled = preppedDigits.map(function (num, idx) {
@@ -72,3 +72,4 @@ console.log(makeValidLuhn('3333')); // '33332'
 console.log(makeValidLuhn('1111')); // '11114' 
 console.log(makeValidLuhn('1212')); // '12120' a test for input that will
                                     // return 0 for base % 10
+console.log(makeValidLuhn('2323 2005 7766 3554')); // returns input number
