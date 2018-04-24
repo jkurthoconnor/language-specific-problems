@@ -21,6 +21,31 @@ function validLuhn(num) {
 }
 
 
+function makeValidLuhn(num) { // assumes non-Luhn input
+  var prepDoubled;
+  var base;
+  var preppedDigits = num.replace(/\D/g, '').split('').reverse();
+  var differential;
+
+  if (preppedDigits.length === 0) {
+    return false;
+  }
+
+  prepDoubled = preppedDigits.map(function (num, idx) {
+    return (idx % 2 === 0 ? parseInt(num * 2) : parseInt(num));
+  }).map(function (num) {
+    return (num > 9 ? num - 9 : num);
+  });
+
+  base = prepDoubled.reduce(function (sum, currValue) {
+    return sum + currValue;
+  });
+
+  differential = (base % 10 === 0) ? 0 : 10 - (base % 10);
+
+  return num.concat(String(differential));
+}
+
 console.log(validLuhn('')); // false
 console.log(validLuhn('abcd')); // false
 console.log(validLuhn('-1111')); // false
@@ -38,3 +63,12 @@ console.log(validLuhn('8.763')); // true given the specs to ignore non digits
 console.log(validLuhn('2323 2005 7766 3554')); // true
 console.log(validLuhn('2323-2005-7766-3554')); // true
 console.log(validLuhn('2323.2005.7766.3554')); // true dots treated as separators
+console.log(validLuhn('33332')); // true
+console.log(validLuhn('11114')); // true
+console.log(validLuhn('12120')); // true
+
+console.log(makeValidLuhn('2323 2005 7766 355')); // '2323 2005 7766 3554'
+console.log(makeValidLuhn('3333')); // '33332'
+console.log(makeValidLuhn('1111')); // '11114' 
+console.log(makeValidLuhn('1212')); // '12120' a test for input that will
+                                    // return 0 for base % 10
