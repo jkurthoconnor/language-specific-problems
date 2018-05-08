@@ -22,7 +22,7 @@ function validLuhn(num) {
 
 
 function makeValidLuhn(num) {
-  var prepDoubled;
+  var evenDoubled;
   var base;
   var preppedDigits = num.replace(/\D/g, '').split('').reverse();
   var differential;
@@ -31,13 +31,13 @@ function makeValidLuhn(num) {
     return num;
   }
 
-  prepDoubled = preppedDigits.map(function (num, idx) {
+  evenDoubled = preppedDigits.map(function (num, idx) {
     return (idx % 2 === 0 ? parseInt(num * 2) : parseInt(num));
   }).map(function (num) {
     return (num > 9 ? num - 9 : num);
   });
 
-  base = prepDoubled.reduce(function (sum, currValue) {
+  base = evenDoubled.reduce(function (sum, currValue) {
     return sum + currValue;
   });
 
