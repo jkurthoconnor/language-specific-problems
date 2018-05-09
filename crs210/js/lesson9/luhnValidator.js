@@ -8,7 +8,7 @@ function validLuhn(num) {
   }
 
   luhnDoubled = preppedDigits.map(function (num, idx) {
-    return (idx % 2 === 1 ? parseInt(num * 2) : parseInt(num));
+    return (idx % 2 === 1 ? parseInt(num, 10) * 2 : parseInt(num, 10));
   }).map(function (num) {
     return (num > 9 ? num - 9 : num);
   });
@@ -32,7 +32,7 @@ function makeValidLuhn(num) {
   }
 
   evenDoubled = preppedDigits.map(function (num, idx) {
-    return (idx % 2 === 0 ? parseInt(num * 2) : parseInt(num));
+    return (idx % 2 === 0 ? parseInt(num, 10) * 2 : parseInt(num, 10));
   }).map(function (num) {
     return (num > 9 ? num - 9 : num);
   });
