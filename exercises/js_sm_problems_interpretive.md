@@ -203,7 +203,6 @@ console.log(isBlockWord('O\'Karu'));       // true
 console.log(isBlockWord('Turing'));       // false
 console.log(isBlockWord('Data'));       // false
 console.log(isBlockWord('B A T'));       // true
-
 ```
 
 ## Problem:
@@ -230,7 +229,6 @@ caesarEncrypt('The quick brown fox jumps over the lazy dog!', 5);
 // many non-letters
 caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2);
 // "Vjgtg ctg, cu aqw ecp ugg, ocpa rwpevwcvkqpu. Tkijv?; Ytqpi?"
-
 ```
 
 ### Solution:
@@ -302,9 +300,6 @@ result: Bmnxmtpeqw dhz'x gh ar pbldal!
 Notice that in the example, the key isn't moved forward if the character isn't in the alphabet. Like the Caesar Cipher, the Vigenere Cipher only encrypts alphabetic characters.
 
 Write a function that implements the Vigenere Cipher. The case of the keyword doesn't matter—in other words, the resulting encryption won't change depending on the case of the keyword's letters (e.g., 'MEat' === 'mEaT').
-
-
-
 
 
 ### Solution:
@@ -421,26 +416,5 @@ function star(n) {
 }
 
 console.log(star(7));
-/* logs
-*  *  *
- * * *
-  ***
-*******
-  ***
- * * *
-*  *  *
-*/
 
 console.log(star(9));
-/* logs
-*   *   *
- *  *  *
-  * * *
-   ***
-*********
-   ***
-  * * *
- *  *  *
-*   *   *
-*/
-```
