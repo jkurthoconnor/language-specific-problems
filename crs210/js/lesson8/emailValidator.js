@@ -1,16 +1,22 @@
-/*
+/* building a RegExp by concatenating str representations of the pattern 
+  NB: `\` must be escaped to survive the string parser
+
 function isValidEmail(email) {
   var local = '^[0-9a-z]+';
-  var domain = '[a-z]+(\\.[a-z]+)+$'; // NB: need to escape the `\` so it appears
-                                      // after running through the string parser
+  var domain = '[a-z]+(\\.[a-z]+)+$';
   var validEmail = new RegExp(local + '@' + domain, 'i');
 
   return validEmail.test(email);
 }
 */
 
+//more direct use of RegExp constructor
+//
+//var emailPattern = new RegExp('^[a-z\\d]+@([a-z]+\\.)+[a-z]+$', 'i');
+
+
 function isValidEmail(email) {
-  var emailPattern = new RegExp('^[a-z\\d]+@([a-z]+\\.)+[a-z]+$', 'i');
+  var emailPattern = /^[a-z0-9]+@[a-z]+(\.[a-z]+)+$/i;
   return emailPattern.test(email);
 }
 
@@ -28,3 +34,5 @@ console.log(isValidEmail('foo@bar.....com'));         // returns false
 
 console.log(isValidEmail('foo@baz@com'));                // returns false
 console.log(isValidEmail('foo@'));                // returns false
+console.log(isValidEmail('foo@bar.com@my.mail.com'));         // returns false
+console.log(isValidEmail(''));         // returns false
