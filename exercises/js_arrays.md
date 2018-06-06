@@ -65,6 +65,16 @@ console.log(myOtherArray);
 myOtherArray.push(6);
 console.log(myArray);
 console.log(myOtherArray);
+
+// finally, one could iterate through the original array using `forEach`
+
+var myArray = [1, 2, 3, 4];
+var myAdditionalArray = [];
+
+myArray.forEach(function (ele) {
+  myAdditionalArray[myAdditionalArray.length] = ele;
+});
+
 ```
 
 ## Problem 3
