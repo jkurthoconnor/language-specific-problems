@@ -187,15 +187,14 @@ function swapcase(str) {
 
 // handled as a list processing problem
 function swapcase(str) {
-  return str.split('').map(function (char) {
-    if (/[A-Z]/.test(char)) {
-      return char.toLowerCase();
-    } else if (/[a-z]/.test(char)) {
-      return char.toUpperCase();
-    } else {
-      return char;
-    }
-  }).join('');
+  var swapped;
+  var chars = str.split('');
+
+  swapped = chars.map(function (char) {
+    return /[a-z]/.test(char) ? char.toUpperCase() : char.toLowerCase();
+  });
+  
+ return swapped.join('');
 }
 ```
 
@@ -242,8 +241,8 @@ staggeredCase('ignore 77 the 444 numbers');    // "IgNoRe 77 ThE 444 nUmBeRs"
 
 ```javascript
 function staggeredCase(str) {
-  return str.replace(/([a-z])([^a-z]*?)(([a-z])|($))/gi, function (set, even, unmodified, odd) {
-    return [even.toUpperCase(), unmodified, odd.toLowerCase()].join('');
+  return str.replace(/([a-z])([^a-z]*?)(([a-z])|($))/ig, function (match, up, nonAlph, down) {
+    return [up.toUpperCase(), nonAlph, down.toLowerCase()].join('');
   });
 }
 ```
@@ -283,9 +282,15 @@ function wordLengths(str) {
 
   return str.split(' ').map(function (word) {
     return `${word} ${String(word.length)}`;
-
   });
 }
+
+// to avoid returning empty array for arguments 0, false, undefined, NaN or null
+// the following guard clause could be used, as it targets only the empty
+// string and non-existant argument
+  if (arguments.length === 0 || str.length === 0) {
+    return [];
+  }
 ```
 
 
@@ -312,12 +317,23 @@ function searchWord(word, text) {
 }
 
 // treating as a list processing problem using reduce
+// also with input validation
+
 function searchWord(word, text) {
-  return text.split(' ').reduce(function (count, str) {
-    return (str.toLowerCase() === word.toLowerCase() ? count += 1 : count);
+  if (arguments.length !== 2 || word.length < 1 || text.length < 1) {
+    return 'Inadequate parameters supplied.';
+  };
+
+  var pattern = new RegExp('^' + word + '$', 'i');
+
+  return text.split(/\W+/).reduce(function (count, str) {
+    return (pattern.test(str) ? count += 1 : count);
   }, 0);
 }
 
+console.log(searchWord('sed', text));      // 3
+console.log(searchWord('qui', text));      // 4
+console.log(searchWord('', text));      //
 ```
 
 
@@ -327,17 +343,23 @@ The function from the previous exercise returns the number of occurrences of a w
 
 For this exercise, write a function that takes a word and a string of text as arguments, and returns the text with every instance of the word highlighted. To highlight a word, enclose the word with two asterisks (`**`) on each side and change every letter of the word to uppercase (e.g., `**HIGHLIGHTEDWORD**`).
 
-```javascript
-```
 
 ### Solution
 
 ```javascript
 function searchWord(word, text) {
+  if (arguments.length !== 2 || word.length < 1 || text.length < 1) {
+    return 'Inadequate parameters supplied.';
+  };
+
   var pattern = new RegExp('\\b' + word + '\\b', 'gi');
 
   return text.replace(pattern, function (match) {
     return `**${match.toUpperCase()}**`;
   });
 }
+
+console.log(searchWord('sed', text));      // 3
+console.log(searchWord('qui', text));      // 4
+console.log(searchWord('', text));      //
 ```
