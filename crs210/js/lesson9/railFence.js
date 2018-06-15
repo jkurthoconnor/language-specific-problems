@@ -30,7 +30,8 @@ function encode(message, railCount) {
     }
   });
 
-  return rails.map(function (rail) { return rail.join('')}).join('');
+  return rails;
+  // return rails.map(function (rail) { return rail.join('')}).join('');
 }
 
 console.log(encode('Hi Everyone!', 2));

@@ -40,19 +40,17 @@ var newReleases = [
 ];
 
 
-function processReleaseData(data) {
-  var selection = data.filter(function (film) {
-    return film.id + 1 && film.title; // `+1` to address further exploration:
-  });                                 // what if id: 0 were allowed?
 
-  return selection.map(function (film) {
-    return {
-      id: film['id'],
-      title: film['title'],
-    };
+function processReleaseData(data) {
+  var qualifyingFilms = data.filter(function (film) {
+    return film.title && (film.id >= 0);
+    // return film.id + 1 && film.title; // alternate: handle 0 id 
+  });
+
+  return qualifyingFilms.map(function (film) {
+    return {id: film.id, title: film.title };
   });
 }
-
 console.log(processReleaseData(newReleases));
 
 // should return:

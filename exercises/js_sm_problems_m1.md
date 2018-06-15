@@ -82,6 +82,19 @@ function rotateRightmostDigits(digits, rotation) {
   return Number(base + rotated);
 }
 
+// or using `splice()`:
+
+function rotateRightmostDigits(number, rotation) {
+  if (typeof number !== 'number') {
+    return NaN;
+  }
+
+  var digits = String(number).split('');
+  var end = digits.splice(digits.length - rotation, 1);
+
+  return Number(digits.concat(end).join(''));
+}
+
 console.log(rotateRightmostDigits(735291, 1));      // 735291
 console.log(rotateRightmostDigits(735291, 2));      // 735219
 console.log(rotateRightmostDigits(735291, 3));      // 735912
@@ -341,7 +354,7 @@ function substituteDigits(word) {
     'seven': '7',
     'eight': '8',
     'nine': '9',
-  }
+  };
 
   if (Object.keys(numbers).includes(word)) {
     return numbers[word];

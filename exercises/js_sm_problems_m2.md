@@ -27,27 +27,31 @@ letterPercentages('123');
 ### Solution
 
 ```javascript
+// with named callback for reduce
+
 function letterPercentages(str) {
   var chars = str.split('');
+  var count;
 
-  var count = chars.reduce(function (counter, char) {
-    if (/[A-Z]/.test(char)) {
-      counter.uppercase += 1;
-    } else if (/[a-z]/.test(char)) {
-      counter.lowercase += 1;
-    } else {
-      counter.neither += 1;
-    }
-    return counter;
-  }, { lowercase: 0, uppercase: 0, neither: 0, });
+  count = chars.reduce(countChars, {lowercase: 0, uppercase: 0, neither: 0});
 
-  Object.keys(count).forEach(function (key) {
-    count[key] = ((count[key] / str.length) * 100).toFixed(2);
+  Object.keys(count).forEach(function (charType) {
+    return count[charType] = ((count[charType] / chars.length) * 100).toFixed(2);
   });
 
   return count;
 }
 
+function countChars(totals, char) {
+  if (char.match(/[a-z]/)) {
+    totals.lowercase += 1;
+  } else if (char.match(/[A-Z]/)) {
+    totals.uppercase += 1;
+  } else {
+    totals.neither += 1;
+  }
+  return totals;
+};
 
 // or more declarative style:
 function letterPercentages(str) {
@@ -100,6 +104,10 @@ triangle(3, 1, 1);        // "invalid"
 
 ```javascript
 function triangle(s1, s2, s3) {
+  if (!validNumbers(s1, s2, s3)) {
+    return 'invalid arguments';
+  }
+
   var evaluation;
   var sides = [s1, s2, s3].sort(function (a, b) {
     return a - b;
@@ -117,6 +125,27 @@ function triangle(s1, s2, s3) {
 
   return evaluation;
 }
+
+function validNumbers(arg1, arg2, arg3) {
+  var i;
+  var args = [arg1, arg2, arg3];
+
+  for (i = 0; i < args.length; i += 1) {
+    if (Number(args[0]) !== args[0]) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+console.log(triangle(3, 3, 3));        // "equilateral"
+console.log(triangle(3, 3, 1.5));      // "isosceles"
+console.log(triangle(3, 4, 5));        // "scalene"
+console.log(triangle(0, 3, 3));        // "invalid"
+console.log(triangle(3, 1, 1));        // "invalid"
+console.log(triangle(-3, 1, 1));        // "invalid"
+console.log(triangle(3, Infinity, 1));        // "invalid arguments"
 ```
 
 
@@ -165,6 +194,27 @@ function triangle(a1, a2, a3) {
 
   return evaluation;
 }
+
+// without sorting
+
+function triangle(a1, a2, a3) {
+  var maxAngle = Math.max(a1, a2, a3);
+  var minAngle = Math.min(a1, a2, a3);
+  var assessment;
+
+  if ((a1 + a2 + a3) !== 180 || minAngle <= 0) {
+    assessment = 'invalid';
+  } else if (maxAngle === 90) {
+    assessment = 'right';
+  } else if (maxAngle < 90) {
+    assessment = 'acute';
+  } else {
+    assessment = 'obtuse';
+  }
+
+  return assessment;
+
+}
 ```
 
 
@@ -186,7 +236,7 @@ fridayThe13ths(2017);      // 2
 function fridayThe13ths(year) {
   var thirteenth;
   var friday13ths = 0;
-  var month = 0;
+  var month;
 
   for (month = 0; month < 12; month += 1) {
     thirteenth = new Date(year, month, 13);
@@ -221,43 +271,28 @@ featured(999999987);    // 1023456987
 
 ```javascript
 function featured(num) {
-  var max = 9876543210;
-  var testNumber = getInitialTestValue(num);
+  var checkNext = findNextOdd7(num + 1);
 
-  for (testNumber; testNumber <= max; testNumber += 7) {
-    if (testNumber % 2 === 1 && checkNoDuplicates(testNumber)) {
-      return testNumber;
+  for (; checkNext < 9876543210; checkNext += 14) {
+    if (!findDupes(checkNext)) {
+      return checkNext;
     }
   }
 
-  return new Error(`No next featured number exists for ${String(num)}`);
+  return 'No next featured number';
 }
 
-function getInitialTestValue(number) {
-  var i = number + 1;
-
-  for (i; i <= number + 7; i += 1) {
-    if (i % 7 === 0) {
-      return i;
-     }
-  }
+function findDupes(number) {
+  return String(number).match(/(.).*\1/);
 }
 
-function checkNoDuplicates(number) {
-  var i;
-  var chars = number.toString(10);
-  var char;
-
-  for (i = 0; i < chars.length; i += 1) {
-    char = new RegExp(chars[i], 'g');
-    if (chars.match(char).length > 1) {
-      return false;
-    }
+function findNextOdd7(number) {
+  while ((number % 7 !== 0) || (number % 2 !== 1)) {
+    number += 1;
   }
 
-  return true;
+  return number;
 }
-
 
 console.log(featured(12));           // 21
 console.log(featured(20));           // 21
@@ -293,7 +328,7 @@ function sumSquareDifference(n) {
   var i = 1;
   var firstNs = [];
 
-  for (i; i <= n; i += 1) firstNs.push(i);
+  for (; i <= n; i += 1) firstNs.push(i);
 
   sqSums = square(firstNs.reduce(sum));
 

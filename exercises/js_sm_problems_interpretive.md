@@ -27,6 +27,29 @@ lightsOn(100);      // [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 ### Solution:
 
 ```javascript
+function lightsOn(switches) {
+  var results = [];
+  var lights = new Array(switches + 1);
+  var i;
+
+  for (i = 1; i < lights.length; i += 1) {
+    lights[i] = false;
+  }
+
+  for (i = 1; i < lights.length; i += 1) {
+    lights = lights.map(function (light, idx) {
+      return idx % i === 0 ? !light : light;
+    });
+  }
+
+  return lights.map(function (light, idx) {
+    return light ? idx : light;
+    }).filter(function (light) {
+    return light;
+  });
+}
+
+// similar approach, mulitple functions:
 function lightsOn(switchCount) {
   var switchBank = makeSwitches(switchCount);
   var pass;
@@ -53,6 +76,7 @@ function makeSwitches(number) {
   switches.unshift(undefined);
   return switches;
 }
+
 ```
 
 ## Problem:
@@ -102,6 +126,31 @@ function diamond(n) {
   });
 }
 
+// using while loops to build entire star pattern
+function diamond(n) {
+  var pattern = [];
+  var starCount = 1;
+  var spaceCount = Math.ceil(n / 2) - starCount;
+
+  while (starCount <= n) {
+    pattern.push(' '.repeat(spaceCount) + '*'.repeat(starCount));
+    starCount += 2;
+    spaceCount -= 1;
+  }
+
+  starCount -= 4;
+  spaceCount += 2;
+
+  while (starCount >= 1) {
+    pattern.push(' '.repeat(spaceCount) + '*'.repeat(starCount));
+    starCount -= 2;
+    spaceCount += 1;
+  }
+
+  pattern.forEach(function (row) {
+    console.log(row);
+  });
+}
 ```
 
 ### Further Exploration: Hollow Diamonds
@@ -184,12 +233,11 @@ function isBlockWord(string) {
     ["B", "O"], ["X", "K"], ["D", "Q"], ["C", "P"], ["N", "A"], ["G", "T"], ["R", "E"],
     ["F", "S"], ["J", "W"], ["H", "U"], ["V", "I"], ["L", "Y"], ["Z", "M"]
   ];
-  var letters = string.toUpperCase().replace(/[^A-Z]/g, '');
-    vsvr letter = letters[i];
-    if (letters.indexOf(letter) !== letters.lastIndexOf(letter)) return false;
-  }
 
   for (i = 0; i < blocks.length; i += 1) {
+    var letter = letters[i];
+
+    if (letters.indexOf(letter) !== letters.lastIndexOf(letter)) return false;
     if (letters.match(blocks[i][0]) && letters.match(blocks[i][1])) return false;
   }
   return true;

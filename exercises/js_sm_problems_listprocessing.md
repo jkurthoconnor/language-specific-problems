@@ -21,6 +21,16 @@ function sum(int) {
   return integers.reduce(function (sum, value) { return sum + value; });
 }
 
+// or using initial value with coercion within reduce:
+
+function sum(n) {
+  var digits = String(n).split('');
+
+  return digits.reduce(function (sum, value) {
+    return sum + parseInt(value, 10);
+  }, 0);
+}
+
 sum(23);           // 5
 sum(496);          // 19
 sum(123456789);    // 45
@@ -39,6 +49,7 @@ alphabeticNumberSort(
 ### Solution
 
 ```javascript
+// using inline function expression as callback:
 function alphabeticNumberSort(numbers) {
   var numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 
@@ -51,6 +62,28 @@ function alphabeticNumberSort(numbers) {
       return 0;
     }
   });
+}
+
+// or using named callback function:
+
+function alphabeticNumberSort(numbers) {
+  return numbers.sort(sortNumberWords);
+}
+
+function sortNumberWords(numA, numB) {
+  var numWords = [ 
+    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+    'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+    'sixteen', 'seventeeen', 'eighteen', 'nineteen',
+  ];
+
+  if (numWords[numA] < numWords[numB]) {
+    return -1;
+  } else if (numWords[numA] > numWords[numB]) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 console.log(alphabeticNumberSort(
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]));
@@ -82,6 +115,38 @@ function multiplyAllPairs(arr1, arr2) {
 }
 
 console.log(multiplyAllPairs([2, 4], [4, 3, 1, 2]));    // [2, 4, 4, 6, 8, 8, 12, 16]
+
+// with input validation:
+
+function multiplyAllPairs(arr1, arr2) {
+  var products = [];
+
+  if (nonNumberArgument(arr1.concat(arr2))) {
+    return 'invalid argument';
+  }
+
+  arr1.forEach(function (num) {
+    arr2.forEach(function (num2) {
+      products.push(num * num2);
+    });
+  });
+
+  return products.sort(function (a, b) {
+    return a - b;
+  });
+}
+
+function nonNumberArgument(values) {
+  var i;
+
+  for (i = 0; i < values.length; i += 1) {
+    if (Number(values[i]) !== values[i]) {
+      return true;
+    }
+  }
+
+  return false;
+}
 ```
 
 
@@ -107,6 +172,20 @@ function sumOfSums(numbers) {
   }).reduce(function (sum, value) { return sum + value });
 }
 
+// less dense:
+
+function sumOfSums(numbers) {
+  return numbers.reduce(function (total, value, idx, arr) {
+    return total + arr.slice(0, idx + 1).reduce(sum);
+  });
+
+
+  return numbers;
+}
+
+function sum(a, b) {
+  return a + b;
+}
 console.log(sumOfSums([3, 5, 2]));        // (3) + (3 + 5) + (3 + 5 + 2) --> 21
 console.log(sumOfSums([1, 5, 7, 3]));     // (1) + (1 + 5) + (1 + 5 + 7) + (1 + 5 + 7 + 3) --> 36
 console.log(sumOfSums([4]));              // 4
@@ -248,24 +327,29 @@ buyFruit([['apple', 3], ['orange', 1], ['banana', 2]]);
 
 ```javascript
 function buyFruit(list) {
-  var longList = expandList(list);
-
-  return longList.reduce(function (collector, subArr) {
-    return collector.concat(subArr);
+  return list.map(function (item) {
+    return expandList(item);
+  }).reduce(function (flat, list) {
+    return flat.concat(list);
   });
 }
 
-function expandList(nestedList) {
-  return nestedList.map(function (item) {
-    var holder = [];
-    for (var i = 1; i <= item[1]; i += 1) {
-      holder.push(item[0]);
-    }
-    return holder;
-  });
+function expandList(list) {
+  var expandedList = [];
+  var count = list[1];
+  var i;
+
+  for (i = 0; i < count; i += 1) {
+    expandedList.push(list[0]);
+  }
+
+  return expandedList;
 }
 
 console.log(buyFruit([['apple', 3], ['orange', 1], ['banana', 2]]));
+// returns ["apple", "apple", "apple", "orange", "banana", "banana"]
+console.log(buyFruit([['apple', 3], ['orange', 0], ['banana', 2]]));
+// returns ["apple", "apple", "apple", "banana", "banana"]
 
 ```
 
