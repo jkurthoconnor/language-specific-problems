@@ -205,6 +205,29 @@ function retirementReport(ageRequirements) {
 }
 
 console.log(retirementReport(collectAges()));
+
+// using an object to store input data:
+
+function retire() {
+  var prospectus = getRetirementPlans();
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
+  var yearsToRetirement = prospectus.retireAge - prospectus.age;
+  var retireYear = new Date();
+
+  retireYear.setFullYear(year + yearsToRetirement);
+
+  console.log(`It is ${year}. Retire in ${retireYear.getFullYear()}`);
+  console.log(`You have only ${yearsToRetirement} year of work to go!`);
+}
+
+function getRetirementPlans() {
+  var age = parseInt(prompt('age'), 10);
+  var retireAge = parseInt(prompt('retire age'), 10);
+
+  return { age, retireAge };
+}
+
 ```
 
 Further Exploration:
@@ -434,6 +457,14 @@ function swap(string) {
 
   return words.join(' ');
 }
+
+// using regex:
+function swap(words) {
+  return words.replace(/\w{2,}/g, function (match) {
+    return match.slice(-1) + match.slice(1, -1) + match[0];
+  });
+
+}
 ```
 
 ### Further Exploration:
@@ -490,6 +521,7 @@ function wordSizes(string) {
 
   return lengthCount;
 }
+
 ```
 
 
@@ -527,4 +559,24 @@ function wordSizes(string) {
 // another option is to determine `size` based on a 'cleaned' string:
 
 size = words[i].replace(/[^a-z]/ig, '').length;
+
+
+// using reduce:
+
+function wordSizes(string) {
+  var words = string.replace(/[^a-z ]/gi, '').split(' ');
+
+  return words.reduce(function (count, word) {
+    if (word.length) {
+      if (count[String(word.length)]) {
+        count[String(word.length)] += 1;
+      } else {
+        count[String(word.length)] = 1;
+      }
+    }
+    return count;
+  }, {});
+      
+}
 ```
+

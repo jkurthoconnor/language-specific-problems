@@ -467,6 +467,33 @@ function ordinalString(integer) {
   return digits + ordinalSuffix;
 }
 
+// using regexp and Math.floor:
+
+function century(year) {
+  var cent = Math.ceil(year / 100).toString();
+  var suffix = getNumberSuffix(cent);
+
+  return cent + suffix;
+}
+
+function getNumberSuffix(numberStr) {
+  var suffix;
+  var thPattern = /([04-9]$)|(1[1-3])$/;
+  var stPattern = /1$/;
+  var ndPattern = /2$/;
+  
+  if (thPattern.test(numberStr)) {
+    suffix = 'th';
+  } else if (stPattern.test(numberStr)) {
+    suffix = 'st';
+  } else if (ndPattern.test(numberStr)) {
+    suffix = 'nd';
+  } else {
+    suffix = 'rd';
+  }
+
+  return suffix;
+}
 console.log(century(2000));        // "20th"
 console.log(century(2001));        // "21st"
 console.log(century(1965));        // "20th"

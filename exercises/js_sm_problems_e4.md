@@ -75,31 +75,31 @@ union([1, 3, 5], [3, 6, 9]);    // [1, 3, 5, 6, 9]
 ### Solution
 
 ```javascript
+// note: with added test cases to ensure no duplicates from either source array
 function union(arr1, arr2) {
-  var result = arr1.slice();
-  var i;
+  var inputUnion = [];
+  var joinedValues = arr1.concat(arr2);
 
-  for (i = 0; i < arr2.length; i += 1) {
-    if (result.indexOf(arr2[i]) === -1) {
-      result.push(arr2[i]);
-    }
-  }
-
-  return result;
-}
-
-// using forEach:
-function union(arr1, arr2) {
-  var result = arr1.slice();
-
-  arr2.forEach(function (element) {
-    if (result.indexOf(element) === -1) {
-      result.push(element);
+  joinedValues.forEach(function (ele) {
+    if (!inputUnion.includes(ele)) {
+      inputUnion.push(ele);
     }
   });
 
-  return result;
+  return inputUnion;
 }
+
+
+console.log(union([1, 3, 5], [3, 6, 9]));    // [1, 3, 5, 6, 9]
+console.log(union([1, 3, 3, 5], [3, 6, 9]));    // [1, 3, 5, 6, 9]
+console.log(union([1, 3, 5], [3, 6, 9, 9, 9]));    // [1, 3, 5, 6, 9]
+console.log(union([], [3, 6, 9, 9, 9]));    // [ 3, 6, 9]
+console.log(union([], []));    // []
+
+var a1 = [1, 2, 3];
+var a2 = a1;
+
+console.log(union([a1], [a2]));    // [ 1, 2, 3]
 ```
 
 
@@ -138,6 +138,13 @@ function halvsies(arr) {
   halved[1] = arr.slice(secondHalfIdx);
 
   return halved;
+}
+
+// or even:
+
+function halvsies(arr) {
+  var halfPtIdx = Math.ceil(arr.length / 2);
+  return [arr.slice(0, halfPtIdx), arr.slice(halfPtIdx)];
 }
 ```
 
@@ -282,6 +289,15 @@ function multiplyList(arr1, arr2) {
   });
 
   return products;
+}
+
+// or with map:
+
+function multiplyList(arr1, arr2) {
+
+  return arr1.map(function (number, idx) {
+    return number * arr2[idx];
+  });
 }
 ```
 

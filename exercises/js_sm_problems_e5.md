@@ -48,6 +48,15 @@ function repeater(str) {
 function repeater(str) {
   return Array.from(str, char => char + char).join('');
 }
+
+// with map:
+function repeater(string) {
+  var chars = string.split('');
+
+  return chars.map(function (char) {
+    return char + char;
+  }).join('');
+}
 ```
 
 
@@ -68,6 +77,14 @@ doubleConsonants('');                // ""
 // with an ugly regex
 function doubleConsonants(str) {
   return str.replace(/([b-df-hj-np-tv-z])/gi, '$1$1');
+}
+
+// regex formed by constructor:
+
+function doubleConsonants(string) {
+  var consonant = new RegExp('([bcdfghjklmnpqrstvwxz])', 'gi');
+
+  return string.replace(consonant, '$1$1');
 }
 
 // with map and an ugly regex:
@@ -225,6 +242,12 @@ function swapName(name) {
 
   return  `${last}, ${first}`;
 }
+
+// with regex and replace:
+
+function swapName(name) {
+  return name.replace(/(\w+)\s(\w+)/g, '$2, $1');
+}
 ```
 
 Further Exploration:
@@ -240,7 +263,13 @@ function swapName(name) {
   return  `${last}, ${first}`;
 }
 
-console.log(swapName('Joe Michael Patrick O\'Reilly'));     // -5
+// or with regex and replace:
+function swapName(name) {
+  return name.replace(/(.+)\s([\w']+)$/g, '$2, $1');
+}
+
+console.log(swapName('Joe Michael Patrick O\'Reilly'));     // O'Reilly, Joe ...
+
 ```
 
 ## Problem 8:
