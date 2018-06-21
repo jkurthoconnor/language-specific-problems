@@ -243,6 +243,31 @@ function isBlockWord(string) {
   return true;
 }
 
+// representing blocks with an object:
+function isBlockWord(word) {
+  var i;
+  var j;
+  var word = word.toUpperCase().replace(/[^A-Z]/g, '');
+  var blocks = {
+    'BO': true, 'XK': true, 'DQ': true, 'CP': true, 'NA': true, 'GT': true, 'RE': true, 'FS': true, 'JW': true, 'HU': true, 'VI': true, 'LY': true, 'ZM': true
+  };
+  var keys = Object.keys(blocks);
+
+  for (i = 0; i < word.length; i += 1) {
+    for (j = 0; j < keys.length; j += 1) {
+      if (keys[j].includes(word[i].toUpperCase()) && blocks[keys[j]]) {
+        blocks[keys[j]] = false;
+        break;
+      }
+    }
+
+    if (j === keys.length) {
+      return false;
+    }
+  }
+
+  return true;
+} 
 console.log(isBlockWord('BATCH'));      // true
 console.log(isBlockWord('BUTCH'));      // false
 console.log(isBlockWord('jest'));       // true
