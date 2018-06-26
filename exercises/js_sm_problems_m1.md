@@ -147,6 +147,23 @@ function rotateRightmostDigits(digits, rotation) {
   return base + rotated;
 }
 
+// without `rotateRightmostDigits`:
+
+function maxRotation(number) {
+  var digits = number.toString(10);
+  var digitIdx;
+
+  for (digitIdx = 0; digitIdx < digits.length; digitIdx += 1) {
+    digits = rotate(digits, digitIdx);
+  }
+
+  return parseInt(digits, 10);
+}
+
+function rotate(string, index) {
+  return string.slice(0, index) + string.slice(index + 1) + string[index];
+}
+
 console.log(maxRotation(735291));          // 321579
 console.log(maxRotation(3));               // 3
 console.log(maxRotation(35));              // 53

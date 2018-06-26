@@ -28,24 +28,34 @@ lightsOn(100);      // [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
 ```javascript
 function lightsOn(switches) {
-  var results = [];
-  var lights = new Array(switches + 1);
-  var i;
+  var switchRow = prepSwitches(switches);
+  var pass = 1;
 
-  for (i = 1; i < lights.length; i += 1) {
-    lights[i] = false;
+  function prepSwitches(n) {
+    var lights = [null];
+    var switchN = 1;
+
+    for (; switchN <= n; switchN += 1) {
+      lights.push(false);
+    }
+
+    return lights;
   }
 
-  for (i = 1; i < lights.length; i += 1) {
-    lights = lights.map(function (light, idx) {
-      return idx % i === 0 ? !light : light;
+  for (; pass <= switches; pass += 1) {
+    switchRow = switchRow.map(function (switchState, switchNum) {
+      if (switchNum % pass === 0 && switchNum > 0) {
+        return !switchState;
+      } else {
+        return switchState;
+      }
     });
   }
 
-  return lights.map(function (light, idx) {
-    return light ? idx : light;
-    }).filter(function (light) {
-    return light;
+  return switchRow.map(function (switchState, switchNum) {
+    return switchState ? switchNum : switchState;
+  }).filter(function (switchState) {
+    return switchState;
   });
 }
 
@@ -161,15 +171,16 @@ function diamond(n) {
 function hollowDiamond(n) {
   var pattern = [];
   var spaceCount = Math.floor(n / 2);
-  var starCount = 1;
+  var innerCount = 0;
 
   for (spaceCount; spaceCount >= 0; spaceCount -= 1) {
-    if (starCount < 2) {
+    if (innerCount === 0) {
       pattern.push(' '.repeat(spaceCount) + '*');
+      innerCount = 1;
     } else {
-      pattern.push(' '.repeat(spaceCount) + '*' + ' '.repeat(starCount - 2) + '*');
+      pattern.push(' '.repeat(spaceCount) + '*' + ' '.repeat(innerCount) + '*');
+      innerCount += 2;
     }
-    starCount += 2;
   }
 
   pattern = pattern.concat(pattern.slice(0, -1).reverse());
@@ -308,30 +319,34 @@ caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2)
 
 ```javascript
 // using character codes
-function caesarEncrypt(str, key) {
-  var code;
-  var base;
-  var chars = str.split('');
-  var capRolloff = 'Z'.charCodeAt(0);
-  var lowRolloff = 'z'.charCodeAt(0);
-  var capDiff = 'A'.charCodeAt(0) - 1;
-  var lowDiff = 'a'.charCodeAt(0) - 1;
+function caesarEncrypt(plainText, key) {
+  var plainChars = plainText.split('');
+  var cipherChars;
 
-  var encryptedChars = chars.map(function (char) {
-     base = char.charCodeAt(0) + key;
-    if (/[^a-z]/i.test(char)) {
-      return char;
-    } else if (/[A-Z]/.test(char)) {
-       code = base <= capRolloff ? base : (base % capRolloff) + capDiff;
-    } else {
-       code = base <= lowRolloff ? base : (base % lowRolloff) + lowDiff;
-    }
-
-    return String.fromCharCode(code);
+  cipherChars = plainChars.map(function (char) {
+    return getCaesarChar(char, key);
   });
 
-  return encryptedChars.join('');
+  return cipherChars.join('');
 }
+
+function getCaesarChar(plainChar, key) {
+  var caesarCode;
+  var grossCode = plainChar.charCodeAt(0) + key;
+
+  if (/[^a-z]/i.test(plainChar)) {
+    caesarCode = plainChar.charCodeAt(0);
+  } else if (/[A-Z]/.test(plainChar) && (grossCode > 90)) {
+    caesarCode = (((grossCode - 90) % 26) - 1) + 65;
+  } else if (/[a-z]/.test(plainChar) && (grossCode > 122)) {
+    caesarCode = (((grossCode - 122) % 26) - 1) + 97;
+  } else {
+    caesarCode = grossCode;
+  }
+
+  return String.fromCharCode(caesarCode);
+}
+
 
 // using an alpha string as reference
 function caesarEncrypt(str, key) {
@@ -352,6 +367,22 @@ function caesarEncrypt(str, key) {
 
   return encryptedChars.join('');
 }
+
+// simple shift
+console.log(caesarEncrypt('A', 0));       // "A"
+console.log(caesarEncrypt('A', 26));       // "A"
+console.log(caesarEncrypt('A', 3));       // "D"
+console.log(caesarEncrypt('y', 5));       // "d"
+console.log(caesarEncrypt('a', 47));      // "v"
+console.log(caesarEncrypt('a', 73));      // "v"
+console.log(caesarEncrypt('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 25));
+// "ZABCDEFGHIJKLMNOPQRSTUVWXY"
+console.log(caesarEncrypt('The quick brown fox jumps over the lazy dog!', 5));
+// "Ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl!"
+
+// many non-letters
+console.log(caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2));
+// "Vjgtg ctg, cu aqw ecp ugg, ocpa rwpevwcvkqpu. Tkijv?; Ytqpi?"
 ```
 
 ## Problem:

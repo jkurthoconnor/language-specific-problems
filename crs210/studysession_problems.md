@@ -19,23 +19,24 @@ console.log(toCamelCase("thIs_WoRd_is_WeIRD")); // "thisWordIsWeird
 ### Solution:
 ```javascript
 function toCamelCase(str) {
+  var words = str.split(/[-_]/).filter(function (word) { return word !== ''});
   if (str === '') {
     return str;
   }
 
-  var words = str.split(/[_\-]/).filter(function (ele) {
-    return ele !== '';
-  });
+  return words.map(function (word, place) {
+    var initial = word[0];
+    var tail = word.slice(1).toLowerCase();
 
-  return words.map(function (word, idx) {
-    if (idx === 0) {
-      return word[0] + word.slice(1).toLowerCase();
+    if (place === 0) {
+      return initial + tail;
     } else {
-      return word[0].toUpperCase() + word.slice(1).toLowerCase();
+      return initial.toUpperCase() + tail;
     }
   }).join('');
 }
 ```
+
 My PEDAC:
  //in: string
  //out: camelCased string
@@ -94,24 +95,17 @@ console.log(isIPv4Address("a0.1.1.1")); // => false
    return true (if all tests pass)
 
 ```javascript
-function isIPv4Address(addr) {
-  var ipv4Pattern = /^(\d{1,3}\.){3}(\d{1,3})$/;
-  var ipv4Numbers = addr.split('.');
-  var i;
-  var num;
+function isIPv4Address(address) {
+  var ipv4Pattern = new RegExp('^(\\d{1,3}\\.){3}(\\d{1,3})$');
 
-  if (!ipv4Pattern.test(addr)) {
-    return false;
-  }
+  if (!ipv4Pattern.test(address)) return false;
 
-  for (i = 0; i < 4; i += 1) {
-    num = Number(ipv4Numbers[i]);
-   if (num < 0 || num > 255) {
-     return false;
-   }
-  }
+  var subAddresses = address.split(/\./);
 
-  return true;
+  return subAddresses.every(function (sub) {
+    var value = Number(sub);
+    return value >= 0 && value <= 255;
+  });
 }
 
 console.log(isIPv4Address("172.16.254.1")); // => true
