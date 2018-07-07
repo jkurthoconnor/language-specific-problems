@@ -1,7 +1,7 @@
 # LS Practice: [Garbage Collection](https://launchschool.com/lessons/0b371359/assignments/d5156138)
 
 ## Problem 2:
-Are either of the values `1` of `"A strring"` eligible for garbage collection at the marked locations?
+Are either of the values `1` of `"A string"` eligible for garbage collection at the marked locations?
 
 ### Solution:
 
@@ -19,9 +19,10 @@ foo();
 
 // what is eligible for GC here?
 //
-//      A: because `foo` has returned `myStr` no longer references anything, so 'A string' is eligible for GC
-//      However, the program is not complete, so `1` which is referenced by a global var is
-//      still in use
+//      A: because `foo` has returned `myStr` no longer references anything,
+//        and without access to 'A string', that value is eligible for GC.
+//        However, the program is not complete, so `1` which is referenced by a 
+//        global var is still accessible, so it is _not_ eligible for GC
 //
 // more code```
 
@@ -46,7 +47,8 @@ bar();
 // can outerFoo's 0 be garbage collected here?
 
     // A: No, the 0 held by `outerFoo` is still in use b/c `outerFoo`
-    //    is a globally-scoped var and its reference persists after assignment
+    //    is a globally-scoped var and its reference persists after assignment.
+    //    `0` is still accessible, and as such is _not_ eligible for GC.
 
 // more code
 ```
@@ -68,13 +70,17 @@ function makeEvenCounter() {
 var evenCounter = makeEvenCounter();
 
 // is 0 eligible for GC here?
-
-    // A: No. Although `makeEvenCounter()` has returned, and the `0` is the value
-    //  of `index` which is scoped to `makeEvenCounter`, the function it returned
-    // is now stored in `evenCounter`, and that function closes over the scope in
-    // which `index` is assigned `0`. Thus `index` still is in use, and it still
-    // holds `0`
-
+//
+//    A: No, it is not eligible. Although `makeEvenCounter` has returned, its
+//        return value is another function which is now referenced by `evenCounter`.
+//        `evenCounter` closes over `makeEvenCounter`'s scope, so it has access
+//        to the current value of `index`, which until `evenCounter` is itself
+//        invoked, is `0`.
+//
+//        So, while `index` (and its value of 0) is not accessible from the noted
+//        point in the code, it _is accessible_ from `evenCounter`. Because there
+//        is current access to `0`, it cannot be freed up for GC.
+//
 // more code
 ```
 
