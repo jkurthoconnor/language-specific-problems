@@ -2,7 +2,7 @@
 
 ## Problem 1:
 
-What does this point to in the code below, and what does the method return?
+What does `this` point to in the code below, and what does the method return?
 
 ```javascript
 var myObject = {
@@ -39,7 +39,7 @@ var myObject = {
   },
 };
 
-console.log(myObject.myChildObject.myMethod.call(myObject));
+myObject.myChildObject.myMethod.call(myObject);
 ```
 
 ## Problem 3:

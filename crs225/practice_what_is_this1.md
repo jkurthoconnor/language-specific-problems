@@ -28,7 +28,7 @@ whatIsMyContext();
 
 ### Solution:
 
-The function is invoked using function invocation, so `this` refers to the global object. If this is a browser environment, this === window; else this === global.
+The function is invoked using function invocation, so `this` refers to the global object. If this is a browser environment, `this` === window; else `this` === global.
 
 ## Problem 3:
 
@@ -89,7 +89,7 @@ foo();
 
 ### Solution:
 
-`foo` is the contains `this`, and since `foo` is invoked with function invocation the execution context will be the implicit global object. The global var `a` is a property on the global object, so the program will log the value of global `a` (`window.a`), i.e. 2.
+`foo` contains `this`, and since `foo` is invoked with function invocation the execution context will be the implicit global object. The global var `a` is a property on the global object, so the program will log the value of global `a` (`window.a`), i.e. 2.
 
 
 ## Problem 6:
@@ -112,7 +112,7 @@ obj.foo();
 
 ### Solution:
 
-`this` appears within the `bar` function, but it is invoked as a method on the `foo` object. Thus, `this.a` evaluates to `obj.a`, which in turn evaluates to 2. 2 is logged.
+`this` appears within the `bar` function, but it is invoked as a method on the `foo` object. Thus, `this.a` evaluates to `obj.a`, which in turn evaluates to `2`, so `2` is logged.
 
 ## Problem 7:
 
@@ -137,6 +137,6 @@ qux();
 
 ### Solution:
 
-`foo` is logged from line 12 because `bar` is invoked as a method on `foo`, which ultimately logs the return value of `this.baz()` [i.e. foo.baz()], which is `foo`.
+`foo` is logged from line 12 because `bar` is invoked as a method on `foo`, which ultimately logs the return value of `this.baz()` [i.e. `foo.baz()`], which is `foo`.
 
 line 14 logs TypeError, because `this` in an extracted method called as a function is the global object, and `baz` is not a property/function on the global object
