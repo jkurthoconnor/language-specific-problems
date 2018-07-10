@@ -164,17 +164,18 @@ What will the followng code log out and why?
 
 ```javascript
 var ninja;
-   function Ninja() {
-     this.swung = true;
-   }
 
-   ninja = new Ninja();
+function Ninja() {
+   this.swung = true;
+ }
 
-   Ninja.prototype.swingSword = function() {
-     return this.swung;
-   };
+ ninja = new Ninja();
 
-   console.log(ninja.swingSword());
+ Ninja.prototype.swingSword = function() {
+   return this.swung;
+ };
+
+ console.log(ninja.swingSword());
 ```
 
 ### Solution:
@@ -210,19 +211,20 @@ What will the following code log out and why?
 
 ```javascript
 var ninja;
-   function Ninja() {
-     this.swung = true;
-   }
 
-   ninja = new Ninja();
+function Ninja() {
+ this.swung = true;
+}
 
-   Ninja.prototype = {
-     swingSword: function() {
-       return this.swung;
-     },
-   };
+ninja = new Ninja();
 
-   console.log(ninja.swingSword());
+Ninja.prototype = {
+ swingSword: function() {
+   return this.swung;
+ },
+};
+
+console.log(ninja.swingSword());
 ```
 
 ### Solution:
@@ -241,8 +243,9 @@ ninja = new Ninja();
 Ninja.prototype = {           // `Ninja.prototype` object is replaced with a new one;
  swingSword: function() {     // `ninja` keeps the original prototype object as
    return this.swung;         // its reference for inheritance/delegation.
- },                           // With `Ninja.prototype` pointing elsewhere, 
-};                            // `swingSword` is not inherited by `ninja`
+ },                           // With `Ninja.prototype` pointing to an object, 
+};                            // not in `ninja`s prototype chain, `swingSword` 
+                              // is not inherited by `ninja`
 
 console.log(ninja.swingSword());// TypeError: `ninja.swingSword` is not a function
 ```
@@ -254,18 +257,19 @@ Implement the method described in the comments.
 ```javascript
 var ninjaA;
 var ninjaB;
-   function Ninja() {
-     this.swung = false;
-   }
 
-   ninjaA = new Ninja();
-   ninjaB = new Ninja();
+function Ninja() {
+ this.swung = false;
+}
 
-   // Add a swing method to the Ninja prototype which
-   // returns itself and modifies swung
+ninjaA = new Ninja();
+ninjaB = new Ninja();
 
-   console.log(ninjaA.swing().swung);      // this needs to be true
-   console.log(ninjaB.swing().swung);      // this needs to be true
+// Add a swing method to the Ninja prototype which
+// returns itself and modifies swung
+
+console.log(ninjaA.swing().swung);      // this needs to be true
+console.log(ninjaB.swing().swung);      // this needs to be true
 ```
 
 ### Solution:
@@ -316,6 +320,11 @@ var ninjaB = Object.create(ninjaA.__proto__);
                                               // if no args are passed; 
                                               // `new` is doing the work
                                               // of creating a new instance
+
+// why does it work? `constructor` points
+// to the constructor function itself; since `ninjaA.constructor` evaluates
+// to its constructor function, `Ninja`, it can be called with 
+// the `new` operator
 
 console.log(ninjaB.constructor === ninjaA.constructor);    //  true
 ```
