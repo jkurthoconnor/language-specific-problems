@@ -110,6 +110,20 @@ function createInvoice(services) {
     },
   };
 }
+
+// a more communicative version using default parameter and avoiding ternary operator in guard clause
+
+function createInvoice(services = {}) {
+  var invoice = {};
+
+  invoice.phone = services.phone || 3000;
+  invoice.internet = services.internet || 5500;
+  invoice.total = function () {
+    return this.phone + this.internet;
+  };
+
+  return invoice;
+ }
 ```
 
 ## Problem 4:
@@ -172,9 +186,29 @@ function createPayment(services) {
     phone: services.phone || 0,
     amount: services.amount || 0,
     total: function () {
-      return this.amount || this.phone + this.internet;
-     },
+      return this.amount || this.phone + this.internet; // if amount: 0 is passed
+     },                                                 // in, then method won't
+  };                                                    // return it; that doesn't
+}                                                       // meet explicit requirement
+
+// or, to meet the explicit requirement for `total` to return the value of `amount`
+// if one is provided in the argument:
+
+function createPayment(services = {}) {
+  var payment = {};
+
+  payment.phone = services.phone || 0;
+  payment.internet = services.internet || 0;
+  payment.amount = services.amount;
+  payment.total = function () {
+    if (this.amount !== undefined) {
+      return this.amount;
+    } else {
+      return this.phone + this.internet;
+    }
   };
+
+  return payment;
 }
 ```
 
@@ -244,4 +278,29 @@ function createInvoice(services) {
     },
    };
 }
+
+// or, with a cleaner implementation of `amountDue` by calling existing method and function:
+function createInvoice(services = {}) {
+  var invoice = {};
+
+  invoice.phone = services.phone || 3000;
+  invoice.internet = services.internet || 5500;
+  invoice.total = function () {
+    return this.phone + this.internet;
+  };
+  invoice.payments = []; 
+  invoice.addPayment = function(payment) {
+    this.payments.push(payment); 
+  };
+  invoice.addPayments = function(payments) {
+    this.payments = this.payments.concat(payments);
+  };
+  invoice.amountDue = function () {
+    return this.total() - paymentTotal(this.payments);
+  };
+
+  return invoice;
+ }
 ```
+
+
