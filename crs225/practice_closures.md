@@ -26,9 +26,24 @@ function makeMultipleLister(n) {
       console.log(n * i);
       i += 1;
     }
-  }
+  };
+}
+
+
+// skipping the incrementer for more clear intent
+function makeMultipleLister(n) {
+  return function() {
+    var result = n;
+
+    while (result < 100) {
+      console.log(result);
+      result += n;
+    }
+  };
 }
 ```
+
+
 
 ## Problem 2:
 
