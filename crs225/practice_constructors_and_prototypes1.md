@@ -314,9 +314,10 @@ var ninjaA = (function() {
   return new Ninja();
 })();
 
-var ninjaB = Object.create(ninjaA.__proto__);
+// var ninjaB = Object.create(ninjaA.__proto__); // would miss any own properties
+                                                // set via the constructor
 
-// var ninjaB = new ninjaA.constructor();     // also works NB: () are optional
+var ninjaB = new ninjaA.constructor();     // NB: () are optional
                                               // if no args are passed; 
                                               // `new` is doing the work
                                               // of creating a new instance

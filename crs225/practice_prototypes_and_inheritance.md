@@ -65,6 +65,15 @@ bar.say = function() {
 var baz = shallowCopy(bar);
 console.log(baz.a);       // 1
 baz.say();                // "c is 3"
+
+// if specs allow copying only the own enum properties, then this would work:
+
+function shallowCopy(object) {
+  var copy = Object.create(Object.getPrototypeOf(object));
+  Object.assign(copy, object);
+
+  return copy
+}
 ```
 
 ### Solution:

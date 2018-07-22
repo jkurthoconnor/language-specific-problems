@@ -35,13 +35,14 @@ function Triangle(a, b, c) {
   this.type = 'triangle';
 }
 
-Triangle.prototype = shape;
-Triangle.prototype.constructor = Triangle;// must reassign constructor;
-                                          // b/c automatically generated
-                                          // prototype object was overwritten
+Triangle.prototype = Object.create(shape);
 Triangle.prototype.getPerimeter = function () {
   return this.a + this.b + this.c;
 };
+Triangle.prototype.constructor = Triangle;// must reassign constructor;
+                                          // otherwise `shape`s constructor
+                                          // would be used, and as an object
+                                          // literal, that would be `Object()`
 ```
 
 ## Problem 2:
@@ -69,8 +70,10 @@ console.log(user2.name);   // John Doe
 ```javascript
 // this 'scope-safe' constructor ensures the desired result even if the function
 // is called without the `new` operator
+// The key is that when called with `new`, `this` is set to point to the new object
 
 function User(first, last) {
+  // if (this.constructor !== User) { // << also works
   if (!(this instanceof User)) {
     return new User(first, last);
   }
@@ -87,6 +90,39 @@ var user2 = User('John', 'Doe');
 console.log(name);         // Jane Doe
 console.log(user1.name);   // John Doe
 console.log(user2.name);   // John Doe
+
+```
+
+## Problem 3:
+
+Create a function that can create an object with a given object as its prototype, without using Object.create.
+
+### Solution:
+
+```javascript
+function createObject(obj) {
+  function MakeWithPrototype() {}
+
+  MakeWithPrototype.prototype = obj;
+  return new MakeWithPrototype();
+}
+
+var foo = {
+  a: 1
+};
+
+var bar = createObject(foo);
+console.log(foo.isPrototypeOf(bar));         // true
+
+// also works:
+
+function createObject(obj) {
+  var newObj = {};
+
+  newObj.__proto__ = obj;
+
+  return  newObj;
+}
 
 ```
 
