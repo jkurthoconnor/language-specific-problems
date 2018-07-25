@@ -113,6 +113,13 @@ var para = document.body.querySelectorAll('p');
 for (i = 0; i < para.length; i += 1) {
   para[i].classList.add('article-text');
 }
+
+// or even:
+var paras = Array.prototype.slice.call(document.body.querySelectorAll('P'));
+
+paras.forEach(function (para) {
+  para.classList.add('article-text');
+});
 ```
 
 ## Problem 3:

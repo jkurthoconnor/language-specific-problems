@@ -77,12 +77,8 @@ document.childNodes[1].childNodes[2].childNodes[1].style.fontSize = '48px';
 
 ```javascript
 // programatically
-var modified = false;
-
 function walk(node, callback) {
   callback(node);
-
-  if (modified) return;
 
   var i;
   for (i = 0; i < node.childNodes.length; i++) {
@@ -94,7 +90,6 @@ function bigRedH1(node) {
   if (node.nodeName === 'H1') {
     node.style.color = 'red';
     node.style.fontSize = '48px';
-    modified = true;
   }
 }
 
