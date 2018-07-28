@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var textField = document.querySelector('.text-field');
   var content = document.querySelector('.content');
   var focusedTextField = false;
-  var cursorIntervalId = null;
+  var cursorIntervalId;
   var textString = '';
 
   textField.addEventListener('click', function(event) {
@@ -74,4 +74,5 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="content"></div>
     </div>
   </body>
+
 </html>
