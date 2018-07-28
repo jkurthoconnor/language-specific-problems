@@ -21,7 +21,7 @@ Write a JavaScript function named delayLog that loops through the numbers from 1
 ### Solution:
 
 ```javascript
-// the key is to see that the callback accesses the variables at 
+// the key is to see that the callback accesses the variables (`counter`) at
 // the time of callback execution, not `setTimeout` execution
 function delayLog() {
   var timer = 1;
@@ -34,6 +34,21 @@ function delayLog() {
     }, timer * 1000);
   }
 
+}
+
+// or for fun:
+function delayLog() {
+  var id;
+  var count = 1;
+
+  id = setInterval(function() {
+      console.log(count);
+      count += 1;
+    }, 1000);
+
+  setTimeout(function() {
+    clearInterval(id);
+  }, 10000);
 }
 ```
 
@@ -117,5 +132,4 @@ var logHello = log('hello');
 
 afterNSeconds(log10, 10);
 afterNSeconds(logHello, 15);
-
 ```
