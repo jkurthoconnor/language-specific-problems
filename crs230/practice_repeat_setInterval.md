@@ -8,6 +8,7 @@ Write a function named startCounting that logs a number to the console every sec
 
 ```javascript
 function startCounting() {
+  var count = 1;
   var id = setInterval(function() {
     console.log(count);
     count += 1;
