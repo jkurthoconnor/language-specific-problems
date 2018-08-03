@@ -5,11 +5,8 @@ $(document).ready(function() {
 
     var item = $('#name').val();
     var quantity = $('#quantity').val() || '1';
-    var newLi = document.createElement('LI');
 
-    newLi.textContent = `${quantity} ${item}`;
-    $('ul').get(0).appendChild(newLi);
+    $('ul').append(`<li>${quantity} ${item}</li>`);
     $('form').get(0).reset();
   });
-
 });
