@@ -9,6 +9,10 @@ $(document).ready(function(e) {
     $(e.target).addClass('active'); 
 
     current = $thumbnails.filter('.active');
-    $mainImg.attr('src', current.attr('src'));
+    $mainImg.fadeOut(300);
+    setTimeout(function() {
+      $mainImg.attr('src', current.attr('src'));
+    }, 300);
+    $mainImg.fadeIn(900);
   });
 });
