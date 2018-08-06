@@ -2,13 +2,25 @@ $(function() {
   $('#team a').on('click', function(e) {
     e.preventDefault();
 
-    var $memberLi = $(e.target).parent();
-    var $memberModal = $memberLi.find('.modal');
-    var $memberScreen = $memberLi.find('.modal_layer');
+    var $targetParent = $(e.target).closest('li');
+    var $memberModal = $targetParent.find('.modal');
+    var $memberScreen = $targetParent.find('.modal_layer');
+    var $close = $targetParent.find('.close');
 
-    $memberModal.css('display', 'block');
-    $memberScreen.css('display', 'block');
+    if ($close.get(0) === e.target) {
+      $memberModal.css('display', 'none');
+      $memberScreen.css('display', 'none');
+    } else {
+      $memberModal.css('display', 'block');
+      $memberScreen.css('display', 'block');
+    }
   });
 
+  $('.modal_layer').on('click', function(e) {
+    var $screen = $(e.currentTarget);
+    var $modal = $screen.prev();
 
+    $screen.css('display', 'none');
+    $modal.css('display', 'none');
+  });
 });
