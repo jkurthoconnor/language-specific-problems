@@ -8,12 +8,12 @@ $(function() {
     var $close = $targetParent.find('.close');
 
     if ($close.get(0) === e.target) {
-      $modal.css('display', 'none');
-      $screen.css('display', 'none');
+      $screen.fadeOut();
+      $modal.fadeOut();
     } else {
-      $modal.css('display', 'block');
+      $modal.fadeIn();
       $modal.css('top', $(window).scrollTop() + 150);
-      $screen.css('display', 'block');
+      $screen.fadeIn();
     }
   });
 
@@ -21,7 +21,7 @@ $(function() {
     var $screen = $(e.currentTarget);
     var $modal = $screen.prev();
 
-    $screen.css('display', 'none');
-    $modal.css('display', 'none');
+    $screen.fadeOut();
+    $modal.fadeOut();
   });
 });
