@@ -3,20 +3,21 @@ $(function() {
     e.preventDefault();
 
     var $targetParent = $(e.target).closest('li');
-    var $memberModal = $targetParent.find('.modal');
-    var $memberScreen = $targetParent.find('.modal_layer');
+    var $modal = $targetParent.find('.modal');
+    var $screen = $targetParent.find('.modal_screen');
     var $close = $targetParent.find('.close');
 
     if ($close.get(0) === e.target) {
-      $memberModal.css('display', 'none');
-      $memberScreen.css('display', 'none');
+      $modal.css('display', 'none');
+      $screen.css('display', 'none');
     } else {
-      $memberModal.css('display', 'block');
-      $memberScreen.css('display', 'block');
+      $modal.css('display', 'block');
+      $modal.css('top', $(window).scrollTop() + 150);
+      $screen.css('display', 'block');
     }
   });
 
-  $('.modal_layer').on('click', function(e) {
+  $('.modal_screen').on('click', function(e) {
     var $screen = $(e.currentTarget);
     var $modal = $screen.prev();
 

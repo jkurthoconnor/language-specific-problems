@@ -167,7 +167,7 @@ footer li a.instagram { background-position: 0 -138px; }
   }
 }
 
-.modal_layer {
+.modal_screen {
   display: none;
   position: fixed;
   top: 0;
@@ -181,9 +181,9 @@ footer li a.instagram { background-position: 0 -138px; }
 .modal {
   display: none;
   box-sizing: border-box;
-  /* position: absolute; */
-  position: fixed;
-  top: 20%;
+  position: absolute;
+/*  position: fixed; */
+  /*top: 20%; */
   left: 50%;
   margin-left: -400px;
   z-index: 3;
