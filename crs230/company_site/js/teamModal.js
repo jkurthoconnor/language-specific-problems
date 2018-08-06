@@ -1,20 +1,24 @@
 $(function() {
-  $('#team a').on('click', function(e) {
+  $('#team li > a').on('click', function(e) {
     e.preventDefault();
 
-    var $targetParent = $(e.target).closest('li');
+    var $targetParent = $(e.target).parent();
     var $modal = $targetParent.find('.modal');
     var $screen = $targetParent.find('.modal_screen');
-    var $close = $targetParent.find('.close');
 
-    if ($close.get(0) === e.target) {
-      $screen.fadeOut();
-      $modal.fadeOut();
-    } else {
-      $modal.fadeIn();
-      $modal.css('top', $(window).scrollTop() + 150);
-      $screen.fadeIn();
-    }
+    $modal.css('top', $(window).scrollTop() + 150);
+    $modal.fadeIn();
+    $screen.fadeIn();
+  });
+
+  $('.close').on('click', function(e) {
+    e.preventDefault();
+
+    var $modal = $(e.currentTarget).parent();
+    var $screen = $modal.next();
+
+    $screen.fadeOut();
+    $modal.fadeOut();
   });
 
   $('.modal_screen').on('click', function(e) {
