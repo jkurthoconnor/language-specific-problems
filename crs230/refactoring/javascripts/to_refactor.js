@@ -3,7 +3,11 @@ $(function() {
   function validNumber(n) {
     var odd_total = 0;
     var even_total = 0;
+    var validPattern = /^\d{16}$/;
     var cc_number = n.split('').reverse();
+
+
+    if (!validPattern.test(cc_number.join(''))) { return false }
 
     for (var i = 0, len = cc_number.length; i < len; i++) {
       if (i % 2 == 1) {
