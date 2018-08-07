@@ -1,31 +1,31 @@
 $(function() {
 
   function validNumber(n) {
-    var odd_total = 0;
-    var even_total = 0;
+    var oddTotal = 0;
+    var evenTotal = 0;
     var validPattern = /^\d{16}$/;
-    var cc_number = n.split('').reverse();
+    var ccNumber = n.split('').reverse();
 
 
-    if (!validPattern.test(cc_number.join(''))) { return false }
+    if (!validPattern.test(ccNumber.join(''))) { return false }
 
-    for (var i = 0, len = cc_number.length; i < len; i++) {
+    for (var i = 0, len = ccNumber.length; i < len; i++) {
       if (i % 2 == 1) {
-        cc_number[i] = (+cc_number[i] * 2) + '';
-        if (cc_number[i].length > 1) {
-          cc_number[i] = +cc_number[i][0] + +cc_number[i][1];
+        ccNumber[i] = (+ccNumber[i] * 2) + '';
+        if (ccNumber[i].length > 1) {
+          ccNumber[i] = +ccNumber[i][0] + +ccNumber[i][1];
         }
         else {
-          cc_number[i] = +cc_number[i];
+          ccNumber[i] = +ccNumber[i];
         }
-        odd_total += cc_number[i];
+        oddTotal += ccNumber[i];
       }
       else {
-        even_total += +cc_number[i];
+        evenTotal += +ccNumber[i];
       }
     }
 
-    return (odd_total + even_total) % 10 == 0;
+    return oddTotal + evenTotal % 10 == 0;
   };
 
   $('nav a').on('mouseenter', function() {
@@ -36,7 +36,7 @@ $(function() {
     $(this).find('ul ul').removeClass('opened');
   });
 
-  $('main h2 + p').on('click', function(e) {
+  $('button, .button').on('click', function(e) {
     e.preventDefault();
     $(e.target).addClass('clicked');
   });
@@ -52,14 +52,14 @@ $(function() {
 
     var $success = $(this).find('.success');
     var $error = $(this).find('.error')
-    var cc_number = $(this).find('[type=text]').val();
+    var ccNumber = $(this).find('[type=text]').val();
 
     $success.removeClass('opened');
     $error.removeClass('opened');
 
     $('form').get(0).reset();
 
-    if (validNumber(cc_number)) {
+    if (validNumber(ccNumber)) {
       $success.toggleClass('opened');
     }
     else {
