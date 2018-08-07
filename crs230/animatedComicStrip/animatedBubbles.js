@@ -1,12 +1,10 @@
 $(function () {
-  var defaultDelay = 1000;
+  var speed = 250;
+  var defaultDelay = 1500;
   var $blinds = $('[id^=blind]');
 
   $blinds.each(function(idx) {
-    var self = this;
-
-    setTimeout(function() {
-      $(self).fadeOut('slow');
-    }, idx * defaultDelay);
+    $(this).delay(idx * defaultDelay).slideUp(speed);
   });
 });
+
