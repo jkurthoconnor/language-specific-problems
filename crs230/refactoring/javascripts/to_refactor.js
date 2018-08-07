@@ -1,24 +1,15 @@
 $(function() {
   $("nav a").on("mouseenter", function() {
-    $(this).next("ul").css({
-      display: "block"
-    });
+    $(this).next("ul").addClass('opened');
   });
 
   $("nav").on("mouseleave", function() {
-    $(this).find("ul ul").css({
-      display: "none"
-    });
+    $(this).find("ul ul").removeClass('opened');
   });
 
-  $(".button").on("click", function(e) {
+  $('main h2 + p').on('click', function(e) {
     e.preventDefault();
-
-    $(this).addClass("clicked");
-  });
-
-  $("button").on("click", function() {
-    $(this).addClass("clicked");
+    $(e.target).addClass('clicked');
   });
 
   $(".toggle").on("click", function(e) {
