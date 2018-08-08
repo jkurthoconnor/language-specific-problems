@@ -16,16 +16,16 @@ $(function () {
     });
   }
 
-  showText();
 
   $('p a').on('click', function(e) {
     e.preventDefault();
 
-    $blinds.each(function() {
-      $(this).attr('style', '');
-    });
+    $blinds.finish();
+    $blinds.removeAttr('style');
 
     showText();
   });
+
+  showText();
 });
 
