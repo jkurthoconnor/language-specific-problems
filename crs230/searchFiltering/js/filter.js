@@ -1,13 +1,5 @@
 $(function() {
 
-  function updateCheckAttr(changedItem) {
-    if ((changedItem).attr('checked') === 'checked') {
-      changedItem.removeAttr('checked');
-    } else {
-      changedItem.attr('checked', 'checked');
-    }
-  }
-
   var games = [{
     "title": "The Legend of Zelda: Majora's Mask 3D",
     "id": 1,
@@ -63,8 +55,6 @@ $(function() {
   $('aside > form').on('change', function(e) {
     var activeIds;
     var activeCategories = [];
-
-    updateCheckAttr($(e.target));
 
     $('aside input:checked').each(function(idx) {
       activeCategories.push($(this).val());
