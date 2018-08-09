@@ -39,6 +39,27 @@
 
         return n ? samples : samples[0];
       },
+
+      findWhere: function(obj) {
+        var idx;
+        var targetKey = 0;
+        var keys = Object.keys(obj);
+
+        for (idx = 0; idx < arg.length; idx += 1) {
+
+          for (targetKey = 0; targetKey < keys.length; targetKey += 1) {
+            if (arg[idx][keys[targetKey]] !== obj[keys[targetKey]]) {
+              break;
+            }
+          }
+
+          if (targetKey === keys.length) { // placed here (not at top
+            return arg[idx];              // of `idx` loop b/c it must
+          }                               // be checked before the last
+       }                                 // b/f `idx` loop ends to
+                                         // catch match on last obj
+        return undefined;
+      },
     };
 
     return u;
@@ -68,3 +89,8 @@
 
 console.log(_([1, 2, 3]).first());
 console.log(_.range(1, 5));
+
+
+var dict = [{ foo: "bar", quux: "q", idx: 0 }, { foo: "baz", quux: "z", idx: 1 }, { foo: "bar", quux: "z", idx: 2 }];
+
+console.log(_(dict).findWhere({foo: 'bar', quux: 'z'}));
