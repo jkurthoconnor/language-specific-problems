@@ -60,6 +60,19 @@
                                          // catch match on last obj
         return undefined;
       },
+
+      where: function(obj) {
+        var holder = [];
+        var key = Object.keys(obj); 
+
+        arg.forEach(function(callerObj) {
+          if (obj[key] === callerObj[key]) {
+            holder.push(callerObj);
+          }
+        });
+
+        return holder;
+      }
     };
 
     return u;
