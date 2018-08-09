@@ -235,11 +235,3 @@
   window._ = _;
 })();
 
-
-console.log(_([1, 2, 3]).first());
-console.log(_.range(1, 5));
-
-
-var dict = [{ foo: "bar", quux: "q", idx: 0 }, { foo: "baz", quux: "z", idx: 1 }, { foo: "bar", quux: "z", idx: 2 }];
-
-console.log(_(dict).findWhere({foo: 'bar', quux: 'z'}));
