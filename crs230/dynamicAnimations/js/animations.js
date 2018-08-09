@@ -38,7 +38,7 @@ $(function() {
     var $shapes = $('#canvas > div');
 
     $shapes.each(function() {
-      var duration = parseInt($(this).attr('data-duration'));
+      var duration = parseInt($(this).attr('data-duration')) || 400;
       var endPoints = {
         top: $(this).attr('data-end_x'),
         left: $(this).attr('data-end_y'),
