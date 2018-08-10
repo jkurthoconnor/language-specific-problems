@@ -8,11 +8,18 @@ $(document).ready(function() {
   var $apples = $('#apples');
 
   function startNewGame() {
-    $body.removeClass();
-    $apples.removeClass();
-    $spaces.find('span').remove();
-    $guesses.find('span').remove();
+    turnOnKeyListener();
 
+    $('#replay').on('click', function(e) {
+      e.preventDefault();
+      turnOnKeyListener();
+      thisGame.initializeRound();
+    });
+
+    return Object.create(Game).initializeRound();
+  }
+
+  function turnOnKeyListener() {
     $body.on('keypress', function(e) {
       if (e.keyCode >= 97 && e.keyCode <= 122) {
         thisGame.showNewGuess(e.key);
@@ -23,20 +30,13 @@ $(document).ready(function() {
           thisGame.handleWrongGuess(e.key);
         }
 
-        thisGame.evaluatePlay();
+        thisGame.evaluateRound();
       }
     });
-
-    $('#replay').on('click', function(e) {
-      e.preventDefault();
-      thisGame = startNewGame();
-    });
-
-    return Object.create(Game).init();
   }
 
   var randomWord = (function() {
-    var wordList = ['apple', 'banana', 'orange', 'pear'];
+    var wordList = ['apple', 'banana', 'orange', 'pear', 'plum', 'peach', 'nectarine', 'kiwi', 'grape', 'blueberry', 'strawberry'];
 
     return function() {
       var length = wordList.length;
@@ -95,7 +95,7 @@ $(document).ready(function() {
       }
     },
 
-    evaluatePlay: function() {
+    evaluateRound: function() {
       var gameWon = $spaces.find('span').text() === this.word;
 
       if (gameWon) {
@@ -111,9 +111,26 @@ $(document).ready(function() {
       }
     },
 
-    init: function() {
+    resetScreen: function() {
+      $body.removeClass();
+      $apples.removeClass();
+      $spaces.find('span').remove();
+      $guesses.find('span').remove();
+    },
+
+    confirmWord: function() {
+      if (this.word) {
+        this.message = 'Let\'s Play!';
+      } else {
+        this.message = 'Sorry. Game is out of words. Refresh to start again.';
+        $body.off('keypress');
+      }
+    },
+
+    initializeRound: function() {
+      this.resetScreen();
       this.word = randomWord();
-      this.message = this.word ? 'Play!' : 'Sorry, out of words!';
+      this.confirmWord();
       this.guesses = [];
       this.wrongGuesses = 0;
       this.showMessage(this.message);
