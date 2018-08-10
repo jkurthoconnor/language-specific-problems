@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+  var $message = $('#message');
+  var $spaces = $('#spaces');
+  var $guesses = $('#guesses');
+  var $apples = $('#apples');
+
   var randomWord = (function() {
     var wordList = ['apple', 'banana', 'orange', 'pear'];
 
@@ -13,23 +18,31 @@ $(document).ready(function() {
   })();
 
   var Game = {
-    word:  '',
-    wrongGuesses: 0,
-    guesses: [],
     maxWrongGuesses: 6,
-    message: '',
-    makeSpaces: function(n) {
+
+    showSpaces: function(word) {
       var i;
-      for (i = 1; i <= n; i += 1) {
-        $('#spaces > h2').append($('<span>'));
+
+      if (!word) { return };
+      $('#spaces > span').remove();
+
+      for (i = 1; i <= word.length; i += 1) {
+        $spaces.append($('<span>'));
       }
+    },
+
+    showMessage: function(newMessage) {
+      $message.text(newMessage);
     },
 
     init: function() {
       this.word = randomWord();
-      this.message = this.word ? 'Time to Play!' : 'Sorry, out of words!';
-      $('#message').text(this.message);
-      this.makeSpaces(this.word.length);
+      this.message = this.word ? 'Play!' : 'Sorry, out of words!';
+      this.guesses = [];
+      this.wrongGuesses = 0;
+      this.showMessage(this.message);
+      this.showSpaces(this.word);
+
       return this;
     },
   };
@@ -39,16 +52,15 @@ $(document).ready(function() {
   var game1 = Object.create(Game).init();
   console.log(game1.word);
   console.log(game1.message);
-  /*
   var game2 = Object.create(Game).init();
   console.log(game2.word);
+  game1.guesses.push(1);
+  console.log(game1.guesses);
+  console.log(game2.guesses);
   var game3 = Object.create(Game).init();
   console.log(game3.word);
   var game4 = Object.create(Game).init();
   console.log(game4.word);
-  var game5 = Object.create(Game).init();
-  console.log(game5.word);
-  console.log(game5.message);
-*/
+  console.log(game1.word);
 
 });
