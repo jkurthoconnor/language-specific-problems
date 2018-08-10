@@ -36,7 +36,7 @@ $(document).ready(function() {
   }
 
   var randomWord = (function() {
-    var wordList = ['apple', 'banana', 'orange', 'pear', 'plum', 'peach', 'nectarine', 'kiwi', 'grape', 'blueberry', 'strawberry'];
+    var wordList = ['apple', 'banana', 'orange', 'pear', 'plum', 'peach', 'nectarine', 'kiwi', 'grape', 'blueberry', 'strawberry', 'carrot', 'pea', 'potato', 'celery', 'cilantro', 'tomato', 'spinach', 'rhubarb', 'lime', 'lemon'];
 
     return function() {
       var length = wordList.length;
@@ -105,7 +105,7 @@ $(document).ready(function() {
       }
 
       if (this.wrongGuesses === this.maxWrongGuesses) {
-        this.showMessage('Game Over. Click below to play again.');
+        this.showMessage('Sorry. Round Over. The word was: ' + this.word.toUpperCase());
         $body.addClass('lose');
         $body.off('keypress');
       }
