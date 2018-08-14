@@ -54,31 +54,31 @@ var inventory;
     },
 
     setListeners: function() {
-        var $inventoryTable = $('#inventory');
+      var $inventoryTable = $('#inventory');
 
-        $('#add_item').on('click', function(e) {
-          $inventoryTable.append(inventory.alterRowID(inventory.template));
-          inventory.addToCollection();
-        });
+      $('#add_item').on('click', function(e) {
+        $inventoryTable.append(inventory.alterRowID(inventory.template));
+        inventory.addToCollection();
+      });
 
-        $inventoryTable.on('click', 'td > a.delete', function(e) {
-          e.preventDefault();
+      $inventoryTable.on('click', 'td > a.delete', function(e) {
+        e.preventDefault();
 
-          var $row = $(this).closest('tr').remove();
-          var itemIdx = Number($row.find('input[type="hidden"]').val());
+        var $row = $(this).closest('tr').remove();
+        var itemIdx = Number($row.find('input[type="hidden"]').val());
 
-          inventory.collection.splice(itemIdx, 1);
-        });
+        inventory.collection.splice(itemIdx, 1);
+      });
 
-        $inventoryTable.on('blur', 'input', function(e) {
-          var input = $(this).attr('name').split(/_/g);
-          var itemIdx = Number(input.slice(-1)[0]);
-          var itemCategory = input.slice(1, 2)[0];
-          var itemValue = $(this).val().trim();
+      $inventoryTable.on('blur', 'input', function(e) {
+        var input = $(this).attr('name').split(/_/g);
+        var itemIdx = Number(input.slice(-1)[0]);
+        var itemCategory = input.slice(1, 2)[0];
+        var itemValue = $(this).val().trim();
 
-          inventory.updateCollection({idx: itemIdx, category: itemCategory, value: itemValue});
-        });
-      },
+        inventory.updateCollection({idx: itemIdx, category: itemCategory, value: itemValue});
+      });
+    },
 
     init: function() {
       this.setDate();
