@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/home/jko/coding/lsch/crs230/handlebars-v4.0.11.js"></script>
+    <script src="/home/jko/coding/lsch/crs230/handlebarsBasics/handlebars.js"></script>
+  </head>
+  <body>
+    <main>
+    </main>
+    <script id="post" type="text/x-handlebars">
+      {{#each posts}}
+      <article>
+        <h1>{{title}}</h1>
+        <p><time>Posted on {{published}}</time></p>
+        {{{body}}}
+        {{#if tags}}
+        <p>Tagged as:</p>
+        <ul>
+          {{#each tags}}
+          {{> tag}}
+          {{/each}}
+        </ul>
+        {{/if}}
+      </article>
+      {{/each}}
+    </script>
+    <script id="tag" type="text/x-handlebars">
+        {{!-- with path notation --}}
+        <li>{{@index}}: {{.}}</li>
+        {{!-- showing use of `this` --}}
+        <li>{{@index}}: {{this}}</li>
+    </script>
+  </body>
+</html>
