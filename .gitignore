@@ -27,3 +27,7 @@ whats_next.md
 # enviroment variables #
 
 .env
+
+# libraries #
+
+handlebars-v*.js
