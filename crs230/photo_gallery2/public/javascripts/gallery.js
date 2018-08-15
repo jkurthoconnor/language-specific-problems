@@ -1,4 +1,13 @@
 $(document).ready(function() {
+  var templateFuncs = {};
+
+  $('script[type$="handlebars"]').each(function() {
+    var $script = $(this);
+
+    templateFuncs[$script.attr('id')] = Handlebars.compile($script.html());
+  });
+
+  Handlebars.registerPartial('comment', templateFuncs.comment);
 
   $.ajax({
     dataType: 'json',
@@ -6,15 +15,8 @@ $(document).ready(function() {
     url: '/photos',
   })
   .done(function(json) {
-    var photosTemplate = $('#photos').html();
-    var photoInfoTemplate = $('#photo_information').html();
-    var photosTemplateScript = Handlebars.compile(photosTemplate);
-    var photoInfoTemplateScript = Handlebars.compile(photoInfoTemplate);
 
-    $('#slides').append(photosTemplateScript( {photos: json} ));
-    $('section > header').append(photoInfoTemplateScript(json[0]));
-
-    console.log(json[0]);
+    $('#slides').append(templateFuncs.photos( {photos: json} ));
+    $('section > header').append(templateFuncs.photo_information(json[0]));
   });
-
 });
