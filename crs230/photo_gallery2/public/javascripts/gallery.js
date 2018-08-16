@@ -11,8 +11,50 @@ $(document).ready(function() {
     $('section > header').html(templateFuncs.photo_information(photo));
   }
 
+  function fetchComments() {
+    $.ajax({
+      dataType: 'json',
+      type: 'get',
+      url: '/comments',
+      data: {
+        photo_id: currentPhoto.id,
+      },
+      success: function(json) { 
+        renderComments(json);
+      },
+    })
+  }
+
   function renderComments(commentJSON) {
     $('#comments ul').html(templateFuncs.comments( {comments: commentJSON } ));
+  }
+
+  function registerEvents() {
+    $('#slideshow a').on('click', function(e) {
+      e.preventDefault();
+      var $slides = $('#slides figure');
+
+      if ($(e.target).hasClass('next')) {
+        $slides.first().fadeOut(500, function () {
+          $('#slides').append($slides.first());
+          $('#slides figure').first().hide().fadeIn(500);
+        });
+      } else {
+        $slides.first().fadeOut(500, function () {
+          $('#slides').prepend($slides.last());
+          $('#slides figure').first().fadeIn(500);
+        });
+      }
+
+      $slides = $('#slides figure');
+
+      currentPhoto = photosJSON.filter(function(photo) {
+        return photo.id === Number($slides.first().attr('data-id'));
+      })[0];
+
+      renderInfo(currentPhoto);
+      fetchComments();
+    });
   }
 
   $('script[type$="handlebars"]').each(function() {
@@ -41,58 +83,9 @@ $(document).ready(function() {
 
       renderPhoto();
       renderInfo(currentPhoto);
+      fetchComments();
 
-      $.ajax({
-        dataType: 'json',
-        type: 'get',
-        url: '/comments',
-        data: {
-          photo_id: currentPhoto.id,
-        },
-      })
-      .done(function(json) {
-        renderComments(json);
-
-
-        $('#slideshow a').on('click', function(e) {
-          e.preventDefault();
-          var $slides = $('#slides figure');
-
-          if ($(e.target).hasClass('next')) {
-            $slides.first().fadeOut(500, function () {
-              $('#slides').append($slides.first());
-              $('#slides figure').first().hide().fadeIn(500);
-            });
-          } else {
-            $slides.first().fadeOut(500, function () {
-              $('#slides').prepend($slides.last());
-              $('#slides figure').first().fadeIn(500);
-            });
-          }
-
-          $slides = $('#slides figure');
-
-          currentPhoto = photosJSON.filter(function(photo) {
-            return photo.id === Number($slides.first().attr('data-id'));
-          })[0];
-
-          renderInfo(currentPhoto);
-
-          $.ajax({
-            dataType: 'json',
-            type: 'get',
-            url: '/comments',
-            data: {
-              photo_id: currentPhoto.id,
-            },
-          })
-          .done(function(json) {
-            renderComments(json);
-          });
-        });
-
-
-      });
+      registerEvents();
     });
   }
 
