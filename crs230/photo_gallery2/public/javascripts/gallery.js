@@ -43,7 +43,6 @@ $(document).ready(function() {
       } else {
         $candidate = $currentDisplay.prev();
         $displayNext = $candidate.length ? $candidate : $slides.last();
-
       }
 
       $currentDisplay.fadeOut(500);
@@ -55,21 +54,31 @@ $(document).ready(function() {
 
       renderInfo(currentPhoto);
       fetchComments();
+    });
 
-    /*
-    $('.actions').on('click', 'a[data-property="likes"]', function(e) {
+    $('section > header').on('click', 'a', function(e) {
       e.preventDefault();
       var id = $(this).attr('data-id'); 
-      console.log(id);
+      var $currentLink = $(this);
+      var $currentLinkText = $(this).text();
+      var currentPhotoId = $('#slideshow figure:visible').attr('data-id');
 
-    });
+      currentPhoto = photosJSON.filter(function(photo) {
+        return photo.id === Number(currentPhotoId);
+      })[0];
 
-    $('.actions').on('click', 'a[data-property="favorites"]', function(e) {
-      e.preventDefault();
-      console.log(this);
-
-    });
-    */
+      $.ajax({
+        type: 'post',
+        url: $(this).attr('href'),
+        data: {
+          photo_id: id,
+        },
+        dataType: 'json',
+        success: function(json) {
+          $currentLink.text($currentLinkText.replace(/\d+/g, json.total));
+          currentPhoto[$currentLink.attr('data-property')] = json.total;
+        },
+      });
     });
   }
 
