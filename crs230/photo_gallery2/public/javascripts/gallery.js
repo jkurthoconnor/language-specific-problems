@@ -59,9 +59,15 @@ $(document).ready(function() {
           var $slides = $('#slides figure');
 
           if ($(e.target).hasClass('next')) {
-            $('#slides').append($slides.first());
+            $slides.first().fadeOut(500, function () {
+              $('#slides').append($slides.first());
+              $('#slides figure').first().hide().fadeIn(500);
+            });
           } else {
-            $('#slides').prepend($slides.last());
+            $slides.first().fadeOut(500, function () {
+              $('#slides').prepend($slides.last());
+              $('#slides figure').first().fadeIn(500);
+            });
           }
 
           $slides = $('#slides figure');
