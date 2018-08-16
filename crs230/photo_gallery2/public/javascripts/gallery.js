@@ -80,6 +80,23 @@ $(document).ready(function() {
         },
       });
     });
+
+    $('#comments form').on('submit', function(e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
+
+      $.ajax({
+        type: 'post',
+        url: '/comments/new',
+        data: formData,
+        dataType: 'json',
+        success: function(json) {
+          var commentHTML = templateFuncs.comment(json);
+          $('#comments ul').append(commentHTML);
+          $('form')[0].reset();
+        },
+      });
+    });
   }
 
   $('script[type$="handlebars"]').each(function() {
