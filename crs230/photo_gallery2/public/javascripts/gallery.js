@@ -1,22 +1,94 @@
 $(document).ready(function() {
   var templateFuncs = {};
+  var photosJSON;
+  var currentPhoto;
+
+  function renderPhoto() {
+    $('#slides').append(templateFuncs.photos( {photos: photosJSON} ));
+  }
+
+  function renderInfo(photo) {
+    $('section > header').html(templateFuncs.photo_information(photo));
+  }
+
+  function renderComments(commentJSON) {
+    $('#comments ul').html(templateFuncs.comments( {comments: commentJSON } ));
+  }
 
   $('script[type$="handlebars"]').each(function() {
     var $script = $(this);
+    var name = $script.attr('id');
 
-    templateFuncs[$script.attr('id')] = Handlebars.compile($script.html());
+    templateFuncs[name] = Handlebars.compile($script.html());
   });
 
-  Handlebars.registerPartial('comment', templateFuncs.comment);
+  $('script[data-type="partial"]').each(function() { 
+    var $script = $(this);
+    var name = $script.attr('id');
 
-  $.ajax({
-    dataType: 'json',
-    type: 'get',
-    url: '/photos',
-  })
-  .done(function(json) {
-
-    $('#slides').append(templateFuncs.photos( {photos: json} ));
-    $('section > header').append(templateFuncs.photo_information(json[0]));
+    Handlebars.registerPartial(name, templateFuncs[name]);
   });
+
+  function renderPage() {
+    $.ajax({
+      dataType: 'json',
+      type: 'get',
+      url: '/photos',
+    })
+    .done(function(json) {
+      photosJSON = json;
+      currentPhoto = photosJSON[0];
+
+      renderPhoto();
+      renderInfo(currentPhoto);
+
+      $.ajax({
+        dataType: 'json',
+        type: 'get',
+        url: '/comments',
+        data: {
+          photo_id: currentPhoto.id,
+        },
+      })
+      .done(function(json) {
+        renderComments(json);
+
+
+        $('#slideshow a').on('click', function(e) {
+          e.preventDefault();
+          var $slides = $('#slides figure');
+
+          if ($(e.target).hasClass('next')) {
+            $('#slides').append($slides.first());
+          } else {
+            $('#slides').prepend($slides.last());
+          }
+
+          $slides = $('#slides figure');
+
+          currentPhoto = photosJSON.filter(function(photo) {
+            return photo.id === Number($slides.first().attr('data-id'));
+          })[0];
+
+          renderInfo(currentPhoto);
+
+          $.ajax({
+            dataType: 'json',
+            type: 'get',
+            url: '/comments',
+            data: {
+              photo_id: currentPhoto.id,
+            },
+          })
+          .done(function(json) {
+            renderComments(json);
+          });
+        });
+
+
+      });
+    });
+  }
+
+  renderPage();
 });
