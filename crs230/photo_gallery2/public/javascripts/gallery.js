@@ -32,28 +32,44 @@ $(document).ready(function() {
   function registerEvents() {
     $('#slideshow a').on('click', function(e) {
       e.preventDefault();
+      var $candidate;
+      var $displayNext;
       var $slides = $('#slides figure');
+      var $currentDisplay = $slides.find('img:visible').parent();
 
-      if ($(e.target).hasClass('next')) {
-        $slides.first().fadeOut(500, function () {
-          $('#slides').append($slides.first());
-          $('#slides figure').first().hide().fadeIn(500);
-        });
+      if ($(this).hasClass('next')) {
+        $candidate = $currentDisplay.next();
+        $displayNext = $candidate.length ? $candidate : $slides.first();
       } else {
-        $slides.first().fadeOut(500, function () {
-          $('#slides').prepend($slides.last());
-          $('#slides figure').first().fadeIn(500);
-        });
+        $candidate = $currentDisplay.prev();
+        $displayNext = $candidate.length ? $candidate : $slides.last();
+
       }
 
-      $slides = $('#slides figure');
+      $currentDisplay.fadeOut(500);
+      $displayNext.fadeIn(500);
 
       currentPhoto = photosJSON.filter(function(photo) {
-        return photo.id === Number($slides.first().attr('data-id'));
+        return photo.id === Number($displayNext.attr('data-id'));
       })[0];
 
       renderInfo(currentPhoto);
       fetchComments();
+
+    /*
+    $('.actions').on('click', 'a[data-property="likes"]', function(e) {
+      e.preventDefault();
+      var id = $(this).attr('data-id'); 
+      console.log(id);
+
+    });
+
+    $('.actions').on('click', 'a[data-property="favorites"]', function(e) {
+      e.preventDefault();
+      console.log(this);
+
+    });
+    */
     });
   }
 
