@@ -54,6 +54,8 @@ $(document).ready(function() {
 
       renderInfo(currentPhoto);
       fetchComments();
+      console.table(currentPhoto);
+      $('input[type="hidden"]').attr('value', String(currentPhoto.id));
     });
 
     $('section > header').on('click', 'a', function(e) {
@@ -83,12 +85,12 @@ $(document).ready(function() {
 
     $('#comments form').on('submit', function(e) {
       e.preventDefault();
-      var formData = $(this).serialize();
+      var $form = $(this);
 
       $.ajax({
-        type: 'post',
-        url: '/comments/new',
-        data: formData,
+        type: $form.attr('method'),
+        url:  $form.attr('action'),
+        data: $form.serialize(),
         dataType: 'json',
         success: function(json) {
           var commentHTML = templateFuncs.comment(json);
