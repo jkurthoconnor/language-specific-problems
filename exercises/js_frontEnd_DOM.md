@@ -405,7 +405,6 @@ Write a function that colors a specific generation of the DOM tree. A generation
 ```
 
 ### Solution:
-
 ```javascript
 
 function colorGeneration(n) {
@@ -441,3 +440,237 @@ function colorGeneration(n) {
   });
 }
 ```
+
+## Problem 6:
+
+
+Write a function that takes two element ids as arguments and swaps the positions of the elements represented by the ids. The function returns true for valid swaps and undefined for invalid. To put the focus on the node swapping functionality, you can assume that nodes will have a value for the id attribute and two arguments will always be provided. Use the following HTML and sample codes to test your output:
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>Node Swap</title>
+  </head>
+  <body>
+    <div id="1">
+      <div id="4"></div>
+      <div id="5">
+        <div id="6"></div>
+      </div>
+    </div>
+    <div id="2"></div>
+    <div id="3">
+      <div id="7"></div>
+      <div id="8"></div>
+      <div id="9"></div>
+    </div>
+  </body>
+</html>
+```
+
+
+_Invalid Swaps_
+
+// at least one of the id attributes doesn't exist
+> nodeSwap(1, 20);
+= undefined
+
+// at least one of the nodes is a "child" of the other
+> nodeSwap(1, 4);
+= undefined
+> nodeSwap(9, 3);
+= undefined
+
+_Valid Swaps_
+
+// one swap
+> nodeSwap(1, 2);
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>Node Swap</title>
+  </head>
+  <body>
+    <div id="2"></div>
+    <div id="1">
+      <div id="4"></div>
+      <div id="5">
+        <div id="6"></div>
+      </div>
+    </div>
+    <div id="3">
+      <div id="7"></div>
+      <div id="8"></div>
+      <div id="9"></div>
+    </div>
+  </body>
+</html>
+```
+
+// multiple swaps
+nodeSwap(3, 1);
+> nodeSwap(7, 9);
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>Node Swap</title>
+  </head>
+  <body>
+    <div id="3">
+      <div id="9"></div>
+      <div id="8"></div>
+      <div id="7"></div>
+    </div>
+    <div id="2"></div>
+    <div id="1">
+      <div id="4"></div>
+      <div id="5">
+        <div id="6"></div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+### Solution:
+
+```javascript
+function nodeSwap(id1, id2) {
+  var ele1 = document.getElementById(id1);
+  var ele2 = document.getElementById(id2);
+  var swapNodes = [ele1, ele2];
+  var validRequest = function() {
+    var i;
+    if (!(swapNodes[0] && swapNodes[1])) return false;
+
+    for (i = 0; i < swapNodes.length; i += 1) {
+      var nodeParent = swapNodes[i].parentNode;
+      var comparison = i > 0 ? swapNodes[0] : swapNodes[1];
+
+      while (nodeParent.tagName !== 'BODY') {
+        if (nodeParent.id === comparison.id) return false;
+        nodeParent = nodeParent.parentNode;
+      }
+    }
+
+    return true;
+  }();
+
+  if (!validRequest) return undefined;
+
+  var ele1Parent = ele1.parentNode;
+  var ele2Parent = ele2.parentNode;
+  var mark1 = document.createElement('SPAN');
+
+  ele1Parent.insertBefore(mark1, ele1);
+  ele2Parent.insertBefore(ele1, ele2);
+  ele1Parent.insertBefore(ele2, mark1);
+  mark1.remove();
+
+  return true;
+}
+```
+
+## Problem 7:
+
+
+Implement a function that converts the DOM, starting from the body, to nested arrays. Each element in the DOM is represented as ["PARENT_TAG_NAME", [children]] where children are elements as well and as such follow the same format. When an element has no children, it's represented as ["PARENT_TAG_NAME", []]. For instance, if the HTML doesn't have any elements inside the body, the result array would be: ["BODY", []]. Likewise, if the HTML only has a div element as its content, the result array would be: ["BODY", [["DIV", []]]].
+
+Go over the examples below to better visualize how the DOM is represented as nested arrays.
+
+example1
+<!doctype html>
+<html>
+  <head>
+    <title>Nodes to Array</title>
+  </head>
+  <body>
+    <header id="1"></header>
+    <main id="2"></main>
+    <footer id="3"></footer>
+  </body>
+</html>
+
+example1-output
+> nodesToArr();
+= ["BODY",[["HEADER",[]],["MAIN",[]],["FOOTER",[]]]]
+
+// OR
+
+= ["BODY", [
+    ["HEADER", []],
+    ["MAIN", []],
+    ["FOOTER", []]]]
+
+example2
+<!doctype html>
+<html>
+  <head>
+    <title>Nodes to Array</title>
+  </head>
+  <body>
+    <header id="1"></header>
+    <main id="2">
+      <div></div>
+      <div></div>
+    </main>
+    <footer id="3"></footer>
+  </body>
+</html>
+
+example2-output
+> nodesToArr();
+= ["BODY",[["HEADER",[]],["MAIN",[["DIV",[]],["DIV",[]]]],["FOOTER",[]]]]
+
+// OR
+
+= ["BODY", [
+    ["HEADER", []],
+    ["MAIN", [
+      ["DIV", []],
+      ["DIV", []]]],
+    ["FOOTER",[]]]]
+
+example3
+<!doctype html>
+<html>
+  <head>
+    <title>Nodes to Array</title>
+  </head>
+  <body>
+    <div id="1">
+      <div id="4"></div>
+      <div id="5">
+        <div id="6"></div>
+      </div>
+    </div>
+    <div id="2"></div>
+    <div id="3">
+      <div id="7"></div>
+      <div id="8"></div>
+      <div id="9"></div>
+    </div>
+  </body>
+</html>
+
+example3-output
+> nodesToArr();
+= ["BODY",[["DIV",[["DIV",[]],["DIV",[["DIV",[]]]]]],["DIV",[]],["DIV",[["DIV",[]],["DIV",[]],["DIV",[]]]]]]
+
+// OR
+
+= ["BODY", [
+    ["DIV", [
+      ["DIV", []],
+      ["DIV", [
+        ["DIV",[]]]]]],
+    ["DIV", []],
+    ["DIV", [
+      ["DIV", []],
+      ["DIV", []],
+      ["DIV", []]]]]]
