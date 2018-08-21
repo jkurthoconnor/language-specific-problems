@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="stylesheets/autocomplete.css">
     <script src="/javascripts/debounce.js"></script>
     <script src="/javascripts/autocomplete.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(e) {
+        console.log('hello');
+        new Autocomplete(document.querySelector('input'), '/countries?matching=');
+      });
+    </script>
   </head>
   <body>
     <div class="app">
