@@ -50,6 +50,28 @@ function delayLog() {
     clearInterval(id);
   }, 10000);
 }
+
+
+// using ES6's block-scoped `let`
+function setTimer() {
+  for (let delay = 1; delay <= 30; delay++) {
+    setTimeout(function() {
+      console.log(delay);
+    }, delay * 1000);
+  }
+}
+
+// or using an IIFE
+function setTimer() {
+  for (var delay = 1; delay <= 30; delay++) {
+    (function (n) {
+      return setTimeout(function() {
+        console.log(n);
+        }, n * 1000);
+    })(delay);
+  }
+}
+
 ```
 
 ## Problem 2:
