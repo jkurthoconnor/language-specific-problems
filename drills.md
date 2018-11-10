@@ -1,4 +1,4 @@
-# Ruby fluency drills
+ Ruby fluency drills
 Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
@@ -114,6 +114,21 @@ str = 'This is my string.'
 str.slice!(1)
 # or
 str.slice!(1..4)
+
+# without convenience methods:
+
+def slice_str!(string, start, n)
+  if (start + n > string.length - 1) || n < 0 || start < 0
+    p 'Error: cannot do that'
+    return
+  end
+
+  write = start
+
+  n.times do
+    string[write] = ''
+  end
+end
 ```
 
 ### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index; double bonus: return index of second occurrence of character using one line of code
@@ -187,6 +202,16 @@ str.insert(3, 'eee')
 str.insert(-2, 'aaa')
 ```
 
+```javascript
+// JS string primitives are immutable; must return new string
+// and reassign
+
+let str = 'Hey, it is Friday!';
+
+str = str.split(0, 3) + 'eee' + str.split(3);
+```
+
+
 ###  insert specified word prior to given existing word
 ```ruby
 str = 'Hey, it is Friday!'
@@ -210,46 +235,42 @@ str = 'Hey, now it is not Friday.'
 str.reverse
 ```
 
-   - bonus: reverse without using .reverse on array
-   ```ruby
-   str = 'Hey, now it is not Friday.'
-   
-   reversed = []
-   split = str.split('')
-   while split.length > 0
-     reversed.push split.pop
-   end
-   reversed.join
-   
-   # non-destructive
-   
-   string = 'This is my string!'
+```javascript
+myStr.split('').reverse().join('');
+```
 
-   reversed_chars = []
-   string_chars = string.split('')
-   
-   n = 0
-   while n + 1 <= string_chars.length
-     reversed_chars.unshift string_chars[n]
-     n += 1
-   end
-   reversed_string = reversed_chars.join
-   ```
-   
-   - double bonus: reverse order without changing string to array first (i.e. without iterating through an array) 
-   
+ - bonus: reverse without using `.reverse`
  ```ruby
-str = 'This is The string, is it not?'
-rev = []
-index = 0 
-while index < str.length
-  rev.unshift str[index]
-  index += 1
-end
-p rev.join
+ str = 'Hey, now it is not Friday.'
+ 
+ reversed = []
+ split = str.split('')
+ while split.length > 0
+   reversed.push split.pop
+ end
+ reversed.join
+ 
+ # non-destructive
+ 
+string = 'hello'
+rev = ''
 
+string.chars.each { |chr| rev.insert(0, chr) }
+```
+ 
+ - double bonus: reverse order without changing string to array first (i.e. without iterating through an array) 
+   
+```javascript
+let string = 'hello';
+let rev = '';
+
+for (let i = string.length - 1; i >= 0; i--) {
+    rev += string[i];
+}
+```
+
+```ruby
 # or to change in place
-
 str = 'This is The string, is it not?'
 
 index = 1
@@ -259,6 +280,18 @@ while index < str.length
 end
 
 str   
+
+# in O(N/2) time:
+def reverse_string!(str)
+  left = 0
+  right = str.length - 1
+
+  while left < right
+    str[left], str[right] = str[right], str[left]
+    left += 1
+    right -= 1
+  end
+end
 ```
    
 ### (string) determine if given characters are present in string. (use regex and non-regex methods)
@@ -322,6 +355,14 @@ string.capitalize
 string.capitalize!
 ```
 
+```javascript
+// NB: JS primitive strings are immutable
+
+let myStr = 'This IS tHe tEST string';
+
+myStr[0].toUpperCase() + myStr.slice(1).toLowerCase();
+```
+
 ### (string) return new string (or modify existing string) to have all cases switch
 ```ruby
 string = 'This IS tHe tEST string'
@@ -371,6 +412,8 @@ end
 str = '   hello   '
 # 1
 str.strip
+# or 
+str.gsub(/(^\s+|\s+$)/, '')
 
 # 2
 str.strip!
@@ -379,6 +422,18 @@ str.strip!
 str.lstrip
 # or
 str.rstrip
+```
+
+```javascript
+let str = '    hello   ';
+
+str.trim();
+// or
+str.replace(/(^\s+|\s+$)/g, '');
+
+str.trimEnd();
+
+str.trimStart();
 ```
 
 
@@ -416,6 +471,11 @@ p squeezed
 
 ```
 
+```javascript
+let myStr = 'hello';
+
+String.fromCharCode(parseInt(myStr.charCodeAt(0).toString(2), 2));
+```
 
 ### Identify and return the first element that matches a block.
 
