@@ -71,11 +71,16 @@ tocAnchors.forEach(function (link, idx) {
   }
 });
 
-// or with map:
-var tocAnchors = [].slice.call(document.body.querySelectorAll('div.toc a'));
+// or as a listener callback
+document.addEventListener('DOMContentLoaded', function() {
 
-tocAnchors.map(function (link, idx) {
-  return (idx % 2 === 0) ? link.style.color = 'green' : link;
+  let tocAnchors = document.querySelectorAll('#toc a');
+
+  Array.prototype.slice.call(tocAnchors).forEach(function(a, idx) {
+    if (idx % 2 === 0) {
+      a.style.color = 'green';
+    }
+  });
 });
 ```
 
