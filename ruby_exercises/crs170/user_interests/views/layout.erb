@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= @title %></title>
+
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+    <link rel="stylesheet" href="/stylesheets/user_interests.css">
+  </head>
+
+  <body>
+    <div id="layout">
+
+      <div class="header">
+        <h1> <%= @title %> </h1>
+        <h2> A Place to Connect </h2>
+      </div>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <div class="footer">
+        <h2>There are <%= count_users %> users with a total of <%= count_interests %> interests.</h2>
+        <h3>Check 'em Out!</h3>
+            <% other_users = identify_other_users %>
+            <% other_users.each do |user| %>
+            <p><a href="/users/<%= user %>"><%= user.capitalize %></a></p>
+            <% end %>
+        <h3>Join Today!</h3>
+      </div>
+
+    </div>
+
+  </body>
+</html>

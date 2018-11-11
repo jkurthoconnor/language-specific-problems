@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+  padding: 2em;
+}
+
+.message {
+  background: yellow;
+  padding: 1em;
+}
+
+form.inline {
+  display: inline;
+}
+
+.signed_in {
+  font-style: italic;
+}
