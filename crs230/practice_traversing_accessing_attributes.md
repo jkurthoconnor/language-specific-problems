@@ -154,6 +154,17 @@ function fetchFirstWord(node) {
 walk(document, fetchFirstWord);
 console.log(firstWords);
 
+// another choice, to run at DOM ready:
+
+document.addEventListener('DOMContentLoaded', function() {
+  let paragraphs = document.body.getElementsByTagName('p');
+
+  let firstWords = Array.prototype.slice.call(paragraphs).map(function (p) {
+    return p.textContent.trim().split(' ')[0];
+  });
+
+  console.log(firstWords);
+});
 ```
 
 ## Problem 4:
@@ -185,7 +196,40 @@ function addStanzaClass(node) {
 }
 
 walk(document, addStanzaClass);
-```
+
+// or:
+document.addEventListener('DOMContentLoaded', function() {
+ let paragraphs = document.body.getElementsByTagName('p');
+
+ Array.prototype.slice.call(paragraphs).forEach(function(para, idx) {
+   if (idx > 0) {
+     para.classList.add('stanza');
+   }
+ });
+});
+
+// or recursively:
+document.addEventListener('DOMContentLoaded', function() {
+
+  let addStanzaClass = false;
+
+ function walk(node, callback) {
+   callback(node);
+
+  for (let i = 0; i < node.children.length; i++) {
+    walk(node.children[i], callback);
+  }
+
+ }
+
+ walk(document.body, function(ele) {
+   if (ele.tagName === 'P' && addStanzaClass) {
+     ele.classList.add('stanza');
+   } else if (ele.tagName === 'P') {
+     addStanzaClass = true;
+   }
+ });
+});
 
 _For the remainder of the problems, use: https://en.wikipedia.org/wiki/Polar_bear _
 
