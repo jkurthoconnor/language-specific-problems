@@ -24,16 +24,18 @@ Extend the code from the previous problem with a `stopCounting` function that st
 
 ```javascript
 function startCounting() {
-  var count = 1
-  var id = setInterval(function() {
-    console.log(count);
-    count += 1;
+  let n = 1;
+
+  let stopId = setInterval(function() {
+    console.log(n);
+    n++;
   }, 1000);
 
-  return id;
+  return function() {
+    clearInterval(stopId);
+  }
 }
 
-function stopCounting(id) {
-  clearInterval(id);
-}
+var stopCounting = startCounting();
+stopCounting();
 ```
