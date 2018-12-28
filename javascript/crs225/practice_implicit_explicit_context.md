@@ -1,4 +1,4 @@
-## 1
+## 1 What will the code output?
 
 ```javascript
 function func() {
@@ -9,12 +9,12 @@ var context = func();
 
 console.log(context); // Window {...}
                       // b/c the implicit invocation context for function
-                      // invocation is the global object, and func is invoked as a 
+                      // invocation is the global object, & func is invoked as a 
                       // function
                       //
 ```
 
-## 2
+## 2 What will the code below output? Explain any difference btwn this output and that of  problem 1.
 
 
 ```javascript
@@ -33,7 +33,7 @@ console.log(context);// {func: f} // i.e. outputs the object O
 ```
 
 
-## 3
+## 3 What will the code output?
 
 
 ```javascript
@@ -60,7 +60,7 @@ foo.deliverMessage();// method invocation; implicit context for a method invocat
 ```
 
 
-## 4
+## 4 What will the code output?
 
 ```javascript
 var a = 10;
@@ -85,7 +85,7 @@ console.log(c.add());//method invocation; implicit context is owning/calling
                     //
 ```
 
-## 6
+## 6 In the code below, use `call` to invoke `add` as a method on `bar` but with `foo` as execution context. What will this return?
 
 
 ```javascript
@@ -110,7 +110,7 @@ console.log(bar.add.call(foo));// `call` used to invoke `add` as  a method on
                                
 ```
 
-# 7
+# 7 Given the code and desired output below, would it make more sense to use `call` or `apply` to supply explicit context and arguments to `outputList`? Implement a solution using one of the methods, such that the desired output is logged, and explain your choice.
 
 
 ```javascript
@@ -135,7 +135,8 @@ function outputList() {
   });                                 // into an array to allow `forEach`
 }
 
-outputList.apply(fruitsObj, fruitsObj.list);
+outputList.apply(fruitsObj, fruitsObj.list); // `apply` is chosen b/c it takes
+                                             // an array as 2nd param
 /*
 A Collection of Fruit:
 Apple
