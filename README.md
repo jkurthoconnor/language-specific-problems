@@ -1,1 +1,1 @@
-Exercises from Launch School work.  Directories represent individual courses.
+Exercises from Launch School work.
