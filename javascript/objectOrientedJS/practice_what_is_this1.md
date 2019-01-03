@@ -30,6 +30,8 @@ whatIsMyContext();
 
 The function is invoked using function invocation, so `this` refers to the global object. If this is a browser environment, `this` === window; else `this` === global.
 
+Run in strict mode, 'this' will be undefined.
+
 ## Problem 3:
 
 What does `this` point to here?
@@ -137,6 +139,6 @@ qux();
 
 ### Solution:
 
-`foo` is logged from line 12 because `bar` is invoked as a method on `foo`, which ultimately logs the return value of `this.baz()` [i.e. `foo.baz()`], which is `foo`.
+`foo` is logged from `foo.bar()` because `bar` is invoked as a method on `foo`, which ultimately logs the return value of `this.baz()` [i.e. `foo.baz()`], which is `foo`.
 
-line 14 logs TypeError, because `this` in an extracted method called as a function is the global object, and `baz` is not a property/function on the global object
+On the other hand, `quz();` logs TypeError, because `this` in an extracted method called as a function on the global object, and `baz` is not a property/function on the global object.

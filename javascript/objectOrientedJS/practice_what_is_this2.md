@@ -22,7 +22,7 @@ myObject.myChildObject.myMethod();{
 
 `this` points to `myChildObject`, because that is the object on which the `myMethod` method is called. 
 
-The method returns `undefined` because there is no `myChildObject.count` defined.
+The method returns `undefined` because there is no `myChildObject.count` defined. Unlike with the scoping of nested functions, execution context _does not_ extend to enclosing objects.
 
 ## Problem 2:
 
@@ -40,6 +40,18 @@ var myObject = {
 };
 
 myObject.myChildObject.myMethod.call(myObject);
+
+// alternately, using `bind`
+var myObject = {
+  count: 1,
+  myChildObject: {
+    myMethod: function() {
+      return (function() {
+        return this.count;
+      }.bind(myObject))();
+    },
+  },
+};
 ```
 
 ## Problem 3:
@@ -119,4 +131,7 @@ console.log(computer.total());
 The program logs '35000'. The `specialDiscount` inner function is not invoked with an explicit context, and since it is invoked as a function, its context is the global object. As a result, `this.price` evaluates to `undefined`, which allows the `specialDiscount`s conditional expression to evaluate to `false`.  Thus no discount (0) is added to the price.
 
 To fix it to log 34000, `specialDiscount` should be called with an explicit context as such:
-    `return this.price + this.shipping + tax - specialDiscount.call(this);`
+
+```javascript
+return this.price + this.shipping + tax - specialDiscount.call(this);
+```
