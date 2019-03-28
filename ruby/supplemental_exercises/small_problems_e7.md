@@ -23,6 +23,23 @@ def interleave(array1, array2)
 
   interleft
 end
+
+# alt solution as method on Array
+module CustomMethods
+  def interleave(arr)
+    interleaved = []
+
+    self.each_with_index do |ele, idx|
+      interleaved.push(ele, arr[idx])
+    end
+
+  interleaved
+  end
+end
+
+class Array
+  include CustomMethods
+end
 ```
 
 ### Further Exploration
@@ -63,6 +80,27 @@ def letter_case_count(string)
 
   count
 end
+
+# alt solution with custom string method
+module CustomString
+  def letter_case_count
+    case_count = { lowercase: 0, uppercase: 0, neither: 0 }
+
+    self.each_char do |char|
+      case char
+      when 'a'..'z' then case_count[:lowercase] += 1
+      when 'A'..'Z' then case_count[:uppercase] += 1
+      else            case_count[:neither] += 1
+      end
+    end
+
+    case_count
+  end
+end
+
+class String
+  include CustomString
+end
 ```
 
 ### 3. Capitalize Words
@@ -84,6 +122,17 @@ word_cap('this is a "quoted" word') == 'This Is A "quoted" Word'
 ```ruby
 def word_cap(string)
   string.split.map(&:capitalize).join(' ')
+end
+
+# or 
+module CustomString
+  def word_cap
+    self.split.each_with_object([]) { |w, obj| obj << w.capitalize }.join(" ")
+  end
+end
+
+class String
+  include CustomString
 end
 ```
 
@@ -122,6 +171,17 @@ def swapcase(string)
     holder.push(char) if char =~ /[^a-z]/i
   end
   holder.join
+end
+
+# or with `gsub`
+def swapcase(str)
+  str.gsub(/\w/) do |char|
+    if char.match?(/[a-z]/)
+      char.upcase
+    else
+      char.downcase
+    end
+  end
 end
 ```
 ### 5. Staggered Caps (Part 1)
