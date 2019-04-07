@@ -133,6 +133,14 @@ def uppercase?(string)
 
   true
 end
+
+# or
+
+def uppercase?(str)
+  return true if str.empty?
+
+  str.match?(/^[^a-z]+$/)
+end
 ```
 
 ### 6. How long are you?
@@ -182,6 +190,13 @@ swap_name('Joe Roberts') == 'Roberts, Joe'
 def swap_name(fullname)
   names = fullname.split
   "#{names.last}, #{names.first}"
+end
+
+# or
+
+def swap_name(fullname)
+  first, last = fullname.split
+  "#{last}, #{first}"
 end
 ```
 
