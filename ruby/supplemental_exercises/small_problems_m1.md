@@ -221,36 +221,38 @@ What are some alternatives for solving this exercise?
 
 ```ruby
 # using a class
-class Lights
-  def initialize(light_count)
-    @count = light_count
-    @lights = prepare_lights
+class LightBank
+  attr_reader :bank
+
+  def initialize(count)
+    @bank = Array.new(count, false)
   end
 
-  def prepare_lights
-    light_set = {}
-    1.upto(@count) { |key| light_set[key] = false }
-    light_set
-  end
+  def toggle_pass
+    size = bank.size
 
-  def toggle_switches
-    n = 1
-    until n > @count
-      @lights.each do |k,v|
-        @lights[k] = !@lights[k] if (k % n).zero?
+    size.times do |n| 
+      iteration = n + 1
+
+      self.bank = bank.map.with_index do |light, idx|
+        light_num = idx + 1
+        (light_num % iteration).zero? ? !light : light;
       end
-      n += 1
     end
-    report_light_status
   end
-  
-  def report_light_status
-    off_lights = @lights.select { |k, v| v == false }.keys
-    on_lights = @lights.keys - off_lights
-    "#{@lights.values.count(true)} lights are on.\n"\
-    "The following lights are off: #{off_lights}.\n"\
-    "The following lights are on: #{on_lights}."
+
+  def report_status
+    lights_on = bank.map.with_index do |light, idx|
+      light ? (idx + 1) : light;
+    end
+      .select { |light| light }
+
+    "Lights on: #{lights_on.join(" ")}"
   end
+
+  protected
+
+  attr_writer :bank
 end
 
 # using an array
