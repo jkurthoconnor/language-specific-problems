@@ -295,6 +295,15 @@ def buy_fruit(list)
 end
 
 # or 
+def buy_fruit(list)
+  list.each_with_object([]) do |item, result| 
+    item.last.times do |_|
+      result << item.first 
+    end
+  end
+end
+# or 
+
 def buy_fruit
   list.map { |food, n| [food]*n }.flatten
 end
