@@ -361,19 +361,26 @@ word_to_digit('Please call me at five five five one two three four. Thanks.') ==
 
 ```ruby
 DIGITS = {
-  'zero' => 0, 'one' => 1, 'two' => 2, 'three' => 3, 'four' => 4,
-  'five' => 5, 'six' => 6, 'seven' => 7, 'eight' => 8, 'nine' => 9
+  'zero' => '0', 'one' => '1', 'two' => '2', 'three' => '3', 'four' => '4',
+  'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8', 'nine' => '9'
 }.freeze
 
-def word_to_digit(string)
-  words = string.split(/\b/)
-  words.map { |word| DIGITS[word] || word }.join
+def word_to_digit(str)
+  str.split(/\b/)
+     .map { |w| DIGITS[w] || w }
+     .join
 end
 
 #or
 def word_to_digit(string)
   capture = /(zero|one|two|three|four|five|six|seven|eight|nine)/
   string.gsub(capture, DIGITS)
+end
+
+#or with less hash magic
+def word_to_digit(string)
+  capture = /(zero|one|two|three|four|five|six|seven|eight|nine)/
+  string.gsub(capture) {|group| DIGITS[group]}
 end
 ```
 
